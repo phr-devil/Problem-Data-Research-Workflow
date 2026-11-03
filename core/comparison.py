@@ -21,7 +21,7 @@ def compare_runs(champion: dict, challenger: dict, metric: str,
     if metric not in a["metrics"] or metric not in b["metrics"]:
         raise ContractError("requested metric missing")
     delta = b["metrics"][metric] - a["metrics"][metric]
-    budget_review = a.get("budget_basis") != b.get("budget_basis")
+    budget_review = not a.get("budget_basis") or not b.get("budget_basis") or a["budget_basis"] != b["budget_basis"]
     return {"comparison_status": "BUDGET_REVIEW_REQUIRED" if budget_review else "DEVELOPMENT_ONLY",
             "metric": metric, "champion_run_id": a["run_id"],
             "challenger_run_id": b["run_id"], "delta": delta,

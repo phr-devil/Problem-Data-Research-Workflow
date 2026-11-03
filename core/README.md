@@ -23,3 +23,5 @@ python -m unittest discover -s tests -v
 - 旧`STATE.md / RUNS.tsv / CLAIMS.md`继续使用，不强制迁移或覆盖。建议只有在产生可信Run或重要Claim时建立机器索引，探索草稿无需每次格式化。
 
 限制：工件文件本身附SHA-256；原始预测/代码引用只核路径可达性，不替代代码、数据血缘及外部权利检查，性能结果必须由独立科研审计判断。
+
+**并发与恢复**：写操作使用排他锁`.evidence-write.lock`，多Agent同写时会拒绝而不是覆盖。崩溃遗留锁须先核事件、工件和进程状态，再手动清理；若仅STATE滞后且证据文件均匹配，运行`recover`。缺失预算基准时Run比较返回`BUDGET_REVIEW_REQUIRED`，不能直接宣称公平增益。

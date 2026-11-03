@@ -7,6 +7,7 @@ import hashlib
 import json
 import os
 import tempfile
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 from uuid import uuid4
@@ -15,6 +16,21 @@ from core.contracts import ContractError, validate_claim, validate_run, validate
 
 STATE = "STATE.json"
 EVENTS = "EVENTS.jsonl"
+
+@contextmanager
+def _writer_lock(root: Path):
+    # Atomic creation works on Windows/Linux, with no third-party dependency.
+    lock_path = root / ".evidence-write.lock"
+    try:
+        fd = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+    except FileExistsError as exc:
+        raise ContractError("another writer or stale evidence lock; inspect project before retry") from exc
+    try:
+        yield
+    finally:
+        os.close(fd)
+        lock_path.unlink()
+
 
 def _sha(path: Path) -> str:
     digest = hashlib.sha256()
@@ -139,7 +155,11 @@ def _validate_linked(root: Path, kind: str, obj: dict, events: list[dict]) -> No
 
 def record_event(root: Path, kind: str, *, artifact: str | None = None,
                  note: str = "") -> dict:
-    root = Path(root)
+    with _writer_lock(Path(root)):
+        return _record_event_locked(Path(root), kind, artifact=artifact, note=note)
+
+def _record_event_locked(root: Path, kind: str, *, artifact: str | None = None,
+                         note: str = "") -> dict:
     if kind not in {"note", "run", "claim"}:
         raise ContractError("kind must be note/run/claim")
     current = status(root)
@@ -188,7 +208,10 @@ def record_event(root: Path, kind: str, *, artifact: str | None = None,
 
 def recover(root: Path) -> dict:
     """Explicit reconciliation after inspecting real artifact/log history."""
-    root = Path(root)
+    with _writer_lock(Path(root)):
+        return _recover_locked(Path(root))
+
+def _recover_locked(root: Path) -> dict:
     with (root / STATE).open(encoding="utf-8") as source:
         old = validate_state(json.load(source))
     events = _read_events(root)

@@ -44,6 +44,12 @@ class ContractTests(unittest.TestCase):
         with self.assertRaisesRegex(ContractError, "NOT_COMPARABLE"):
             compare_runs(run_record(), b, "macro_f1")
 
+    def test_missing_budget_needs_review(self):
+        a, b = run_record(), run_record("r2")
+        a.pop("budget_basis")
+        b.pop("budget_basis")
+        self.assertEqual(compare_runs(a, b, "macro_f1")["comparison_status"], "BUDGET_REVIEW_REQUIRED")
+
     def test_budget_mismatch_needs_review(self):
         b = run_record("r2")
         b["budget_basis"] = "gpu_8h"
@@ -112,6 +118,14 @@ class StateTests(unittest.TestCase):
         record_event(self.root, "run", artifact="r1.json")
         record_event(self.root, "claim", artifact="claim.json")
         self.assertEqual(status(self.root)["evidence_count"], 2)
+
+    def test_writer_lock_blocks_mutations(self):
+        path = self.root / ".evidence-write.lock"
+        path.write_text("in-progress", encoding="utf-8")
+        with self.assertRaisesRegex(ContractError, "another writer"):
+            record_event(self.root, "note", note="should fail")
+        path.unlink()
+        self.assertEqual(status(self.root)["evidence_count"], 0)
 
     def test_no_path_escape(self):
         with self.assertRaises(ContractError):
