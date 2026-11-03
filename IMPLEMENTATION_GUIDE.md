@@ -24,7 +24,7 @@ Run:     run_id, parent_run, data_version, protocol_id, cost, raw_paths
 
 当任务即将真实拟合/执行时，将现有最小任务合同转为一份可机检`task.json`：`task_id/protocol_id/dataset_version`、预测目标与标签来源/时点、`legal_inputs`、`group_key/independent_unit`、`metric/direction`、`evaluator_version`、真实`data_manifest/split_manifest/evaluator`路径、`protected_paths/editable_paths`及至少一项可观察错误反例。数据不足或理论任务不用强制填；初始草稿`UNKNOWN`不自动否决探索。
 
-对具体项目用`python -m core.cli task-check --root research --spec task.json`只读核引用文件、指纹、开发train/dev ID及group隔离；`expected_sha256`可固定受保护引用防静默修改。**STRUCTURAL_PRECHECK_ONLY不代表标签真实、评价器正确、创新成立或训练已获批准**；尚未执行的科学正控仍须在真实授权下完成。新增有效Run建议关联`task_spec_ref/task_spec_sha256`，修改协议后版本化并只重算受影响证据。完整格式见 [core/README.md](core/README.md)。
+对具体项目用`python -m core.cli task-check --root research --spec task.json`只读核引用文件、指纹、开发train/dev ID及group隔离；用`python -m core.cli task-pin --root research --spec task.json --output task-pinned-v1.json`生成带完整`expected_sha256`的**新**任务快照；新Run绑定此版本，修改受保护文件须版本化并重核。**STRUCTURAL_PRECHECK_ONLY不代表标签真实、评价器正确、创新成立或训练已获批准**；尚未执行的科学正控仍须在真实授权下完成。新增有效Run建议关联`task_spec_ref/task_spec_sha256`，修改协议后版本化并只重算受影响证据。完整格式见 [core/README.md](core/README.md)。
 
 ## 2. 架构选择：由数据规律、剩余误差和物理依据驱动
 

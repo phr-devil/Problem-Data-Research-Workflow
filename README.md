@@ -65,7 +65,7 @@
 
 ### 新增：从 Task 到可执行证据（按需，不是新关卡）
 
-- 当研究任务已需要实际编码/拟合时，先编写最小 TaskSpec（合法输入、独立单位、固定评价器、开发分组、受保护文件、可观察正确性检查）。`python -m core.cli task-check --root research --spec task.json` 只做只读结构和数据划分预检，不跑评价器，更不批准训练。
+- 当研究任务已需要实际编码/拟合时，先编写最小 TaskSpec（合法输入、独立单位、固定评价器、开发分组、受保护文件、可观察正确性检查）。`python -m core.cli task-check --root research --spec task.json` 只做只读结构和数据划分预检；新Run绑定已通过`task-pin`固定受保护文件哈希的任务快照，不跑评价器，更不批准训练。
 - 负Pilot后可用`probe-check`审查一个机制候选的竞争解释、区别性预测、正负结果含义及成本；AI仍负责提出科学假设、调用前复核真实权限。
 - 有效Run可运行`run-check`检查环境/复现信息缺口，`status --deep`复核关联的预测/指标/代码文件指纹；旧v1.4记录继续可读。
 - 仅明确调用`literature-search`时联网获取OpenAlex/Crossref元数据与检索时间、来源；元数据不是全文创新性核查。具体调用见[core/README.md](core/README.md)。
