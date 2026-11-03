@@ -56,7 +56,7 @@
 | 推荐路径（必有D1，D2按需） | 用各库官方事实说明**互补性**及目标问题适配 | 一项合法任务族/物理命题，而非新网络名 | 区分各库独立group、标签映射与封存资格 | 例如跨组样本太少、各库标签不能对应 | 各库只读元数据和映射可行性核查 |
 | 备选（按需） | 与推荐组合真正不同的优势或失效条件 | 只写可证伪问题 | 不假定官方test适合所有后生TASK | 与推荐共享前提时明确非独立备份 | 具体下一Probe |
 
-输出固定为：`DIRECTION_CARD` + `DATA_PORTFOLIO(D1,按需D2/D3/备用)` + `PREFERRED` + `WHY_THIS_OVER_ALTERNATIVE`（1句推荐及反对理由）+ `MOST_DANGEROUS_UNKNOWN` + `NEXT_LOW_COST_CHECK` + `PRE_DOWNLOAD_PLAN` + `DOWNLOAD_READY_NOTICE`。只有主张确实需要而缺外部复现时写`EXTERNAL_EVIDENCE_GAP`，不虚构第二库；用户已指定D1则优先寻找同方向互补D2，不重做全部选题。原则是**先确认研究大方向和跨库可评价性，再考虑任务阶梯潜力**。
+输出固定为：`DIRECTION_CARD` + `DATA_PORTFOLIO(D1,按需D2/D3/备用)` + `PREFERRED` + `WHY_THIS_OVER_ALTERNATIVE`（1句推荐及反对理由）+ `MOST_DANGEROUS_UNKNOWN` + `NEXT_LOW_COST_CHECK` + `PRE_DOWNLOAD_PLAN` + `DOWNLOAD_READY_NOTICE`（待授权时）或实际获取/验收证据（已授权时）。只有主张确实需要而缺外部复现时写`EXTERNAL_EVIDENCE_GAP`，不虚构第二库；用户已指定D1则优先寻找同方向互补D2，不重做全部选题。原则是**先确认研究大方向和跨库可评价性，再考虑任务阶梯潜力**。
 
 **证据来源优先级**：官方数据主页/协议和原始论文优先于博客、排行榜与AI生成摘要；许可、版本、原始字段、独立group和可见信息未查实标 `SOURCE_UNVERIFIED`，禁止用假定的受试者数或许可证完成推荐。项目已有真实manifest时优先复用而非重新检索全部背景。
 
@@ -75,8 +75,8 @@
 - NEIGHBORS：最接近 1–2 项近邻及可能差额；创新未证记 VALUE_UNVERIFIED
 - MOST_DANGEROUS_UNKNOWN：当前最有决策价值的风险与廉价检查
 - LADDER_POTENTIAL（可选）：一个较稳妥且可检验的任务＋一个科研潜力延伸，各自所需标签/部署信息；未核实记 HYPOTHESIZED，详细设计延后
-- DOWNLOAD_READY_NOTICE：逐库官方页面与核实的下载直链、需要文件/格式/版本/预计大小、用途/优先级、推荐保存目录、下载方法、许可/不确定项；用户通知状态`DOWNLOAD_READY_WAITING_FOR_USER`，没有直链记`URL_UNVERIFIED`，不编造PowerShell命令
-- PRE_DOWNLOAD_PLAN / RESOURCE/AUTH：研究方向与组合是否已选、每库必要文件和优先顺序、总存储/许可、分组封存、实际授权；无下载授权写WAITING_FOR_AUTH
+- DOWNLOAD_READY_NOTICE（仅待下载/待授权时）：逐库官方页面与核实的下载直链、需要文件/格式/版本/预计大小、用途/优先级、推荐保存目录、下载/续传方法、许可/不确定项；状态 `WAITING_FOR_DOWNLOAD_AUTH` 或 `WAITING_FOR_DATA`，没有直链记`URL_UNVERIFIED`，不编造PowerShell命令
+- PRE_DOWNLOAD_PLAN / RESOURCE/AUTH：研究方向与组合是否已选、每库必需文件和优先顺序、总存储/许可、分组封存、实际授权；无下载授权写WAITING_FOR_DOWNLOAD_AUTH；已授权并获取则记录DATA_MANIFEST和DATA_ACQUIRED_VERIFIED
 
 **初筛判定**：PREFERRED（风险路径更清楚、价值合理）/ EXPLORABLE（未知值得探索）/ NOT_READY（已证明的不可替代阻断）。这些是推荐等级，不是实测成功概率或科学结果；允许用户选择 EXPLORABLE。
 
