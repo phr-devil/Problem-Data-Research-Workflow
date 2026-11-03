@@ -98,3 +98,5 @@ ChatGPT 只传已核实的问题—数据、TASK、最大 UNKNOWN、证据指针
 复用现有 STATE/RUNS，记录 `run_id | task_id | parent_run | data_version | protocol_id/evaluator_version | code_commit | seed | auth | cost | status | metrics_or_observations | raw_paths | decision_scope`，只读最近有效 Run 和当前相关代码；不重复训练已验证结果。`KEEP/IMPROVE/REPAIR/INCONCLUSIVE/DISCARD` 先限定 RUN/机制，不能因单次结果把 AREA_DATA 判失败。
 
 **默认按[WORKFLOW.md](WORKFLOW.md) §5最短输出**：Run、代码、失败证据与必要诊断图保留路径，只报两轨判断变化和NEXT_PROBE；不贴全部日志、反复渲染曲线或制作论文级图片。`无限循环`和流水账都不是目标。
+
+**轻量成本预检（只在实际分支需要时）**：Probe可选填GPU/CPU/人工时和Token数值预算；用`probe-check --remaining-budget-file`与当前可核实剩余预算比较。超额只触发重新规划或真实授权，不默认否决科学命题。

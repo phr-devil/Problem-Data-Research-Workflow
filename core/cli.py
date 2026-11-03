@@ -42,6 +42,7 @@ def main(argv: list[str] | None = None) -> int:
     pin.add_argument("--output", required=True)
     probe = sub.add_parser("probe-check", help="Review a proposed discriminating experiment")
     probe.add_argument("--file", type=Path, required=True)
+    probe.add_argument("--remaining-budget-file", type=Path, help="JSON budget for advisory cost review; not authorization")
     lit = sub.add_parser("literature-search", help="Explicit live metadata lookup (network)")
     lit.add_argument("--query", required=True)
     lit.add_argument("--limit", type=int, default=5)
@@ -63,7 +64,10 @@ def main(argv: list[str] | None = None) -> int:
         elif args.command == "run-check":
             result = audit_run_reproducibility(args.root, args.run)
         elif args.command == "probe-check":
-            result = review_probe(json.loads(args.file.read_text(encoding="utf-8")))
+            budget = (json.loads(args.remaining_budget_file.read_text(encoding="utf-8"))
+                      if args.remaining_budget_file else None)
+            result = review_probe(json.loads(args.file.read_text(encoding="utf-8")),
+                                  remaining_budget=budget)
         elif args.command == "literature-search":
             if args.output.exists():
                 raise ContractError("literature evidence output already exists; do not overwrite")

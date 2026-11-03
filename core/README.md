@@ -44,3 +44,5 @@ python -m core.cli literature-search --query "sensor calibration transfer" --lim
 `literature-search`**只有显式执行才联网**；最多返回有限的OpenAlex/Crossref论文元数据（原始DOI、标题和时间），失败标记且不覆盖已有输出。返回的元数据不是论文方法复核，不得凭搜索为空声称创新。无法联网时保持原有手工检索/NEIGHBOR_UNVERIFIED路径。
 
 **兼容性**：旧v1.4`STATE.json/EVENTS.jsonl`继续可读；新增Run推荐携带`task_spec_ref/task_spec_sha256`与`execution{command,git_commit,python_version,seed,environment_ref}`，但不反向要求迁移历史Run。deep核验大型预测文件可能产生额外I/O，仅在有科学结论变化、恢复或正式确认前调用。程序不判定论文价值、时间因果、确认集资格或授权。
+
+**探针预算（可选）**：`probe.json`可加入`cost_estimate:{"gpu_hours":0.4,"tokens":5000}`；`probe-check --file probe.json --remaining-budget-file budget.json`会在给定JSON预算内提示`BUDGET_REVIEW_REQUIRED`，绝不自动STOP或将预算文件视为用户训练授权。
