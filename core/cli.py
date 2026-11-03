@@ -1,4 +1,4 @@
-"""Small offline CLI; nothing here downloads, trains, or approves."""
+"""Small evidence CLI. Only explicit literature-search performs network requests."""
 from __future__ import annotations
 import argparse
 import json
@@ -8,6 +8,7 @@ from core.contracts import ContractError
 from core.state import initialize, record_event, recover, status
 from core.task_runtime import qualify_task
 from core.probes import review_probe
+from core.literature import literature_search
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="PD-RW evidence index and comparison")
@@ -34,6 +35,10 @@ def main(argv: list[str] | None = None) -> int:
     task.add_argument("--spec", required=True, help="TaskSpec JSON path relative to root")
     probe = sub.add_parser("probe-check", help="Review a proposed discriminating experiment")
     probe.add_argument("--file", type=Path, required=True)
+    lit = sub.add_parser("literature-search", help="Explicit live metadata lookup (network)")
+    lit.add_argument("--query", required=True)
+    lit.add_argument("--limit", type=int, default=5)
+    lit.add_argument("--output", type=Path, required=True, help="New JSON output file; never overwritten")
     args = parser.parse_args(argv)
     try:
         if args.command == "init":
@@ -48,6 +53,13 @@ def main(argv: list[str] | None = None) -> int:
             result = qualify_task(args.root, args.spec)
         elif args.command == "probe-check":
             result = review_probe(json.loads(args.file.read_text(encoding="utf-8")))
+        elif args.command == "literature-search":
+            if args.output.exists():
+                raise ContractError("literature evidence output already exists; do not overwrite")
+            result = literature_search(args.query, args.limit)
+            with args.output.open("x", encoding="utf-8") as target:
+                json.dump(result, target, ensure_ascii=False, indent=2)
+                target.write("\n")
         else:
             a = json.loads(args.champion.read_text(encoding="utf-8"))
             b = json.loads(args.challenger.read_text(encoding="utf-8"))
