@@ -1,4 +1,4 @@
-"""Small offline CLI; nothing here downloads, trains, or approves."""
+"""Small evidence CLI. Only explicit literature-search performs network requests."""
 from __future__ import annotations
 import argparse
 import json
@@ -6,6 +6,9 @@ from pathlib import Path
 from core.comparison import compare_runs
 from core.contracts import ContractError
 from core.state import initialize, record_event, recover, status
+from core.task_runtime import qualify_task, audit_run_reproducibility, pin_task
+from core.probes import review_probe
+from core.literature import literature_search
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="PD-RW evidence index and comparison")
@@ -16,6 +19,8 @@ def main(argv: list[str] | None = None) -> int:
     for action in ("record", "status", "recover"):
         p = sub.add_parser(action)
         p.add_argument("--root", type=Path, required=True)
+        if action == "status":
+            p.add_argument("--deep", action="store_true", help="rehash original linked artifacts")
         if action == "record":
             p.add_argument("--kind", choices=["note", "run", "claim"], required=True)
             p.add_argument("--artifact")
@@ -25,6 +30,23 @@ def main(argv: list[str] | None = None) -> int:
     compare.add_argument("--challenger", type=Path, required=True)
     compare.add_argument("--metric", required=True)
     compare.add_argument("--lower-is-better", action="store_true")
+    task = sub.add_parser("task-check", help="Read-only TaskSpec and split qualification")
+    task.add_argument("--root", type=Path, required=True)
+    task.add_argument("--spec", required=True, help="TaskSpec JSON path relative to root")
+    runcheck = sub.add_parser("run-check", help="Read-only Run execution/reproducibility preflight")
+    runcheck.add_argument("--root", type=Path, required=True)
+    runcheck.add_argument("--run", required=True, help="Run JSON path relative to root")
+    pin = sub.add_parser("task-pin", help="Write a new TaskSpec with referenced file hashes")
+    pin.add_argument("--root", type=Path, required=True)
+    pin.add_argument("--spec", required=True)
+    pin.add_argument("--output", required=True)
+    probe = sub.add_parser("probe-check", help="Review a proposed discriminating experiment")
+    probe.add_argument("--file", type=Path, required=True)
+    probe.add_argument("--remaining-budget-file", type=Path, help="JSON budget for advisory cost review; not authorization")
+    lit = sub.add_parser("literature-search", help="Explicit live metadata lookup (network)")
+    lit.add_argument("--query", required=True)
+    lit.add_argument("--limit", type=int, default=5)
+    lit.add_argument("--output", type=Path, required=True, help="New JSON output file; never overwritten")
     args = parser.parse_args(argv)
     try:
         if args.command == "init":
@@ -32,9 +54,27 @@ def main(argv: list[str] | None = None) -> int:
         elif args.command == "record":
             result = record_event(args.root, args.kind, artifact=args.artifact, note=args.note)
         elif args.command == "status":
-            result = status(args.root)
+            result = status(args.root, deep=args.deep)
         elif args.command == "recover":
             result = recover(args.root)
+        elif args.command == "task-check":
+            result = qualify_task(args.root, args.spec)
+        elif args.command == "task-pin":
+            result = pin_task(args.root, args.spec, args.output)
+        elif args.command == "run-check":
+            result = audit_run_reproducibility(args.root, args.run)
+        elif args.command == "probe-check":
+            budget = (json.loads(args.remaining_budget_file.read_text(encoding="utf-8"))
+                      if args.remaining_budget_file else None)
+            result = review_probe(json.loads(args.file.read_text(encoding="utf-8")),
+                                  remaining_budget=budget)
+        elif args.command == "literature-search":
+            if args.output.exists():
+                raise ContractError("literature evidence output already exists; do not overwrite")
+            result = literature_search(args.query, args.limit)
+            with args.output.open("x", encoding="utf-8") as target:
+                json.dump(result, target, ensure_ascii=False, indent=2)
+                target.write("\n")
         else:
             a = json.loads(args.champion.read_text(encoding="utf-8"))
             b = json.loads(args.challenger.read_text(encoding="utf-8"))

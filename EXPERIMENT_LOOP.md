@@ -68,6 +68,10 @@ ChatGPT 只传已核实的问题—数据、TASK、最大 UNKNOWN、证据指针
 
 采用AIDE/MLEvolve式**有界经验复用**：在现有`RUNS.tsv/STATE`中记录`parent_run / failed_premise_or_signal / reusable_asset / next_distinct_lever`（可用既有字段则不扩列）；分支融合只有在信息预算、机制前提及评价协议兼容时才试，不默认树搜索、向量数据库或多Agent。失败的解释只限本次有效证据，欠训练不等于证明机制不可学。
 
+### 从诊断到一个新机制的最短循环（AIDE/R&D-Agent式经验复用）
+
+已有负Pilot分类保留；若不是评价无效、训练不足或基线不公，才用`error_evidence_refs → failed_premise → competing_explanation → mechanism/lever → distinct_prediction → minimum_test → if_positive/if_negative/if_invalid → estimated_cost/authorization_scope`形成**一条**`PROBE_CANDIDATE`（按需记JSON，不强制所有Run产出）。`python -m core.cli probe-check --file probe.json`仅检查假设是否有可分辨的实验承诺，不会训练，也不会证明机制创新。对已失败的同一前提优先复盘/寻找新杠杆，而非换网络名字续命；保留旧Run与parent关系。预算阈值只触发复盘/授权检查，不做项目自动STOP。一个有效实验可同时服务可靠性能与机制诊断，不必强制双轨GPU并行。
+
 ## 3. 正负 Pilot 后的按症状实验选择
 
 | 当前证据 | 优先最小动作 | 不能推出 |
@@ -94,3 +98,5 @@ ChatGPT 只传已核实的问题—数据、TASK、最大 UNKNOWN、证据指针
 复用现有 STATE/RUNS，记录 `run_id | task_id | parent_run | data_version | protocol_id/evaluator_version | code_commit | seed | auth | cost | status | metrics_or_observations | raw_paths | decision_scope`，只读最近有效 Run 和当前相关代码；不重复训练已验证结果。`KEEP/IMPROVE/REPAIR/INCONCLUSIVE/DISCARD` 先限定 RUN/机制，不能因单次结果把 AREA_DATA 判失败。
 
 **默认按[WORKFLOW.md](WORKFLOW.md) §5最短输出**：Run、代码、失败证据与必要诊断图保留路径，只报两轨判断变化和NEXT_PROBE；不贴全部日志、反复渲染曲线或制作论文级图片。`无限循环`和流水账都不是目标。
+
+**轻量成本预检（只在实际分支需要时）**：Probe可选填GPU/CPU/人工时和Token数值预算；用`probe-check --remaining-budget-file`与当前可核实剩余预算比较。超额只触发重新规划或真实授权，不默认否决科学命题。

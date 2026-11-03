@@ -1,4 +1,4 @@
-# Problem–Data Research Workflow | PD-RW v1.4
+# Problem–Data Research Workflow | PD-RW v1.5
 
 > **独立科研工作流仓库**。不依赖原提示词库或其他章的文件。目标是从“有价值的大问题＋可信数据（或理论证据路径）”开始，在真实观察和有限实验中逐渐发现具体科研任务、算法与论文主张。更自由的探索**不等于放宽最终论文证据**，也不承诺发表或算法增益。
 
@@ -57,8 +57,16 @@
 
 **离线验证**：`python -m unittest discover -s tests -v`；`python -m json.tool SCENARIOS.json > /dev/null`；盲回放：`python chapter10_replay.py responses.json`（仅校验结构，不代替科研盲审）。
 
-## v1.4 轻量执行层
+## v1.5 轻量执行层
 
 - 科学判断、授权与止损仍由 [WORKFLOW.md](WORKFLOW.md) 负责；[core/README.md](core/README.md) 的程序只负责记录证据、恢复状态和检查开发Run的可比性，不自动推进固定科研阶段。
 - 旧 `STATE.md/RUNS.tsv/CLAIMS.md` 可继续复用，无需迁移；新项目首次获得有效Run时，如可执行Python，使用 `python -m core.cli init --root research --project-id demo` 建立机器索引。已启用后，应为新增有效Run和已支持Claim关联真实工件。
 - 运行 `python -m unittest discover -s tests -v` 验证代码与结构约束，**不代表科研质量或成功率已验证**；真实效能需按 [REPLAY_PROTOCOL.md](REPLAY_PROTOCOL.md) 盲回放。
+
+### 新增：从 Task 到可执行证据（按需，不是新关卡）
+
+- 当研究任务已需要实际编码/拟合时，先编写最小 TaskSpec（合法输入、独立单位、固定评价器、开发分组、受保护文件、可观察正确性检查）。`python -m core.cli task-check --root research --spec task.json` 只做只读结构和数据划分预检；新Run绑定已通过`task-pin`固定受保护文件哈希的任务快照，不跑评价器，更不批准训练。
+- 负Pilot后可用`probe-check`审查一个机制候选的竞争解释、区别性预测、正负结果含义及成本；AI仍负责提出科学假设、调用前复核真实权限。
+- 有效Run可运行`run-check`检查环境/复现信息缺口，`status --deep`复核关联的预测/指标/代码文件指纹；旧v1.4记录继续可读。
+- 仅明确调用`literature-search`时联网获取OpenAlex/Crossref元数据与检索时间、来源；元数据不是全文创新性核查。具体调用见[core/README.md](core/README.md)。
+- 论文路线允许`NO_WINNER`后转为真实失效边界/规律或`NO_INDEPENDENT_CLAIM`，不凭零增益自动包装成论文。**科研成功率仍NOT_MEASURED**，须按[REPLAY_PROTOCOL.md](REPLAY_PROTOCOL.md)执行真实历史盲回放。

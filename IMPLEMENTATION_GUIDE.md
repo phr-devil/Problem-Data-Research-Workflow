@@ -20,6 +20,12 @@ Run:     run_id, parent_run, data_version, protocol_id, cost, raw_paths
 
 **顺序**：核真实开发batch与ID/标签/时钟 → 合法group split、train-only预处理 → 简单基线 → 逐样本预测及评价器 → 必要创新模块。已有有效资产直接复用，数据和预处理正确不代表科学命题成功。原始血缘、holdout与评价器默认PROTECTED；确实有错才版本化修复并重算受影响Run。用户未授权时不得下载/安装/CPU Ridge拟合/tiny-set训练/GPU更新；无参数更新的检查也须遵守对应权限。
 
+### 可执行TaskSpec（借鉴AI-Scientist-v3的任务评价合同，按需）
+
+当任务即将真实拟合/执行时，将现有最小任务合同转为一份可机检`task.json`：`task_id/protocol_id/dataset_version`、预测目标与标签来源/时点、`legal_inputs`、`group_key/independent_unit`、`metric/direction`、`evaluator_version`、真实`data_manifest/split_manifest/evaluator`路径、`protected_paths/editable_paths`及至少一项可观察错误反例。数据不足或理论任务不用强制填；初始草稿`UNKNOWN`不自动否决探索。
+
+对具体项目用`python -m core.cli task-check --root research --spec task.json`只读核引用文件、指纹、开发train/dev ID及group隔离；用`python -m core.cli task-pin --root research --spec task.json --output task-pinned-v1.json`生成带完整`expected_sha256`的**新**任务快照；新Run绑定此版本，修改受保护文件须版本化并重核。新Run若声明绑定该快照，机器仅在train/dev样本ID及独立group有非空且不重叠的清单时接受证据关联；早期未知仍可探索、但不能宣称已结构核验。**STRUCTURAL_PRECHECK_ONLY不代表标签真实、评价器正确、创新成立或训练已获批准**；尚未执行的科学正控仍须在真实授权下完成。新增有效Run建议关联`task_spec_ref/task_spec_sha256`，修改协议后版本化并只重算受影响证据。完整格式见 [core/README.md](core/README.md)。
+
 ## 2. 架构选择：由数据规律、剩余误差和物理依据驱动
 
 | 真实任务/错误证据 | 简单可信起点 | 有依据才升级 | 最强简单替代 |

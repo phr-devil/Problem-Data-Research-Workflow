@@ -13,6 +13,7 @@ from pathlib import Path
 from uuid import uuid4
 
 from core.contracts import ContractError, validate_claim, validate_run, validate_state
+from core.task_runtime import check_run_task_alignment
 
 STATE = "STATE.json"
 EVENTS = "EVENTS.jsonl"
@@ -76,7 +77,7 @@ def initialize(root: Path, project_id: str) -> dict:
     (root / EVENTS).touch(exist_ok=False)
     return state
 
-def _read_events(root: Path, *, check_hashes: bool = True) -> list[dict]:
+def _read_events(root: Path, *, check_hashes: bool = True, deep: bool = False) -> list[dict]:
     path = root / EVENTS
     if not path.exists():
         raise ContractError("missing EVENTS.jsonl")
@@ -101,6 +102,10 @@ def _read_events(root: Path, *, check_hashes: bool = True) -> list[dict]:
                 actual = _sha(_resolve(root, event.get("artifact_path", "")))
                 if actual != event.get("artifact_sha256"):
                     raise ContractError(f"artifact fingerprint mismatch at line {n}")
+            if deep and event.get("linked_sha256"):
+                for ref, saved_sha in event["linked_sha256"].items():
+                    if _sha(_resolve(root, ref)) != saved_sha:
+                        raise ContractError(f"linked artifact fingerprint mismatch at line {n}: {ref}")
             events.append(event)
     return events
 
@@ -119,14 +124,14 @@ def _build_state(project_id: str, events: list[dict]) -> dict:
                 state["latest_valid_run_id"] = e["artifact_id"]
     return state
 
-def status(root: Path) -> dict:
+def status(root: Path, *, deep: bool = False) -> dict:
     root = Path(root)
     try:
         with (root / STATE).open(encoding="utf-8") as source:
             state = validate_state(json.load(source))
     except (FileNotFoundError, json.JSONDecodeError) as exc:
         raise ContractError("missing/corrupt STATE.json; inspect events before recovering") from exc
-    events = _read_events(root)
+    events = _read_events(root, deep=deep)
     expected = _build_state(state["project_id"], events)
     if state != expected:
         raise ContractError("STATE vs EVENTS mismatch; inspect then run explicit recover")
@@ -134,10 +139,13 @@ def status(root: Path) -> dict:
             "last_event_id": state["last_event_id"],
             "evidence_count": len(state["evidence_refs"]),
             "active_task_id": state["active_task_id"],
-            "latest_valid_run_id": state["latest_valid_run_id"]}
+            "latest_valid_run_id": state["latest_valid_run_id"],
+            "linked_fingerprints": "DEEP_VERIFIED" if deep else "NOT_CHECKED",
+            "legacy_unhashed_events": sum(e["kind"] != "note" and not e.get("linked_sha256") for e in events)}
 
 def _validate_linked(root: Path, kind: str, obj: dict, events: list[dict]) -> None:
     if kind == "run" and obj["status"] == "VALID":
+        check_run_task_alignment(root, obj)
         for ref in obj["artifact_refs"].values():
             _resolve(root, ref)
     if kind == "claim" and obj["status"] in {"SUPPORTED", "CONFIRMED"}:
@@ -197,6 +205,13 @@ def _record_event_locked(root: Path, kind: str, *, artifact: str | None = None,
                       "task_id": obj["task_id"], "status": obj["status"]})
         if kind == "run":
             event["split"] = obj["split"]
+        if kind == "run" and obj["status"] == "VALID":
+            linked = dict(obj["artifact_refs"])
+            if obj.get("task_spec_ref"):
+                linked["task_spec"] = obj["task_spec_ref"]
+            event["linked_sha256"] = {p: _sha(_resolve(root, p)) for p in linked.values()}
+        if kind == "claim" and obj["status"] in {"SUPPORTED", "CONFIRMED"}:
+            event["linked_sha256"] = {p: _sha(_resolve(root, p)) for p in obj["artifact_refs"]}
     # Log-first: interruption between append and STATE save is detected by status().
     with (root / EVENTS).open("a", encoding="utf-8") as output:
         output.write(json.dumps(event, ensure_ascii=False, sort_keys=True) + "\n")
