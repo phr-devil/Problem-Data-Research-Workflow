@@ -22,7 +22,7 @@
 
 复用已有TASK_CARD/STATE，最多六字段：
 - `ROOT_PROBLEM / DATA_VERSION`：共同科学问题、原始数据与标签血缘。
-- `PRIMARY_LEVEL / TASK_ID`：当前主要任务与主张，可为 `UNDECIDED`；默认考虑L2，但由证据决定。
+- `PRIMARY_LEVEL / TASK_ID`：当前主要任务与主张，可为 `UNDECIDED`；由合法信号、独立价值和验证成本决定，不预设L2。
 - `LEVEL_CLAIMS`：每级仅一句待检验主张，**部署前可见的传感输入、目标批次标签预算K、时间条件、允许的其他信息**；标 `OBSERVED / HYPOTHESIZED / NOT_RUN`。
 - `SHARED_ASSETS`：合法可复用的基线、开发组划分、代码、原始Run路径；不同级别不能假装同一输入下公平对照。
 - `PIVOT_CONDITION`：每个拟探索级别至少一个**可能改变决策的最小Probe**，分别写有利/不利结果如何更新路线及预算上限。
@@ -57,6 +57,8 @@
 这是转换成本控制，不是允许跨层传递非法信息。只改超参/Backbone不等于真正切换层级。
 
 **任务切换证据和恢复**：仅在已有归因证明当前层级缺可负担的不同判别实验，或新层级具有真实不同的合法信息/真值/目标时评估`UP/DOWN/NARROW/LATERAL`；旧层级写`SUSPENDED/HOLD`并保留原Run，重新版本化新`task_id/protocol_id/Claim/eligible_holdout`。欠训练或普通Bug先修，不因一次负Pilot切层。
+
+**增量贡献可直接停止上探**：若L1或L2的简单有效结果已提供未被近邻覆盖的窄范围知识/能力/成本差额，应优先完善独立证据并进入`PAPER_PATH_CANDIDATE`，不强制冲L3。层级是科研问题与合法信息条件之分，不是文章档次。
 
 ## 3. 三种方向调整（按证据选择）
 
