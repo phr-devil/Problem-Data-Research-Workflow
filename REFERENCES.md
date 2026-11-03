@@ -42,7 +42,7 @@
 
 具体转换见[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md)。OpenAlex/Semantic Scholar等只有真实可用时才作为论文元数据来源；未接通API不假称查询。无Star排名、无第三方代码复制。
 
-## PD-RW v1.3｜从优秀项目移植的五项小机制
+## PD-RW v1.3–v1.5｜从优秀项目移植的机制
 
 1. **选题必须落成可验证的建议**（RD-Agent）：不是堆热门模型，而是“为什么选数据/反对理由/最大未知/下一最廉价检查”；用真实反馈更新科研问题。
 2. **单一对照＋完整实验血缘**（autoresearch、AIDE、MLflow）：稳定的合法evaluator、`Champion–Challenger`、保存负结果/异常/版本；不复制autoresearch的无限循环或仅以开发分数推进科研。
@@ -51,3 +51,15 @@
 5. **测量Agent行为，而不只检测Markdown关键词**（AIDE实验血缘、v3 sealed evaluator）：合成反例先测试合同与红线，随后以真实项目历史冻结点做**遮蔽后续结果的行动回放**，比较是否选择正确的最小探针、避免非法训练/假降级/确认污染、是否保留负结果与资源成本。尚未跑真实Agent对照时只能说`NOT_MEASURED`。
 
 **不会照搬**：复杂多Agent系统、无界GPU搜索、强制长模板、流水账或自动生成即算论文成功。外部GitHub热度不证明科研成功率；上述都是设计借鉴而非已在用户电脑安装/运行框架。第三方代码和数据许可按实际用途复核。
+
+## PD-RW v1.5：可核验的移植边界
+
+| 官方项目 | 借鉴到本仓库的实现 | 没有照搬/不能声称的结果 |
+|---|---|---|
+| [AI-Scientist-v3](https://github.com/SakanaAI/AI-Scientist-v3) | `core/task_runtime.py` 的TaskSpec引用文件指纹、只读资格核查、train/dev独立组检查；`PAPER_FIRST.md` 的NO_WINNER探索出口 | 不复制强制线性阶段、模型运行器、论文自动生成；TaskSpec预检不是科学评价PASS |
+| [AIDE](https://github.com/WecoAI/aideml) / [RD-Agent](https://github.com/microsoft/RD-Agent) | `core/probes.py`：失败证据→差异性预测→最小判别实验，一个主候选＋父Run追踪 | 不引入无界搜索或默认多Agent，探针格式PASS不等于机制正确 |
+| [autoresearch](https://github.com/karpathy/autoresearch/blob/master/program.md) | 固定评价/受保护文件的显式哈希锁定（`task-pin`）、修改后版本化、可恢复证据 | 不使用固定5分钟或永不停止循环，不按单一开发分数推进科学Claim |
+| [DVC](https://github.com/treeverse/dvc) / [MLflow](https://github.com/mlflow/mlflow) | 真实Run关联原始预测/指标/代码的SHA-256，显式`status --deep`验证；`run-check`报告运行环境与复现缺口 | 不引入外部追踪服务或重复拷贝大数据；元数据齐全也不等于真实复现 |
+| [Research-Workflow-Forge](https://github.com/phr-devil/Research-Workflow-Forge) | 显式OpenAlex/Crossref元数据查询及来源/日期/DOI留痕（`core/literature.py`） | 不把论文元数据当全文新颖性鉴定，不因空结果判研究空白 |
+
+以上是机制借鉴，代码为独立的轻量适配实现；尚未运行真实历史项目的盲回放，工作流科研成功率保持`NOT_MEASURED`。只有真实的冻结时点Agent对照才能判断改进价值。

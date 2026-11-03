@@ -1,6 +1,6 @@
 # PD-RW v1.5：可选的最小证据层
 
-**定位**：管理只读TaskSpec资格预检、Probe候选合同、结构化证据/工件指纹、跨会话恢复、开发Run的记录条件可比性以及显式调用的文献元数据查询；不判断选题/创新价值、不自动STOP、不执行网络/拟合/训练、不授权解封。科研决策仍由 [WORKFLOW.md](../WORKFLOW.md) 负责。
+**定位**：管理只读TaskSpec资格预检、Probe候选合同、结构化证据/工件指纹、跨会话恢复、开发Run的记录条件可比性以及显式调用的文献元数据查询；不判断选题/创新价值、不自动STOP、默认不联网、不执行拟合/训练（仅显式`literature-search`会发起元数据网络请求）、不授权解封。科研决策仍由 [WORKFLOW.md](../WORKFLOW.md) 负责。
 
 ## 最小使用
 
@@ -37,7 +37,7 @@ python -m core.cli status --root research --deep
 python -m core.cli literature-search --query "sensor calibration transfer" --limit 5 --output search-evidence.json
 ```
 
-`task-check`要求`task.json`至少含：`task_id, protocol_id, dataset_version, target_definition, label_provenance, prediction_time, legal_inputs[], group_key, independent_unit, metric, metric_direction(max/min), evaluator_version, editable_paths[], protected_paths[], references{data_manifest,split_manifest,evaluator}, correctness_checks[]`。已存在的开发split清单可附`train_ids/dev_ids`和`train_groups/dev_groups`做**实际不重叠检查**；缺字段标UNKNOWN而非假PASS。`task-pin`会新建包含完整`expected_sha256`的TaskSpec快照；新Run若携带`task_spec_ref/task_spec_sha256`，系统要求快照与实际数据/划分/评价器哈希一致，拒绝静默替换。既有Run可不绑定，不能倒推其已锁定。只读资格检查不执行评价器，不访问sealed标签。
+`task-check`要求`task.json`至少含：`task_id, protocol_id, dataset_version, target_definition, label_provenance, prediction_time, legal_inputs[], group_key, independent_unit, metric, metric_direction(max/min), evaluator_version, editable_paths[], protected_paths[], references{data_manifest,split_manifest,evaluator}, correctness_checks[]`。已存在的开发split清单可附`train_ids/dev_ids`和`train_groups/dev_groups`做**实际不重叠检查**；缺字段标UNKNOWN而非假PASS；若新Run绑定已固定TaskSpec，必须有非空且不交叠的train/dev样本ID与独立group清单，否则拒绝声称该快照下的Run通过最小结构核查。`task-pin`会新建包含完整`expected_sha256`的TaskSpec快照；新Run若携带`task_spec_ref/task_spec_sha256`，系统要求快照与实际数据/划分/评价器哈希一致，拒绝静默替换。既有Run可不绑定，不能倒推其已锁定。只读资格检查不执行评价器，不访问sealed标签。
 
 `probe-check`只检查一条候选的失败前提、竞争解释、明确区别性预测、最廉价测试、正/负/无效三类结果的后续含义及授权成本。不生成科学创新、不自动授权GPU、也不能仅凭结构推断物理可学性。`run-check`审计命令、Git commit、Python版本、seed、环境文件、任务快照与预算元数据；缺字段标`PROVENANCE_PARTIAL`，并不自动否定既有科学结果。
 
