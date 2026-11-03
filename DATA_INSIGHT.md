@@ -1,6 +1,6 @@
 # 活动02｜真实数据画像 → 科研现象与机会（Data Insight v1.0）
 
-> **适用时机**：活动01已确定`DIRECTION_CARD / DATA_PORTFOLIO`，且本地数据真实可读或有用户允许的只读资产。数据获取/清单/许可/分组封存由[DATA_DISCOVERY.md](DATA_DISCOVERY.md)负责；本文件只解释**如何从真实数据发现有价值的现象**。形成`DATA_INSIGHT_CARD`后交[TASK_EXPLORATION.md](TASK_EXPLORATION.md)。不默认安装工具、多Agent、全量扫描或训练。没有真实数据标`WAITING_FOR_DATA/NOT_RUN`，不要把设想写成观察。
+> **适用时机**：活动01已确定`DIRECTION_CARD / DATA_PORTFOLIO`，且本轮必需数据已按 [DATA_DISCOVERY.md](DATA_DISCOVERY.md) 获取/复用并达到 `DATA_ACQUIRED_VERIFIED`。数据获取/清单/许可/分组封存由[DATA_DISCOVERY.md](DATA_DISCOVERY.md)负责；本文件只解释**如何从真实数据发现有价值的现象**。形成`DATA_INSIGHT_CARD`后交[TASK_EXPLORATION.md](TASK_EXPLORATION.md)。不默认安装工具、多Agent、全量扫描或训练。缺完整必需数据标 `WAITING_FOR_DOWNLOAD_AUTH/WAITING_FOR_DATA/PARTIAL_DATA` 并回活动01下载/验收；不开展正式数据画像，也不把设想写成观察。已有完整本地副本则直接核验复用，无需重下。
 
 ## 1. 数据角色先核清，再决定观察深度
 
