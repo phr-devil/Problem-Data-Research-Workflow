@@ -47,3 +47,14 @@
 5. 最终独立确认前冻结任务、方法、指标与选择史；已参与多库搜索的D1/D2/D3不得冒充未接触确认。科学升级不能借确认集反复改方向。
 
 **最短输出**：`BEST_VALID_RUN | PAPER_PATH/STRONGEST_NEIGHBOR_GAP | NEXT | AUTH`（只在变化时更新），证据用Run路径引用；不提前生成精美论文图、架构宣传图或长报告。科研诊断图按需；已获可靠证据且用户确需投稿交付，才在活动06美化。执行仍须真实授权。
+
+## v1.6｜四类结论分账
+
+每个可信Run之后只选择当前受到证据支持的出口：
+
+- `ALGORITHM_INCREMENT`：同任务、同合法信息、同K、相近公平预算下对强简单/具名近邻存在可信新增能力。
+- `INDEPENDENT_MECHANISM_OR_CAPABILITY`：有合法干预或新部署条件与对照，机制因果解释仍需独立鉴别。
+- `REPLICABLE_BOUNDARY`：在控制选择偏差、独立组与已有近邻后，得到真正可复核的新规律/局限；不是一个负分数就有论文。
+- `ENGINEERING_ASSET_ONLY / NO_INDEPENDENT_CLAIM`：基线能跑或已有方法吸收全部差额，无充分新科学贡献；保留代码而非强行写稿。
+
+`PAPER_PATH_CANDIDATE`与`CONFIRMED_CLAIM`仍遵循既有证据级别；以上只帮助确定Claim类型，不能自动升格。

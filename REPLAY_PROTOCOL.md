@@ -17,3 +17,7 @@
 [SCENARIOS.json](SCENARIOS.json) 仅是合成反例；根目录 `chapter10_replay.py`只做结构/路由/范围检查，**不自动裁判科研质量**，不能替代真实Agent输出和盲审。
 
 **SAFE-Gait 定向回放（未完成真实盲回放）**：[LESSONS/SAFE_GAIT_REPLAY.json](LESSONS/SAFE_GAIT_REPLAY.json) 将事后复盘拆成 C1 Oracle/策略落差、C2 合法 K=1 候选、C3 目标/方向异质性，以及 N1–N3 负对照。该 JSON 是**重构的回放设计与测试夹具，不是已冻结的原始历史快照**；执行真实盲回放时必须重新获取带时间戳的当时证据并遮蔽未来信息，按同预算与授权评价 AI 决策。不得因为本案例后来成功，就把当时的 K=1 选择认定为必然正确。
+
+## v1.6｜失败路由的盲回放验收
+
+优先冻结六种历史节点：APACE无标注策略→K=1合法转向、CRIA真值邻域错误、OpenPack互补但动态策略不可辨、RISC-Sense强SVM覆盖、ACRF低ICC、CC-DRA跨日失效。先盲评后解盲；比较是否选择真实可行的下一Probe、保留简单方法、拒绝虚假GO、未过早STOP、遵守同K/独立组并记录GPU/Token/人力。未重算原始Run或没有当时可见快照时标`NOT_REPLAYABLE`，不报成功率提高。

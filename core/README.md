@@ -48,3 +48,6 @@ python -m core.cli literature-search --query "sensor calibration transfer" --lim
 **探针预算（可选）**：`probe.json`可加入`cost_estimate:{"gpu_hours":0.4,"tokens":5000}`；`probe-check --file probe.json --remaining-budget-file budget.json`会在给定JSON预算内提示`BUDGET_REVIEW_REQUIRED`，绝不自动STOP或将预算文件视为用户训练授权。
 
 **按需信息条件核对（无训练）**：`python -m core.cli information-check --file info-shift.json`。输入 `root_problem`、`before/after`（task_id、protocol_id、每单位 K、合法决策前可见信息）、`new_information`（标签/反馈是否预测前可见、support-query 是否独立、成本及同 K 简单基线）、可选 `evidence`（Oracle/实际策略与参照结果及来源）。输出只标记信息条件候选和风险，不判断科学成功、不自动转题、不批准训练。案例见 [LESSONS/SAFE_GAIT_APACE.md](../LESSONS/SAFE_GAIT_APACE.md)。
+
+
+**v1.6可选失败原因分诊（纯建议）**：`python -m core.cli failure-check --file failure.json`；输入示例：`{"task_id":"T","protocol_id":"P","findings":[{"kind":"EVALUATION_INVALID","evidence_level":"OBSERVED","evidence_ref":"runs/audit.json"}]}`。kind可为`EVALUATION_INVALID/TRAINING_INADEQUATE/LEGAL_INFORMATION_GAP/SIMPLE_BASELINE_DOMINATES/CLAIM_NOT_DISTINCT/STATISTICAL_UNCERTAINTY/MECHANISM_NEGATIVE/EXPLORATORY_OBSERVATION`。输出的路线与范围不是Run事实复核；原始证据须由Agent读取，程序不会自动训练、STOP或改变授权。
