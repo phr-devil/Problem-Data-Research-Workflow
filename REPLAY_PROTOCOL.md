@@ -10,6 +10,8 @@
 6. **选题搜索盲审（按需）**：在同`USER_SCOPE`、信息时点、检索权限、Token/时间预算下配对比较：重要方向漏检、最强直接近邻漏检、虚假研究空白、可信数据/评价路径、越界选题、搜索成本和停止合理性。比有效信息而非文献数量；未真实回放为`NOT_MEASURED`。
 7. **落盘与解释**：保留`case_id / frozen_snapshot / agent_version / decision / human_safety / next_action_quality / reproduced_evidence / gpu_hours / tokens / human_hours / later_outcome`；按真实项目配对比较，不能让多seed冒充独立项目。未实际回放记NOT_MEASURED。
 
+**增量贡献评测（v1.9）**：历史冻结节点应同时统计两种错误：因未达SOTA、缺新网络或缺多库而过早拒绝有实际增量贡献的假阴性；将普通复现、偶然开发集切片或伪指标包装为论文的假阳性。盲评只用当时可见文献与Run，对候选Claim的可证伪性、证据覆盖和验证成本评价；真实回放未执行时仍标`NOT_MEASURED`。
+
 **v1.5验收**：重点观察TaskSpec是否减少错误实验、差异性Probe是否避免重复失败前提、原始工件指纹是否及时发现证据变化、NO_WINNER是否诚实区分独立规律与单纯负增益；这些指标须以真实项目冻结快照、盲审和实际日志确认。未执行仍记NOT_MEASURED。
 
 **v1.4验收**：先运行结构/事件/比较器行为测试，再对至少一个历史成功和一个历史失败项目进行冻结时点盲回放，比较v1.3与v1.4在相同信息、权限及预算下的错误STOP、同前提无效重试、科学安全违规、有效下一探针和GPU/Token/人工成本。未实施实测标`NOT_MEASURED`，不能宣称科研成功率已提高。
