@@ -74,6 +74,8 @@
 
 **交接**：选`PRIMARY_TASK`（必要时一条不同共同失败前提的`RESERVE_TASK`）及`NEXT_DISCRIMINATING_PROBE`，附`INSIGHT_ORIGIN / GROUP_SPLIT / LABEL_AND_VISIBLE_INPUTS / NEIGHBOR_GAP / AUTH`；已有有效Run直接进入活动04，无需重做画像。任务级数据或封存资格变化时更新`task_id/protocol_id/eligible_holdout`，不解封挑选。
 
+**选库与研究命题是可调整的，而不是一次性锁死**：D1完整性和最低评价路径已核后可先做廉价真实探针；发现新数据事实允许按既有用户范围更新TASK，不需要重跑整轮选题搜索。D1无法支持原任务时按[DATA_DISCOVERY.md](DATA_DISCOVERY.md)的转题顺序复用资产；主问题及授权改变仍由用户决定。
+
 ## 2. 最小 TASK_CARD 与当前选择
 
 每项最多八要素，可复用现有文件：`TASK_ID/ORIGIN`｜`SCIENTIFIC_QUESTION`｜`INPUT_TARGET`（部署可见输入、独立真值/证明义务、组）｜`TESTABLE_DIFFERENCE`（只有机制归因才必须要求竞争 A/B 预测）｜`BASELINE`｜`VALUE`（近邻之外可能新增的知识或真实能力）｜`MINIMUM_PROBE`｜`COST_RISK`。

@@ -1,11 +1,11 @@
-# Problem–Data Research Workflow | PD-RW v1.3
+# Problem–Data Research Workflow | PD-RW v1.4
 
 > **独立科研工作流仓库**。不依赖原提示词库或其他章的文件。目标是从“有价值的大问题＋可信数据（或理论证据路径）”开始，在真实观察和有限实验中逐渐发现具体科研任务、算法与论文主张。更自由的探索**不等于放宽最终论文证据**，也不承诺发表或算法增益。
 
 ## 唯一入口与最短路径
 
 - **AI 首次进入**：只读 [START.md](START.md)，再按用户意图读 [WORKFLOW.md](WORKFLOW.md) 的对应活动；只在需要时读一份专题。已有项目优先读其最新 STATE、原始 Run/数据版本；**无需预读所有章节、24条旧Prompt或全部来源**。
-- **每次用户会指定研究方向**（如视觉、NLP、机器人、传感器或明确「方向不限」）：AI仅在本轮范围内筛1–3个问题—资源组合；**每个组合默认规划3–4个互补数据库**（可多库同时开发，保留转题资源和独立确认），标明标签/分组兼容性与来源。**第一步方向确定后直接完成数据库选择、下载清单并通知用户下载；无需再让用户选择一次数据库**；不要求提前决定具体算法或先证明增益。
+- **每次用户会指定研究方向**（如视觉、NLP、机器人、传感器或明确「方向不限」）：AI仅在本轮范围内筛1–3个问题—资源组合；**优先核实可评价主库D1，再按科学主张与成本扩展外部复现/备用数据库**（可多库联合开发，但不凑数量），标明标签/分组兼容性与来源。**第一步方向确定后直接完成数据库选择、下载清单并通知用户下载；无需再让用户选择一次数据库**；不要求提前决定具体算法或先证明增益。
 - **用户已有具体研究机制或旧项目**：可以直接进入对应活动（通常03/04），复用真实 STATE 和 Run；不强制重新选题，不未经确认迁移旧项目。
 
 ## 六项研究活动（可跳跃，不是六道审批门）
@@ -42,7 +42,7 @@
 - [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md)：真实实验、按症状探针、分层公平对照、可复现 Run 与修复；故障按需参考本库 [IMPLEMENTATION_GUIDE](IMPLEMENTATION_GUIDE.md) 的定位与恢复流程
 - [CONFIRMATION.md](CONFIRMATION.md)：从开放探索到严格论文确认
 - [EXAMPLE_SENSOR.md](EXAMPLE_SENSOR.md)：传感器跨平台迁移的假想执行实例（明确非实测）
-- [templates/STATE.md](templates/STATE.md)：可选、极简的项目断点
+- [templates/STATE.md](templates/STATE.md)：兼容旧项目的人类可读续做索引；有效Run/Claim应保留可核验证据
 - [REFERENCES.md](REFERENCES.md)：高星 GitHub 项目的具体借鉴点、限制与原始链接
 - [REPLAY_PROTOCOL.md](REPLAY_PROTOCOL.md)：真实项目冻结点的盲回放和人工配对评审
 - [SCENARIOS.json](SCENARIOS.json)：57个PD-RW专属的**合成**反例/风险场景；CI只校验结构和关键词，不调用模型
@@ -56,3 +56,9 @@
 此仓库是从 [Research-Prompt-Library](https://github.com/phr-devil/Research-Prompt-Library) 的原第十章整理的独立版本：工作流文档在仓库根目录，配有最短 AI 入口 `AGENTS.md`、结构回归测试及盲回放检查脚本。无需载入旧仓库的 08/09 章，也不绑定第三方算法 Agent。实验、运行记录及数据应放在各自项目目录，勿提交敏感数据或大型原始数据。
 
 **离线验证**：`python -m unittest discover -s tests -v`；`python -m json.tool SCENARIOS.json > /dev/null`；盲回放：`python chapter10_replay.py responses.json`（仅校验结构，不代替科研盲审）。
+
+## v1.4 轻量执行层
+
+- 科学判断、授权与止损仍由 [WORKFLOW.md](WORKFLOW.md) 负责；[core/README.md](core/README.md) 的程序只负责记录证据、恢复状态和检查开发Run的可比性，不自动推进固定科研阶段。
+- 旧 `STATE.md/RUNS.tsv/CLAIMS.md` 可继续复用，无需迁移；新项目首次获得有效Run时，如可执行Python，使用 `python -m core.cli init --root research --project-id demo` 建立机器索引。已启用后，应为新增有效Run和已支持Claim关联真实工件。
+- 运行 `python -m unittest discover -s tests -v` 验证代码与结构约束，**不代表科研质量或成功率已验证**；真实效能需按 [REPLAY_PROTOCOL.md](REPLAY_PROTOCOL.md) 盲回放。
