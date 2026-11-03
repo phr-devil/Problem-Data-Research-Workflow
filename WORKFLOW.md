@@ -1,4 +1,4 @@
-# PD-RW v1.9｜PD-RW唯一决策总控（ChatGPT / WorkBuddy / Codex）
+# PD-RW v1.10｜PD-RW唯一决策总控（ChatGPT / WorkBuddy / Codex）
 
 **目标**：**本轮研究学科/方向完全以用户当次指令为准**，只有明确「方向不限」时才跨学科；不默认传感器或具身智能。随后在给定范围内选择可信数据/评估基准（或理论证明），获授权后完成实证。**仅用户明确选择PD-RW时启用**；第八章具体命题研究和第九章挽救工作不被自动覆盖或迁移。
 
@@ -17,7 +17,7 @@
 
 **单次循环可跳转**：已有 STATE/Run 直接续做；低门槛 EXPLORE、中门槛追加投入、高门槛正式确认。**当前最优选择并不由L2的名称决定**：L1若科学价值更明确可先研究L1；L3若有廉价关键正控可先尝试L3。初始 UNKNOWN 不自动否决；论文确认仍核独立真值、时间因果、公平强基线、独立组、效应不确定性与直接近邻。
 
-**增量论文路由（不是新状态/审批门）**：可信开发结果出现后，按 [PAPER_FIRST.md](PAPER_FIRST.md) 检查是否存在**至少一项**具名近邻尚未回答、可证伪且有独立确认路径的贡献：包括适用边界、同信息条件下局部增益、资源/标定成本—性能权衡、可解释负结果、或有价值的已知组件组合。符合则记`PAPER_PATH_CANDIDATE`并安排最少必要证据，可同步构思文章；不以全数据集SOTA、新网络、多项贡献或预设全量跨库作为门槛。没有实质新意保留`NO_INDEPENDENT_CLAIM`；论文确认质量不降低。A=工程资产、B=增量贡献候选、C=可选高影响拓展仅为决策类比，**不是机器状态、固定阶段或期刊等级**。
+**增量论文路由（不是新状态/审批门）**：可信开发结果出现后，按 [PAPER_FIRST.md](PAPER_FIRST.md) 检查是否存在**至少一项**具名近邻尚未回答、可证伪且有独立确认路径的贡献：包括适用边界、同信息条件下局部增益、资源/标定成本—性能权衡、可解释负结果、或有价值的已知组件组合。符合则记`PAPER_PATH_CANDIDATE`并安排最少必要证据，可同步构思文章；不以全数据集SOTA、新网络、多项贡献或预设全量跨库作为门槛。没有实质新意保留`NO_INDEPENDENT_CLAIM`；论文确认质量不降低。工程资产、增量贡献与高影响扩展必须分开判断；按需使用 [VENUE_STRATEGY.md](VENUE_STRATEGY.md) 的 **S/A/B/C稿件潜力（NONE/UNKNOWN）** 与 **冲刺/主投/保守期刊策略** 两轴，既不能把B/C档小创新自动判STOP，也不能把分档当官方JCR/CAS分区、客观质量分或录用概率。该档次只是阶段性建议、不是机器状态或新审批门。
 
 ## 2. 单入口事件路由
 
@@ -33,6 +33,7 @@
 | TASK需要真实编码/评价器尚未固定 | [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)；可用[core/README.md](core/README.md)只读TaskSpec检查 | 合法TaskSpec／保护范围／评价器指纹或明确UNKNOWN（不自动授权拟合） |
 | 有 TASK/基线/负 Pilot/普通代码故障 | [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md)；写代码才读 [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) | 有效 Run、定向修复或 NEXT_PROBE |
 | 有可信结果、需要收敛论文贡献或判断创新价值 | [PAPER_FIRST.md](PAPER_FIRST.md)；确需转任务才读[TASK_EXPLORATION.md](TASK_EXPLORATION.md) | CLAIM_EVIDENCE_MAP、具名近邻差额与下一必要实验 |
+| 有可信增量Claim且需判断稿件档次/目标期刊 | [VENUE_STRATEGY.md](VENUE_STRATEGY.md)（仅按需） | 非强制的稿件潜力、期刊适配梯队、关键证据缺口；不预测录用率 |
 | 正式科学确认、公开主张、投稿 | [CONFIRMATION.md](CONFIRMATION.md) | 预冻结协议、独立证据或 CONFIRMATION_UNAVAILABLE |
 | 用户改变研究范围/权限/预算 | 本文件＋最新 STATE | 影响范围与真实用户决策 |
 

@@ -85,6 +85,8 @@
 
 **选库与研究命题是可调整的，而不是一次性锁死**：D1完整性和最低评价路径已核后可先做廉价真实探针；发现新数据事实允许按既有用户范围更新TASK，不需要重跑整轮选题搜索。D1无法支持原任务时按[DATA_DISCOVERY.md](DATA_DISCOVERY.md)的转题顺序复用资产；主问题及授权改变仍由用户决定。
 
+**不要因想象中的期刊等级提前淘汰Task**：早期只评估数据/真值、可学信号、科学差额和下一最便宜证据；S/A/B/C稿件潜力只能在有具体Claim或初步Run时暂估，且不参与硬性选题PASS/STOP。研究任务在困难L2/L3上未成功时，检查是否留下可独立复核的窄规律/局部收益/标注成本边界；若有，移交[PAPER_FIRST.md](PAPER_FIRST.md)，不要默认继续追逐复杂模型。
+
 ## 2. 最小 TASK_CARD 与当前选择
 
 每项最多八要素，可复用现有文件：`TASK_ID/ORIGIN`｜`SCIENTIFIC_QUESTION`｜`INPUT_TARGET`（部署可见输入、独立真值/证明义务、组）｜`TESTABLE_DIFFERENCE`（只有机制归因才必须要求竞争 A/B 预测）｜`BASELINE`｜`VALUE`（近邻之外可能新增的知识或真实能力）｜`MINIMUM_PROBE`｜`COST_RISK`。

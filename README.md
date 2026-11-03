@@ -1,10 +1,12 @@
-# Problem–Data Research Workflow | PD-RW v1.9
+# Problem–Data Research Workflow | PD-RW v1.10
 
 > **独立科研工作流仓库**。不依赖原提示词库或其他章的文件。目标是从“有价值的大问题＋可信数据（或理论证据路径）”开始，在真实观察和有限实验中逐渐发现具体科研任务、算法与论文主张。更自由的探索**不等于放宽最终论文证据**，也不承诺发表或算法增益。
 
 **v1.8 默认科研路线**：验收必需数据 → 发现可重复的真实规律或提出明确的可证伪需求 → 用简单合法参照证明信号和可纠正性 → 分开判断可靠结果与独立科研贡献 → 仅为明确瓶颈升级复杂机制 → 冻结后独立确认。已有有效 Run 直接续做，非新增门槛；简单结果不自动等于创新。
 
 **v1.9 论文标准**：有一项可信、可证伪、相对具名最近邻具有实际差额的**增量贡献**，即可进入最小论文路线；不预设必须全面SOTA、发明新网络、跨所有数据库或同时具备多种创新。效率/标定成本/可靠性/失效边界/已有方法的有意义组合都可成为贡献，但不能降低合法评价、公平对照、效应不确定性和与主张匹配的独立确认。详见 [PAPER_FIRST.md](PAPER_FIRST.md)。
+
+**v1.10 小发现保留与选刊**：一项有限但真实的增量贡献可以进入最小论文路线。活动04–05有可信DEV证据或特定负Pilot时，先评估可收窄的科学主张与缺口，必要时参考 [VENUE_STRATEGY.md](VENUE_STRATEGY.md) 的稿件潜力 S/A/B/C（另有NONE/UNKNOWN）及期刊冲刺/主投/保守分层；二者是两根不同轴、不是JCR分区或录用概率，也不构成STOP门槛。仅在需要真实选刊时联网核最新范围、近期近邻论文、索引与费用。
 
 ## 唯一入口与最短路径
 
@@ -20,7 +22,7 @@
 | 02 | 数据获取验收后，审计与真实科研现象：[DATA_DISCOVERY.md](DATA_DISCOVERY.md) / [DATA_INSIGHT.md](DATA_INSIGHT.md) | DATA_MANIFEST（DATA_ACQUIRED_VERIFIED）＋DATA_INSIGHT_CARD；封存确认资源 | 获授权的 WorkBuddy/Codex/本地环境 |
 | 03 | 从现象/文献生成、比较任务并按需分层：[TASK_EXPLORATION.md](TASK_EXPLORATION.md) / [TASK_LADDER.md](TASK_LADDER.md) | PRIMARY_TASK＋NEXT_DISCRIMINATING_PROBE、备选任务按需，不提前承诺增益 | ChatGPT＋可访问真实数据的 Agent |
 | 04 | 双轨算法开发：可信性能＋有依据的机制探索：[EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md) | 有效Run、ALGORITHM_HYPOTHESIS及下一最有价值实验 | 获授权的代码/实验 Agent |
-| 05 | 与活动04并行收敛独立贡献：[PAPER_FIRST.md](PAPER_FIRST.md) / [TASK_EXPLORATION.md](TASK_EXPLORATION.md) | CLAIM_EVIDENCE_MAP：可信贡献候选、最强替代及实验缺口 | ChatGPT＋代码 Agent |
+| 05 | 与活动04并行收敛独立贡献：[PAPER_FIRST.md](PAPER_FIRST.md) / [VENUE_STRATEGY.md](VENUE_STRATEGY.md)（按需） | CLAIM_EVIDENCE_MAP：可信贡献候选、最强替代及实验缺口 | ChatGPT＋代码 Agent |
 | 06 | 严格科学确认：[CONFIRMATION.md](CONFIRMATION.md) | 有效独立证据或 CONFIRMATION_UNAVAILABLE，论文声明边界 | 独立核验与获授权正式实验 |
 
 **实证执行前提（非额外科研审核）**：本轮确定为必需的D1及其他必需库，应先获取选定版本的完整必需原始文件、核文件完整性和本地可达性，再进行数据画像、正式TASK冻结、基线或算法实验；已有可信本地副本直接验收复用。下载未获授权或未完成，停在 `WAITING_FOR_DOWNLOAD_AUTH` / `WAITING_FOR_DATA`，仅允许公开资料调查、下载准备和不依赖数据的假说草拟；不能以示例数据/模拟运行假冒完整实证。备用库按需获取，理论/无需静态库的仿真按证据路径处理，见 [DATA_DISCOVERY.md](DATA_DISCOVERY.md) §4。
