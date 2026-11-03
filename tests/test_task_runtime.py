@@ -84,6 +84,15 @@ class TaskSpecTests(unittest.TestCase):
         with self.assertRaises(ContractError):
             qualify_task(self.root,"task.json")
 
+    def test_pinned_task_still_requires_group_split_evidence(self):
+        (self.root/"split.json").write_text('{"train_ids":["1"],"dev_ids":["2"]}',encoding="utf-8")
+        pin_task(self.root,"task.json","task-pinned.json")
+        valid={"task_id":"task1","protocol_id":"p1","dataset_version":"d1",
+               "evaluator_version":"e1","legal_inputs":["sensor"],
+               "task_spec_ref":"task-pinned.json","task_spec_sha256":digest(self.root/"task-pinned.json")}
+        with self.assertRaisesRegex(ContractError,"independent-group"):
+            check_run_task_alignment(self.root,valid)
+
     def test_run_alignment(self):
         pin_task(self.root,"task.json","task-pinned.json")
         valid={"task_id":"task1","protocol_id":"p1","dataset_version":"d1",

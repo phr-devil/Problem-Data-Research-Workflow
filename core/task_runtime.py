@@ -93,6 +93,8 @@ def qualify_task(root: Path, task_spec_path: str) -> dict:
             a, b = split[train], split[dev]
             if not isinstance(a, list) or not isinstance(b, list) or any(not isinstance(x, (str,int)) for x in a+b):
                 raise ContractError(f"invalid split list: {train}/{dev}")
+            if not a or not b:
+                raise ContractError(f"empty train/dev split: {train}/{dev}")
             if len(a) != len(set(a)) or len(b) != len(set(b)):
                 raise ContractError(f"duplicate entries in {train}/{dev}")
             if set(a) & set(b):
@@ -121,6 +123,8 @@ def check_run_task_alignment(root: Path, run: dict) -> None:
         raise ContractError("TaskSpec changed since Run was planned")
     if not audit["protected_snapshot_frozen"]:
         raise ContractError("TaskSpec has no complete pinned protected-file SHA-256 set; run task-pin first")
+    if any(not check.endswith(":DISJOINT") for check in audit["split_checks"]):
+        raise ContractError("TaskSpec lacks train/dev ID and independent-group split evidence")
     spec = json.loads(_inside(Path(root), spec_ref).read_text(encoding="utf-8"))
     for field in ("task_id", "protocol_id", "dataset_version", "evaluator_version"):
         if run[field] != spec[field]:
