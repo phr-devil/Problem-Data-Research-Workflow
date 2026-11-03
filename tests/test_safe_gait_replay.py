@@ -19,8 +19,8 @@ class ReplayFixtureTests(unittest.TestCase):
         second=self.case["checkpoints"][1]
         self.assertNotIn("SAFE-Gait succeeds",json.dumps(first["visible_evidence"]))
         self.assertEqual(second["visible_evidence"]["future_perf"],"UNKNOWN")
-        self.assertFalse(any("DS cross-dataset advantage" in json.dumps(item)
-                              for item in [x["visible_evidence"] for x in self.case["checkpoints"][:2]))
+        self.assertFalse(any("DS cross-dataset advantage" in json.dumps(x["visible_evidence"])
+                             for x in self.case["checkpoints"][:2]))
 
     def test_negative_controls_have_distinct_invalid_reasons(self):
         controls=self.case["negative_controls"]
