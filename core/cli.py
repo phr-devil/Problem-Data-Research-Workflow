@@ -6,7 +6,7 @@ from pathlib import Path
 from core.comparison import compare_runs
 from core.contracts import ContractError
 from core.state import initialize, record_event, recover, status
-from core.task_runtime import qualify_task
+from core.task_runtime import qualify_task, audit_run_reproducibility
 from core.probes import review_probe
 from core.literature import literature_search
 
@@ -33,6 +33,9 @@ def main(argv: list[str] | None = None) -> int:
     task = sub.add_parser("task-check", help="Read-only TaskSpec and split qualification")
     task.add_argument("--root", type=Path, required=True)
     task.add_argument("--spec", required=True, help="TaskSpec JSON path relative to root")
+    runcheck = sub.add_parser("run-check", help="Read-only Run execution/reproducibility preflight")
+    runcheck.add_argument("--root", type=Path, required=True)
+    runcheck.add_argument("--run", required=True, help="Run JSON path relative to root")
     probe = sub.add_parser("probe-check", help="Review a proposed discriminating experiment")
     probe.add_argument("--file", type=Path, required=True)
     lit = sub.add_parser("literature-search", help="Explicit live metadata lookup (network)")
@@ -51,6 +54,8 @@ def main(argv: list[str] | None = None) -> int:
             result = recover(args.root)
         elif args.command == "task-check":
             result = qualify_task(args.root, args.spec)
+        elif args.command == "run-check":
+            result = audit_run_reproducibility(args.root, args.run)
         elif args.command == "probe-check":
             result = review_probe(json.loads(args.file.read_text(encoding="utf-8")))
         elif args.command == "literature-search":

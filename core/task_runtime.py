@@ -122,3 +122,35 @@ def check_run_task_alignment(root: Path, run: dict) -> None:
             raise ContractError("Run and TaskSpec mismatch: " + field)
     if sorted(run["legal_inputs"]) != sorted(spec["legal_inputs"]):
         raise ContractError("Run legal_inputs differ from TaskSpec")
+
+
+def audit_run_reproducibility(root: Path, run_path: str) -> dict:
+    """Describe replay metadata gaps; does not rerun experiment or certify reproducibility."""
+    from core.contracts import validate_run
+    root=Path(root)
+    obj=validate_run(json.loads(_inside(root, run_path).read_text(encoding="utf-8")))
+    if obj["status"] != "VALID":
+        return {"status":"NOT_A_VALID_RUN", "run_id":obj["run_id"], "gaps":["no valid measured Run"]}
+    refs=obj["artifact_refs"]
+    hashes={k:_hash_file(_inside(root,p)) for k,p in refs.items()}
+    execution=obj.get("execution")
+    gaps=[]
+    if not isinstance(execution,dict):
+        execution={}
+    for name in ("command","git_commit","python_version","environment_ref"):
+        if not isinstance(execution.get(name),str) or not execution[name].strip():
+            gaps.append("execution."+name)
+    if type(execution.get("seed")) is not int:
+        gaps.append("execution.seed")
+    if "environment_ref" in execution and isinstance(execution["environment_ref"],str):
+        hashes["environment"]=_hash_file(_inside(root,execution["environment_ref"]))
+    if not obj.get("budget_basis"):
+        gaps.append("budget_basis")
+    if obj.get("task_spec_ref") and obj.get("task_spec_sha256"):
+        check_run_task_alignment(root,obj)
+        hashes["task_spec"]=_hash_file(_inside(root,obj["task_spec_ref"]))
+    else:
+        gaps.append("task_spec_ref+sha256")
+    return {"status":"METADATA_COMPLETE_NOT_REPRODUCED" if not gaps else "PROVENANCE_PARTIAL",
+            "run_id":obj["run_id"],"fingerprints":hashes,"gaps":gaps,
+            "note":"No model, evaluator or scientific inference was executed; environment equivalence needs real replay."}
