@@ -2,6 +2,10 @@
 
 **唯一目的**：保护“小而真实”的论文机会，为一项具体Claim选适合的期刊；不预测录用概率、不决定是否停止算法。新科研任务仍按[WORKFLOW.md](WORKFLOW.md)执行；增量贡献与证据见[PAPER_FIRST.md](PAPER_FIRST.md)，确认按[CONFIRMATION.md](CONFIRMATION.md)。**这不是第七步/新自动审批/新的状态Schema**。
 
+## 0. 提前进行轻量论文参照（不要求初期完整期刊评级）
+
+**选题/任务阶段**：在`USER_SCOPE`已明确、有可检验任务族时，可低成本查同方向近期1–3篇真实已发表论文及其期刊/文章类型，记录最小可发表贡献类型、关键实验与论文篇幅；不需要先给S/A/B/C，不以IF筛选/淘汰问题，也不要求全面期刊检索。无联网/无充分证据时标`VENUE_ANALOGS_UNKNOWN`，不阻止科学探索或合法数据获取。**结果阶段**：有可信Run且需要决定是补论文还是继续算法时，根据近期类似稿件建立2–3本参考池；**投稿准备阶段**才严格检查索引、APC、作者指南和最新政策。避免每轮重复搜刊。
+
 ## 1. 什么时候触发
 
 - 已有可信DEV现象或合法正/负Pilot，且可提出一项可证伪的新规律、局部改进、资源/标定成本权衡、失效边界或有意义的组件组合：**先进入最小Claim路线**，不需要新架构或全面SOTA。
@@ -32,6 +36,10 @@
 **受控输出（只有触发时附加一行，复用CLAIM_EVIDENCE_MAP或STATE索引，不强制新JSON）**：
 `CLAIM+RUN | POTENTIAL(S/A/B/C/NONE/UNKNOWN)+WHY+UNCERTAINTY | EVIDENCE_GAPS | VENUES(STRETCH/TARGET/FALLBACK, verified source+date) | NEXT_CHEAP_TEST | AUTH`。
 无期刊检索权限、无最新数据或用户尚未要求具体期刊时，`VENUES=NOT_CHECKED`，不猜IF/APC、也不默认联网搜几十本刊。
+
+## 3.5 以稿件完成难度决定下一步
+
+先分别判断：`CLAIM_EVIDENCE` 是否足够，`MANUSCRIPT_COMPLETENESS` 是否有基本结构与必要对照，`VENUE_FIT` 是否存在真实同方向投稿去处。可有B/C档潜力但论文未完成；可写初稿也不等于完成确认。若距离一个匹配专业期刊的最小完整稿件仅剩1–3项有限补证据任务，则先完成它们，不因缺新网络/全面SOTA而扩大研发；期刊层级及IF不作为研究项目生死门槛。缺关键真值/组独立性/近邻新意时明示缺口，不借选低档期刊跳过科学诚信。用户不要求具体选刊时`VENUES=NOT_CHECKED`。
 
 ## 4. 失败与论文出口
 
