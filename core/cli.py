@@ -11,6 +11,7 @@ from core.probes import review_probe
 from core.information_probe import review_information_shift
 from core.failure_triage import review_failure
 from core.feasibility_review import review_feasibility
+from core.forge_bridge import verify_with_forge
 from core.literature import literature_search
 
 def main(argv: list[str] | None = None) -> int:
@@ -50,6 +51,13 @@ def main(argv: list[str] | None = None) -> int:
     info.add_argument("--file", type=Path, required=True, help="Information transition JSON; never executed")
     feasibility = sub.add_parser("feasibility-check", help="Read-only review of a verified DEV evidence envelope")
     feasibility.add_argument("--file", type=Path, required=True)
+    forge = sub.add_parser("forge-verify", help="Optional trusted DEV metric handoff; requires a local RWF checkout")
+    forge.add_argument("--root", type=Path, required=True, help="PD-RW project root")
+    forge.add_argument("--run", type=Path, required=True, help="PD-RW Run JSON, under root")
+    forge.add_argument("--forge-repo", type=Path, required=True, help="Local RWF repository")
+    forge.add_argument("--forge-project", type=Path, required=True, help="Local RWF project with verified DEV data")
+    forge.add_argument("--forge-run", type=Path, required=True, help="RWF Run JSON")
+    forge.add_argument("--metric", required=True)
     failure = sub.add_parser("failure-check", help="Advisory triage of scoped negative results (no fitting)")
     failure.add_argument("--file", type=Path, required=True)
     lit = sub.add_parser("literature-search", help="Explicit live metadata lookup (network)")
@@ -81,6 +89,9 @@ def main(argv: list[str] | None = None) -> int:
             result = review_information_shift(json.loads(args.file.read_text(encoding="utf-8")))
         elif args.command == "feasibility-check":
             result = review_feasibility(json.loads(args.file.read_text(encoding="utf-8")))
+        elif args.command == "forge-verify":
+            result = verify_with_forge(args.root, args.run, args.forge_repo,
+                                       args.forge_project, args.forge_run, args.metric)
         elif args.command == "failure-check":
             result = review_failure(json.loads(args.file.read_text(encoding="utf-8")))
         elif args.command == "literature-search":

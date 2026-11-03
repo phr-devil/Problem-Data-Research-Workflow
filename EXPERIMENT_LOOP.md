@@ -121,3 +121,13 @@ ChatGPT 只传已核实的问题—数据、TASK、最大 UNKNOWN、证据指针
 
 读取最近**可信、同 Task/同合法信息**的 Run 与可行性画像：对已有可靠残差提出 `ERROR_PATTERN → REASON_EXISTING_BASELINE_MISSES_IT → LEVER → DISTINCT_PREDICTION → MINIMAL_TEST`。新机制必须比简单参照多利用某种*可检测*信号、归纳偏置、优化能力或实际资源限制；若只是更复杂的模型名称，先不要投入昂贵 GPU。若 DEV 结果无增益：先排评价失效/欠训练/不公调优，再检查信息缺口或换机制，**不把任务自动 STOP**。一个有界实验可同时更新性能和机制证据，不自动生成额外报告；细节见 [FEASIBILITY_ENVELOPE.md](FEASIBILITY_ENVELOPE.md)。
 
+
+## v1.7 · 关键结果的可信证据分级与最小新机制
+
+- `REPORTED`：Agent自报指标或原始工件仅做哈希记录；可探索，不可称独立核实增益。
+- `METRIC_VERIFIED_DEV_ONLY`：按需借 RWF `forge-verify` 用原始DEV标签独立复算，匹配同一批预测、任务、样本、合法输入和K/level；只证明**算术与工件一致**。
+- `INDEPENDENTLY_CONFIRMED`：冻结协议与主张后，经独立未污染确认和必要科研审核支持，不由DEV工具自动升级。
+
+最低可发表路线与强基线公平性由 [PAPER_FIRST.md](PAPER_FIRST.md) / [CONFIRMATION.md](CONFIRMATION.md) 判定；被核实的 F1 不能单独证明机制、在线因果执行或学术新颖性。旧Run仍兼容。关键结果的可执行验证见[README.md](README.md)；不强制每个小Pilot都构造一份RWF工程。
+
+**最高信息价值的新机制选择**：取现有可信DEV Run的一项可重复错误→明确简单方法错在哪里→提出合法新杠杆(信息/归纳偏置/优化/成本)→写能与强替代区分的预测→做最便宜有界试验。若缺数据真值/现成强基线，先修或补齐，不用换网络名假装新机制；负结果保留，按Run/机制/Task/Claim分层处理。一次实验可同时服务可靠性能与创新探索。

@@ -36,3 +36,17 @@ python -m core.cli feasibility-check --file PROJECT/FEASIBILITY_ENVELOPE.json
 `DATA_VALIDITY | SIGNAL_EVIDENCE | SIMPLE_REFERENCE_STATUS | GROUP_RESIDUALS | PAIRED_DEV_DELTA | DISTINCT_LEVER | NEXT_PROBE`。
 
 未知标 UNKNOWN；不造单一“可学性评分”、不强制 P 值/三种随机种子、不默认新可视化或长报告。科学成功仍需具名近邻差额、相同合法信息的公平对照、组级稳健性及独立确认；对经过反复任务选择的 DEV 切片标 **EXPLORATORY**。允许减少复杂度和调整合法信息条件，但必须更新 Task/协议/Claim，不能将 APACE 的 K=1 结果解释为 K=0 原任务成功。
+
+## v1.7 · 将诊断转成机制选择，而不是增加审批
+
+只在准备开发**昂贵的新机制**且已有可信 DEV Run 时复用一次画像。把科研判断分成三项证据，不生成综合可学性概率：
+
+| 层面 | 可支持的结论 | 不能推出 |
+|---|---|---|
+| LEGAL_SIGNAL | 合法预测前信息、简单/无信息参照是否有真实组级区分力 | Oracle有空间就是可部署增益 |
+| CORRECTABLE_ERROR | 哪些配对组级错误在有界干预后有合理可检验的改善路径 | 残余错误就是理论可达上界 |
+| INDEPENDENT_VALUE | 具名最近邻尚未覆盖的机制/能力/失效规律及确认路径 | DEV最高分就是独立论文贡献 |
+
+**选择下一实验**：已有可靠组级失效→找与同K强简单替代不同的合法信息/先验/优化杠杆，给出相反预测与最廉价鉴别；没有可比参考→优先补公平基线；Oracle与决策策略分离→核预测前可辨识性和实际标定成本；只有一次负Pilot→先查评价和训练充足性；同前提无信息重试→HOLD机制或合法NARROW/DOWN/LATERAL。任何 UNKNOWN 和负增益都**不自动证明数据不可学习**。
+
+需要防止自报 F1 时，在PD-RW环境显式运行 `python -m core.cli forge-verify --help`，按 README 配置已有RWF验证Run；检查通过也只升级为 `METRIC_VERIFIED_DEV_ONLY`。若无RWF/原始预测不相同，保留 `REPORTED/UNKNOWN` 而非假PASS。通常Pilot不必每次重复独立复算；可信正式比较和Claim升级时必须审核受影响证据。

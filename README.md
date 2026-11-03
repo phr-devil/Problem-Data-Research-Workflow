@@ -80,3 +80,13 @@
 
 - **可学性与剩余空间诊断**：[FEASIBILITY_ENVELOPE.md](FEASIBILITY_ENVELOPE.md)。已有真实 Run 时先看可核对的 DEV 误差、简单方法与信息条件，再决定新机制或转向；不默认训练、评审或画图。
 
+
+## v1.7 · 可信DEV指标交接（可选）
+
+关键 DEV Run 可用本地安装的 RWF 独立复算原始标签、样本和指标；不复制第二套状态系统、不强制旧Run迁移：
+
+```bash
+python -m core.cli forge-verify --root PD_PROJECT --run PD_PROJECT/runs/R.json --forge-repo RWF_REPO --forge-project FORGE_PROJECT --forge-run FORGE_PROJECT/runs/R/RUN.json --metric macro_F1
+```
+
+需将**相同字节的原始预测 JSON**保存在PD-RW Run与RWF Run引用路径下，Task/协议/数据版本/独立组/样本ID/合法输入/信息层级需相符；若旧项目仅有CSV或不同样本编号，先在DEV合法地生成等价的标准预测工件并核对，不得靠复制F1制造验证。接口输出仅为 `METRIC_VERIFIED_DEV_ONLY`，不能证明训练执行来源、时间因果合法性、算法增益公平性、论文贡献或封存确认。详情见[FEASIBILITY_ENVELOPE.md](FEASIBILITY_ENVELOPE.md)。

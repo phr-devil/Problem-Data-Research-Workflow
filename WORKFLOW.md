@@ -95,3 +95,9 @@
 
 **新增按需资源：** 当已有 DEV Run 且准备投入复杂机制时，可先读取 [FEASIBILITY_ENVELOPE.md](FEASIBILITY_ENVELOPE.md) 产生短画像；没有 Run 的项目仍可合法开展选题和必要观察。其 `UNKNOWN`、负增益或组级波动仅指向下一最小判别，不自动变成方向性 STOP、科研确认或用户授权。
 
+
+## v1.7 · 主控与验证的唯一边界（不增加新阶段）
+
+PD-RW 仍是**唯一科研主控**（机会、数据、合法Task、机制实验、科研Claim与授权），RWF是关键 DEV 工件的**按需独立复算器**。先有真实数据和公平简单参照，再按 [FEASIBILITY_ENVELOPE.md](FEASIBILITY_ENVELOPE.md) 判断合法信号、可纠正性、独立论文价值，不用残差/Oracle推算成功概率。关键实验首次建立正式基线、显著正增益或评价异常时，如已有标准RWF Run才调用`forge-verify`；数据/评价/预测文件未变时复用审计证据，不重复创建全套状态。未匹配原始预测或未运行验证的历史Run仍为`REPORTED`，不能在正式科学判断中称作已独立核实。
+
+分工原则：**复杂算法仍由实际获授权的外部Agent执行；可信Run不等于公平强基线、在线因果、创新或论文确认。** 同一负证据先局部纠错/机制转向；不强制多seed/多模型/多Agent和长报告，也不因为没有RWF就自动停止探索。真实效能应由 [REPLAY_PROTOCOL.md](REPLAY_PROTOCOL.md) 的历史冻结节点与前瞻任务对照检验。
