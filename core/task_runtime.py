@@ -1,4 +1,4 @@
-"""Read-only task qualification; never runs the model/evaluator or opens sealed labels."""
+"""Task manifest qualification; never executes model/evaluator or requests sealed labels."""
 from __future__ import annotations
 import hashlib
 import json
@@ -37,6 +37,8 @@ def validate_task_spec(value: dict) -> dict:
     if not isinstance(references, dict):
         raise ContractError("TaskSpec needs references for manifests and evaluator")
     _required(references, "data_manifest", "split_manifest", "evaluator")
+    if set(references) != {"data_manifest", "split_manifest", "evaluator"}:
+        raise ContractError("TaskSpec references must contain only data/split metadata and evaluator")
     if any(not isinstance(name, str) or not isinstance(ref, str) or not ref.strip() for name, ref in references.items()):
         raise ContractError("reference names and paths must be text")
     for p in protected:
@@ -99,6 +101,7 @@ def qualify_task(root: Path, task_spec_path: str) -> dict:
         else:
             checks.append(f"{train}/{dev}:UNKNOWN")
     return {"qualification": "STRUCTURAL_PRECHECK_ONLY",
+            "protected_snapshot_frozen": set(expected_hashes) == set(fingerprints),
             "task_id": spec["task_id"], "protocol_id": spec["protocol_id"],
             "task_spec_sha256": _hash_file(spec_file),
             "fingerprints": fingerprints, "split_checks": checks,
@@ -116,6 +119,8 @@ def check_run_task_alignment(root: Path, run: dict) -> None:
     audit = qualify_task(root, spec_ref)
     if audit["task_spec_sha256"] != expected:
         raise ContractError("TaskSpec changed since Run was planned")
+    if not audit["protected_snapshot_frozen"]:
+        raise ContractError("TaskSpec has no complete pinned protected-file SHA-256 set; run task-pin first")
     spec = json.loads(_inside(Path(root), spec_ref).read_text(encoding="utf-8"))
     for field in ("task_id", "protocol_id", "dataset_version", "evaluator_version"):
         if run[field] != spec[field]:
@@ -142,7 +147,7 @@ def audit_run_reproducibility(root: Path, run_path: str) -> dict:
             gaps.append("execution."+name)
     if type(execution.get("seed")) is not int:
         gaps.append("execution.seed")
-    if "environment_ref" in execution and isinstance(execution["environment_ref"],str):
+    if isinstance(execution.get("environment_ref"),str) and execution["environment_ref"].strip():
         hashes["environment"]=_hash_file(_inside(root,execution["environment_ref"]))
     if not obj.get("budget_basis"):
         gaps.append("budget_basis")
@@ -154,3 +159,28 @@ def audit_run_reproducibility(root: Path, run_path: str) -> dict:
     return {"status":"METADATA_COMPLETE_NOT_REPRODUCED" if not gaps else "PROVENANCE_PARTIAL",
             "run_id":obj["run_id"],"fingerprints":hashes,"gaps":gaps,
             "note":"No model, evaluator or scientific inference was executed; environment equivalence needs real replay."}
+
+
+def pin_task(root: Path, spec_path: str, output_path: str) -> dict:
+    """Explicitly write a *new* TaskSpec with protected reference SHA-256 values."""
+    root=Path(root)
+    # Read and qualify only metadata and evaluator (no training or sealed labels).
+    audit=qualify_task(root,spec_path)
+    original=validate_task_spec(json.loads(_inside(root,spec_path).read_text(encoding="utf-8")))
+    pinned=dict(original)
+    pinned["expected_sha256"]=audit["fingerprints"]
+    base=root.resolve()
+    dest=(base/output_path).resolve()
+    if not dest.is_relative_to(base):
+        raise ContractError("pinned TaskSpec output cannot be outside project root")
+    dest.parent.mkdir(parents=True,exist_ok=True)
+    try:
+        with dest.open("x",encoding="utf-8") as out:
+            json.dump(pinned,out,ensure_ascii=False,sort_keys=True,indent=2)
+            out.write("\n")
+    except FileExistsError as exc:
+        raise ContractError("pinned TaskSpec already exists; choose a versioned path") from exc
+    return {"status":"REFERENCE_HASHES_PINNED_NOT_SCIENTIFICALLY_VERIFIED",
+            "path":dest.relative_to(base).as_posix(), "sha256":_hash_file(dest),
+            "referenced_sha256":audit["fingerprints"],
+            "note":"Check TaskSpec correctness and actual user authorization before fitting."}
