@@ -6,6 +6,8 @@ from pathlib import Path
 from core.comparison import compare_runs
 from core.contracts import ContractError
 from core.state import initialize, record_event, recover, status
+from core.task_runtime import qualify_task
+from core.probes import review_probe
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="PD-RW evidence index and comparison")
@@ -16,6 +18,8 @@ def main(argv: list[str] | None = None) -> int:
     for action in ("record", "status", "recover"):
         p = sub.add_parser(action)
         p.add_argument("--root", type=Path, required=True)
+        if action == "status":
+            p.add_argument("--deep", action="store_true", help="rehash original linked artifacts")
         if action == "record":
             p.add_argument("--kind", choices=["note", "run", "claim"], required=True)
             p.add_argument("--artifact")
@@ -25,6 +29,11 @@ def main(argv: list[str] | None = None) -> int:
     compare.add_argument("--challenger", type=Path, required=True)
     compare.add_argument("--metric", required=True)
     compare.add_argument("--lower-is-better", action="store_true")
+    task = sub.add_parser("task-check", help="Read-only TaskSpec and split qualification")
+    task.add_argument("--root", type=Path, required=True)
+    task.add_argument("--spec", required=True, help="TaskSpec JSON path relative to root")
+    probe = sub.add_parser("probe-check", help="Review a proposed discriminating experiment")
+    probe.add_argument("--file", type=Path, required=True)
     args = parser.parse_args(argv)
     try:
         if args.command == "init":
@@ -32,9 +41,13 @@ def main(argv: list[str] | None = None) -> int:
         elif args.command == "record":
             result = record_event(args.root, args.kind, artifact=args.artifact, note=args.note)
         elif args.command == "status":
-            result = status(args.root)
+            result = status(args.root, deep=args.deep)
         elif args.command == "recover":
             result = recover(args.root)
+        elif args.command == "task-check":
+            result = qualify_task(args.root, args.spec)
+        elif args.command == "probe-check":
+            result = review_probe(json.loads(args.file.read_text(encoding="utf-8")))
         else:
             a = json.loads(args.champion.read_text(encoding="utf-8"))
             b = json.loads(args.challenger.read_text(encoding="utf-8"))
