@@ -3,7 +3,7 @@
 现有STATE、RUNS、CLAIMS、manifest优先**复用原路径**；只更新本轮变化和下一步所需字段，其他不复制、不填空占位。原始日志/图片/代码留在原处；未运行NOT_RUN，证据不足UNKNOWN。
 
 ## 常驻索引（仅变化时更新）
-- WORKFLOW: CHAPTER_10 / PD-RW v1.4（仅用户明确选择）
+- WORKFLOW: CHAPTER_10 / PD-RW v1.5（仅用户明确选择）
 - USER_SCOPE: <本轮用户研究范围或「方向不限」；SCOPE_UNSPECIFIED不继承旧课题>
 - AREA_DATA: <当前大问题及选择来源；未选WAITING_FOR_USER_SELECTION>
 - ACTIVE_TASK: <当前TASK_ID/合法K/部署前信息/协议；可UNDECIDED>
@@ -28,9 +28,9 @@
 - TASK_CANDIDATES: <候选选择史链接，不复制>
 - PORTFOLIO_PIVOT_MAP: <真正不同失败前提的备选>
 - TASK_LADDER: <可选L0–L3不同信息条件及切换证据；NOT_APPLICABLE>
-- IMPLEMENTATION: <需要编码时才记接口/保护/定向测试>
+- IMPLEMENTATION: <需要编码时才记TaskSpec/evaluator指纹、接口/保护/定向测试；未知标UNKNOWN>
 - ALGORITHM_HYPOTHESIS: <仅重大机制：ERROR_PATTERN/MECHANISM_LEVER/STRONG_SIMPLE_ALTERNATIVE/DISCRIMINATING_SIGNATURE/PROBE>
-- EXPERIMENT_BRANCH: <BRANCH_ID/parent_run/失败前提/可复用资产/NEXT_DISTINCT_PROBE/累计GPU/Token/人工成本>
+- EXPERIMENT_BRANCH: <BRANCH_ID/parent_run/失败前提/差异性Probe及竞争解释/可复用资产/NEXT_DISTINCT_PROBE/累计GPU/Token/人工成本>
 - PAPER_PATH: <PERFORMANCE_FLOOR/PAPER_PATH_CANDIDATE/SCIENCE_UPGRADE及证据指针>
 - SCIENTIFIC_VALUE: <不同于具名近邻的新能力/规律；VALUE_UNVERIFIED>
 - CLAIM_EVIDENCE_MAP: <能力/机制/规律候选、最强替代、Run和工件指针、最近复盘、待补证据/确认资格>
