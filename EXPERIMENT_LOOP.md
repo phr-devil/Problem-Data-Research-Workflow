@@ -103,3 +103,16 @@ ChatGPT 只传已核实的问题—数据、TASK、最大 UNKNOWN、证据指针
 **默认按[WORKFLOW.md](WORKFLOW.md) §5最短输出**：Run、代码、失败证据与必要诊断图保留路径，只报两轨判断变化和NEXT_PROBE；不贴全部日志、反复渲染曲线或制作论文级图片。`无限循环`和流水账都不是目标。
 
 **轻量成本预检（只在实际分支需要时）**：Probe可选填GPU/CPU/人工时和Token数值预算；用`probe-check --remaining-budget-file`与当前可核实剩余预算比较。超额只触发重新规划或真实授权，不默认否决科学命题。
+
+## v1.6｜负Pilot原因优先，非通用再调参
+
+只在有真实新证据的分叉点执行：
+
+- `INVALID`（真值邻域取峰、未来特征、支持/查询交叉、聚合错位）：隔离受影响结果，修最早错误并定向回归；**不在坏评价器上继续调参**。
+- `UNDERTRAINED`：以有预算上限的成对小/大训练或梯度/收敛诊断鉴别，不要求完整重训全库。
+- `INFORMATION_LIMITED`：核可纠正性与决策前可预测性；若K或可见信息真实改变，按Task Ladder生成新Task/协议/Claim，旧零标签Claim保持失败边界。
+- `BASELINE_DOMINATED`：保留简单Champion及负Run，暂停同前提复杂模块；比较不同可检验机制、任务边界或新规律。
+- `CLAIM_UNSUPPORTED`：核具名近邻及实际独立价值，允许NO_INDEPENDENT_CLAIM；工程资产可复用。
+- `INCONCLUSIVE`：用独立组效应量与不确定性决定下一廉价实验，不能把CI包含0直接写成机制已证伪。
+
+以上是诊断标签不是额外必填清单或自动STOP。若有已记录且可靠的评价与数据证据，直接续用，不重复做全套正控/训练。可选`failure-check`只分类Agent提供的证据指针，真实动作仍由原`WORKFLOW.md`与授权决定。

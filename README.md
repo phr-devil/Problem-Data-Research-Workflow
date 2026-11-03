@@ -74,3 +74,6 @@
 - 有效Run可运行`run-check`检查环境/复现信息缺口，`status --deep`复核关联的预测/指标/代码文件指纹；旧v1.4记录继续可读。
 - 仅明确调用`literature-search`时联网获取OpenAlex/Crossref元数据与检索时间、来源；元数据不是全文创新性核查。具体调用见[core/README.md](core/README.md)。
 - 论文路线允许`NO_WINNER`后转为真实失效边界/规律或`NO_INDEPENDENT_CLAIM`，不凭零增益自动包装成论文。**科研成功率仍NOT_MEASURED**，须按[REPLAY_PROTOCOL.md](REPLAY_PROTOCOL.md)执行真实历史盲回放。
+
+
+**v1.6重点**：在原数据→任务→算法双轨中增加按真实负证据的原因路由；失败优先修评价、辨别欠训练/信息不足、核同K简单基线与论文贡献，允许合法信息条件PIVOT但不自动STOP。只读`python -m core.cli failure-check --file failure.json`供重大负结果按需使用，具体见[WORKFLOW.md](WORKFLOW.md)；既有 v1.5 状态/Run保持兼容。未做真实历史盲回放，不宣称成功率提高。

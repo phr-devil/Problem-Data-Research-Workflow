@@ -9,6 +9,7 @@ from core.state import initialize, record_event, recover, status
 from core.task_runtime import qualify_task, audit_run_reproducibility, pin_task
 from core.probes import review_probe
 from core.information_probe import review_information_shift
+from core.failure_triage import review_failure
 from core.literature import literature_search
 
 def main(argv: list[str] | None = None) -> int:
@@ -46,6 +47,8 @@ def main(argv: list[str] | None = None) -> int:
     probe.add_argument("--remaining-budget-file", type=Path, help="JSON budget for advisory cost review; not authorization")
     info = sub.add_parser("information-check", help="Read-only diagnosis of changed legal information (no fitting)")
     info.add_argument("--file", type=Path, required=True, help="Information transition JSON; never executed")
+    failure = sub.add_parser("failure-check", help="Advisory triage of scoped negative results (no fitting)")
+    failure.add_argument("--file", type=Path, required=True)
     lit = sub.add_parser("literature-search", help="Explicit live metadata lookup (network)")
     lit.add_argument("--query", required=True)
     lit.add_argument("--limit", type=int, default=5)
@@ -73,6 +76,8 @@ def main(argv: list[str] | None = None) -> int:
                                   remaining_budget=budget)
         elif args.command == "information-check":
             result = review_information_shift(json.loads(args.file.read_text(encoding="utf-8")))
+        elif args.command == "failure-check":
+            result = review_failure(json.loads(args.file.read_text(encoding="utf-8")))
         elif args.command == "literature-search":
             if args.output.exists():
                 raise ContractError("literature evidence output already exists; do not overwrite")

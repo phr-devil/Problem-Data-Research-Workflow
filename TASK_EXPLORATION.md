@@ -112,3 +112,11 @@
 `CLAIM_CANDIDATE` 必须说明：①一句可被反驳的新增科学知识/能力；②有效 Run/开发组真实现象及证据路径；③最强简单替代与直接近邻的差额；④适配且未污染的确认路径；⑤可能需要收窄的主张。只有代理分数/工程复现时写 `NO_INDEPENDENT_CLAIM`，有独立机会但仍缺证写 `CLAIM_WITH_GAPS`。详细正式证据只在 [CONFIRMATION.md](CONFIRMATION.md) 验证。
 
 **止损只按证据作用范围**：有新的、可负担的观察/能力/机制差异可继续；没有值得运行的下一探针可 HOLD 该分支而非宣布全项目被证伪。不要在本文件另设 Run/机制、Task、Area-Data 的第二套门槛。
+
+## v1.6｜可学空间：已有诊断的最短统一输出
+
+不再引入新的阶段或大型评分表。当出现信息/残差/门控风险时，在原`TASK_DECISION`后按需追加一行：
+
+`REAL_ERROR_OR_NEED | CORRECTABLE(OBSERVED/HYPOTHESIZED/UNKNOWN) | PREDECISION_IDENTIFIABLE(OBSERVED/HYPOTHESIZED/UNKNOWN) | STRONG_SIMPLE_REMAINDER(OBSERVED/UNKNOWN) | INDEPENDENT_VALUE(UNVERIFIED/PLAUSIBLE/OVERLAPPED) | CHEAPEST_DISTINGUISHING_TEST`。
+
+可纠正性用真实目标误差和干预正控，不把Oracle未来信息当部署增益；可辨识性必须只用预测前可见信号；剩余空间需要同K/同组公平基线；论文价值通过具名近邻和最小新Claim说明。初期UNKNOWN不阻断廉价探索。数据仅证明域差异或原模型错误时，不自动推导可利用的适应信号。
