@@ -34,6 +34,14 @@ class WorkflowContracts(unittest.TestCase):
         for case in cases:
             self.assertTrue(all(k in case for k in ("id","event","situation","should","must_not")))
 
+    def test_algorithm_decision_scenarios_are_preserved(self):
+        cases = {x["id"]: x for x in json.loads((ROOT / "SCENARIOS.json").read_text(encoding="utf-8"))["cases"]}
+        for cid, expected_scope in (("D10-58", "MECHANISM"), ("D10-59", "EVIDENCE"), ("D10-60", "RUN")):
+            with self.subTest(case=cid):
+                self.assertEqual(cases[cid]["expected_route"], "ALGORITHM_ENGINEERING.md")
+                self.assertEqual(cases[cid]["decision_scope"], expected_scope)
+                self.assertTrue(cases[cid]["should"] and cases[cid]["must_not"])
+
     def test_algorithm_engineering_contract(self):
         guide = (ROOT / "ALGORITHM_ENGINEERING.md").read_text(encoding="utf-8")
         for marker in ("REPAIR_EVALUATION", "SIMPLE_IMPROVEMENT", "MECHANISM_CANDIDATE",
