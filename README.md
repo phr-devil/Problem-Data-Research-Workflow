@@ -60,5 +60,5 @@
 ## v1.4 轻量执行层
 
 - 科学判断、授权与止损仍由 [WORKFLOW.md](WORKFLOW.md) 负责；[core/README.md](core/README.md) 的程序只负责记录证据、恢复状态和检查开发Run的可比性，不自动推进固定科研阶段。
-- 旧 `STATE.md/RUNS.tsv/CLAIMS.md` 可继续复用，无需迁移；新项目可用 `python -m core.cli init --root research --project-id demo` 建立机器索引。已启用后，应为新增有效Run和已支持Claim关联真实工件。
+- 旧 `STATE.md/RUNS.tsv/CLAIMS.md` 可继续复用，无需迁移；新项目首次获得有效Run时，如可执行Python，使用 `python -m core.cli init --root research --project-id demo` 建立机器索引。已启用后，应为新增有效Run和已支持Claim关联真实工件。
 - 运行 `python -m unittest discover -s tests -v` 验证代码与结构约束，**不代表科研质量或成功率已验证**；真实效能需按 [REPLAY_PROTOCOL.md](REPLAY_PROTOCOL.md) 盲回放。

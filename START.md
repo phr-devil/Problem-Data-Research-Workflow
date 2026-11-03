@@ -7,4 +7,6 @@
 3. **已有开发数据**：按 [DATA_INSIGHT.md](DATA_INSIGHT.md) 看真实现象，再到 [TASK_EXPLORATION.md](TASK_EXPLORATION.md) 选可检验任务；Task Ladder仅在不同合法信息/任务层级有意义时读。
 4. **已有任务/运行**：按 [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md) 获取有效Run、诊断负Pilot，编码才读 [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)；需要贡献判断读 [PAPER_FIRST.md](PAPER_FIRST.md)，正式独立确认读 [CONFIRMATION.md](CONFIRMATION.md)。
 
+**证据索引**：新项目出现首个有效Run且有Python环境时按 [core/README.md](core/README.md) 初始化和记录工件；既有项目不强制迁移，无法执行则保留真实原始路径并标`INDEX_PENDING`。
+
 **统一输出**：`NEW_EVIDENCE+PATH | DECISION_CHANGE/UNKNOWN | NEXT_PROBE+可能结果 | AUTH/COST`。不编造运行或检索，不使用封存集调参。新规则不代表额外审批门，现有合法授权范围内可连续执行。
