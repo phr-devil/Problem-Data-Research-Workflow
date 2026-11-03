@@ -1,23 +1,25 @@
-# Problem–Data Research Workflow | PD-RW v1.7
+# Problem–Data Research Workflow | PD-RW v1.7.1
 
 > **独立科研工作流仓库**。不依赖原提示词库或其他章的文件。目标是从“有价值的大问题＋可信数据（或理论证据路径）”开始，在真实观察和有限实验中逐渐发现具体科研任务、算法与论文主张。更自由的探索**不等于放宽最终论文证据**，也不承诺发表或算法增益。
 
 ## 唯一入口与最短路径
 
 - **AI 首次进入**：只读 [START.md](START.md)，再按用户意图读 [WORKFLOW.md](WORKFLOW.md) 的对应活动；只在需要时读一份专题。已有项目优先读其最新 STATE、原始 Run/数据版本；**无需预读所有章节、24条旧Prompt或全部来源**。
-- **每次用户会指定研究方向**（如视觉、NLP、机器人、传感器或明确「方向不限」）：AI仅在本轮范围内筛1–3个问题—资源组合；**优先核实可评价主库D1，再按科学主张与成本扩展外部复现/备用数据库**（可多库联合开发，但不凑数量），标明标签/分组兼容性与来源。**第一步方向确定后直接完成数据库选择、下载清单并通知用户下载；无需再让用户选择一次数据库**；不要求提前决定具体算法或先证明增益。
+- **每次用户会指定研究方向**（如视觉、NLP、机器人、传感器或明确「方向不限」）：AI仅在本轮范围内筛1–3个问题—资源组合；**优先核实可评价主库D1，再按科学主张与成本扩展外部复现/备用数据库**（可多库联合开发，但不凑数量），标明标签/分组兼容性与来源。**方向确定后立即自主选库并进入数据获取：有真实下载授权即由Agent连续下载及验收；无授权则给可执行下载清单并停在等待数据状态，不先进入实证任务/算法开发**。无需再次让用户选择数据库，也不要求先证明增益。
 - **用户已有具体研究机制或旧项目**：可以直接进入对应活动（通常03/04），复用真实 STATE 和 Run；不强制重新选题，不未经确认迁移旧项目。
 
 ## 六项研究活动（可跳跃，不是六道审批门）
 
 | 编号 | 任务与入口 | 最小交付 | 主要执行环境 |
 |---|---|---|---|
-| 01 | 自适应科研机会搜索并自动选库：[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md) / [DATA_DISCOVERY.md](DATA_DISCOVERY.md) | SEARCH_HANDOFF→DIRECTION_CARD→DATA_PORTFOLIO或PROOF_PATH→下载通知 |
-| 02 | 获数据/授权后核数据审计与科研现象：[DATA_DISCOVERY.md](DATA_DISCOVERY.md) / [DATA_INSIGHT.md](DATA_INSIGHT.md) | DATA_MANIFEST＋DATA_INSIGHT_CARD（可无可信现象）；封存确认资源 | 获授权的 WorkBuddy/Codex/本地环境 |
+| 01 | 自适应科研机会搜索、选库与优先获取：[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md) / [DATA_DISCOVERY.md](DATA_DISCOVERY.md) | SEARCH_HANDOFF→DATA_PORTFOLIO→获授权下载/验收或待下载清单；理论题用PROOF_PATH |
+| 02 | 数据获取验收后，审计与真实科研现象：[DATA_DISCOVERY.md](DATA_DISCOVERY.md) / [DATA_INSIGHT.md](DATA_INSIGHT.md) | DATA_MANIFEST（DATA_ACQUIRED_VERIFIED）＋DATA_INSIGHT_CARD；封存确认资源 | 获授权的 WorkBuddy/Codex/本地环境 |
 | 03 | 从现象/文献生成、比较任务并按需分层：[TASK_EXPLORATION.md](TASK_EXPLORATION.md) / [TASK_LADDER.md](TASK_LADDER.md) | PRIMARY_TASK＋NEXT_DISCRIMINATING_PROBE、备选任务按需，不提前承诺增益 | ChatGPT＋可访问真实数据的 Agent |
 | 04 | 双轨算法开发：可信性能＋有依据的机制探索：[EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md) | 有效Run、ALGORITHM_HYPOTHESIS及下一最有价值实验 | 获授权的代码/实验 Agent |
 | 05 | 与活动04并行收敛独立贡献：[PAPER_FIRST.md](PAPER_FIRST.md) / [TASK_EXPLORATION.md](TASK_EXPLORATION.md) | CLAIM_EVIDENCE_MAP：可信贡献候选、最强替代及实验缺口 | ChatGPT＋代码 Agent |
 | 06 | 严格科学确认：[CONFIRMATION.md](CONFIRMATION.md) | 有效独立证据或 CONFIRMATION_UNAVAILABLE，论文声明边界 | 独立核验与获授权正式实验 |
+
+**实证执行前提（非额外科研审核）**：本轮确定为必需的D1及其他必需库，应先获取选定版本的完整必需原始文件、核文件完整性和本地可达性，再进行数据画像、正式TASK冻结、基线或算法实验；已有可信本地副本直接验收复用。下载未获授权或未完成，停在 `WAITING_FOR_DOWNLOAD_AUTH` / `WAITING_FOR_DATA`，仅允许公开资料调查、下载准备和不依赖数据的假说草拟；不能以示例数据/模拟运行假冒完整实证。备用库按需获取，理论/无需静态库的仿真按证据路径处理，见 [DATA_DISCOVERY.md](DATA_DISCOVERY.md) §4。
 
 **唯一主线：三个决策循环贯穿六项活动**——A 研究机会（先定宽方向→多数据库角色配置→授权后真实观察→任务）→ B 算法实证（可信L0基线、判别探针→有效 Run）→ C 科研价值（L1/L2/L3上探、下探、收窄或横向备用→严格确认）。阶段可以跳转，**不是六道强制关卡**。Task Ladder 是按数据条件启用的研究机会结构，非四级必做、非难度越高论文价值必高；L0/L1也不自动构成保底论文。下探换标签预算/部署信息时更换TASK和协议，封存holdout仍须重新核任务适配。科学止损统一见 [WORKFLOW.md](WORKFLOW.md)。
 
