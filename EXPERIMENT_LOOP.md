@@ -33,6 +33,8 @@ ChatGPT 只传已核实的问题—数据、TASK、最大 UNKNOWN、证据指针
 >
 > **OUTPUT**：实际新增 Run/观察、原始路径、相对公平基线的效应及独立组不确定性（不具备则 UNKNOWN）、修复及验证结果、成本与唯一下一探针；没执行写 NOT_RUN，崩溃记 PARTIAL/CRASH。
 
+**算法设计→可执行闭环（按需）**：遇到可信剩余误差、新算法候选、高成本训练或重复负Pilot时，先查[ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)第1–4节：错误是否真实、信息能否在预测前合法获取、什么最简单修复可以解决、一个新机制与其预言有何可观察差异。选择`BASELINE / SIMPLE_IMPROVEMENT / MECHANISM_CANDIDATE / PAPER_EVIDENCE`之一，编程→定向验证→合法DEV Run→公平对照→保留最优/修复/暂停/转论文。既有正结果可直接选`PAPER_EVIDENCE`，不用再跑机制搜索；独立科学确认仍在活动06。
+
 ### 新机制设计前的最小假设（不额外开审批门）
 
 对真正改变机制/信息/任务能力的Challenger，附一行`ALGORITHM_HYPOTHESIS = ERROR_PATTERN | MECHANISM_LEVER | STRONG_SIMPLE_ALTERNATIVE | DISCRIMINATING_SIGNATURE | PROBE(+POS/NEG/INVALID决策) | COST_CAP`。假说可由数据、物理或文献驱动；初始仅标`HYPOTHESIZED`，不要求预先证明正收益。纯工程修复、超参调优或基线复现不必造“新机制”。
