@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ("AGENTS.md","START.md","WORKFLOW.md","README.md","DATA_DISCOVERY.md",
         "SEARCH_DISCOVERY.md","DATA_INSIGHT.md","TASK_EXPLORATION.md","TASK_LADDER.md",
-        "EXPERIMENT_LOOP.md","IMPLEMENTATION_GUIDE.md","PAPER_FIRST.md",
+        "EXPERIMENT_LOOP.md","IMPLEMENTATION_GUIDE.md","ALGORITHM_ENGINEERING.md","PAPER_FIRST.md",
         "CONFIRMATION.md","VENUE_STRATEGY.md","REPLAY_PROTOCOL.md","REFERENCES.md","EXAMPLE_SENSOR.md",
         "templates/STATE.md")
 
@@ -33,6 +33,18 @@ class WorkflowContracts(unittest.TestCase):
         self.assertEqual(len(ids), len(set(ids)))
         for case in cases:
             self.assertTrue(all(k in case for k in ("id","event","situation","should","must_not")))
+
+    def test_algorithm_engineering_contract(self):
+        guide = (ROOT / "ALGORITHM_ENGINEERING.md").read_text(encoding="utf-8")
+        for marker in ("REPAIR_EVALUATION", "SIMPLE_IMPROVEMENT", "MECHANISM_CANDIDATE",
+                       "PAPER_EVIDENCE", "LEGAL_LEVER", "Champion", "逐样本预测", "NOT_RUN"):
+            with self.subTest(marker=marker):
+                self.assertIn(marker, guide)
+        for filename in ("START.md", "AGENTS.md", "WORKFLOW.md",
+                         "EXPERIMENT_LOOP.md", "IMPLEMENTATION_GUIDE.md", "README.md"):
+            with self.subTest(link=filename):
+                self.assertIn("ALGORITHM_ENGINEERING.md",
+                              (ROOT / filename).read_text(encoding="utf-8"))
 
     def test_publication_first_contract(self):
         files = {
