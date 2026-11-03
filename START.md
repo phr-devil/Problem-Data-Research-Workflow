@@ -1,4 +1,4 @@
-# PD-RW v1.5｜AI 最短入口
+# PD-RW v1.7｜AI 最短入口
 
 仅在用户明确选择PD-RW时启用。本轮研究范围以当前用户指令为准；[WORKFLOW.md](WORKFLOW.md) 是科研决策与权限的唯一总控，**无需预读所有专题**。
 
@@ -12,3 +12,5 @@
 **统一输出**：`NEW_EVIDENCE+PATH | DECISION_CHANGE/UNKNOWN | NEXT_PROBE+可能结果 | AUTH/COST`。不编造运行或检索，不使用封存集调参。新规则不代表额外审批门，现有合法授权范围内可连续执行。
 
 **出现 Oracle 有收益、可部署策略却无增益的症状时**：按需读[SAFE-Gait/APACE 复盘](LESSONS/SAFE_GAIT_APACE.md)并选择 `information-check` 的只读核对；平常项目不要预读此案例或新增审批步骤。
+
+**关键DEV结果独立复算（按需）**：若已有适配RWF的同一原始预测工件，在正式基线/明显增益/异常评审时使用 `core.cli forge-verify`，只得到指标算术验证；旧Run无条件不升级、没有RWF也不阻断探索。先读 [core/README.md](core/README.md) 对应说明，不预加载RWF源码。
