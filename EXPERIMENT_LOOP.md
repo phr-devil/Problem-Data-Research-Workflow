@@ -62,6 +62,8 @@ ChatGPT 只传已核实的问题—数据、TASK、最大 UNKNOWN、证据指针
 
 ### 结果反馈：一次迭代要回答一个决策问题
 
+**负Pilot归因记录**：沿用本文件现有INVALID/UNDERTRAINED/COMPARABLE_NEG/MIXED分类，优先排代码与评价错误、基线不公平、欠收敛，再考虑机制假说；仅查相关项。按需更新既有Run/STATE中的BRANCH_ID、FAILED_PREMISE、NEXT_DISTINCT_PROBE和CUMULATIVE_COST。预算阈值触发复盘，不能自动扩写为项目STOP。
+
 `INVALID`（泄漏/真值/评价/代码缺陷）→定向修复与受影响回归，不作科学否定；`UNDERTRAINED`→必要时公平成对延长/调优；`COMPARABLE_NEG`→定位是否假说/信息前提未成立，考虑更简单方案或不同机制；`MIXED`→查独立group、成本与切片选择历史；`COMPARABLE_POS`→核强简单替代及对应`CLAIM_EVIDENCE_MAP`；`INCONCLUSIVE`→只追加可能改变决定的有界探针。保留失败Run；如无新增信息且成本不值得，HOLD**当前分支**而非AREA_DATA。
 
 采用AIDE/MLEvolve式**有界经验复用**：在现有`RUNS.tsv/STATE`中记录`parent_run / failed_premise_or_signal / reusable_asset / next_distinct_lever`（可用既有字段则不扩列）；分支融合只有在信息预算、机制前提及评价协议兼容时才试，不默认树搜索、向量数据库或多Agent。失败的解释只限本次有效证据，欠训练不等于证明机制不可学。
@@ -84,6 +86,8 @@ ChatGPT 只传已核实的问题—数据、TASK、最大 UNKNOWN、证据指针
 `CRITICAL`（已证实泄漏、假真值、越权、关键平台不可用）只阻断受影响动作/Claim；`REPAIRABLE` 在原授权内定向复现→最小修复→相关回归→恢复；`MINOR` 记录或顺手处理，不中断。科学负结果不作为 Bug 强行“修正”。真实故障时按 [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) 做定向诊断与最小恢复，不改变PD-RW路由与授权。
 
 修复后原失败测试实际通过才能报已修复；未验证标 NOT_RUN。**Run 证据与负结果不得被回退丢失**：代码即使回退仍保留原 Run 的 commit、数据/协议版本、合法逐样本预测和负证据。已污染或失效的指标只标 INVALID，不用于科学判决。
+
+**证据交接**：有效Run保留task_id、protocol_id、dataset_version、evaluator_version、group_split、sample_ids_hash、legal_inputs及原始指标/逐样本预测/代码配置路径；使用机器索引时参见[core/README.md](core/README.md)，校验器只核结构和记录的可比性，不认证科学因果。
 
 ## 5. 可恢复证据和 Token 预算
 
