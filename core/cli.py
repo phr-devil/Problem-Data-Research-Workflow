@@ -10,6 +10,7 @@ from core.task_runtime import qualify_task, audit_run_reproducibility, pin_task
 from core.probes import review_probe
 from core.information_probe import review_information_shift
 from core.failure_triage import review_failure
+from core.feasibility_review import review_feasibility
 from core.literature import literature_search
 
 def main(argv: list[str] | None = None) -> int:
@@ -47,6 +48,8 @@ def main(argv: list[str] | None = None) -> int:
     probe.add_argument("--remaining-budget-file", type=Path, help="JSON budget for advisory cost review; not authorization")
     info = sub.add_parser("information-check", help="Read-only diagnosis of changed legal information (no fitting)")
     info.add_argument("--file", type=Path, required=True, help="Information transition JSON; never executed")
+    feasibility = sub.add_parser("feasibility-check", help="Read-only review of a verified DEV evidence envelope")
+    feasibility.add_argument("--file", type=Path, required=True)
     failure = sub.add_parser("failure-check", help="Advisory triage of scoped negative results (no fitting)")
     failure.add_argument("--file", type=Path, required=True)
     lit = sub.add_parser("literature-search", help="Explicit live metadata lookup (network)")
@@ -76,6 +79,8 @@ def main(argv: list[str] | None = None) -> int:
                                   remaining_budget=budget)
         elif args.command == "information-check":
             result = review_information_shift(json.loads(args.file.read_text(encoding="utf-8")))
+        elif args.command == "feasibility-check":
+            result = review_feasibility(json.loads(args.file.read_text(encoding="utf-8")))
         elif args.command == "failure-check":
             result = review_failure(json.loads(args.file.read_text(encoding="utf-8")))
         elif args.command == "literature-search":

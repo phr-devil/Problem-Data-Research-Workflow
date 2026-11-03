@@ -77,3 +77,6 @@
 
 
 **v1.6重点**：在原数据→任务→算法双轨中增加按真实负证据的原因路由；失败优先修评价、辨别欠训练/信息不足、核同K简单基线与论文贡献，允许合法信息条件PIVOT但不自动STOP。只读`python -m core.cli failure-check --file failure.json`供重大负结果按需使用，具体见[WORKFLOW.md](WORKFLOW.md)；既有 v1.5 状态/Run保持兼容。未做真实历史盲回放，不宣称成功率提高。
+
+- **可学性与剩余空间诊断**：[FEASIBILITY_ENVELOPE.md](FEASIBILITY_ENVELOPE.md)。已有真实 Run 时先看可核对的 DEV 误差、简单方法与信息条件，再决定新机制或转向；不默认训练、评审或画图。
+

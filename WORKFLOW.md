@@ -92,3 +92,6 @@
 | 独立组不足、区间宽 | INCONCLUSIVE＋最廉价判别 | 未显著=无真实效应 |
 
 工具 `python -m core.cli failure-check --file failure.json` 是**可选只读建议**，不能从输入的文字断言科学事实、不读原始Run、不自动STOP或训练；优先复用已有效的`information-check`。只有原始证据支持才用`OBSERVED`，其他为`HYPOTHESIZED`。当多项问题共存，先修会污染后续判断的评价错误。没有新的不同失败前提时不靠换模型名重启预算。正式确认标准不变。
+
+**新增按需资源：** 当已有 DEV Run 且准备投入复杂机制时，可先读取 [FEASIBILITY_ENVELOPE.md](FEASIBILITY_ENVELOPE.md) 产生短画像；没有 Run 的项目仍可合法开展选题和必要观察。其 `UNKNOWN`、负增益或组级波动仅指向下一最小判别，不自动变成方向性 STOP、科研确认或用户授权。
+

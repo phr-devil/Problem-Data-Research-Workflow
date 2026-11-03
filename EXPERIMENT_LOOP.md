@@ -116,3 +116,8 @@ ChatGPT 只传已核实的问题—数据、TASK、最大 UNKNOWN、证据指针
 - `INCONCLUSIVE`：用独立组效应量与不确定性决定下一廉价实验，不能把CI包含0直接写成机制已证伪。
 
 以上是诊断标签不是额外必填清单或自动STOP。若有已记录且可靠的评价与数据证据，直接续用，不重复做全套正控/训练。可选`failure-check`只分类Agent提供的证据指针，真实动作仍由原`WORKFLOW.md`与授权决定。
+
+### 由剩余误差提出真正的新机制（只在机制开发时执行）
+
+读取最近**可信、同 Task/同合法信息**的 Run 与可行性画像：对已有可靠残差提出 `ERROR_PATTERN → REASON_EXISTING_BASELINE_MISSES_IT → LEVER → DISTINCT_PREDICTION → MINIMAL_TEST`。新机制必须比简单参照多利用某种*可检测*信号、归纳偏置、优化能力或实际资源限制；若只是更复杂的模型名称，先不要投入昂贵 GPU。若 DEV 结果无增益：先排评价失效/欠训练/不公调优，再检查信息缺口或换机制，**不把任务自动 STOP**。一个有界实验可同时更新性能和机制证据，不自动生成额外报告；细节见 [FEASIBILITY_ENVELOPE.md](FEASIBILITY_ENVELOPE.md)。
+

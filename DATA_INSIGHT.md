@@ -52,3 +52,8 @@
 `INSIGHT_ID | DATASET/SPLIT/GROUP/PROTOCOL | OBSERVATION(FACT_OBSERVED/HYPOTHESIZED/PROXY_ONLY) | EVIDENCE_PATH | COMPETING_EXPLANATIONS | TASK_OPPORTUNITY | MOST_DANGEROUS_UNKNOWN | NEXT_LOW_COST_CHECK | AUTH`
 
 输出可为`NO_RELIABLE_INSIGHT_YET`：如尚未发现可靠现象但存在合法评价任务，继续交活动03用文献/真实需求生成任务；**不能因EDA没有显著图形就判该数据不可研究**。对已确定科学任务可跳过重新画像，只核变化涉及的字段。数据分析不要求先完成训练或证明增益。
+
+### 与可信 DEV 预测衔接：残差不是潜在增益
+
+存在已核验的 Run 时，不重复全库 EDA，按任务只找 1–2 个有物理或部署意义的轴，查看**独立组上的剩余误差、目标/条件差异及标签质量**。误差集中 ≠ 新机制可改进；没有模型参照 ≠ 没有信号。需要现成组级摘要时，按需使用 Forge 的 `tools.feasibility_probe`，它只复用已验证 DEV Run，不启动训练，也不触及封存组；开发集切片不自动升级为科学规律。统一判读参见 [FEASIBILITY_ENVELOPE.md](FEASIBILITY_ENVELOPE.md)。
+

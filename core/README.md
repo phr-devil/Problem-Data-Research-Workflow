@@ -51,3 +51,6 @@ python -m core.cli literature-search --query "sensor calibration transfer" --lim
 
 
 **v1.6可选失败原因分诊（纯建议）**：`python -m core.cli failure-check --file failure.json`；输入示例：`{"task_id":"T","protocol_id":"P","findings":[{"kind":"EVALUATION_INVALID","evidence_level":"OBSERVED","evidence_ref":"runs/audit.json"}]}`。kind可为`EVALUATION_INVALID/TRAINING_INADEQUATE/LEGAL_INFORMATION_GAP/SIMPLE_BASELINE_DOMINATES/CLAIM_NOT_DISTINCT/STATISTICAL_UNCERTAINTY/MECHANISM_NEGATIVE/EXPLORATORY_OBSERVATION`。输出的路线与范围不是Run事实复核；原始证据须由Agent读取，程序不会自动训练、STOP或改变授权。
+
+**按需可行性结果判读：** `python -m core.cli feasibility-check --file PROJECT/FEASIBILITY_ENVELOPE.json` 仅对 Forge 生成的候选/参照差值提出下一个实验方向，不重新打开数据、不拟合、不把传入 JSON 自报内容当独立验证。原始数据和运行工件仍应先在 Forge 用 `tools.feasibility_probe` 核验。任务集分层与具体用法见 [FEASIBILITY_ENVELOPE.md](../FEASIBILITY_ENVELOPE.md)。
+

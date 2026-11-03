@@ -120,3 +120,8 @@
 `REAL_ERROR_OR_NEED | CORRECTABLE(OBSERVED/HYPOTHESIZED/UNKNOWN) | PREDECISION_IDENTIFIABLE(OBSERVED/HYPOTHESIZED/UNKNOWN) | STRONG_SIMPLE_REMAINDER(OBSERVED/UNKNOWN) | INDEPENDENT_VALUE(UNVERIFIED/PLAUSIBLE/OVERLAPPED) | CHEAPEST_DISTINGUISHING_TEST`。
 
 可纠正性用真实目标误差和干预正控，不把Oracle未来信息当部署增益；可辨识性必须只用预测前可见信号；剩余空间需要同K/同组公平基线；论文价值通过具名近邻和最小新Claim说明。初期UNKNOWN不阻断廉价探索。数据仅证明域差异或原模型错误时，不自动推导可利用的适应信号。
+
+### 先核三件事，不把它们做成三道关卡
+
+在设计复杂模型前，用已有证据依次问：**(1) 合法输入/真值是否支持任务？(2) 简单模型是否已利用可见信号，且哪些残差在独立组间重现？(3) 新机制利用何种剩余结构或新的合法信息？** 只有必要时才运行有授权的最小探针。残差不是可实现增益，Oracle 不等于可学策略；没有简单基线时只标 `BASELINE_PENDING`，不因高/低开发集分数判论文价值。复用 [FEASIBILITY_ENVELOPE.md](FEASIBILITY_ENVELOPE.md)，不重复制造新审批或图表。
+
