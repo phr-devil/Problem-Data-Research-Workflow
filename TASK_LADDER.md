@@ -53,6 +53,8 @@
 
 这是转换成本控制，不是允许跨层传递非法信息。只改超参/Backbone不等于真正切换层级。
 
+**任务切换证据和恢复**：仅在已有归因证明当前层级缺可负担的不同判别实验，或新层级具有真实不同的合法信息/真值/目标时评估`UP/DOWN/NARROW/LATERAL`；旧层级写`SUSPENDED/HOLD`并保留原Run，重新版本化新`task_id/protocol_id/Claim/eligible_holdout`。欠训练或普通Bug先修，不因一次负Pilot切层。
+
 ## 3. 三种方向调整（按证据选择）
 
 | 发现 | 建议动作 | 必须守住的边界 |

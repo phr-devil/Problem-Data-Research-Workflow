@@ -51,4 +51,4 @@
 一次最短`SEARCH_HANDOFF`：
 `USER_SCOPE | SEARCH_MODE | SEARCH_COVERAGE(来源/关键词族/时间窗及日期) | PREFERRED+WHY | STRONGEST_NEIGHBOR+GAP_STATUS | TREND_EVIDENCE或UNKNOWN | COVERAGE_GAP | NEXT_LOW_COST_CHECK`。
 
-只保存**可追溯的少量关键链接和差异事实**，长日志留在既有文件指针，不额外造大型数据库。选题确定后**同一轮**接[DATA_DISCOVERY.md](DATA_DISCOVERY.md)自动选默认3–4个互补数据库/基准（纯理论可PROOF_PATH）、生成`PRE_DOWNLOAD_PLAN/DOWNLOAD_READY_NOTICE`并**通知用户下载**。选题与在线只读搜索不构成下载、安装、CPU拟合或GPU训练授权。
+只保存**可追溯的少量关键链接和差异事实**，长日志留在既有文件指针，不额外造大型数据库。选题确定后**同一轮**接[DATA_DISCOVERY.md](DATA_DISCOVERY.md)自主选有合法评价路径的主库D1；外部复现与备用库按科学主张和成本扩展（纯理论可PROOF_PATH）、生成`PRE_DOWNLOAD_PLAN/DOWNLOAD_READY_NOTICE`并**通知用户下载**。选题与在线只读搜索不构成下载、安装、CPU拟合或GPU训练授权。
