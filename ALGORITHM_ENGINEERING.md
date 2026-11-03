@@ -22,7 +22,7 @@
 3. **为什么不是简单方法就行**：先比较真实同输入同K的强简单替代；新机制必须有**不同的可观察预言**，例如只在特定可预定义场景改善、标签减少而性能不减、延迟下降但失真范围明确。
 4. **论文能增加什么**：对应最近邻的哪一条有限新知识/能力/成本权衡；**小而真实即有价值**，但不能靠开发集随机小增益宣布论文成立。
 
-机制候选复用现有`PROBE_CANDIDATE`及 `python -m core.cli probe-check --file probe.json`：`ERROR_EVIDENCE | SIMPLE_ALTERNATIVE | DISTINCT_PREDICTION | MINIMUM_TEST | IF_POS/NEG/INVALID | COST/AUTH`；不新建复杂候选表。**不要求每个调参都填写机制卡**，只在新机制、重要转向或高成本实验时使用。
+机制候选复用现有`PROBE_CANDIDATE`及 `python -m core.cli probe-check --file probe.json`：`ERROR_EVIDENCE | LEGAL_LEVER | SIMPLE_ALTERNATIVE | DISTINCT_PREDICTION | MINIMUM_TEST | IF_POS/NEG/INVALID | COST/AUTH`；不新建复杂候选表。**不要求每个调参都填写机制卡**，只在新机制、重要转向或高成本实验时使用。
 
 ## 3. 代码 Agent 的连续有界执行循环
 
