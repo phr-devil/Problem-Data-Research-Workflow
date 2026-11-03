@@ -1,4 +1,4 @@
-# PD-RW v1.11｜PD-RW唯一决策总控（ChatGPT / WorkBuddy / Codex）
+# PD-RW v1.12｜PD-RW唯一决策总控（ChatGPT / WorkBuddy / Codex）
 
 **目标**：**本轮研究学科/方向完全以用户当次指令为准**，只有明确「方向不限」时才跨学科；不默认传感器或具身智能。随后在给定范围内选择可信数据/评估基准（或理论证明），获授权后完成实证。**仅用户明确选择PD-RW时启用**；第八章具体命题研究和第九章挽救工作不被自动覆盖或迁移。
 
@@ -12,7 +12,7 @@
 
 
 - **外循环 A｜研究机会**：01 在本轮`USER_SCOPE`内按[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md)自适应广搜/深查热点与空白、核最强近邻，明确「方向不限」才跨学科推荐1–3个AREA_DATA组合；**先核一个有合法评价路径的主库D1，外部/备用库根据独立验证、不同失败前提和成本按需配置，不凑数量**，核跨库标签/科学命题可比性，**第一步确定方向后AI立即自主筛库，不等用户再选数据库** → 完成PRE_DOWNLOAD_PLAN → 有下载授权时先获取/验收本轮必需原始数据（已有完整副本则复用），无授权时输出DOWNLOAD_READY_NOTICE并等待 → `DATA_ACQUIRED_VERIFIED` 后02按[DATA_INSIGHT.md](DATA_INSIGHT.md)在开发池核真实现象与假象 → 03 接[TASK_EXPLORATION.md](TASK_EXPLORATION.md)选具体可检验TASK与最廉价判别，按需构建L0–L3任务阶梯。一个有依据的机会就可开展有界实验；**不要求完整方法假说**、穷尽任务、复现所有强基线或先证明算法增益。[DATA_DISCOVERY.md](DATA_DISCOVERY.md) / [TASK_EXPLORATION.md](TASK_EXPLORATION.md) / [TASK_LADDER.md](TASK_LADDER.md)。
-- **内循环 B｜算法实证**：04 默认先复用/建立同信息同K的强简单参照，定位真正可学信号和剩余误差，再按需升级；并行考虑`RELIABLE_TRACK`（稳妥性能/现象）和`NOVELTY_TRACK`（机制/规律探索），在已授权范围内按证据动态投入，**不要求双模型同时训练**；新机制先有可区分假设，按症状修复与学习负结果。首次负Pilot不自动STOP，不为GPU占用率扩大无信息实验。[EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md)。
+- **内循环 B｜算法实证**：04 默认先复用/建立同信息同K的强简单参照，定位真正可学信号和剩余误差，再按需升级；并行考虑`RELIABLE_TRACK`（稳妥性能/现象）和`NOVELTY_TRACK`（机制/规律探索），在已授权范围内按证据动态投入，**不要求双模型同时训练**；新机制先有可区分假设，按症状修复与学习负结果。首次负Pilot不自动STOP，不为GPU占用率扩大无信息实验。[EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md)；真正需要新方法/工程迭代时按需读[ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)选择`BASELINE/SIMPLE_IMPROVEMENT/MECHANISM_CANDIDATE/PAPER_EVIDENCE`，明确可证伪预言、受保护边界和Agent执行结果。这里是科研路线选择，不增加第二个主控或声称已具备GPU执行器。
 - **外循环 C｜科研价值**：05 与04并行更新`CLAIM_EVIDENCE_MAP`，区分稳健性能、能力/机制/规律三类独立贡献候选及证据缺口；有最低可信论文路线再按信息价值科学升级；可继续当前层级、`UP`挑战更难信息条件、`DOWN`使用更现实的合法标定、`NARROW`收窄主张，或`LATERAL`比较备用科研任务。06 只有冻结 Claim/方法/协议并获授权后才严格独立确认。层级切换必须更新Claim与公平评价，**L0/L1没有天然论文保底**。[TASK_LADDER.md](TASK_LADDER.md) / [CONFIRMATION.md](CONFIRMATION.md)。
 
 **数据先行是执行依赖，不是新增科研淘汰门槛**：新实证任务的顺序是 `方向→自主选库→完整必需原始文件下载/本地复用→文件级验收/确认池封存→数据观察→具体任务→基线/算法`。确定方向不等于许可下载；无授权停在 `WAITING_FOR_DOWNLOAD_AUTH`，源不可用或文件不完整停在 `WAITING_FOR_DATA`，先交付可执行获取/续传方案，不把缺数据解释为任务科学失败。`DATA_ACQUIRED_VERIFIED` 只证明约定文件完整且可访问，不能取代标签/独立组/可见信息的科学审计。理论证明、无需静态数据的仿真，或已有完整可信数据不重复下载；大库只有在用户明确批准收窄研究数据范围、同步收窄主张后，才可将该预定义范围视为完整，不能默认拿样例代替全库。**未就绪时禁止正式TASK冻结、基线拟合、算法训练和基于数据的结果宣称；不依赖真实数据的文献核查、假说草拟、下载脚本可提前做**。
@@ -33,6 +33,7 @@
 | 数据或文献已提供机会，但具体TASK未定 | [TASK_EXPLORATION.md](TASK_EXPLORATION.md) | 主TASK、必要备选、性能空间/信息条件的最小探针 |
 | 同一问题可用不同标签预算/部署条件完成分层任务，或考虑上探/下探 | [TASK_LADDER.md](TASK_LADDER.md) | 一项主层级与L0共享资产、层级间公平协议、切换判据 |
 | TASK需要真实编码/评价器尚未固定 | [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)；可用[core/README.md](core/README.md)只读TaskSpec检查 | 合法TaskSpec／保护范围／评价器指纹或明确UNKNOWN（不自动授权拟合） |
+| 真实DEV残差已核、需要设计新算法或连续工程迭代 | [ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)（按需） | 误差/合法杠杆/直接简单替代/一条不同预言、最小正控、授权内执行结果和论文机会 |
 | 有 TASK/基线/负 Pilot/普通代码故障 | [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md)；写代码才读 [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) | 有效 Run、定向修复或 NEXT_PROBE |
 | 可信Run/关键负Pilot/拟继续堆模型，需要判断“现有结果是否已足够做一篇论文” | [PAPER_FIRST.md](PAPER_FIRST.md) | 最小可投稿论文轮廓、必需证据缺口、补证据vs升级模型的选择 |
 | 有可信结果、需要收敛论文贡献或判断创新价值 | [PAPER_FIRST.md](PAPER_FIRST.md)；确需转任务才读[TASK_EXPLORATION.md](TASK_EXPLORATION.md) | CLAIM_EVIDENCE_MAP、具名近邻差额与下一必要实验 |
