@@ -1,8 +1,10 @@
-# PD-RW v1.10｜PD-RW唯一决策总控（ChatGPT / WorkBuddy / Codex）
+# PD-RW v1.11｜PD-RW唯一决策总控（ChatGPT / WorkBuddy / Codex）
 
 **目标**：**本轮研究学科/方向完全以用户当次指令为准**，只有明确「方向不限」时才跨学科；不默认传感器或具身智能。随后在给定范围内选择可信数据/评估基准（或理论证明），获授权后完成实证。**仅用户明确选择PD-RW时启用**；第八章具体命题研究和第九章挽救工作不被自动覆盖或迁移。
 
 当出现 `Oracle 有空间但实际策略无收益` 或零标签决策不可辨识时，按需做**信息条件三分诊断**（可纠正性/决策前可辨识性/合法实际收益），优先检查能否用现实中可负担的 K-shot/一次标定重新界定问题；不得借新 Task 把原任务写成成功。经验索引：[SAFE-Gait/APACE](LESSONS/SAFE_GAIT_APACE.md)。工具 `core.cli information-check` 仅作只读建议，不拟合/批准训练。
+
+**v1.11 默认成果目标：以合理总成本形成真实、完整、可投给合适专业期刊的论文，而非最大化突破幅度、网络复杂度或目标IF。** 选题时仅低成本查看真实同类论文的贡献/核心实验；首个可信Run和每次关键负Pilot后，先检查是否已有一项足够明确的小贡献以及最小论文缺口。若有可完成的论文路线，**优先补稿件必须的公平对照、独立证据和论文结构**，不默认`UP/SCIENCE_UPGRADE`。可选高影响探索须有明确投稿价值/应用需求、额外成本合理或用户指示，不能覆盖已保留的窄论文路线。`PAPER_COMPLETION_PRIORITY`只是当前行动建议，非自动状态、授权或可投稿认证。[PAPER_FIRST.md](PAPER_FIRST.md) / [VENUE_STRATEGY.md](VENUE_STRATEGY.md)。
 
 ## 1. 三个决策循环（六项活动，不是六道审批门）
 
@@ -32,6 +34,7 @@
 | 同一问题可用不同标签预算/部署条件完成分层任务，或考虑上探/下探 | [TASK_LADDER.md](TASK_LADDER.md) | 一项主层级与L0共享资产、层级间公平协议、切换判据 |
 | TASK需要真实编码/评价器尚未固定 | [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)；可用[core/README.md](core/README.md)只读TaskSpec检查 | 合法TaskSpec／保护范围／评价器指纹或明确UNKNOWN（不自动授权拟合） |
 | 有 TASK/基线/负 Pilot/普通代码故障 | [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md)；写代码才读 [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) | 有效 Run、定向修复或 NEXT_PROBE |
+| 可信Run/关键负Pilot/拟继续堆模型，需要判断“现有结果是否已足够做一篇论文” | [PAPER_FIRST.md](PAPER_FIRST.md) | 最小可投稿论文轮廓、必需证据缺口、补证据vs升级模型的选择 |
 | 有可信结果、需要收敛论文贡献或判断创新价值 | [PAPER_FIRST.md](PAPER_FIRST.md)；确需转任务才读[TASK_EXPLORATION.md](TASK_EXPLORATION.md) | CLAIM_EVIDENCE_MAP、具名近邻差额与下一必要实验 |
 | 有可信增量Claim且需判断稿件档次/目标期刊 | [VENUE_STRATEGY.md](VENUE_STRATEGY.md)（仅按需） | 非强制的稿件潜力、期刊适配梯队、关键证据缺口；不预测录用率 |
 | 正式科学确认、公开主张、投稿 | [CONFIRMATION.md](CONFIRMATION.md) | 预冻结协议、独立证据或 CONFIRMATION_UNAVAILABLE |
@@ -47,6 +50,8 @@
 - **06**：冻结当前Task/Claim/方法/协议及选择史，按[CONFIRMATION.md](CONFIRMATION.md)核独立证据。级间转换按[TASK_LADDER.md](TASK_LADDER.md)更新合法信息、评估和Claim。
 
 每次只交当前阻碍所需的最少字段；授权、证据、机制/任务/区域级止损仍由本文件统一决定。
+
+**论文优先决策**：有效Run形成后，且尤其在拟启动高成本机制/多库训练、拟HOLD/PIVOT时，对照现有Claim做一次`PAPER_COMPLETION_REVIEW`（决策动作名，非CLI状态）：`ONE_CLAIM | NEAREST_GAP | CORE_RESULT | REQUIRED_EVIDENCE_GAPS (最多3项) | LOWEST_COST_PATH | CONTINUE_ALGO_ONLY_IF_WORTH_IT`。若最小论文路线可信且补证据更划算，优先论文路线；只有必要核心证据不可获得/近邻完全覆盖，才优先不同任务或机制。无新结果不反复复核；已完成的核查不重做。不能把开发集高分误当确认。
 
 ## 3. 唯一下一行动算法（不机械全跑检查表）
 
