@@ -89,7 +89,7 @@ def literature_search(query: str, limit: int=5, *, fetch=_get_json) -> dict:
             continue
         seen.add(key)
         unique.append(row)
-    return {"status":"SOURCE_METADATA_PARTIAL" if failures else "SOURCE_METADATA_ONLY",
+    return {"status":("SOURCE_METADATA_PARTIAL" if failures else "SOURCE_METADATA_ONLY") if unique else "NO_VERIFIED_RESULTS",
             "query":query, "searched_at_utc":datetime.now(timezone.utc).isoformat(),
             "providers":list(PROVIDERS), "results":unique[:limit],
             "provider_failures":failures,

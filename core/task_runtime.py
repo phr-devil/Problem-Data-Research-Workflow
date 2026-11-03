@@ -37,6 +37,8 @@ def validate_task_spec(value: dict) -> dict:
     if not isinstance(references, dict):
         raise ContractError("TaskSpec needs references for manifests and evaluator")
     _required(references, "data_manifest", "split_manifest", "evaluator")
+    if any(not isinstance(name, str) or not isinstance(ref, str) or not ref.strip() for name, ref in references.items()):
+        raise ContractError("reference names and paths must be text")
     for p in protected:
         if p not in references.values():
             raise ContractError("protected path not backed by referenced file: " + p)
@@ -74,7 +76,10 @@ def qualify_task(root: Path, task_spec_path: str) -> dict:
         raise ContractError("TaskSpec is not UTF-8 JSON") from exc
     fingerprints = {name: _hash_file(_inside(root, ref))
                     for name, ref in spec["references"].items()}
-    for name, expected in spec.get("expected_sha256", {}).items():
+    expected_hashes = spec.get("expected_sha256", {})
+    if not isinstance(expected_hashes, dict):
+        raise ContractError("expected_sha256 must be a map of reference name to hash")
+    for name, expected in expected_hashes.items():
         if name not in fingerprints or fingerprints[name] != expected:
             raise ContractError(f"stale protected input fingerprint: {name}")
     split = json.loads(_inside(root, spec["references"]["split_manifest"]).read_text(encoding="utf-8"))
@@ -111,8 +116,8 @@ def check_run_task_alignment(root: Path, run: dict) -> None:
     audit = qualify_task(root, spec_ref)
     if audit["task_spec_sha256"] != expected:
         raise ContractError("TaskSpec changed since Run was planned")
+    spec = json.loads(_inside(Path(root), spec_ref).read_text(encoding="utf-8"))
     for field in ("task_id", "protocol_id", "dataset_version", "evaluator_version"):
-        spec = json.loads(_inside(Path(root), spec_ref).read_text(encoding="utf-8"))
         if run[field] != spec[field]:
             raise ContractError("Run and TaskSpec mismatch: " + field)
     if sorted(run["legal_inputs"]) != sorted(spec["legal_inputs"]):
