@@ -171,6 +171,19 @@ class ProbeTests(unittest.TestCase):
         with self.assertRaisesRegex(ContractError,"distinguishable"):
             validate_probe(p)
 
+    def test_cost_budget_warning_never_auto_stops(self):
+        p=probe()
+        p["cost_estimate"]={"gpu_hours":0.4,"tokens":5000}
+        r=review_probe(p,remaining_budget={"gpu_hours":0.2,"tokens":6000},authorization_granted=True)
+        self.assertEqual(r["decision"],"BUDGET_REVIEW_REQUIRED")
+        self.assertEqual(r["budget_warnings"],["gpu_hours:EXCEEDS_REMAINING"])
+
+    def test_budget_missing_is_not_approval(self):
+        p=probe()
+        p["cost_estimate"]={"gpu_hours":0.4}
+        r=review_probe(p,remaining_budget={},authorization_granted=True)
+        self.assertEqual(r["decision"],"BUDGET_REVIEW_REQUIRED")
+
     def test_missing_evidence_rejected(self):
         p=probe();p["evidence_refs"]=[]
         with self.assertRaisesRegex(ContractError,"evidence"):
