@@ -12,6 +12,9 @@
 
 ## 1.5 双轨算法开发：稳妥结果 × 创新探索（按证据分配，而非双模型硬并行）
 
+**默认最低必要复杂度，可跳过已有项**：真实数据/评价 → 复用或授权后建立简单可信同K参考 → 检查组级残差、合法预测信息 → 最小规则/校准/线性/轻量模型或正控 → 仅为明确剩余瓶颈或不同机制预言引入复杂模型。按A只读诊断、B轻量拟合、C复杂训练分配预算（不是固定GPU时长门槛）；真实时空建模需求可直接进入C，但先明确必要性和廉价判别。复杂模型失败不能覆盖简单模型和已经核验的结果。
+
+
 - `RELIABLE_TRACK`：共享合法数据/评价器/基线，优先获得可复现性能、可解释的失效边界或成本—性能规律；这是研究资产，**没有独立近邻差额不能自动称论文保底**。
 - `NOVELTY_TRACK`：从已核残差、真实任务约束和具名近邻缺口提出差异化机制、能力或规律；其失败只更新对应机制/Claim，不丢弃可靠结果。
 - 两轨**不是两套固定预算/审批**；不要求双模型同时训练。同一Agent按`NEXT_PROBE`的信息价值和总成本选其中一轨，也可一个实验同时服务两轨。保留现有最简单可信Champion和最多一条**不同失败前提**的活跃Challenger；多分支仅在有新解释或可辨别结果时启用。旧Run、负结果与Checkpoint按既有路径复用。
@@ -44,7 +47,7 @@ ChatGPT 只传已核实的问题—数据、TASK、最大 UNKNOWN、证据指针
 
 借鉴 autoresearch 的**稳定评价＋完整尝试日志**，但不复制其无限运行或只用单一最佳分数KEEP的准则。
 
-- **Champion** = 当前`BEST_VALID_RUN`中的最简单可信参照；**Challenger** = 本轮唯一有明确科学差异的候选。固定`task_id / level_id / K_unit / legal_inputs / support_query_policy / group_split / evaluator_version / budget_basis`；若某字段不同，标`NOT_COMPARABLE`，可以研究成本—性能曲线，但不能写同等信息条件下的算法提升。
+- **Champion** = 当前`BEST_VALID_RUN`中的最简单可信参照，保留其预测/指标/代码/协议作为`VERIFIED_REFERENCE`（DEV证据，并非独立论文确认）；**Challenger** = 本轮唯一有明确科学差异的候选。固定`task_id / level_id / K_unit / legal_inputs / support_query_policy / group_split / evaluator_version / budget_basis`；若某字段不同，标`NOT_COMPARABLE`，可以研究成本—性能曲线，但不能写同等信息条件下的算法提升。
 - **执行前一句话**：`HYPOTHESIS | WHAT_CHANGES_ONLY | EXPECTED_OBSERVATION | DECISION_IF_POS/NEG/INVALID | COST_CAP`。少量参数共同调整可以属于同一机制假设，不要求一次只改一行代码；但关键因果解释必须能排除简单竞争因素。
 - **执行后证据**：配对group差异/合理不确定性、完整训练收敛或必要正控、代码与配置版本、真实独立单位数、额外标签/算力成本、失败结果及可重现原始路径。小收益不能靠挑最优seed升级为论文主张；负Pilot不自动判全部机制不可学。
 - **不同状态有不同动作**：`INVALID`（数据/评价失效）只隔离并定向修复；`NOT_COMPARABLE`先明确预算/输入差别；`INCONCLUSIVE`按是否存在廉价辨别选择继续或HOLD；`COMPARABLE_POS/NEG`仅更新当前机制证据，若触发不同科学任务的研究则交 [TASK_LADDER.md](TASK_LADDER.md)。
