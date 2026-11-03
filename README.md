@@ -30,6 +30,10 @@
 5. **输出证据优先**：默认短文本/指标/路径；图表只为判别科学问题或验证证据，01–05不自动做精美图片、长报告或PPT/PDF。避免重复读取、无效多Agent与重绘；不为省Token跳过科学验证。见[WORKFLOW.md](WORKFLOW.md) §5。
 
 ## 相关材料
+- **真实成功与失败一体案例**：[APACE → SAFE-Gait](LESSONS/SAFE_GAIT_APACE.md)；包含 Oracle/可辨识性差距、K=0→K=1 合法信息变化、目标级异质性与论文边界。
+- **可重复只读工具**：`python -m core.cli information-check --file LESSONS/SAFE_GAIT_INFO_PROBE.json`，核 K/信息时点/support-query/成本与共同失败前提；不拟合、不可替代科学判决。
+- **历史盲回放设计**：[SAFE_GAIT_REPLAY.json](LESSONS/SAFE_GAIT_REPLAY.json)，当前为事后重构案例，未宣称已执行真正盲回放。
+
 
 - [WORKFLOW.md](WORKFLOW.md)：总控、状态路由、权限和跨活动续做
 - [SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md)：按本轮范围动态扩缩、多源检索、热点/研究空白与反向近邻检查

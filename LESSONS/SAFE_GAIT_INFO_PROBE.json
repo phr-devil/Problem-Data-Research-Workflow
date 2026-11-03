@@ -1,0 +1,40 @@
+{
+  "root_problem": "Cross-condition gait estimation using shoe-insole sensors",
+  "before": {
+    "task_id": "APACE_K0",
+    "protocol_id": "zero_label_active_policy",
+    "target_label_k": 0,
+    "k_unit": "per new wearer",
+    "legal_predecision_information": [
+      "unlabeled insole signals"
+    ]
+  },
+  "after": {
+    "task_id": "SAFE_GAIT_K1",
+    "protocol_id": "single_supervised_calibration",
+    "target_label_k": 1,
+    "k_unit": "per new wearer",
+    "legal_predecision_information": [
+      "unlabeled insole signals",
+      "single labeled calibration residual available before next condition"
+    ]
+  },
+  "new_information": {
+    "available_before_prediction": true,
+    "support_query_disjoint": true,
+    "cost_feasible": null,
+    "same_information_simple_baseline": false
+  },
+  "evidence": {
+    "oracle_gain_range": [
+      0.08,
+      0.1
+    ],
+    "learned_policy_stable_advantage": false,
+    "refs": [
+      "User-provided APACE history and 2026-10-28 SAFE-Gait draft summary"
+    ],
+    "historical_evidence_status": "USER_NARRATIVE_NOT_RECHECKED"
+  },
+  "unresolved_shared_blockers": []
+}

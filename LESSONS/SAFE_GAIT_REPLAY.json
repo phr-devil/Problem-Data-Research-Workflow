@@ -1,0 +1,84 @@
+{
+  "schema": "case-replay-v1",
+  "case_id": "SAFE-GAIT-APACE",
+  "source_status": "RECONSTRUCTED_FROM_USER_NARRATIVE_NOT_PRIMARY_LOGS",
+  "blinded_evaluation_status": "NOT_RUN",
+  "rules": "At each checkpoint expose only visible_evidence; never use next checkpoint outcome to justify current decision.",
+  "checkpoints": [
+    {
+      "id": "C1",
+      "visible_evidence": {
+        "task": "APACE zero target label proactive decision",
+        "oracle_gain_pct_range": [
+          8,
+          10
+        ],
+        "policy_gain_recovery_pct_range": [
+          61,
+          75
+        ],
+        "simple_policy_not_reliably_beaten": true
+      },
+      "required_reasoning": [
+        "Oracle optimum is not a deployable policy",
+        "Check information available before action",
+        "Preserve data assets and inspect independent fixes before STOP"
+      ],
+      "forbidden_hindsight": [
+        "SAFE-Gait succeeds",
+        "K1 residual coefficient numerical values"
+      ]
+    },
+    {
+      "id": "C2",
+      "visible_evidence": {
+        "observation": "similar observable inputs can require different optimal actions",
+        "legal_option": "one supervised calibration residual available before next condition query, if support/query independent",
+        "future_perf": "UNKNOWN"
+      },
+      "required_reasoning": [
+        "New label access changes Task/protocol and claim",
+        "Compare with same-K simple residual correction and fixed baseline",
+        "Check cost/time of K1 and label independence",
+        "No assumption that SAFE-Gait is successful"
+      ],
+      "forbidden_hindsight": [
+        "DS cross-dataset advantage",
+        "Which target has strongest transfer"
+      ]
+    },
+    {
+      "id": "C3",
+      "visible_evidence": {
+        "result_scope": "mixed by target, direction and dataset",
+        "independent_groups_small": true,
+        "multiple_testing_unadjusted": true,
+        "main_pattern": "stride length positive; speed direction-dependent; step time unstable"
+      },
+      "required_reasoning": [
+        "Narrow claim to supported target/conditions",
+        "Track negative slices and model selection",
+        "Do not claim cross-platform weight transfer",
+        "Demand untouched independent validation and nearest-work comparison"
+      ],
+      "forbidden_hindsight": []
+    }
+  ],
+  "negative_controls": [
+    {
+      "id": "N1",
+      "issue": "No independent reference truth exists after adding K labels",
+      "expected_route": "HOLD_OR_DATA_PIVOT_NOT_AUTOMATIC_DOWN"
+    },
+    {
+      "id": "N2",
+      "issue": "Calibration label appears only after target query",
+      "expected_route": "INADMISSIBLE_INFORMATION"
+    },
+    {
+      "id": "N3",
+      "issue": "K=1 cost unaffordable or support=query",
+      "expected_route": "INADMISSIBLE_OR_REDEFINE_DEPLOYMENT"
+    }
+  ]
+}

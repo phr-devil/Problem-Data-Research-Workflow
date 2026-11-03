@@ -46,3 +46,5 @@ python -m core.cli literature-search --query "sensor calibration transfer" --lim
 **兼容性**：旧v1.4`STATE.json/EVENTS.jsonl`继续可读；新增Run推荐携带`task_spec_ref/task_spec_sha256`与`execution{command,git_commit,python_version,seed,environment_ref}`，但不反向要求迁移历史Run。deep核验大型预测文件可能产生额外I/O，仅在有科学结论变化、恢复或正式确认前调用。程序不判定论文价值、时间因果、确认集资格或授权。
 
 **探针预算（可选）**：`probe.json`可加入`cost_estimate:{"gpu_hours":0.4,"tokens":5000}`；`probe-check --file probe.json --remaining-budget-file budget.json`会在给定JSON预算内提示`BUDGET_REVIEW_REQUIRED`，绝不自动STOP或将预算文件视为用户训练授权。
+
+**按需信息条件核对（无训练）**：`python -m core.cli information-check --file info-shift.json`。输入 `root_problem`、`before/after`（task_id、protocol_id、每单位 K、合法决策前可见信息）、`new_information`（标签/反馈是否预测前可见、support-query 是否独立、成本及同 K 简单基线）、可选 `evidence`（Oracle/实际策略与参照结果及来源）。输出只标记信息条件候选和风险，不判断科学成功、不自动转题、不批准训练。案例见 [LESSONS/SAFE_GAIT_APACE.md](../LESSONS/SAFE_GAIT_APACE.md)。

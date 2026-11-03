@@ -2,7 +2,7 @@ name: PD-RW structural and evidence checks
 
 on:
   push:
-    branches: [main, feat/v1.4-evidence-first-workflow]
+    branches: [main, feat/v1.4-evidence-first-workflow, feat/safe-gait-lesson]
   pull_request:
 
 permissions:
