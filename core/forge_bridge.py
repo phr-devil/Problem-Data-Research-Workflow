@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import subprocess
 import sys
 from pathlib import Path
@@ -41,10 +42,13 @@ def verify_with_forge(
         raise ContractError("RWF PD-RW bridge missing; use the current RWF checkout")
     if not metric or not metric.strip():
         raise ContractError("metric required")
+    project_path = forge_project.resolve()
+    run_path = (forge_run if forge_run.is_absolute()
+                else project_path / forge_run).resolve()
     cmd = [
         sys.executable, "-m", "adapters.pd_rw_bridge",
-        "--project", str(forge_project.resolve()),
-        "--forge-run", str(forge_run.resolve()),
+        "--project", str(project_path),
+        "--forge-run", str(run_path),
         "--pd-root", str(pd_root),
         "--pd-run", str(pd_path),
         "--metric", metric,
@@ -69,8 +73,14 @@ def verify_with_forge(
             or evidence.get("pd_run_sha256") != _sha(pd_path)):
         raise ContractError("Forge handoff receipt does not match current PD-RW Run")
     for key in ("forge_run_sha256", "prediction_sha256"):
-        if not isinstance(evidence.get(key), str) or len(evidence[key]) != 64:
+        if (not isinstance(evidence.get(key), str)
+                or len(evidence[key]) != 64
+                or any(c not in "0123456789abcdefABCDEF" for c in evidence[key])):
             raise ContractError("Forge handoff receipt missing real SHA-256: " + key)
+    metric_value = evidence.get("recomputed_value")
+    if (type(metric_value) not in (float, int)
+            or not math.isfinite(metric_value)):
+        raise ContractError("Forge handoff receipt lacks finite recomputed metric")
     return {
         "verification": evidence["status"],
         "run": str(pd_path),

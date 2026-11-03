@@ -67,6 +67,19 @@ class ForgeBridgeTests(unittest.TestCase):
         with self.assertRaisesRegex(ContractError, "under its project root"):
             verify_with_forge(self.pd, outside, self.rwf, self.project, outside, "macro_F1")
 
+    def test_relative_forge_run_scoped_to_forge_project(self):
+        with patch("core.forge_bridge.subprocess.run", return_value=self.output()) as proc:
+            self.call()
+        args = proc.call_args.args[0]
+        self.assertEqual(args[args.index("--forge-run")+1],
+                         str((self.project / "run.json").resolve()))
+
+    def test_non_finite_metric_receipt_is_rejected(self):
+        with patch("core.forge_bridge.subprocess.run",
+                   return_value=self.output(recomputed_value="nan")):
+            with self.assertRaisesRegex(ContractError, "finite recomputed"):
+                self.call()
+
     def test_missing_rwf_bridge_rejected(self):
         (self.rwf / "adapters" / "pd_rw_bridge.py").unlink()
         with self.assertRaisesRegex(ContractError, "bridge missing"):

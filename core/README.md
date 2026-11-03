@@ -54,3 +54,7 @@ python -m core.cli literature-search --query "sensor calibration transfer" --lim
 
 **按需可行性结果判读：** `python -m core.cli feasibility-check --file PROJECT/FEASIBILITY_ENVELOPE.json` 仅对 Forge 生成的候选/参照差值提出下一个实验方向，不重新打开数据、不拟合、不把传入 JSON 自报内容当独立验证。原始数据和运行工件仍应先在 Forge 用 `tools.feasibility_probe` 核验。任务集分层与具体用法见 [FEASIBILITY_ENVELOPE.md](../FEASIBILITY_ENVELOPE.md)。
 
+
+## 可选跨仓库独立指标复算
+
+本地有最新 RWF checkout 时，可运行 `python -m core.cli forge-verify --root PD_PROJECT --run runs/R.json --forge-repo RWF_REPO --forge-project FORGE_PROJECT --forge-run runs/R/RUN.json --metric MAE`。PD Run与RWF Run的原始预测文件需字节相同，RWF在自己的工作目录和Python进程内核真实DEV标签/组/指标；避免两个仓库同名 `core` 包发生导入冲突。输出仅为 `METRIC_VERIFIED_DEV_ONLY`，旧Run无验证证据时保留`REPORTED`，不修改原Run/STATE或封存数据。若相对路径参数，`--run` 相对于 PD_PROJECT，`--forge-run` 相对于 FORGE_PROJECT。
