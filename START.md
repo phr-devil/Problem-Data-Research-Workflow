@@ -5,7 +5,7 @@
 1. **已有项目**：先核真实STATE/Run、manifest和用户授权。若使用 `STATE.json/EVENTS.jsonl`，先查事件一致性；缺工件不冒充有效结果。仅按当前阻碍读对应专题。
 2. **新课题**：机会搜索→自主定D1及必需外部库→核官方版本/必要文件/许可/容量→**优先下载并核验数据**。已有完整副本直接复用；有下载授权的Agent连续完成获取，不再为选库/下载反复请示；无下载授权则给直链/保存路径/可执行命令，标 `WAITING_FOR_DOWNLOAD_AUTH`，不进入数据实证。详见 [DATA_DISCOVERY.md](DATA_DISCOVERY.md)。
 3. **数据就绪后**：必须先有 `DATA_MANIFEST` 中本轮必需库的 `DATA_ACQUIRED_VERIFIED`（文件完整与可读，不代表科学有效）；否则只做下载/恢复与非实证准备。就绪后按 [DATA_INSIGHT.md](DATA_INSIGHT.md) 观察真实现象，再到 [TASK_EXPLORATION.md](TASK_EXPLORATION.md) 选任务；Task Ladder按需读。理论/仿真按明确证据路径例外处理。
-4. **已有任务/运行**：按 [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md) 获取有效Run、诊断负Pilot；实际编码/拟合前才按需读 [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) 的TaskSpec与受保护评价器规则（只读检查不构成训练授权）；机制失败时用最小Probe区分竞争解释。论文贡献读 [PAPER_FIRST.md](PAPER_FIRST.md)，正式独立确认读 [CONFIRMATION.md](CONFIRMATION.md)。
+4. **已有任务/运行**：按 [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md) 获取有效Run、诊断负Pilot；**需要设计新算法或连续编码/GPU实验**时，按需读 [ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md) 的误差→杠杆→廉价正控→有界执行闭环，实际接口和保护规则读 [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)。机制失败先分辨可用信息/公平基线/欠训练，再决定转向或补论文。论文贡献读 [PAPER_FIRST.md](PAPER_FIRST.md)，正式独立确认读 [CONFIRMATION.md](CONFIRMATION.md)。
 
 **论文优先触发**：新Task形成时可按需读 [VENUE_STRATEGY.md](VENUE_STRATEGY.md) §0 的真实类似论文，不先做正式期刊评级。首个可信Run、关键负Pilot、拟新建高成本模型或HOLD/PIVOT时，应按需读 [PAPER_FIRST.md](PAPER_FIRST.md) §0，先判断能否完成一篇窄主张的论文；如果最低必要证据可补齐，优先补论文，不默认为升级算法。稿件确认仍须读 [CONFIRMATION.md](CONFIRMATION.md)；无需每次重载这三个文件。
 
