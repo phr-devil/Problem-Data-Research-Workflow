@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 from core.contracts import ContractError
-from core.task_runtime import qualify_task, check_run_task_alignment
+from core.task_runtime import qualify_task, check_run_task_alignment, pin_task, audit_run_reproducibility
 from core.probes import validate_probe, review_probe
 from core.state import initialize, record_event, status
 
@@ -85,15 +85,30 @@ class TaskSpecTests(unittest.TestCase):
             qualify_task(self.root,"task.json")
 
     def test_run_alignment(self):
+        pin_task(self.root,"task.json","task-pinned.json")
         valid={"task_id":"task1","protocol_id":"p1","dataset_version":"d1",
                "evaluator_version":"e1","legal_inputs":["sensor"],
-               "task_spec_ref":"task.json","task_spec_sha256":digest(self.root/"task.json")}
+               "task_spec_ref":"task-pinned.json","task_spec_sha256":digest(self.root/"task-pinned.json")}
         check_run_task_alignment(self.root,valid)
         valid["evaluator_version"]="different"
         with self.assertRaisesRegex(ContractError,"mismatch"):
             check_run_task_alignment(self.root,valid)
 
+    def test_unpinned_task_ref_is_rejected(self):
+        valid={"task_id":"task1","protocol_id":"p1","dataset_version":"d1",
+               "evaluator_version":"e1","legal_inputs":["sensor"],
+               "task_spec_ref":"task.json","task_spec_sha256":digest(self.root/"task.json")}
+        with self.assertRaisesRegex(ContractError,"task-pin"):
+            check_run_task_alignment(self.root,valid)
+
+    def test_pin_never_overwrites(self):
+        result=pin_task(self.root,"task.json","task-pinned.json")
+        self.assertEqual(result["status"],"REFERENCE_HASHES_PINNED_NOT_SCIENTIFICALLY_VERIFIED")
+        with self.assertRaisesRegex(ContractError,"already exists"):
+            pin_task(self.root,"task.json","task-pinned.json")
+
     def test_linked_artifacts_are_detected_in_deep_status(self):
+        pin_task(self.root,"task.json","task-pinned.json")
         initialize(self.root,"toy")
         valid={"run_id":"r1","task_id":"task1","protocol_id":"p1",
                "dataset_version":"d1","evaluator_version":"e1",
@@ -101,7 +116,7 @@ class TaskSpecTests(unittest.TestCase):
                "legal_inputs":["sensor"],"split":"dev","status":"VALID",
                "metrics":{"macro_f1":0.6},
                "artifact_refs":{"metrics":"metrics.json","predictions":"pred.csv","code":"model.py"},
-               "task_spec_ref":"task.json","task_spec_sha256":digest(self.root/"task.json")}
+               "task_spec_ref":"task-pinned.json","task_spec_sha256":digest(self.root/"task-pinned.json")}
         (self.root/"run.json").write_text(json.dumps(valid),encoding="utf-8")
         event=record_event(self.root,"run",artifact="run.json")
         self.assertIn("pred.csv",event["linked_sha256"])
@@ -110,6 +125,28 @@ class TaskSpecTests(unittest.TestCase):
         self.assertEqual(status(self.root)["status"],"CONSISTENT")
         with self.assertRaisesRegex(ContractError,"linked artifact fingerprint"):
             status(self.root,deep=True)
+
+    def test_reproducibility_gaps_visible(self):
+        obj={"run_id":"r1","task_id":"task1","protocol_id":"p1",
+             "dataset_version":"d1","evaluator_version":"e1","group_split":"split-v1",
+             "sample_ids_hash":"s1","legal_inputs":["sensor"],"split":"dev",
+             "status":"VALID","metrics":{"macro_f1":0.6},
+             "artifact_refs":{"metrics":"metrics.json","predictions":"pred.csv","code":"model.py"}}
+        (self.root/"run.json").write_text(json.dumps(obj),encoding="utf-8")
+        report=audit_run_reproducibility(self.root,"run.json")
+        self.assertEqual(report["status"],"PROVENANCE_PARTIAL")
+        self.assertIn("execution.command",report["gaps"])
+        pin_task(self.root,"task.json","task-pinned.json")
+        (self.root/"requirements.txt").write_text("example==1.0",encoding="utf-8")
+        obj.update({"task_spec_ref":"task-pinned.json",
+                    "task_spec_sha256":digest(self.root/"task-pinned.json"),
+                    "budget_basis":"1 GPU-hour",
+                    "execution":{"command":"python model.py","git_commit":"abcdef0",
+                                 "python_version":"3.11","seed":1,
+                                 "environment_ref":"requirements.txt"}})
+        (self.root/"run.json").write_text(json.dumps(obj),encoding="utf-8")
+        report=audit_run_reproducibility(self.root,"run.json")
+        self.assertEqual(report["status"],"METADATA_COMPLETE_NOT_REPRODUCED")
 
 class ProbeTests(unittest.TestCase):
     def test_valid_probe_needs_auth(self):
