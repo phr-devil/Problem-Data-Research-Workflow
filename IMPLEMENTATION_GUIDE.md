@@ -2,6 +2,8 @@
 
 > 总决策见 [WORKFLOW.md](WORKFLOW.md)，实验预算与公平性见 [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md)。本库以现有真实 TASK、基线、原始Run和关键可证伪实验为执行依据。只读当前TASK相关STATE/代码/Run，不重建已验证工程。
 
+**适用边界**：本文件负责TaskSpec、模块接口和正确性检查；**如何从真实误差选择算法机制、连续训练并比较候选**统一见[ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)，不在此重复设计第二套实验循环。不存在本地GPU执行器时由已获授权的WorkBuddy/Codex实际执行，禁止仅凭计划/模拟日志报训练成功。
+
 ## 1. 从研究任务到第一份有效代码
 
 **最小任务合同**：
@@ -37,7 +39,7 @@ Run:     run_id, parent_run, data_version, protocol_id, cost, raw_paths
 | 多模态、按需启用 | 单模态、固定融合/固定启用 | 可辨识信号支持动态策略 | 同成本简单固定策略 |
 | 浓度/漂移混杂 | 匹配条件统计、简单校准 | 可区分物理机制→结构化模块 | 浓度与批次共变 |
 
-新机制开工前写`WHAT_CHANGES_ONLY`（只修改哪个模块/信息/损失）＋`EXPECTED_SIGNATURE`（在哪个合法开发组与简单替代不同）＋`REMOVAL_CONDITION`；只有机制归因才要求对照。缺证据标HYPOTHESIZED，不按模型热度堆架构。
+新机制开工前按[ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)先定位`ERROR_EVIDENCE → LEGAL_LEVER → STRONG_SIMPLE_ALTERNATIVE`，再写`WHAT_CHANGES_ONLY`＋`EXPECTED_SIGNATURE`＋`REMOVAL_CONDITION`。缺证据标HYPOTHESIZED；优先校准、残差、局部融合等可直接完成窄论文的可靠增量；只有不同可观察预言或真实任务容量需求，才扩新架构。单纯调参或论文补证据不强制再写机制卡。
 
 ### 机制与工程变更分开
 
@@ -72,6 +74,8 @@ Run:     run_id, parent_run, data_version, protocol_id, cost, raw_paths
 超参按`scientific`（机制变量）、`nuisance`（学习率/正则/epoch等需公平调优）、`fixed`（任务、合法信息、split/evaluator）分类，记录合理搜索范围、次数、停止规则、成本。候选充分调参、基线只用默认参数不构成公平增益。
 
 **扩GPU依据**：欠收敛→成对短/长；容量不足有证据→成对小/大；组级不确定→优先独立group而不是seed；评价错误→先修；没有新信息→HOLD受影响机制。不能以显卡空闲为由扩大训练。
+
+**工程失败不是算法命题失败**：出现OOM/NaN/系统中断先保留本Run日志、checkpoint和变更diff；遵守实际预算检查后复用合法checkpoint或局部修复，记录CRASH/PARTIAL/INVALID，不得把训练没跑通写成科学NO_GAIN。完整Run记录需保留逐样本预测、分组单位及聚合分母；迁移GPU/数据批次时记录有效优化步数/时间，不能从比较中隐藏训练资源差异。详见[ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)。
 
 ## 5. 可直接交给 WorkBuddy / Codex 的短指令
 
