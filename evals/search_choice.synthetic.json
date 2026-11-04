@@ -1,0 +1,40 @@
+{
+  "format": "pd-rw-search-choice-v1",
+  "user_scope": "SYNTHETIC: public wearable dataset opportunity (not actual evidence)",
+  "coverage": {
+    "query_families_ref": "PLACEHOLDER/synthetic_query_receipt",
+    "source_families_ref": "PLACEHOLDER/synthetic_sources",
+    "critical_coverage_gaps": []
+  },
+  "candidates": [
+    {
+      "id": "SYN_A",
+      "scientific_question": "Does transfer degradation follow independent conditions?",
+      "importance_basis": "Deployment reliability",
+      "knowledge_delta_or_unknown": "SOURCE_UNVERIFIED",
+      "decisive_unknown": "Device/subject independent crossing",
+      "nearest_original_status": "UNKNOWN",
+      "nearest_original_ref": "UNKNOWN",
+      "counterevidence_status": "UNKNOWN"
+    },
+    {
+      "id": "SYN_B",
+      "scientific_question": "Can legal calibration reduce label cost?",
+      "importance_basis": "Calibration burden",
+      "knowledge_delta_or_unknown": "SOURCE_UNVERIFIED",
+      "decisive_unknown": "Legal K-shot information"
+    }
+  ],
+  "preferred_id": "SYN_A",
+  "why_preferred_over_competitor": "SYNTHETIC judgment; cannot be accepted as scientific evidence",
+  "contrasting_opportunity_search": {
+    "status": "ALTERNATIVE_FOUND",
+    "different_premise_or_query": "Different objective: calibration cost",
+    "source_or_query_ref": "PLACEHOLDER/synthetic_query"
+  },
+  "pre_download_data_fit": {
+    "status": "UNKNOWN"
+  },
+  "next_discriminating_check": "Inspect actual official protocol and nearest original",
+  "warning": "SYNTHETIC EXAMPLE; no references, source facts or permission verified"
+}

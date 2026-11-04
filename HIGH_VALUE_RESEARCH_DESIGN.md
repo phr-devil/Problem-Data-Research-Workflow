@@ -6,6 +6,8 @@
 
 **可用工具（均为非强制只读辅助）**：`python -m core.scientific_discriminability --metadata DEV_METADATA.json --factor-a device --factor-b class --group subject --role DEV` 检查已获许可元数据的交叉/独立组结构；`python -m core.science_choice_replay --cases evals/science_choice_cases.synthetic.json --blind` 导出不含专家答案的构造场景。两者**不能证明因果关系、选题价值、Q2水平或真实行为改进**。历史冻结回放必须独立准备真实来源和专家参考后另行执行，见[REPLAY_PROTOCOL.md](REPLAY_PROTOCOL.md)。
 
+**活动01防首个满意解**：不要求固定3次ChatGPT回复，而要在同一次或2–3轮内先广搜可能重要的不同科研问题，再对最有潜力者核原文/反证，最后用至少一次**不同失败前提的替代机会搜索**挑战首选；没有可比备选可以保留唯一首选，但必须记录搜索限制。D1正式选定前通过官方公开元数据做`PRE_DOWNLOAD_SCIENCE_FIT`，未知仅`PREFERRED_PROVISIONAL`，不在未授权情况下读取DEV/test或自动下载。详情见[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md)与[DATA_DISCOVERY.md](DATA_DISCOVERY.md)。
+
 ## A｜研究问题发现：先评价知识价值，再比较实现难度
 
 借鉴 [STORM](https://github.com/stanford-oval/storm) 的多视角提问、[PaperQA2](https://github.com/Future-House/paper-qa) 的有出处原文核查、[AI-Scientist-v2](https://github.com/SakanaAI/AI-Scientist-v2) 的不同假说探索思想。**不引入其全文撰稿、自动科研执行或复杂树搜索。**

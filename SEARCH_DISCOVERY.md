@@ -17,6 +17,13 @@
 
 **高价值问题搜索（按需，不新增研究阶段）**：遇到新方向或已有候选仅是小增益时，参考[HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md) A：以**真实后果/重要需求、物理与测量局限、现有最强方法边界**三个互补视角提出少量问题；对最多3个不同失败前提的机会查具名最近邻原文、反例和Q1/Q2近期同类型研究。问题的“重要知识增量”与“实现成本”分开判断，不能以论文数量少、Star高或容易训练充当创新。交接优先写`IMPORTANT_QUESTION | NAMED_NEAREST_GAP | WHAT_SUCCESS_TEACHES | COUNTEREVIDENCE | DECISIVE_UNKNOWN | COST`；证据未核则UNKNOWN。避免STORM式自动长文/多Agent全面搜索。
 
+**快速选题不等于浅层搜索**：ChatGPT 可在同一回复/2–3轮对话内完成以下三个**内部审查动作**，不增加用户轮次，也不强制多Agent或固定大量论文：
+① **BREADTH_SCAN**：在`USER_SCOPE`内沿现实需求、方法瓶颈、数据/测量局限搜互异失败前提；生成少量候选，补学科别名、否定性结果与关键来源覆盖缺口；
+② **DEEP_FALSIFICATION**：对有潜力的首选核具名最近邻原始论文（不只摘要）、最强可能反例、合法输入、已知数据分组和关键评价条件；最危险事实查不到标`UNKNOWN`；
+③ **COMPETING_CHOICE**：至少进行一次**不同失败前提**的替代机会检索/比较，判断该机会能否推翻首选；若未找到真实竞争者，记录检索式/来源和`NO_BETTER_ALTERNATIVE_WITH_LIMITS`，**不必强造第二个题目**。用重要性→新增知识→可区分的证据→实际成本的顺序选择，低成本只能帮助决定如何验证，不能直接决定科学价值。
+
+**选题深度以是否消除决策关键不确定性衡量，而不是聊天轮数、论文数量、下载量或搜索时长**。已有可复用来源则不重读；一个明显优势且已反证审查的题目可直接进入D1规划，但仅被首先发现的可行题目不得触发`SELECT`。以上三动作可连续自主完成，不是三次用户审批。
+
 ## 2. 多视角主题地图与证据来源
 
 对实证课题按需组合`任务/真实需求 × 困难/条件 × 资源或部署约束`，其他学科用相应科学问题分类；初始4–6类仅作起点，不是上限。补中英文/学科别名/缩写，去重预印本与发表版本、相同数据不同切片。
@@ -36,9 +43,9 @@
 | `DEEPEN` | 关键候选的最强近邻、数据或真实条件未明 | 查原文、引用链、代码、官方评测 |
 | `REFRAME` | 同一主张已被直接近邻覆盖 | 在合法新条件、成本或真实科学规律上寻找不同贡献；不能偷换用户学科 |
 | `NARROW` | 信息重复高、候选过多 | 围绕重要知识缺口、具名最近邻差额和决定性可验证条件聚焦；不只选最容易的F1增益 |
-| `SELECT` | 已有足够证据确定可验证的首选 | 直接交[DATA_DISCOVERY.md](DATA_DISCOVERY.md)配置数据/评估并通知下载 |
+| `SELECT` | 具名最近邻/最强反证已查或明确UNKNOWN，关键来源覆盖可陈述，完成不同前提的对照机会检索（可得未发现替代的有限结论），D1适配风险已初筛 | 给证据支持或`PROVISIONAL`的科学首选，接[DATA_DISCOVERY.md](DATA_DISCOVERY.md)核主库与授权；不宣称Q2/新颖性已确认 |
 
-按`COVERAGE_GAP + NEW_UNIQUE_EVIDENCE + DECISION_CHANGE + COST`判断继续搜什么。**可停止**：已有合理首选及最低可检验路径；或新检索不会改变选择且关键来源覆盖；或到实际预算上限。停下时报告覆盖缺口；重大近邻未查不能称创新已经成立。**一个可信机会即可进入数据规划**，不要求穷尽领域。
+按`COVERAGE_GAP + NEW_UNIQUE_EVIDENCE + DECISION_CHANGE + COST`判断继续搜什么。**可停止**：已有合理首选及最低可检验路径；或新检索不会改变选择且关键来源覆盖；或到实际预算上限。停下时报告覆盖缺口；重大近邻未查不能称创新已经成立。**一个可信机会只是候选，不是充分的搜索停止理由**：在成本上限内至少完成一次具备不同失败前提的替代方向挑战，并交代最强近邻/反例、最危险未解事实、覆盖边界和为何首选优于现实备选；若经真实搜索未发现可比备选，也可保留唯一首选并注明有限检索范围。重要论文原文未查、关键数据条件未知时只作`PREFERRED_PROVISIONAL`、安排最便宜的决定性查证，而非宣称原创性或D1科研适配已证明。已经有显然无新增信息的搜索路径可停止，不能因规定检查而无界搜。
 
 ## 4. 热点、潜在空白与反向创新核查
 
@@ -52,11 +59,13 @@
 
 **证据检索适配（可选）**：需要真实元数据核查时明确调用`python -m core.cli literature-search --query "..." --output search.json`，保存OpenAlex/Crossref来源、检索式、UTC日期、DOI和失败来源（见[core/README.md](core/README.md)）；仅在联网工具可用、对应授权范围内运行。检索返回0项只能记`NO_VERIFIED_RESULTS`，不能推断创新；最强具名近邻需核原文机制/任务条件/数据公平差额。已有可核来源不重复全库搜索。
 
+**搜索停止的反证检查（轻量）**：最后问一遍“是否存在一个我尚未验证、且若成立就会改变首选的**直接近邻、重要替代方向或数据结构性障碍**？”有且能低成本核就先查；无可行新增信息则收束。保留`COVERAGE_GAP`和`SEARCH_PARTIAL`，不以当前ChatGPT的主观信心冒充完整综述。
+
 ## 5. 选题与不增加用户中断的交接
 
 实际证据支持时，从**稳妥可行/新兴热点/潜在空白**类别中选1个首选、最多2个不同失败前提备选；不为凑三类而硬造。优先评价：真实问题、独立真值或证明路径、强简单基线、最低可信独立贡献候选、未污染确认机会、资源/预算。无资料写`VALUE_UNVERIFIED`，允许有界探索；高分却无近邻差额不是论文保底。
 
 一次最短`SEARCH_HANDOFF`：
-`USER_SCOPE | SEARCH_MODE | SEARCH_COVERAGE(来源/关键词族/时间窗及日期) | PREFERRED+WHY | STRONGEST_NEIGHBOR+GAP_STATUS | TREND_EVIDENCE或UNKNOWN | COVERAGE_GAP | NEXT_LOW_COST_CHECK`。
+`USER_SCOPE | SEARCH_MODE | BREADTH_COVERAGE | PREFERRED+WHY_OVER_DIFFERENT_PREMISE | CONTRASTING_OPPORTUNITY_QUERY+OUTCOME | STRONGEST_NEIGHBOR_ORIGINAL+COUNTEREVIDENCE+STATUS | PRE_DOWNLOAD_SCIENCE_FIT(SUPPORTED/UNKNOWN/CONTRADICTED) | CRITICAL_COVERAGE_GAP | NEXT_DISCRIMINATING_CHECK | AUTH`。可按需用`python -m core.search_choice_review --packet SEARCH_DECISION.json`对短JSON做**结构性反早停核查**，参照`evals/search_choice.synthetic.json`；结构PASS不代表价值、创新性、数据适用性已被认证。
 
-只保存**可追溯的少量关键链接和差异事实**，长日志留在既有文件指针，不额外造大型数据库。选题确定后**同一轮**接[DATA_DISCOVERY.md](DATA_DISCOVERY.md)自主选有合法评价路径的主库D1；外部复现与备用库按科学主张和成本扩展（纯理论可PROOF_PATH）、生成`PRE_DOWNLOAD_PLAN/DOWNLOAD_READY_NOTICE`并**通知用户下载**。选题与在线只读搜索不构成下载、安装、CPU拟合或GPU训练授权。
+只保存**可追溯的少量关键链接和差异事实**，长日志留在既有文件指针，不额外造大型数据库。完成不同失败前提的比较后，选题可以**同一轮**接[DATA_DISCOVERY.md](DATA_DISCOVERY.md)核有合法评价路径的主库D1；外部复现与备用库按科学主张和成本扩展（纯理论可PROOF_PATH）、生成`PRE_DOWNLOAD_PLAN/DOWNLOAD_READY_NOTICE`并**通知用户下载**。选题与在线只读搜索不构成下载、安装、CPU拟合或GPU训练授权。

@@ -2,6 +2,8 @@
 
 > **适用时机**：活动01已确定`DIRECTION_CARD / DATA_PORTFOLIO`，且本轮必需数据已按 [DATA_DISCOVERY.md](DATA_DISCOVERY.md) 获取/复用并达到 `DATA_ACQUIRED_VERIFIED`。数据获取/清单/许可/分组封存由[DATA_DISCOVERY.md](DATA_DISCOVERY.md)负责；本文件只解释**如何从真实数据发现有价值的现象**。形成`DATA_INSIGHT_CARD`后交[TASK_EXPLORATION.md](TASK_EXPLORATION.md)。不默认安装工具、多Agent、全量扫描或训练。缺完整必需数据标 `WAITING_FOR_DOWNLOAD_AUTH/WAITING_FOR_DATA/PARTIAL_DATA` 并回活动01下载/验收；不开展正式数据画像，也不把设想写成观察。已有完整本地副本则直接核验复用，无需重下。
 
+**数据反证回传选题**：发现合法DEV中的独立样本、条件交叉、标签/真值或预测前可见性与活动01公开来源假设不相容时，立即标记`PREDOWNLOAD_ASSUMPTION_REFUTED`，只把DEV允许的聚合/元数据结论回传[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md)保存的`SEARCH_HANDOFF`与备用候选；先审查有无可支持的窄主张，必要时重比不同失败前提的备选，不自动改研究方向、不越权下载、不读封存集。原先数据与负结果保留为科研资产，避免在已不适配的D1上继续无效算法升级。
+
 ## 1. 数据角色先核清，再决定观察深度
 
 1. 复用各库`DATA_MANIFEST`、`DIRECTION_CARD`和已核评估协议；先看本轮科学问题与真实输入/独立真值、group、时间、采集来源、预测时点的对应关系，找出数据**支持什么、不能支持什么**。

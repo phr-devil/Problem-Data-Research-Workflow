@@ -13,6 +13,8 @@
 
 **已有Run科学信息挖掘（只读、非科研认证）**：`python -m core.result_harvest --packet DEV_EVIDENCE.json` 对已合法整理的同任务、同K、同协议和同metric的DEV配对组级指标输出条件差异、组间异质性与实测资源权衡线索。输入来源、独立组和数据许可来自调用者声明，不重算指标、不提供p值、不证明因果或期刊水平。带上次`previous_packet_sha256`可在同内容下返回`UNCHANGED_INPUT_REUSE`，减少重复审查。见[SCIENCE_RESULT_HARVEST.md](../SCIENCE_RESULT_HARVEST.md)。
 
+**活动01选题反早停（可选，只读）**：`python -m core.search_choice_review --packet SEARCH_DECISION.json` 对最多3个已发现的科研候选、不同失败前提的竞争搜索、原文反证、官方元数据D1科学可评价性进行**结构性核查**。示例`evals/search_choice.synthetic.json`是虚构数据、**非真实文献或研究价值证据**；`STRUCTURALLY_READY_FOR_D1_PLANNING_ONLY`不等于有科学新颖性、Q2潜力或用户下载授权。该检查不联网、不读数据、不训练，也不增加审批门。
+
 ## 最小使用
 
 ```bash

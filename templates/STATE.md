@@ -15,6 +15,7 @@
 
 ## 专题索引（当前涉及才添加，其他省略）
 - SEARCH_TRACE: <查询来源/日期/覆盖缺口；SEARCH_PARTIAL>
+- SEARCH_CHOICE_REVIEW: <可选SEARCH_HANDOFF/SEARCH_DECISION.json路径：覆盖与不同前提挑战/具名原文反证/首选优于对照的理由/初筛D1适配/核心UNKNOWN；仅结构检查不认证创新；已验证未变化可复用>
 - DIRECTION_CARD: <宽方向/变化轴/独立真值假设>
 - DATA_PORTFOLIO: <可评价主库D1、按需外部/备用、SEALED_CONFIRM角色；必要时EXTERNAL_EVIDENCE_GAP>
 - DATA_CHOICE: <PREFERRED及选择证据指针>

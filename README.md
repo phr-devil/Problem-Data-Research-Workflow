@@ -28,6 +28,8 @@
 
 **高价值科学问题设计（按需）**：[HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md) 支持多视角问题搜索、数据库科学辨识力、竞争假设与有界机制探索，保留阶段/授权/写作锁。
 
+**活动01防过早选题**：按[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md)用`BREADTH_SCAN→DEEP_FALSIFICATION→COMPETING_CHOICE`在同一ChatGPT回复或2–3轮内部进行不同前提的竞争性选题；不能因为首先找到可行问题就停搜。基于官方元信息做`PRE_DOWNLOAD_SCIENCE_FIT`后选D1，数据反证初始假设时回看备选。可选只读核查`core.search_choice_review`不评分、不认证Q2也不授予下载权限。
+
 ## 唯一入口与最短路径
 
 - **AI 首次进入**：只读 [START.md](START.md)，再按用户意图读 [WORKFLOW.md](WORKFLOW.md) 的对应活动；只在需要时读一份专题。已有项目优先读其最新 STATE、原始 Run/数据版本；**无需预读所有章节、24条旧Prompt或全部来源**。
