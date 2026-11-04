@@ -40,6 +40,8 @@ python -m core.cli feasibility-check --file PROJECT/FEASIBILITY_ENVELOPE.json
 
 未知标 UNKNOWN；不造单一“可学性评分”、不强制 P 值/三种随机种子、不默认新可视化或长报告。科学成功仍需具名近邻差额、相同合法信息的公平对照、组级稳健性及独立确认；对经过反复任务选择的 DEV 切片标 **EXPLORATORY**。允许减少复杂度和调整合法信息条件，但必须更新 Task/协议/Claim，不能将 APACE 的 K=1 结果解释为 K=0 原任务成功。
 
+**完成算法后的路径**：本文件仅提供合法信号、误差和强简单参照的画像；是否用小修改形成新科学贡献，由[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)按需决定。DEV事后切片不能直接确认为新规律。
+
 ## v1.7 · 将诊断转成机制选择，而不是增加审批
 
 只在准备开发**昂贵的新机制**且已有可信 DEV Run 时复用一次画像。把科研判断分成三项证据，不生成综合可学性概率：
