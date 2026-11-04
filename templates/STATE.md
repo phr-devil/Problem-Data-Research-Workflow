@@ -19,13 +19,13 @@
 - DATA_PORTFOLIO: <可评价主库D1、按需外部/备用、SEALED_CONFIRM角色；必要时EXTERNAL_EVIDENCE_GAP>
 - DATA_CHOICE: <PREFERRED及选择证据指针>
 - PRE_DOWNLOAD_PLAN: <必需D1/外部库；官方版本/文件清单/大小/许可/存储与下载授权>
-- DOWNLOAD_READY_NOTICE: <无下载授权时给出的可执行下载/保存/续传指引；WAITING_FOR_DOWNLOAD_AUTH>
+- DOWNLOAD_READY_NOTICE: <无下载授权时官方来源/范围/成本及推荐与授权选项；绝无提前执行指令；WAITING_FOR_DOWNLOAD_AUTH>
 - DATA_MANIFEST: <逐库expected/actual文件与字节/有则哈希/读入冒烟/真实路径/缺失项；NOT_RUN>
 - DATA_READINESS: <逐库required_now与DATA_ACQUIRED_VERIFIED/PARTIAL_DATA/WAITING_FOR_DATA/WAITING_FOR_DOWNLOAD_AUTH/NOT_APPLICABLE；是否SCOPE_REDUCED；旧FULL_VERIFIED需复核映射>
 - DATA_INSIGHTS: <关键DATA_INSIGHT_CARD路径或NO_RELIABLE_INSIGHT_YET>
 - OBSERVATIONS: <OBSERVED/HYPOTHESIZED/PROXY_ONLY及原始来源>
 - TASK_DISCOVERY: <PRIMARY_TASK/必要RESERVE_TASK/MINIMUM_PROBE>
-- TASK_CANDIDATES: <候选选择史链接，不复制>
+- TASK_CANDIDATES: <候选选择史链接，不复制；含重要性、最近邻差额、竞争解释、证据可达性/成本、未选理由；不是论文质量分数>
 - PORTFOLIO_PIVOT_MAP: <真正不同失败前提的备选>
 - TASK_LADDER: <可选L0–L3不同信息条件及切换证据；NOT_APPLICABLE>
 - IMPLEMENTATION: <需要编码时才记TaskSpec/evaluator指纹、接口/保护/定向测试；未知标UNKNOWN>
@@ -43,6 +43,7 @@
 - SUMMARY_USER_REVIEW: <PENDING / REVIEWED + 可核查用户原始确认消息；缺失默认 PENDING>
 - MANUSCRIPT_WRITE_AUTH: <LOCKED / APPROVED + 用户针对本项目/主张的明确写作指令来源；默认 LOCKED；参见 WRITING_GATE.md>
 - SCIENCE_UPGRADE_AUDIT: <可选：Run/最近邻差额/竞争解释/区别性预测/成本/授权/UPGRADE_PILOT|EVIDENCE_ONLY|KEEP_ORIGINAL|UNKNOWN；非写作授权>
+- SCIENTIFIC_DISCRIMINABILITY: <可选DEV/公开元数据因素交叉诊断路径；结构性发现≠因果或独立确认>
 - HIGH_VALUE_RESEARCH_DESIGN: <按需：重要问题/具名近邻知识差额/科学辨识力与混杂/竞争性假设/不同预言/最低决定性测试；UNKNOWN保留；见HIGH_VALUE_RESEARCH_DESIGN.md>
 - SCIENTIFIC_VALUE: <不同于具名近邻的新能力/规律；VALUE_UNVERIFIED>
 - CLAIM_EVIDENCE_MAP: <能力/机制/规律候选、最强替代、Run和工件指针、最近复盘、待补证据/确认资格>
