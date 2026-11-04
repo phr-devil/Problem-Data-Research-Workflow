@@ -2,6 +2,10 @@
 
 > **按需方法库，不新增阶段/审批/评分器。** 服务既有活动01–05：问题搜索→数据能力→任务与科学假设→高潜力机制→决定性实证。论文导向项目的最低成功标准仍是有真实证据支持的 **JCR Q2+ 投稿潜力，优先Q1**；发表/录用无法保证。遵守 [Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)、[NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md) 和 [WRITING_GATE.md](WRITING_GATE.md)。不自动训练、下载、打开封存集或写论文。
 
+**执行优先级（旧文档出现“最小论文优先”时覆盖旧口径）**：先对知识价值、最近邻差额和科学辨识力做可审计的比较，再寻找可执行的最低成本试验；**不能以最便宜的训练、最容易提高F1或任何Q3/Q4可发性代替Q2+科研目标**。可信小成果仍保护。已有数据/Run可直接跳到决定性缺口，不重启搜索。
+
+**可用工具（均为非强制只读辅助）**：`python -m core.scientific_discriminability --metadata DEV_METADATA.json --factor-a device --factor-b class --group subject --role DEV` 检查已获许可元数据的交叉/独立组结构；`python -m core.science_choice_replay --cases evals/science_choice_cases.synthetic.json --blind` 导出不含专家答案的构造场景。两者**不能证明因果关系、选题价值、Q2水平或真实行为改进**。历史冻结回放必须独立准备真实来源和专家参考后另行执行，见[REPLAY_PROTOCOL.md](REPLAY_PROTOCOL.md)。
+
 ## A｜研究问题发现：先评价知识价值，再比较实现难度
 
 借鉴 [STORM](https://github.com/stanford-oval/storm) 的多视角提问、[PaperQA2](https://github.com/Future-House/paper-qa) 的有出处原文核查、[AI-Scientist-v2](https://github.com/SakanaAI/AI-Scientist-v2) 的不同假说探索思想。**不引入其全文撰稿、自动科研执行或复杂树搜索。**
