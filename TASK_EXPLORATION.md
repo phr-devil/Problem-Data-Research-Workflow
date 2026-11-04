@@ -2,6 +2,8 @@
 
 **本文件只回答研究什么与为什么有价值**。新实证项目须先验收本轮必需原始数据（`DATA_ACQUIRED_VERIFIED`），再进行正式TASK选择和冻结；缺文件只可做文献层面的假说草拟，不应先写TaskSpec/训练计划再补下载。接收活动02的[DATA_INSIGHT.md](DATA_INSIGHT.md) `DATA_INSIGHT_CARD`及活动01的`SEARCH_HANDOFF`，把现象转为可验证问题。实验怎么做交 [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md)，RUN/机制、Task、Area-Data 级续投与止损由 [WORKFLOW.md](WORKFLOW.md) 唯一决定；不要在本文件重建审核关卡。
 
+**科研目标**：在任务候选的真实可学性之外，比较其是否可能形成有证据支持的**JCR Q2+期刊投稿潜力**，优先Q1，依据问题重要性、具名最近邻实质差额、合法独立确认与相近已发表论文，见[Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)。普通增量论文可做探索备选但不自动达成最终项目目标；未知先做最小证伪，不把早期潜力估计当成功或失败。
+
 ## 0. 从观察到候选 TASK：先定位问题，再选择诊断
 
 读取已有的`DATA_INSIGHT_CARD`、`DATA_MANIFEST`、`DIRECTION_CARD`与具名近邻；数据已验收但尚无可靠现象时，可依真实需求/文献设计`HYPOTHESIZED_TASK`；数据尚未齐全时仅记录待验证想法，不能作为正式实证TASK或声称性能差额。不根据数据类型强行指定模型。**主任务候选由现象或需求驱动，不是从算法名反推数据**。
