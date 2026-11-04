@@ -47,7 +47,7 @@
 
 **活动01→02连续执行**：`USER_SCOPE → DIRECTION_DEFINED → DATA_PORTFOLIO → PRE_DOWNLOAD_PLAN`（理论任务可为PROOF_PATH）。已有授权则Agent直接获取/复用数据并完成文件级验收；无授权则发 `DOWNLOAD_READY_NOTICE`，停在 `WAITING_FOR_DOWNLOAD_AUTH`（兼容旧 `DOWNLOAD_READY_WAITING_FOR_USER`），不另问选哪个库。下载未成功/未完整记 `WAITING_FOR_DATA`；达到 `DATA_ACQUIRED_VERIFIED` 才进行活动02真实画像和后续正式任务开发。选库本身并非下载、安装、拟合或训练授权。
 
-**选库新增科学辨识力维度（不替代真值/许可/下载合同）**：在确定D1时，按[HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md) B，用一句候选主张、最强竞争解释与独立因素交叉情况比较候选库。重点看设备×受试者、时间×类别、实验条件×测量/标签来源等是否严重绑定，独立group数是否真实、预测前信息/K是否合法、未触碰确认资源是否适配。数据可训练**不等于**可辨识声称的因果机制；如果交叉缺失，只能提出预测性边界或标`UNIDENTIFIABLE_WITH_CURRENT_DATA`，不能把相关性写成因果。下载前只用可信官方元信息，已授权下载/验收后才查合法DEV；确认集不参与筛库/择题。用`CLAIM | COMPETING_EXPLANATION | REQUIRED_CONTRAST | INDEPENDENT_N | CONFOUNDING | CONFIRMATION_PATH | UNKNOWN`作为候选比较补充，不设新评分或强制多库。
+**选库新增科学辨识力维度（不替代真值/许可/下载合同）**：按需对已获许可的DEV或公开元数据运行 `python -m core.scientific_discriminability --metadata METADATA.json --factor-a ... --factor-b ... --group ... --role DEV`；它仅做因素交叉/独立组的描述性检查，不能自动推断因果、科学价值或本地访问权限。先核主张所必需的条件是否存在（例如设备×受试者），再考虑易下载和模型高分。无可比较数据时标UNKNOWN；无需新强制审批门。在确定D1时，按[HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md) B，用一句候选主张、最强竞争解释与独立因素交叉情况比较候选库。重点看设备×受试者、时间×类别、实验条件×测量/标签来源等是否严重绑定，独立group数是否真实、预测前信息/K是否合法、未触碰确认资源是否适配。数据可训练**不等于**可辨识声称的因果机制；如果交叉缺失，只能提出预测性边界或标`UNIDENTIFIABLE_WITH_CURRENT_DATA`，不能把相关性写成因果。下载前只用可信官方元信息，已授权下载/验收后才查合法DEV；确认集不参与筛库/择题。用`CLAIM | COMPETING_EXPLANATION | REQUIRED_CONTRAST | INDEPENDENT_N | CONFOUNDING | CONFIRMATION_PATH | UNKNOWN`作为候选比较补充，不设新评分或强制多库。
 
 ## 2. 数据候选比较：形成一个可执行推荐
 
@@ -77,7 +77,7 @@
 - NEIGHBORS：最接近 1–2 项近邻及可能差额；创新未证记 VALUE_UNVERIFIED
 - MOST_DANGEROUS_UNKNOWN：当前最有决策价值的风险与廉价检查
 - LADDER_POTENTIAL（可选）：一个较稳妥且可检验的任务＋一个科研潜力延伸，各自所需标签/部署信息；未核实记 HYPOTHESIZED，详细设计延后
-- DOWNLOAD_READY_NOTICE（仅待下载/待授权时）：逐库官方页面与核实的下载直链、需要文件/格式/版本/预计大小、用途/优先级、推荐保存目录、下载/续传方法、许可/不确定项；状态 `WAITING_FOR_DOWNLOAD_AUTH` 或 `WAITING_FOR_DATA`，没有直链记`URL_UNVERIFIED`，不编造PowerShell命令
+- DOWNLOAD_READY_NOTICE（仅待下载/待授权时）：逐库官方来源/已核实直链、必需文件/版本/规模/许可、推荐存储与资源成本、**先给用户授权选择，不附PowerShell/Agent执行命令**；获许可后再给下载/续传/校验指令；状态 `WAITING_FOR_DOWNLOAD_AUTH` 或 `WAITING_FOR_DATA`，没有直链记`URL_UNVERIFIED`，不编造PowerShell命令
 - PRE_DOWNLOAD_PLAN / RESOURCE/AUTH：研究方向与组合是否已选、每库必需文件和优先顺序、总存储/许可、分组封存、实际授权；无下载授权写WAITING_FOR_DOWNLOAD_AUTH；已授权并获取则记录DATA_MANIFEST和DATA_ACQUIRED_VERIFIED
 
 **初筛判定**：PREFERRED（风险路径更清楚、价值合理）/ EXPLORABLE（未知值得探索）/ NOT_READY（已证明的不可替代阻断）。这些是推荐等级，不是实测成功概率或科学结果；允许用户选择 EXPLORABLE。
@@ -86,7 +86,7 @@
 
 ### 方向确定后，自动选库并优先完成数据获取
 
-**活动01完成即继续选库**，无须问“是否开始数据库选择”。核实官方版本、许可、必需文件/规模/下载次序与可访问路径。**有真实下载授权，Agent同一轮优先执行完整获取、校验与manifest登记**，不把下载通知当成交付终点；若无法操作或未获授权，输出 `DOWNLOAD_READY_NOTICE`（官方链接、文件、保存目录、已核实的命令、恢复方法）并停在对应等待状态。`SOURCE_UNVERIFIED/URL_UNVERIFIED`须如实标记，不编造直链或文件数量。
+**活动01完成即继续选库**，无须问“是否开始数据库选择”。核实官方版本、许可、必需文件/规模/下载次序与可访问路径。**有真实下载授权，Agent同一轮优先执行完整获取、校验与manifest登记**，不把下载通知当成交付终点；若无法操作或未获授权，输出 `DOWNLOAD_READY_NOTICE`（官方链接、必需文件、容量、存储与授权选择；**禁止提前给执行指令**）并停在对应等待状态。`SOURCE_UNVERIFIED/URL_UNVERIFIED`须如实标记，不编造直链或文件数量。
 
 ## 4. 数据准备：实证任务正式开始前的文件级依赖（不是科研价值准入门槛）
 
