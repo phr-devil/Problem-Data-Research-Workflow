@@ -4,7 +4,9 @@
 
 当出现 `Oracle 有空间但实际策略无收益` 或零标签决策不可辨识时，按需做**信息条件三分诊断**（可纠正性/决策前可辨识性/合法实际收益），优先检查能否用现实中可负担的 K-shot/一次标定重新界定问题；不得借新 Task 把原任务写成成功。经验索引：[SAFE-Gait/APACE](LESSONS/SAFE_GAIT_APACE.md)。工具 `core.cli information-check` 仅作只读建议，不拟合/批准训练。
 
-**v1.11 默认成果目标（写作锁下仅指证据目标）：以合理总成本形成真实、完整、能支撑合适专业期刊文章的科研证据，而非最大化突破幅度、网络复杂度或目标IF。** 选题时仅低成本查看真实同类论文的贡献/核心实验；首个可信Run和每次关键负Pilot后，先检查是否已有一项足够明确的小贡献以及最小论文缺口。若有可完成的论文路线，**优先补主张需要的公平对照、独立证据和科研成果总结；不得提前生成论文结构或正文**，不默认`UP/SCIENCE_UPGRADE`。可选高影响探索须有明确投稿价值/应用需求、额外成本合理或用户指示，不能覆盖已保留的窄论文路线。`PAPER_COMPLETION_PRIORITY`只是当前行动建议，非自动状态、授权或可投稿认证。[PAPER_FIRST.md](PAPER_FIRST.md) / [VENUE_STRATEGY.md](VENUE_STRATEGY.md)。
+**v1.11 默认成果目标（写作锁下仅指证据目标）：以合理总成本形成真实、完整、能支撑合适专业期刊文章的科研证据，而非最大化突破幅度、网络复杂度或目标IF。** 选题时仅低成本查看真实同类论文的贡献/核心实验；首个可信Run和每次关键负Pilot后，先检查是否已有一项足够明确的小贡献以及最小论文缺口。若有可信Q2+潜力路线，**优先补主张需要的公平对照、独立证据和科研成果总结；不得提前生成论文结构或正文**，不默认`UP/SCIENCE_UPGRADE`。可选高影响探索须有明确投稿价值/应用需求、额外成本合理或用户指示，不能覆盖已保留的窄论文路线。`PAPER_COMPLETION_PRIORITY`只是当前行动建议，非自动状态、授权或可投稿认证。[PAPER_FIRST.md](PAPER_FIRST.md) / [VENUE_STRATEGY.md](VENUE_STRATEGY.md)。
+
+**统一科研成功目标**：按[Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)，证据充分且具名JCR Q2+相关期刊有同类发表先例时可评为`Q2_POTENTIAL_SUPPORTED`（科研成功，优先争取Q1）；**实际录用非必要条件，不能保证**。普通专业期刊可发、自定义B/C、PAPER_PATH_CANDIDATE及DRAFTABLE均非成功。低于Q2且升级路线已耗尽时可建议失败收束；早期未知不自动失败。期刊类别与年度按[VENUE_STRATEGY.md](VENUE_STRATEGY.md)核实。
 
 **最高优先级：论文写作锁**：见 [WRITING_GATE.md](WRITING_GATE.md)。在科研成果总结经用户明确审查、且用户另外明确授权本项目论文写作之前，始终 `WRITING_LOCKED`。可信Run、PAPER_PATH_CANDIDATE、DRAFTABLE、确认成功或科研阶段06不会解锁；仅能评估最小可发表证据及补实验，不得自动写论文提纲、章节、摘要或初稿。授权研究实验不受写作锁影响。
 
@@ -15,7 +17,7 @@
 
 - **外循环 A｜研究机会**：01 在本轮`USER_SCOPE`内按[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md)自适应广搜/深查热点与空白、核最强近邻，明确「方向不限」才跨学科推荐1–3个AREA_DATA组合；**先核一个有合法评价路径的主库D1，外部/备用库根据独立验证、不同失败前提和成本按需配置，不凑数量**，核跨库标签/科学命题可比性，**第一步确定方向后AI立即自主筛库，不等用户再选数据库** → 完成PRE_DOWNLOAD_PLAN → 有下载授权时先获取/验收本轮必需原始数据（已有完整副本则复用），无授权时输出DOWNLOAD_READY_NOTICE并等待 → `DATA_ACQUIRED_VERIFIED` 后02按[DATA_INSIGHT.md](DATA_INSIGHT.md)在开发池核真实现象与假象 → 03 接[TASK_EXPLORATION.md](TASK_EXPLORATION.md)选具体可检验TASK与最廉价判别，按需构建L0–L3任务阶梯。一个有依据的机会就可开展有界实验；**不要求完整方法假说**、穷尽任务、复现所有强基线或先证明算法增益。[DATA_DISCOVERY.md](DATA_DISCOVERY.md) / [TASK_EXPLORATION.md](TASK_EXPLORATION.md) / [TASK_LADDER.md](TASK_LADDER.md)。
 - **内循环 B｜算法实证**：04 默认先复用/建立同信息同K的强简单参照，定位真正可学信号和剩余误差，再按需升级；并行考虑`RELIABLE_TRACK`（稳妥性能/现象）和`NOVELTY_TRACK`（机制/规律探索），在已授权范围内按证据动态投入，**不要求双模型同时训练**；新机制先有可区分假设，按症状修复与学习负结果。首次负Pilot不自动STOP，不为GPU占用率扩大无信息实验。[EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md)；真正需要新方法/工程迭代时按需读[ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)选择`BASELINE/SIMPLE_IMPROVEMENT/MECHANISM_CANDIDATE/PAPER_EVIDENCE`，明确可证伪预言、受保护边界和Agent执行结果。这里是科研路线选择，不增加第二个主控或声称已具备GPU执行器。
-- **外循环 C｜科研价值**：05 与04并行更新`CLAIM_EVIDENCE_MAP`，区分稳健性能、能力/机制/规律三类独立贡献候选及证据缺口；有最低可信论文路线再按信息价值科学升级；可继续当前层级、`UP`挑战更难信息条件、`DOWN`使用更现实的合法标定、`NARROW`收窄主张，或`LATERAL`比较备用科研任务。06 只有冻结 Claim/方法/协议并获授权后才严格独立确认。层级切换必须更新Claim与公平评价，**L0/L1没有天然论文保底**。[TASK_LADDER.md](TASK_LADDER.md) / [CONFIRMATION.md](CONFIRMATION.md)。
+- **外循环 C｜科研价值**：05 与04并行更新`CLAIM_EVIDENCE_MAP`，区分稳健性能、能力/机制/规律三类独立贡献候选及证据缺口；有Q2+潜力候选路线时按信息价值科学升级，不因普通期刊可发提前停止；可继续当前层级、`UP`挑战更难信息条件、`DOWN`使用更现实的合法标定、`NARROW`收窄主张，或`LATERAL`比较备用科研任务。06 只有冻结 Claim/方法/协议并获授权后才严格独立确认。层级切换必须更新Claim与公平评价，**L0/L1没有天然论文保底**。[TASK_LADDER.md](TASK_LADDER.md) / [CONFIRMATION.md](CONFIRMATION.md)。
 
 **数据先行是执行依赖，不是新增科研淘汰门槛**：新实证任务的顺序是 `方向→自主选库→完整必需原始文件下载/本地复用→文件级验收/确认池封存→数据观察→具体任务→基线/算法`。确定方向不等于许可下载；无授权停在 `WAITING_FOR_DOWNLOAD_AUTH`，源不可用或文件不完整停在 `WAITING_FOR_DATA`，先交付可执行获取/续传方案，不把缺数据解释为任务科学失败。`DATA_ACQUIRED_VERIFIED` 只证明约定文件完整且可访问，不能取代标签/独立组/可见信息的科学审计。理论证明、无需静态数据的仿真，或已有完整可信数据不重复下载；大库只有在用户明确批准收窄研究数据范围、同步收窄主张后，才可将该预定义范围视为完整，不能默认拿样例代替全库。**未就绪时禁止正式TASK冻结、基线拟合、算法训练和基于数据的结果宣称；不依赖真实数据的文献核查、假说草拟、下载脚本可提前做**。
 
