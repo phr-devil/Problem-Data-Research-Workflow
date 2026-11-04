@@ -4,7 +4,9 @@
 
 当出现 `Oracle 有空间但实际策略无收益` 或零标签决策不可辨识时，按需做**信息条件三分诊断**（可纠正性/决策前可辨识性/合法实际收益），优先检查能否用现实中可负担的 K-shot/一次标定重新界定问题；不得借新 Task 把原任务写成成功。经验索引：[SAFE-Gait/APACE](LESSONS/SAFE_GAIT_APACE.md)。工具 `core.cli information-check` 仅作只读建议，不拟合/批准训练。
 
-**v1.11 默认成果目标：以合理总成本形成真实、完整、可投给合适专业期刊的论文，而非最大化突破幅度、网络复杂度或目标IF。** 选题时仅低成本查看真实同类论文的贡献/核心实验；首个可信Run和每次关键负Pilot后，先检查是否已有一项足够明确的小贡献以及最小论文缺口。若有可完成的论文路线，**优先补稿件必须的公平对照、独立证据和论文结构**，不默认`UP/SCIENCE_UPGRADE`。可选高影响探索须有明确投稿价值/应用需求、额外成本合理或用户指示，不能覆盖已保留的窄论文路线。`PAPER_COMPLETION_PRIORITY`只是当前行动建议，非自动状态、授权或可投稿认证。[PAPER_FIRST.md](PAPER_FIRST.md) / [VENUE_STRATEGY.md](VENUE_STRATEGY.md)。
+**v1.11 默认成果目标（写作锁下仅指证据目标）：以合理总成本形成真实、完整、可投给合适专业期刊的论文，而非最大化突破幅度、网络复杂度或目标IF。** 选题时仅低成本查看真实同类论文的贡献/核心实验；首个可信Run和每次关键负Pilot后，先检查是否已有一项足够明确的小贡献以及最小论文缺口。若有可完成的论文路线，**优先补主张需要的公平对照、独立证据和科研成果总结；不得提前生成论文结构或正文**，不默认`UP/SCIENCE_UPGRADE`。可选高影响探索须有明确投稿价值/应用需求、额外成本合理或用户指示，不能覆盖已保留的窄论文路线。`PAPER_COMPLETION_PRIORITY`只是当前行动建议，非自动状态、授权或可投稿认证。[PAPER_FIRST.md](PAPER_FIRST.md) / [VENUE_STRATEGY.md](VENUE_STRATEGY.md)。
+
+**最高优先级：论文写作锁**：见 [WRITING_GATE.md](WRITING_GATE.md)。在科研成果总结经用户明确审查、且用户另外明确授权本项目论文写作之前，始终 `WRITING_LOCKED`。可信Run、PAPER_PATH_CANDIDATE、DRAFTABLE、确认成功或科研阶段06不会解锁；仅能评估最小可发表证据及补实验，不得自动写论文提纲、章节、摘要或初稿。授权研究实验不受写作锁影响。
 
 ## 1. 三个决策循环（六项活动，不是六道审批门）
 
@@ -19,7 +21,7 @@
 
 **单次循环可跳转**：已有 STATE/Run 直接续做；低门槛 EXPLORE、中门槛追加投入、高门槛正式确认。**当前最优选择并不由L2的名称决定**：L1若科学价值更明确可先研究L1；L3若有廉价关键正控可先尝试L3。初始 UNKNOWN 不自动否决；论文确认仍核独立真值、时间因果、公平强基线、独立组、效应不确定性与直接近邻。
 
-**增量论文路由（不是新状态/审批门）**：可信开发结果出现后，按 [PAPER_FIRST.md](PAPER_FIRST.md) 检查是否存在**至少一项**具名近邻尚未回答、可证伪且有独立确认路径的贡献：包括适用边界、同信息条件下局部增益、资源/标定成本—性能权衡、可解释负结果、或有价值的已知组件组合。符合则记`PAPER_PATH_CANDIDATE`并安排最少必要证据，可同步构思文章；不以全数据集SOTA、新网络、多项贡献或预设全量跨库作为门槛。没有实质新意保留`NO_INDEPENDENT_CLAIM`；论文确认质量不降低。工程资产、增量贡献与高影响扩展必须分开判断；按需使用 [VENUE_STRATEGY.md](VENUE_STRATEGY.md) 的 **S/A/B/C稿件潜力（NONE/UNKNOWN）** 与 **冲刺/主投/保守期刊策略** 两轴，既不能把B/C档小创新自动判STOP，也不能把分档当官方JCR/CAS分区、客观质量分或录用概率。该档次只是阶段性建议、不是机器状态或新审批门。
+**增量论文路由（不是新状态/审批门）**：可信开发结果出现后，按 [PAPER_FIRST.md](PAPER_FIRST.md) 检查是否存在**至少一项**具名近邻尚未回答、可证伪且有独立确认路径的贡献：包括适用边界、同信息条件下局部增益、资源/标定成本—性能权衡、可解释负结果、或有价值的已知组件组合。符合则记`PAPER_PATH_CANDIDATE`并安排最少必要证据，可同步记录科研主张和证据缺口（非论文提纲/正文）；不以全数据集SOTA、新网络、多项贡献或预设全量跨库作为门槛。没有实质新意保留`NO_INDEPENDENT_CLAIM`；论文确认质量不降低。工程资产、增量贡献与高影响扩展必须分开判断；按需使用 [VENUE_STRATEGY.md](VENUE_STRATEGY.md) 的 **S/A/B/C稿件潜力（NONE/UNKNOWN）** 与 **冲刺/主投/保守期刊策略** 两轴，既不能把B/C档小创新自动判STOP，也不能把分档当官方JCR/CAS分区、客观质量分或录用概率。该档次只是阶段性建议、不是机器状态或新审批门。
 
 ## 2. 单入口事件路由
 
@@ -35,7 +37,7 @@
 | TASK需要真实编码/评价器尚未固定 | [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)；可用[core/README.md](core/README.md)只读TaskSpec检查 | 合法TaskSpec／保护范围／评价器指纹或明确UNKNOWN（不自动授权拟合） |
 | 真实DEV残差已核、需要设计新算法或连续工程迭代 | [ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)（按需） | 误差/合法杠杆/直接简单替代/一条不同预言、最小正控、授权内执行结果和论文机会 |
 | 有 TASK/基线/负 Pilot/普通代码故障 | [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md)；写代码才读 [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) | 有效 Run、定向修复或 NEXT_PROBE |
-| 可信Run/关键负Pilot/拟继续堆模型，需要判断“现有结果是否已足够做一篇论文” | [PAPER_FIRST.md](PAPER_FIRST.md) | 最小可投稿论文轮廓、必需证据缺口、补证据vs升级模型的选择 |
+| 可信Run/关键负Pilot/拟继续堆模型，需要判断“现有结果是否已足够做一篇论文” | [PAPER_FIRST.md](PAPER_FIRST.md) | 可发表主张的证据地图（非论文提纲）、必需证据缺口、补证据vs升级模型的选择 |
 | 有可信结果、需要收敛论文贡献或判断创新价值 | [PAPER_FIRST.md](PAPER_FIRST.md)；确需转任务才读[TASK_EXPLORATION.md](TASK_EXPLORATION.md) | CLAIM_EVIDENCE_MAP、具名近邻差额与下一必要实验 |
 | 有可信增量Claim且需判断稿件档次/目标期刊 | [VENUE_STRATEGY.md](VENUE_STRATEGY.md)（仅按需） | 非强制的稿件潜力、期刊适配梯队、关键证据缺口；不预测录用率 |
 | 正式科学确认、公开主张、投稿 | [CONFIRMATION.md](CONFIRMATION.md) | 预冻结协议、独立证据或 CONFIRMATION_UNAVAILABLE |
@@ -52,7 +54,7 @@
 
 每次只交当前阻碍所需的最少字段；授权、证据、机制/任务/区域级止损仍由本文件统一决定。
 
-**论文优先决策**：有效Run形成后，且尤其在拟启动高成本机制/多库训练、拟HOLD/PIVOT时，对照现有Claim做一次`PAPER_COMPLETION_REVIEW`（决策动作名，非CLI状态）：`ONE_CLAIM | NEAREST_GAP | CORE_RESULT | REQUIRED_EVIDENCE_GAPS (最多3项) | LOWEST_COST_PATH | CONTINUE_ALGO_ONLY_IF_WORTH_IT`。若最小论文路线可信且补证据更划算，优先论文路线；只有必要核心证据不可获得/近邻完全覆盖，才优先不同任务或机制。无新结果不反复复核；已完成的核查不重做。不能把开发集高分误当确认。
+**论文优先决策**：有效Run形成后，且尤其在拟启动高成本机制/多库训练、拟HOLD/PIVOT时，对照现有Claim做一次`PAPER_COMPLETION_REVIEW`（决策动作名，非CLI状态）：`ONE_CLAIM | NEAREST_GAP | CORE_RESULT | REQUIRED_EVIDENCE_GAPS (最多3项) | LOWEST_COST_PATH | CONTINUE_ALGO_ONLY_IF_WORTH_IT`。若最小论文路线可信且补证据更划算，优先科研证据补齐（`EVIDENCE_COMPLETION_PRIORITY`，不授权写稿）；只有必要核心证据不可获得/近邻完全覆盖，才优先不同任务或机制。无新结果不反复复核；已完成的核查不重做。不能把开发集高分误当确认。
 
 ## 3. 唯一下一行动算法（不机械全跑检查表）
 
