@@ -35,6 +35,8 @@
 
 **Q2科学竞争力优先的验证指标（v1.11历史指标已保留）**：真实历史冻结节点或前瞻项目比较：最小投稿价值Claim识别率、关键核心证据缺口正确率、合理的论文完成路线、误报投稿就绪率、首次完整可信稿件的时间/Token/GPU/人工成本，以及实际投稿/返修/接收（如已发生）。不得用“建议写论文”的次数代替已完成投稿；实际样本少或未追踪时标`NOT_MEASURED`。针对小发现要同时测过早弃项与选择偏差导致的假阳性。
 
+**新建可执行的科学决策反例回放（工程基线，非真实科研结论）**：`python -m core.science_choice_replay --cases evals/science_choice_cases.synthetic.json --blind` 只向被测Agent展示案例事实，隐藏预设参考；将其回答按 `case_id | selected_choice | noticed_risks | next_action_type | q2_decision` 保存，再用 `--responses RESPONSES.json` 比较是否错选便宜低价值候选、遗漏设备/受试者混杂、把探索切片当确认、缺授权却拟训练、伪称Q2成功。**合成案例只验证评测器可发现这些违例，实际效果仍 `NOT_MEASURED`**。后续历史盲回放需在Agent决策前冻结可见信息、模型/预算/权限，同一方法独立裁定可接受候选及风险，不能利用结局回填专家答案；无真实冻结证据记`NOT_REPLAYABLE`，不得冒充提高Q2成功率。
+
 ## v1.7 · PD-RW / RWF / 协同的最低成本真实对照
 
 用 **3–5个具有可核查时间冻结点** 的历史项目做探索性盲回放，若缺冻结证据标`NOT_REPLAYABLE`，不可把事后复盘充作盲法。三方案使用同一LLM、真实授权、原始数据可见性、工具能力、Token/GPU/人力预算；盲评下一实验的可证伪性、是否能避免伪GO/过早STOP、论文贡献潜力与成本。对开发Run另核**可信指标复算通过率**及合法信息、同K/评价一致性。只有执行过真实实验才能统计“超过公平强基线比例”，单纯决策回放不得冒充端到端算法成功率；小样本不宣称统计显著。对每一方案记录`frozen_sha | condition | next_probe | decision_change | validity | verified_gain | independent_claim | tokens | gpu_hours`。正式确认需独立未触碰资源，CI/场景库不替代科研验证。
