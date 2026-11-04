@@ -16,7 +16,7 @@ class HighValueDesignTests(unittest.TestCase):
 
     def test_rules_not_just_easy_performance(self):
         doc = (ROOT / "HIGH_VALUE_RESEARCH_DESIGN.md").read_text(encoding="utf-8")
-        for marker in ("NAMED_NEAREST", "COMPETING", "CONFOUNDING",
+        for marker in ("NAMED_NEAREST", "ALTERNATIVE", "CONFOUNDING",
                        "DISTINCT_PREDICTIONS", "Q2", "WRITING_GATE.md",
                        "NEXT_ACTION_POLICY.md", "Optuna"):
             with self.subTest(marker=marker):
