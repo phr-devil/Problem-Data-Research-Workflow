@@ -44,6 +44,8 @@
 - RESEARCH_SUMMARY_REF: <成果总结路径/版本；否则 NONE>
 - SUMMARY_USER_REVIEW: <PENDING / REVIEWED + 可核查用户原始确认消息；缺失默认 PENDING>
 - MANUSCRIPT_WRITE_AUTH: <LOCKED / APPROVED + 用户针对本项目/主张的明确写作指令来源；默认 LOCKED；参见 WRITING_GATE.md>
+- SCIENCE_RESULT_HARVEST: <可选：TASK/PROTOCOL/Run/组级指标/搜索历史指纹、已有结果挖掘索引；无变化复用；子群规律仅EXPLORATORY>
+- CONTRIBUTION_EVIDENCE_BRIEF: <可选：不同Claim候选、原始正/负结果、最近邻差额、ARTICULATION_GAP/EVIDENCE_GAP/BOTH/NONE、非稿件成果证据简报路径>
 - SCIENCE_UPGRADE_AUDIT: <可选：Run/最近邻差额/竞争解释/区别性预测/成本/授权/UPGRADE_PILOT|EVIDENCE_ONLY|KEEP_ORIGINAL|UNKNOWN；非写作授权>
 - SCIENTIFIC_DISCRIMINABILITY: <可选DEV/公开元数据因素交叉诊断路径；结构性发现≠因果或独立确认>
 - HIGH_VALUE_RESEARCH_DESIGN: <按需：重要问题/具名近邻知识差额/科学辨识力与混杂/竞争性假设/不同预言/最低决定性测试；UNKNOWN保留；见HIGH_VALUE_RESEARCH_DESIGN.md>

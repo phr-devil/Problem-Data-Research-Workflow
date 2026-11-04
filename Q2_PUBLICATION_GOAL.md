@@ -4,6 +4,8 @@
 
 **可选结构预检**：当确需评估 `Q2_POTENTIAL_SUPPORTED`，可复用已核证据填[Q2_EVIDENCE_PACKET.example.json](Q2_EVIDENCE_PACKET.example.json)同型的少量引用，并运行 `python -m core.q2_preflight PACKET.json`；该工具只检查证据指针、JCR年度/类别字段及Q1/Q2候选是否齐全，返回 `READY_FOR_HUMAN_SCIENTIFIC_AND_JCR_REVIEW` 仍**不是**“Q2潜力已确认”，不得自动赋 `Q2_POTENTIAL_SUPPORTED`。未经原文核查、期刊来源验证、领域独立审查的资料只能保持UNKNOWN。下一步技术核查/用户选择的输出遵守[NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)。
 
+**Q2目标的防遗漏检查（非新审批门）**：有多个可信Run或重要负结果时，按需参考[SCIENCE_RESULT_HARVEST.md](SCIENCE_RESULT_HARVEST.md)，检查是否有比第一个漂亮总体分数更有科研价值的能力、规律或资源权衡；科研成果总结准确提炼已证实贡献，但不能把未完成的消融/独立验证用更好表达“提升”为Q2证据。相同工件复用此前判断；不要为每个普通Run重新评刊。
+
 ## 1. 分清三个问题
 
 - **科研事实**：合法真实Run、明确独立科学贡献、可复核效应和对照是什么？负实验可是真实且有价值的研究结果。

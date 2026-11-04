@@ -2,6 +2,8 @@
 
 > **优先级：所有 PD-RW Agent、Skill、路由、旧项目 STATE 和稿件潜力评估均须遵守。** 这是写作权限规则，不是额外科研实验审批门。
 
+**科学贡献提炼不等于论文写作**：在`WRITING_LOCKED`期间，允许按[SCIENCE_RESULT_HARVEST.md](SCIENCE_RESULT_HARVEST.md)整理已有Run、负结果、候选科学主张、最强反解释及证据缺口，生成结构化非稿件`CONTRIBUTION_EVIDENCE_BRIEF`。禁止在未经两道真实用户授权前写投稿标题、摘要、论文结构、引言/讨论、正文或稿件式图版。科研总结更准确不等于科学证据更充分。
+
 ## 原则与两道门禁
 
 默认 `WRITING_LOCKED`。**论文可发表性 / DRAFTABLE / PAPER_PATH_CANDIDATE / CONFIRMED_CLAIM / 实验完成 ≠ 写作授权。** 即使用户遗漏提醒、Agent 判断论文已经足够成熟，仍不得自动进入写作。

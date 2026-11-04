@@ -11,6 +11,8 @@
 
 **PD-RW→RWF 科学决策交接（可选）**：RWF 的 `python -m adapters.science_handoff --project PROJECT --packet PROJECT/SCIENCE_HANDOFF.json` 接受研究问题、重要性、具名原文近邻、竞争解释、区别性预测、数据混杂、独立组、合法信息、下一决定性实验及1–8个已许可 DEV/公开元数据 SHA-256来源；详见 [SCIENTIFIC_HANDOFF.example.json](../SCIENTIFIC_HANDOFF.example.json)。其哈希PASS不代表科学事实、数据合法性、Q2或用户授权；RWF的便宜Probe顺序不能反向覆盖PD-RW的科学方向选择。
 
+**已有Run科学信息挖掘（只读、非科研认证）**：`python -m core.result_harvest --packet DEV_EVIDENCE.json` 对已合法整理的同任务、同K、同协议和同metric的DEV配对组级指标输出条件差异、组间异质性与实测资源权衡线索。输入来源、独立组和数据许可来自调用者声明，不重算指标、不提供p值、不证明因果或期刊水平。带上次`previous_packet_sha256`可在同内容下返回`UNCHANGED_INPUT_REUSE`，减少重复审查。见[SCIENCE_RESULT_HARVEST.md](../SCIENCE_RESULT_HARVEST.md)。
+
 ## 最小使用
 
 ```bash

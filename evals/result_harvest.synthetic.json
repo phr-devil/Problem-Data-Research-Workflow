@@ -1,0 +1,46 @@
+{
+  "role": "DEV",
+  "task_id": "SYNTHETIC_TASK",
+  "protocol_id": "SYNTHETIC_PROTOCOL",
+  "metric": "accuracy",
+  "higher_is_better": true,
+  "group_unit": "subject",
+  "baseline_run_ref": "SYNTHETIC_RUN_BASE",
+  "champion_run_ref": "SYNTHETIC_RUN_CHAMP",
+  "selection_history_ref": "SYNTHETIC_SELECTION_HISTORY",
+  "matched_information_and_evaluator": true,
+  "observations": [
+    {
+      "group": "S1",
+      "condition": "device_A",
+      "baseline": 0.6,
+      "champion": 0.7
+    },
+    {
+      "group": "S2",
+      "condition": "device_A",
+      "baseline": 0.62,
+      "champion": 0.72
+    },
+    {
+      "group": "S3",
+      "condition": "device_B",
+      "baseline": 0.65,
+      "champion": 0.62
+    },
+    {
+      "group": "S4",
+      "condition": "device_B",
+      "baseline": 0.7,
+      "champion": 0.6
+    }
+  ],
+  "measured_costs": [
+    {
+      "name": "calibration_labels",
+      "unit": "labels",
+      "baseline": 20,
+      "champion": 5
+    }
+  ]
+}

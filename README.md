@@ -20,6 +20,8 @@
 
 **论文写作锁（强制）**：[WRITING_GATE.md](WRITING_GATE.md)。默认 `WRITING_LOCKED`：必须先有科研成果总结和用户审查，再有独立明确的写作授权；可发表性、`DRAFTABLE`、确认成功和自动路由均不会启动论文提纲/初稿。证据补齐、科研验证与普通诊断不受影响。
 
+**已有科学价值主动挖掘与贡献充分提炼**：[SCIENCE_RESULT_HARVEST.md](SCIENCE_RESULT_HARVEST.md)。重要Run/负结果/拟HOLD/科研总结前复用现有预测、组级差异和实际成本寻找未发现的科学规律线索；比较不同贡献再选最有价值的主张。区分`ARTICULATION_GAP`（已存在可信证据但科学说明不充分）与`EVIDENCE_GAP`（关键实验还缺），避免反复GPU训练或用漂亮修辞替代验证。可选只读`python -m core.result_harvest --packet DEV_EVIDENCE.json`仅做探索性组级描述，不证明Q2/因果/独立确认；默认写作锁不变。
+
 **完成算法后的科学增值（可选）**：[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)。复用原始Run、错误结构及具名近邻，按新证据及现有授权做一项或一组有界且有价值的证伪；无新意则保留成果并总结，写作锁继续生效。
 
 **高价值科研决策的统一优先级**：重要知识差额/可辨识证据优先于训练难易与小论文完成性；Q2+潜力是项目成功标准，期刊录用不是必要条件。科学问题选择由PD-RW决定，RWF只建议实验动作，不反向以低成本排序覆盖选题。
