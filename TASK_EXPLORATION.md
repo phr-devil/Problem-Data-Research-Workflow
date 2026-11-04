@@ -19,6 +19,8 @@
 
 **混杂/证据优先修正**：仅当观察与目标直接相关，才需要深入其诊断。图表/统计显著、Cleanlab疑似错标、外观或embedding分离本身不证明独立科研贡献。数据缺陷优先修复，不能重新包装为“创新现象”。
 
+**高质量科学问题合同（不是新的硬审批表）**：按[HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md) C，研究问题须在证据足够时能说清`IMPORTANT_QUESTION | NAMED_NEAREST_GAP | PRIMARY_CLAIM | STRONGEST_ALTERNATIVE | DIFFERENT_PREDICTIONS | MINIMUM_DISCRIMINATING_TEST | CONFIRMATION_PATH | GAP_TO_Q2`。若两个解释都预测相同F1，现有实验不能识别机制；优先改成有区分性的受控对照，或只主张可验证的新能力/成本—性能规律，**不伪造因果故事**。不能因为数据最容易训练，就把普通小幅性能提高当最有价值问题；也不强迫所有方向都提出物理机制。Task冻结之前检查独立单位和合法输入、已有DEV选择史；无确认能力记UNKNOWN而非自动STOP。
+
 ## 1. 系统化任务机会扫描（已有一个可信机会就开展实证）
 
 **最小可学问题默认优先**：先问差异是否可重复、简单合法校准能否纠正、强简单方法究竟在哪些条件下失败。优先考虑统计、规则、线性或轻量模型与同K/同可见信息参照；确实需要复杂时空表达也可直接探索，但先设计廉价可证伪判别。分开记录LEGAL_SIGNAL（输入能否辨识）、MINIMUM_RELIABLE_RESULT（可信收益/规律）和MINIMUM_INDEPENDENT_CLAIM（近邻未覆盖的新知识/能力）；未知可探索，不能凭Oracle空间或开发集高分宣布可学/创新。
