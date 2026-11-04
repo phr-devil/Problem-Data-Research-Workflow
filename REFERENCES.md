@@ -15,6 +15,18 @@
 | [Cleanlab](https://github.com/cleanlab/cleanlab) | 标签质量、数据问题定位 | 开放观察时审查标签/数据真实性 | 模型标记的可疑标签不等于真实标注错误 |
 | [DVC](https://github.com/treeverse/dvc) | 原始数据和实验版本可追溯 | manifest、data_version、split/protocol_id、增量复跑 | 不强制安装 DVC 或重复存储大型数据 |
 
+## 算法完成后的科学升级：具体开源机制借鉴
+
+| 项目 | 迁移到[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md) | 限制 |
+|---|---|---|
+| [WILDS](https://github.com/p-lambda/wilds) / [DomainBed](https://github.com/facebookresearch/DomainBed) | 固定独立群体、环境、选模协议及跨域验证 | DomainBed 已归档；不能在测试域选模或事后筛组充当确认 |
+| [SHAP](https://github.com/shap/shap) / [Captum](https://github.com/meta-pytorch/captum) | 归因提出不同于简单解释的可证伪预测 | 归因不等于因果识别 |
+| [DoWhy](https://github.com/py-why/dowhy) | 因果假设、竞争解释与反驳性分析 | 观察关联不能单独证明机制 |
+| [RobustBench](https://github.com/RobustBench/robustbench) | 固定现实相关扰动与可比性 | 某种扰动稳健不等于一般真实鲁棒性 |
+| [Cleanlab](https://github.com/cleanlab/cleanlab) / [Evidently](https://github.com/evidentlyai/evidently) | 疑似标签、漂移、组级异常的低成本诊断 | 疑点非真值，漂移不等于性能损失 |
+
+仅借概念，不安装、复制代码或把Star视为发文保证。
+
 ## 活动02–03：数据现象与任务发现（设计借鉴，不要求安装）
 
 | 官方开源项目 | 能力及本章迁移点 | 注意 |
