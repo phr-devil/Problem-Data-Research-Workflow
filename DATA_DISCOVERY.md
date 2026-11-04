@@ -47,6 +47,8 @@
 
 **活动01→02连续执行**：`USER_SCOPE → DIRECTION_DEFINED → DATA_PORTFOLIO → PRE_DOWNLOAD_PLAN`（理论任务可为PROOF_PATH）。已有授权则Agent直接获取/复用数据并完成文件级验收；无授权则发 `DOWNLOAD_READY_NOTICE`，停在 `WAITING_FOR_DOWNLOAD_AUTH`（兼容旧 `DOWNLOAD_READY_WAITING_FOR_USER`），不另问选哪个库。下载未成功/未完整记 `WAITING_FOR_DATA`；达到 `DATA_ACQUIRED_VERIFIED` 才进行活动02真实画像和后续正式任务开发。选库本身并非下载、安装、拟合或训练授权。
 
+**选库新增科学辨识力维度（不替代真值/许可/下载合同）**：在确定D1时，按[HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md) B，用一句候选主张、最强竞争解释与独立因素交叉情况比较候选库。重点看设备×受试者、时间×类别、实验条件×测量/标签来源等是否严重绑定，独立group数是否真实、预测前信息/K是否合法、未触碰确认资源是否适配。数据可训练**不等于**可辨识声称的因果机制；如果交叉缺失，只能提出预测性边界或标`UNIDENTIFIABLE_WITH_CURRENT_DATA`，不能把相关性写成因果。下载前只用可信官方元信息，已授权下载/验收后才查合法DEV；确认集不参与筛库/择题。用`CLAIM | COMPETING_EXPLANATION | REQUIRED_CONTRAST | INDEPENDENT_N | CONFOUNDING | CONFIRMATION_PATH | UNKNOWN`作为候选比较补充，不设新评分或强制多库。
+
 ## 2. 数据候选比较：形成一个可执行推荐
 
 方向已定后，**必须自主选定首选主库D1及其所需的外部证据路线**，而非仅列候选让用户决定。可说明有争议的数据与备选理由，但不新增人为筛库确认轮次。复用 AREA_DATA_CARD，追加一行精简对照：
