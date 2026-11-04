@@ -4,6 +4,13 @@
 
 **可选只读Q2预检与Agent输出决策**：`python -m core.q2_preflight PACKET.json` 对已有科学/期刊证据包做结构检查，**不会**证明新颖性或JCR真实性；`core.action_output.output_mode` 返回“可给Agent指令/需要用户选择”的输出限制，但其参数本身不能证明真实授权。详见 [Q2成功规则](../Q2_PUBLICATION_GOAL.md)与[下一步输出规则](../NEXT_ACTION_POLICY.md)。
 
+**高价值研究辅助（只读、非自动科学认证）**：
+
+- `python -m core.scientific_discriminability --metadata DEV_METADATA.json --factor-a device --factor-b class --group subject --role DEV`：在**已获合法读取许可**的DEV或公开元数据上检查交叉/稀疏独立组；不读封存集、不拟合；输入角色为自述，不能证明因果、训练/下载授权或有效确认。
+- `python -m core.science_choice_replay --cases evals/science_choice_cases.synthetic.json --blind`：输出无专家参考的构造场景；`--responses RESPONSES.json` 审计选择、关键风险及授权/Q2误判。合成测试不是实测科研成功率。真实历史时点需独立冻结和评审。
+
+**PD-RW→RWF 科学决策交接（可选）**：RWF 的 `python -m adapters.science_handoff --project PROJECT --packet PROJECT/SCIENCE_HANDOFF.json` 接受研究问题、重要性、具名原文近邻、竞争解释、区别性预测、数据混杂、独立组、合法信息、下一决定性实验及1–8个已许可 DEV/公开元数据 SHA-256来源；详见 [SCIENTIFIC_HANDOFF.example.json](../SCIENTIFIC_HANDOFF.example.json)。其哈希PASS不代表科学事实、数据合法性、Q2或用户授权；RWF的便宜Probe顺序不能反向覆盖PD-RW的科学方向选择。
+
 ## 最小使用
 
 ```bash
