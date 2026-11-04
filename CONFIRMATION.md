@@ -1,4 +1,4 @@
-# 活动 06｜最小可投稿论文的证据确认与投稿准备
+# 活动 06｜独立科学确认及Q2证据评估（非自动撰稿）
 
 **Q2科研成功判定**：独立科学确认只证明冻结主张的有效证据；是否具备Q2+投稿潜力另由[Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)及[VENUE_STRATEGY.md](VENUE_STRATEGY.md)评估，优先Q1，**不必实际录用才算科研成功**；不自动授权写作。
 
