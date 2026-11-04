@@ -8,6 +8,8 @@
 
 **统一科研成功目标**：按[Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)，证据充分且具名JCR Q2+相关期刊有同类发表先例时可评为`Q2_POTENTIAL_SUPPORTED`（科研成功，优先争取Q1）；**实际录用非必要条件，不能保证**。普通专业期刊可发、自定义B/C、PAPER_PATH_CANDIDATE及DRAFTABLE均非成功。低于Q2且升级路线已耗尽时可建议失败收束；早期未知不自动失败。期刊类别与年度按[VENUE_STRATEGY.md](VENUE_STRATEGY.md)核实。
 
+**下一行动输出规则**：按[NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)先判用户权限与决策权；可自主技术选择/强烈建议且权限已覆盖时给一条可复制的下一步Agent指令，需用户判断/授权的新预算、确认池、任务/研究目标变化、项目级STOP或论文写作则给推荐+选项、不提前给执行指令。现有科研执行可连续处理普通问题，不必频繁询问。
+
 **最高优先级：论文写作锁**：见 [WRITING_GATE.md](WRITING_GATE.md)。在科研成果总结经用户明确审查、且用户另外明确授权本项目论文写作之前，始终 `WRITING_LOCKED`。可信Run、PAPER_PATH_CANDIDATE、DRAFTABLE、确认成功或科研阶段06不会解锁；仅能评估最小可发表证据及补实验，不得自动写论文提纲、章节、摘要或初稿。授权研究实验不受写作锁影响。
 
 ## 1. 三个决策循环（六项活动，不是六道审批门）
@@ -58,7 +60,7 @@
 
 每次只交当前阻碍所需的最少字段；授权、证据、机制/任务/区域级止损仍由本文件统一决定。
 
-**科研证据优先决策（非写作授权）**：有效Run形成后，且尤其在拟启动高成本机制/多库训练、拟HOLD/PIVOT时，对照现有Claim做一次`PAPER_COMPLETION_REVIEW`（决策动作名，非CLI状态）：`ONE_CLAIM | NEAREST_GAP | CORE_RESULT | REQUIRED_EVIDENCE_GAPS (最多3项) | LOWEST_COST_PATH | CONTINUE_ALGO_ONLY_IF_WORTH_IT`。若最小论文路线可信且补证据更划算，优先科研证据补齐（`EVIDENCE_COMPLETION_PRIORITY`，不授权写稿）；只有必要核心证据不可获得/近邻完全覆盖，才优先不同任务或机制。无新结果不反复复核；已完成的核查不重做。不能把开发集高分误当确认。
+**科研证据优先决策（非写作授权）**：有效Run形成后，且尤其在拟启动高成本机制/多库训练、拟HOLD/PIVOT时，对照现有Claim做一次`Q2_EVIDENCE_REVIEW`（决策动作名，非CLI状态）：`ONE_CLAIM | NEAREST_GAP | CORE_RESULT | REQUIRED_EVIDENCE_GAPS (最多3项) | LOWEST_COST_PATH | CONTINUE_ALGO_ONLY_IF_WORTH_IT`。若可信Q2+目标路线存在且补证据更划算，优先科研证据补齐（`EVIDENCE_COMPLETION_PRIORITY`，不授权写稿）；只有必要核心证据不可获得/近邻完全覆盖，才优先不同任务或机制。无新结果不反复复核；已完成的核查不重做。不能把开发集高分误当确认。
 
 ## 3. 唯一下一行动算法（不机械全跑检查表）
 
