@@ -12,6 +12,8 @@
 
 **v1.12 可信算法工程闭环**：活动04需要新算法/复杂训练时才按需读[ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)：真实误差→预测前合法杠杆→强简单替代→一项可证伪预言/低成本正控→获授权的Agent连续实现和DEV实验→公平比较及Run保留→必要时直接转论文补证据。保留单一科研主控，不新增自动训练框架或无上限候选树；参考AIDE/autoresearch/RD-Agent/mini-swe-agent的思想，不复制其整套执行器。
 
+**最低成功标准：可信JCR Q2+投稿潜力，优先Q1**；真实科学证据、具名最近邻与相关期刊近期同类发表先例共同支持，不要求实际录用。普通专业期刊/B-C自定义档不自动算成功。见[Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)。
+
 **论文写作锁（强制）**：[WRITING_GATE.md](WRITING_GATE.md)。默认 `WRITING_LOCKED`：必须先有科研成果总结和用户审查，再有独立明确的写作授权；可发表性、`DRAFTABLE`、确认成功和自动路由均不会启动论文提纲/初稿。证据补齐、科研验证与普通诊断不受影响。
 
 **完成算法后的科学增值（可选）**：[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)。复用原始Run、错误结构及具名近邻，最多做一次有价值的授权内小规模证伪；无新意则保留成果并总结，写作锁继续生效。
@@ -57,6 +59,7 @@
 - [DATA_INSIGHT.md](DATA_INSIGHT.md)：活动02开发池画像、数据类型分析、混杂与现象验证、DATA_INSIGHT_CARD
 - [TASK_EXPLORATION.md](TASK_EXPLORATION.md)：任务科学价值×可行性比较、主/备选任务与 Claim 收敛
 - [POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)：已完成算法的小修改科学性审查、最低成本判别与退出
+- [Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)：JCR Q2+潜力成功目标与Q1优先策略（不要求实际录用）
 - [PAPER_FIRST.md](PAPER_FIRST.md)：可信性能、独立贡献与增强科学性分账，活动04↔05按需反馈
 - [TASK_LADDER.md](TASK_LADDER.md)：L0–L3任务阶梯、共享资产、UP/DOWN/NARROW/LATERAL/HOLD与两类传感器示例
 - [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)：任务到代码、基线、测试不变量与训练诊断（编码时按需读）
