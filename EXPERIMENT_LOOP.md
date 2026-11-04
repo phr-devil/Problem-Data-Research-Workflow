@@ -10,6 +10,8 @@
 - `MECHANISM_TEST`：需要机制归因时才写竞争解释、不同预测或正控；无归因需求不强迫 A/B。
 - `CONFIRMATORY`：只在冻结 Claim/协议并获授权后转 [CONFIRMATION.md](CONFIRMATION.md)；不在探索内循环反复打开封存集。
 
+**高价值机制实验选择**：按[HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md) D，`RELIABLE_TRACK`保护可信简单Champion，`NOVELTY_TRACK`最多生成3个**不同科研杠杆**的候选、默认只执行一个最具区分力且已授权的实验。按`BASELINE_FAILURE | NEW_LEVER | COMPETING_ALTERNATIVE | DISTINCT_PREDICTION | CHEAP_POSITIVE_CONTROL | FAIR_DEV_TEST | COST/IF_POS_NEG_INVALID`选择，而非每遇负Pilot就换网络。真实跨条件/时序结构可能需要复杂方法；不能因最小模型没有增益就过早排除合理高潜力机制。负结果保留，不能后验反复挑seed/组别或打开封存集择法；Q2/Q1收益与追加实验成本相称才扩展。
+
 ## 1.5 双轨算法开发：稳妥结果 × 创新探索（按证据分配，而非双模型硬并行）
 
 **默认最低必要复杂度，可跳过已有项**：真实数据/评价 → 复用或授权后建立简单可信同K参考 → 检查组级残差、合法预测信息 → 最小规则/校准/线性/轻量模型或正控 → 仅为明确剩余瓶颈或不同机制预言引入复杂模型。按A只读诊断、B轻量拟合、C复杂训练分配预算（不是固定GPU时长门槛）；真实时空建模需求可直接进入C，但先明确必要性和廉价判别。复杂模型失败不能覆盖简单模型和已经核验的结果。
