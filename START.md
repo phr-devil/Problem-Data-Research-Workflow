@@ -7,6 +7,8 @@
 3. **数据就绪后**：必须先有 `DATA_MANIFEST` 中本轮必需库的 `DATA_ACQUIRED_VERIFIED`（文件完整与可读，不代表科学有效）；否则只做下载/恢复与非实证准备。就绪后按 [DATA_INSIGHT.md](DATA_INSIGHT.md) 观察真实现象，再到 [TASK_EXPLORATION.md](TASK_EXPLORATION.md) 选任务；Task Ladder按需读。理论/仿真按明确证据路径例外处理。
 4. **已有任务/运行**：按 [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md) 获取有效Run、诊断负Pilot；**需要设计新算法或连续编码/GPU实验**时，按需读 [ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md) 的误差→杠杆→廉价正控→有界执行闭环，实际接口和保护规则读 [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)。机制失败先分辨可用信息/公平基线/欠训练，再决定转向或补论文。论文贡献读 [PAPER_FIRST.md](PAPER_FIRST.md)，正式独立确认读 [CONFIRMATION.md](CONFIRMATION.md)。
 
+**高价值科学设计**：选题、选库、冻结Task或增加复杂机制前按需核[HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md)：重要知识差额、数据能否区分竞争解释、决定性科学实验及Q2潜力。已有Run直接续做，不增加强制阶段。
+
 **Q2科研目标**：按[Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)，最低成功标准是有证据支持的JCR Q2+投稿潜力（Q1更好），**不要求实际发表**；Q3/Q4或仅小发现不等于项目成功，但未知/负Pilot不自动失败。
 
 **下一步交付方式**：遵守[NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)：可在既有授权范围内自主决定的技术任务/强烈推荐任务，直接给一段最小可执行Agent指令；需用户判断或新增授权的，先给建议与2–3个选项，不提前输出Agent指令。
