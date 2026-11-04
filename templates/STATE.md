@@ -35,6 +35,7 @@
 - RESEARCH_SUMMARY_REF: <成果总结路径/版本；否则 NONE>
 - SUMMARY_USER_REVIEW: <PENDING / REVIEWED + 可核查用户原始确认消息；缺失默认 PENDING>
 - MANUSCRIPT_WRITE_AUTH: <LOCKED / APPROVED + 用户针对本项目/主张的明确写作指令来源；默认 LOCKED；参见 WRITING_GATE.md>
+- SCIENCE_UPGRADE_AUDIT: <可选：Run/最近邻差额/竞争解释/区别性预测/成本/授权/UPGRADE_PILOT|EVIDENCE_ONLY|KEEP_ORIGINAL|UNKNOWN；非写作授权>
 - SCIENTIFIC_VALUE: <不同于具名近邻的新能力/规律；VALUE_UNVERIFIED>
 - CLAIM_EVIDENCE_MAP: <能力/机制/规律候选、最强替代、Run和工件指针、最近复盘、待补证据/确认资格>
 - CLAIM_CANDIDATE: <一句Claim或UNVERIFIED>
