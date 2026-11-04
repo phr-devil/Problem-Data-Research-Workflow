@@ -9,7 +9,8 @@ DOCS = ("AGENTS.md","START.md","WORKFLOW.md","README.md","DATA_DISCOVERY.md",
         "SEARCH_DISCOVERY.md","DATA_INSIGHT.md","TASK_EXPLORATION.md","TASK_LADDER.md",
         "EXPERIMENT_LOOP.md","IMPLEMENTATION_GUIDE.md","ALGORITHM_ENGINEERING.md","PAPER_FIRST.md",
         "CONFIRMATION.md","VENUE_STRATEGY.md","REPLAY_PROTOCOL.md","REFERENCES.md","EXAMPLE_SENSOR.md",
-        "templates/STATE.md")
+        "templates/STATE.md","WRITING_GATE.md","NEXT_ACTION_POLICY.md",
+        "Q2_PUBLICATION_GOAL.md","POST_ALGORITHM_SCIENCE_AUDIT.md")
 
 class WorkflowContracts(unittest.TestCase):
     def test_required_files(self):
@@ -54,20 +55,35 @@ class WorkflowContracts(unittest.TestCase):
                 self.assertIn("ALGORITHM_ENGINEERING.md",
                               (ROOT / filename).read_text(encoding="utf-8"))
 
-    def test_publication_first_contract(self):
-        files = {
-            "START.md": ["论文优先触发", "PAPER_FIRST.md"],
-            "WORKFLOW.md": ["PAPER_COMPLETION_REVIEW", "PAPER_COMPLETION_PRIORITY"],
-            "PAPER_FIRST.md": ["最小可投稿论文路线", "最小论文成稿合同"],
-            "VENUE_STRATEGY.md": ["提前进行轻量论文参照", "以稿件完成难度决定下一步"],
-            "EXPERIMENT_LOOP.md": ["论文完成列为优先实验目标"],
-            "CONFIRMATION.md": ["最小完整稿件检查"],
+    def test_q2_goal_writing_and_handoff_contract(self):
+        """Check operative semantics, not obsolete headings or labels."""
+        checks = {
+            "START.md": ["Q2_PUBLICATION_GOAL.md", "WRITING_GATE.md",
+                         "NEXT_ACTION_POLICY.md"],
+            "WORKFLOW.md": ["Q2_PUBLICATION_GOAL.md", "NEXT_ACTION_POLICY.md",
+                            "WRITING_GATE.md"],
+            "PAPER_FIRST.md": ["Q2_PUBLICATION_GOAL.md", "WRITING_GATE.md"],
+            "VENUE_STRATEGY.md": ["Q2_POTENTIAL_SUPPORTED", "Q2_UNCERTAIN",
+                                  "Q3/Q4"],
+            "EXPERIMENT_LOOP.md": ["Q2", "EVIDENCE_COMPLETION_PRIORITY"],
+            "CONFIRMATION.md": ["Q2_PUBLICATION_GOAL.md", "WRITING_GATE.md"],
+            "NEXT_ACTION_POLICY.md": ["AGENT_DECIDABLE",
+                                      "USER_DECISION_REQUIRED",
+                                      "NEXT_AGENT_INSTRUCTION"],
+            "Q2_PUBLICATION_GOAL.md": ["Q2_POTENTIAL_SUPPORTED",
+                                       "Q2_UPGRADE_POSSIBLE",
+                                       "Q2_UNCERTAIN",
+                                       "BELOW_Q2_TARGET",
+                                       "WRITING_LOCKED"],
         }
-        for filename, markers in files.items():
+        for filename, markers in checks.items():
             content = (ROOT / filename).read_text(encoding="utf-8")
             for marker in markers:
                 with self.subTest(file=filename, marker=marker):
                     self.assertIn(marker, content)
+        decision = (ROOT / "NEXT_ACTION_POLICY.md").read_text(encoding="utf-8")
+        self.assertIn("禁止预先输出Agent执行指令", decision)
+        self.assertIn("真实授权", decision)
 
     def test_permissions_and_core_rules(self):
         workflow = (ROOT / "WORKFLOW.md").read_text(encoding="utf-8")
