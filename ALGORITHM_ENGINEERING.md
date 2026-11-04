@@ -2,6 +2,8 @@
 
 **按需读取**：只在 PD-RW 活动03–04 已有真实任务、需要编写/修改算法、批量训练或排查工程阻断时打开；已有有效Run直接续做，不强制重新设计。科研取舍/权限由 [WORKFLOW.md](WORKFLOW.md) 唯一负责，TaskSpec及受保护接口见 [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)，论文收敛见 [PAPER_FIRST.md](PAPER_FIRST.md)。本文件是给 WorkBuddy/Codex 等真实执行 Agent 的工作合同，**不是 GPU 执行器、沙箱、新阶段、第二个状态机或训练授权**。
 
+**Q2科研目标**：一项真实算法增益不等于项目成功。按[Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)寻找能够支持JCR Q2+投稿竞争力的独立科学结论（Q1更好）；实证证据不足时，优先公平强基线、机制反解释、组级规律或科学升级，而非无意义增加网络。实际期刊录用不作为成功门槛，未审查成果总结/未获单独写作授权不得写稿。
+
 ## 1. 先判断该做哪种算法工作，而不是先选网络
 
 | 当前证据/问题 | 最短工程路线 | 不做什么 |
