@@ -2,6 +2,8 @@
 
 > **唯一目标口径（优先于旧的“完成任意专业期刊稿件/B/C小论文即成功”表述）**：论文导向项目以**具有可信证据支撑的 JCR Q2 或更高投稿潜力**作为最低科研成功标准，优先争取有合理依据的 Q1。**实际录用/发表不是科研项目成功的必要条件，也无法保证。** 这一标准不授权写论文、投稿、下载或训练；写作始终受 [WRITING_GATE.md](WRITING_GATE.md) 双重门禁约束。
 
+**可选结构预检**：当确需评估 `Q2_POTENTIAL_SUPPORTED`，可复用已核证据填[Q2_EVIDENCE_PACKET.example.json](Q2_EVIDENCE_PACKET.example.json)同型的少量引用，并运行 `python -m core.q2_preflight PACKET.json`；该工具只检查证据指针、JCR年度/类别字段及Q1/Q2候选是否齐全，返回 `READY_FOR_HUMAN_SCIENTIFIC_AND_JCR_REVIEW` 仍**不是**“Q2潜力已确认”，不得自动赋 `Q2_POTENTIAL_SUPPORTED`。未经原文核查、期刊来源验证、领域独立审查的资料只能保持UNKNOWN。下一步技术核查/用户选择的输出遵守[NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)。
+
 ## 1. 分清三个问题
 
 - **科研事实**：合法真实Run、明确独立科学贡献、可复核效应和对照是什么？负实验可是真实且有价值的研究结果。
