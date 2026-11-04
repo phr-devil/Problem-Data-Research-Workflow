@@ -9,6 +9,8 @@
 
 **Q2科研目标**：按[Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)，最低成功标准是有证据支持的JCR Q2+投稿潜力（Q1更好），**不要求实际发表**；Q3/Q4或仅小发现不等于项目成功，但未知/负Pilot不自动失败。
 
+**下一步交付方式**：遵守[NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)：可在既有授权范围内自主决定的技术任务/强烈推荐任务，直接给一段最小可执行Agent指令；需用户判断或新增授权的，先给建议与2–3个选项，不提前输出Agent指令。
+
 **写作锁**：阅读 [WRITING_GATE.md](WRITING_GATE.md)；在用户审查科研成果总结且明确授权写作之前，禁止自动生成论文提纲/章节/初稿。论文潜力判断、DRAFTABLE、可信Run、确认完成都不解除锁定；继续科研与补证据不受影响。
 
 **完成算法后（按需）**：稳定可信Run且拟HOLD/结束/再堆模型时，参考[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)判断一次小规模科学升级是否值得；不新增必经阶段，不自动拟合或写稿。
