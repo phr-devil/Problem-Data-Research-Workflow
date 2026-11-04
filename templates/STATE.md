@@ -26,6 +26,8 @@
 - OBSERVATIONS: <OBSERVED/HYPOTHESIZED/PROXY_ONLY及原始来源>
 - TASK_DISCOVERY: <PRIMARY_TASK/必要RESERVE_TASK/MINIMUM_PROBE>
 - TASK_CANDIDATES: <候选选择史链接，不复制；含重要性、最近邻差额、竞争解释、证据可达性/成本、未选理由；不是论文质量分数>
+- SCIENCE_DECISION_REPLAY: <可选冻结时点/盲回放对比记录；未实际测量写NOT_MEASURED，合成场景只能算ENGINEERING_TEST>
+- SCIENCE_HANDOFF: <可选DEV/公开证据JSON和hash来源；仅科学意图交接，不授权下载/拟合、不能证明Q2>
 - PORTFOLIO_PIVOT_MAP: <真正不同失败前提的备选>
 - TASK_LADDER: <可选L0–L3不同信息条件及切换证据；NOT_APPLICABLE>
 - IMPLEMENTATION: <需要编码时才记TaskSpec/evaluator指纹、接口/保护/定向测试；未知标UNKNOWN>
