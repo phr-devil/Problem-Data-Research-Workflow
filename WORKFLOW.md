@@ -4,7 +4,7 @@
 
 当出现 `Oracle 有空间但实际策略无收益` 或零标签决策不可辨识时，按需做**信息条件三分诊断**（可纠正性/决策前可辨识性/合法实际收益），优先检查能否用现实中可负担的 K-shot/一次标定重新界定问题；不得借新 Task 把原任务写成成功。经验索引：[SAFE-Gait/APACE](LESSONS/SAFE_GAIT_APACE.md)。工具 `core.cli information-check` 仅作只读建议，不拟合/批准训练。
 
-**v1.11 默认成果目标（写作锁下仅指证据目标）：以合理总成本形成真实、完整、能支撑合适专业期刊文章的科研证据，而非最大化突破幅度、网络复杂度或目标IF。** 选题时仅低成本查看真实同类论文的贡献/核心实验；首个可信Run和每次关键负Pilot后，先检查是否已有一项足够明确的小贡献以及最小论文缺口。若有可信Q2+潜力路线，**优先补主张需要的公平对照、独立证据和科研成果总结；不得提前生成论文结构或正文**，不默认`UP/SCIENCE_UPGRADE`。可选高影响探索须有明确投稿价值/应用需求、额外成本合理或用户指示，不能覆盖已保留的窄论文路线。`PAPER_COMPLETION_PRIORITY`只是当前行动建议，非自动状态、授权或可投稿认证。[PAPER_FIRST.md](PAPER_FIRST.md) / [VENUE_STRATEGY.md](VENUE_STRATEGY.md)。
+**v1.11 默认成果目标（写作锁下仅指证据目标）：以合理总成本形成真实、完整、能支撑合适专业期刊文章的科研证据，而非最大化突破幅度、网络复杂度或目标IF。** 选题时仅低成本查看真实同类论文的贡献/核心实验；首个可信Run和每次关键负Pilot后，先检查是否已有一项足够明确的小贡献以及最小论文缺口。若有可信Q2+潜力路线，**优先补主张需要的公平对照、独立证据和科研成果总结；不得提前生成论文结构或正文**，不默认`UP/SCIENCE_UPGRADE`。可选高影响探索须有明确投稿价值/应用需求、额外成本合理或用户指示，不能覆盖已保留的真实科学Run。`EVIDENCE_COMPLETION_PRIORITY`只是当前行动建议，非自动状态、授权或可投稿认证。[PAPER_FIRST.md](PAPER_FIRST.md) / [VENUE_STRATEGY.md](VENUE_STRATEGY.md)。
 
 **统一科研成功目标**：按[Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)，证据充分且具名JCR Q2+相关期刊有同类发表先例时可评为`Q2_POTENTIAL_SUPPORTED`（科研成功，优先争取Q1）；**实际录用非必要条件，不能保证**。普通专业期刊可发、自定义B/C、PAPER_PATH_CANDIDATE及DRAFTABLE均非成功。低于Q2且升级路线已耗尽时可建议失败收束；早期未知不自动失败。期刊类别与年度按[VENUE_STRATEGY.md](VENUE_STRATEGY.md)核实。
 
