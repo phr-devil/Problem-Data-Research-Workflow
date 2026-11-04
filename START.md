@@ -9,6 +9,8 @@
 
 **写作锁**：阅读 [WRITING_GATE.md](WRITING_GATE.md)；在用户审查科研成果总结且明确授权写作之前，禁止自动生成论文提纲/章节/初稿。论文潜力判断、DRAFTABLE、可信Run、确认完成都不解除锁定；继续科研与补证据不受影响。
 
+**完成算法后（按需）**：稳定可信Run且拟HOLD/结束/再堆模型时，参考[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)判断一次小规模科学升级是否值得；不新增必经阶段，不自动拟合或写稿。
+
 **论文证据优先触发**：新Task形成时可按需读 [VENUE_STRATEGY.md](VENUE_STRATEGY.md) §0 的真实类似论文，不先做正式期刊评级。首个可信Run、关键负Pilot、拟新建高成本模型或HOLD/PIVOT时，应按需读 [PAPER_FIRST.md](PAPER_FIRST.md) §0，先判断能否完成一篇窄主张的论文；如果最低必要证据可补齐，优先补主张的科研证据，不默认为升级算法或启动论文写作。稿件确认仍须读 [CONFIRMATION.md](CONFIRMATION.md)；无需每次重载这三个文件。
 
 **证据索引**：新项目出现首个有效Run且有Python环境时按 [core/README.md](core/README.md) 初始化和记录工件；既有项目不强制迁移，无法执行则保留真实原始路径并标`INDEX_PENDING`。
