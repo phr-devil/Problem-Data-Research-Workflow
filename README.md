@@ -14,6 +14,8 @@
 
 **最低成功标准：可信JCR Q2+投稿潜力，优先Q1**；真实科学证据、具名最近邻与相关期刊近期同类发表先例共同支持，不要求实际录用。普通专业期刊/B-C自定义档不自动算成功。见[Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)。
 
+**下一步Agent指令 / 用户选择分流**：[NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)。已授权且可自行决定或明确值得执行的技术工作，直接给简短可执行Agent指令；需用户判断或新增授权时，先给推荐和选项，不提前给Agent指令。
+
 **论文写作锁（强制）**：[WRITING_GATE.md](WRITING_GATE.md)。默认 `WRITING_LOCKED`：必须先有科研成果总结和用户审查，再有独立明确的写作授权；可发表性、`DRAFTABLE`、确认成功和自动路由均不会启动论文提纲/初稿。证据补齐、科研验证与普通诊断不受影响。
 
 **完成算法后的科学增值（可选）**：[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)。复用原始Run、错误结构及具名近邻，最多做一次有价值的授权内小规模证伪；无新意则保留成果并总结，写作锁继续生效。
