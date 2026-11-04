@@ -1,5 +1,7 @@
 # Venue Strategy｜稿件潜力与期刊匹配（活动05–06按需）
 
+**写作权限**：本文件允许在科研阶段做真实论文/期刊对照，但不得为选刊自动写摘要、投稿提纲或正文；写作门禁见 [WRITING_GATE.md](WRITING_GATE.md)。
+
 **唯一目的**：保护“小而真实”的论文机会，为一项具体Claim选适合的期刊；不预测录用概率、不决定是否停止算法。新科研任务仍按[WORKFLOW.md](WORKFLOW.md)执行；增量贡献与证据见[PAPER_FIRST.md](PAPER_FIRST.md)，确认按[CONFIRMATION.md](CONFIRMATION.md)。**这不是第七步/新自动审批/新的状态Schema**。
 
 ## 0. 提前进行轻量论文参照（不要求初期完整期刊评级）
