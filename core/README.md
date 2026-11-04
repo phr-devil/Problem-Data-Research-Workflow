@@ -2,6 +2,8 @@
 
 **定位**：管理只读TaskSpec资格预检、Probe候选合同、结构化证据/工件指纹、跨会话恢复、开发Run的记录条件可比性以及显式调用的文献元数据查询；不判断选题/创新价值、不自动STOP、默认不联网、不执行拟合/训练（仅显式`literature-search`会发起元数据网络请求）、不授权解封。科研决策仍由 [WORKFLOW.md](../WORKFLOW.md) 负责。
 
+**可选只读Q2预检与Agent输出决策**：`python -m core.q2_preflight PACKET.json` 对已有科学/期刊证据包做结构检查，**不会**证明新颖性或JCR真实性；`core.action_output.output_mode` 返回“可给Agent指令/需要用户选择”的输出限制，但其参数本身不能证明真实授权。详见 [Q2成功规则](../Q2_PUBLICATION_GOAL.md)与[下一步输出规则](../NEXT_ACTION_POLICY.md)。
+
 ## 最小使用
 
 ```bash
