@@ -1,0 +1,24 @@
+{
+  "format": "pd-rw-science-handoff-v1",
+  "task_id": "REPLACE_WITH_REAL_TASK_ID",
+  "research_question": "REPLACE with important, testable research question",
+  "importance_rationale": "REPLACE with who needs the knowledge and why",
+  "named_nearest_original": "REPLACE with source-checked original DOI and scope",
+  "claimed_knowledge_delta": "REPLACE with defensible difference from closest paper",
+  "strongest_alternative": "REPLACE with strongest realistic alternative explanation",
+  "distinct_prediction": "REPLACE with different predictions of the two explanations under matched conditions",
+  "data_discriminability_limitations": "REPLACE with factor crossing, confounding and unknowns",
+  "independent_group_unit": "REPLACE with real independent person/device/site/batch etc",
+  "legal_information_contract": "REPLACE with prediction-time legal inputs and label budget",
+  "next_discriminating_test": "REPLACE with cheap result-changing DEV diagnostic/test",
+  "pd_rw_scientific_choice": "REPLACE with PD-RW-selected Task/Claim and rationale, NOT Forge ranking",
+  "authorization_reference": "REPLACE with actual original user instruction; pointer is NOT grant",
+  "source_receipts": [
+    {
+      "path": "REPLACE_WITH_PROJECT_CONTAINED_DEV_REPORT.json",
+      "role": "DEV",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "example_warning": "All fields are placeholders, not evidence or actual permission. Hashes must be recalculated; do not pass this example to declare success."
+}
