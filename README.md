@@ -8,9 +8,11 @@
 
 **v1.10 小发现保留与选刊**：一项有限但真实的增量贡献可以进入最小论文路线。活动04–05有可信DEV证据或特定负Pilot时，先评估可收窄的科学主张与缺口，必要时参考 [VENUE_STRATEGY.md](VENUE_STRATEGY.md) 的稿件潜力 S/A/B/C（另有NONE/UNKNOWN）及期刊冲刺/主投/保守分层；二者是两根不同轴、不是JCR分区或录用概率，也不构成STOP门槛。仅在需要真实选刊时联网核最新范围、近期近邻论文、索引与费用。
 
-**v1.11 投稿产出优先**：把“最小可完成、可信且适配专业期刊的论文”作为默认成果，而不是突破幅度、模型复杂度或IF。方向/任务明确时，可参考近期同类已发表论文的贡献和关键实验；得到可信Run后先问“现有小发现是否已足够形成论文，缺哪1–3项决定性证据”，再决定是否研发新网络。必要证据能补齐就优先完成论文；正式确认标准不减。见 [PAPER_FIRST.md](PAPER_FIRST.md) 与 [VENUE_STRATEGY.md](VENUE_STRATEGY.md)。
+**v1.11 科研证据优先（非自动写稿）**：把“最小可完成、可信且适配专业期刊的论文”作为默认成果，而不是突破幅度、模型复杂度或IF。方向/任务明确时，可参考近期同类已发表论文的贡献和关键实验；得到可信Run后先问“现有小发现是否已足够形成论文，缺哪1–3项决定性证据”，再决定是否研发新网络。必要证据能补齐就优先补齐核心证据，论文写作另需用户授权；正式确认标准不减。见 [PAPER_FIRST.md](PAPER_FIRST.md) 与 [VENUE_STRATEGY.md](VENUE_STRATEGY.md)。
 
 **v1.12 可信算法工程闭环**：活动04需要新算法/复杂训练时才按需读[ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)：真实误差→预测前合法杠杆→强简单替代→一项可证伪预言/低成本正控→获授权的Agent连续实现和DEV实验→公平比较及Run保留→必要时直接转论文补证据。保留单一科研主控，不新增自动训练框架或无上限候选树；参考AIDE/autoresearch/RD-Agent/mini-swe-agent的思想，不复制其整套执行器。
+
+**论文写作锁（强制）**：[WRITING_GATE.md](WRITING_GATE.md)。默认 `WRITING_LOCKED`：必须先有科研成果总结和用户审查，再有独立明确的写作授权；可发表性、`DRAFTABLE`、确认成功和自动路由均不会启动论文提纲/初稿。证据补齐、科研验证与普通诊断不受影响。
 
 ## 唯一入口与最短路径
 
@@ -26,7 +28,7 @@
 | 02 | 数据获取验收后，审计与真实科研现象：[DATA_DISCOVERY.md](DATA_DISCOVERY.md) / [DATA_INSIGHT.md](DATA_INSIGHT.md) | DATA_MANIFEST（DATA_ACQUIRED_VERIFIED）＋DATA_INSIGHT_CARD；封存确认资源 | 获授权的 WorkBuddy/Codex/本地环境 |
 | 03 | 从现象/文献生成、比较任务并按需分层：[TASK_EXPLORATION.md](TASK_EXPLORATION.md) / [TASK_LADDER.md](TASK_LADDER.md) | PRIMARY_TASK＋NEXT_DISCRIMINATING_PROBE、备选任务按需，不提前承诺增益 | ChatGPT＋可访问真实数据的 Agent |
 | 04 | 双轨算法开发与工程循环：[EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md) / [ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)（按需） | 有效Run、ALGORITHM_HYPOTHESIS及下一最有价值实验 | 获授权的代码/实验 Agent |
-| 05 | 与活动04并行收敛最小可投稿论文：[PAPER_FIRST.md](PAPER_FIRST.md) / [VENUE_STRATEGY.md](VENUE_STRATEGY.md)（按需） | CLAIM_EVIDENCE_MAP＋论文核心表与必要补证据/目标期刊参考 | ChatGPT＋代码 Agent |
+| 05 | 与活动04并行收敛最小可发表科研证据：[PAPER_FIRST.md](PAPER_FIRST.md) / [VENUE_STRATEGY.md](VENUE_STRATEGY.md)（按需） | CLAIM_EVIDENCE_MAP＋科研结果证据表、补证据计划/按需期刊参考（非初稿） | ChatGPT＋代码 Agent |
 | 06 | 严格科学确认：[CONFIRMATION.md](CONFIRMATION.md) | 有效独立证据或 CONFIRMATION_UNAVAILABLE，论文声明边界 | 独立核验与获授权正式实验 |
 
 **实证执行前提（非额外科研审核）**：本轮确定为必需的D1及其他必需库，应先获取选定版本的完整必需原始文件、核文件完整性和本地可达性，再进行数据画像、正式TASK冻结、基线或算法实验；已有可信本地副本直接验收复用。下载未获授权或未完成，停在 `WAITING_FOR_DOWNLOAD_AUTH` / `WAITING_FOR_DATA`，仅允许公开资料调查、下载准备和不依赖数据的假说草拟；不能以示例数据/模拟运行假冒完整实证。备用库按需获取，理论/无需静态库的仿真按证据路径处理，见 [DATA_DISCOVERY.md](DATA_DISCOVERY.md) §4。
