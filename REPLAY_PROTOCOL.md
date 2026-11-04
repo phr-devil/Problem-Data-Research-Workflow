@@ -27,6 +27,8 @@
 **新增对照评价：** 在同一冻结任务/预算下，检查新版是否更早识别不可靠标签、没有参照的“可学性结论”、简单基线饱和后的无效新网络，以及 Oracle 可纠正但决策前不可辨识。评分用证据是否真实、下一实验是否能改变决定、无效训练成本，不以新版多输出一次 `FEASIBILITY_ENVELOPE` 为成功；历史盲回放未真实实施继续标 NOT_MEASURED。
 
 
+**可执行的输出合同回放（非真实科研成功率）**：`chapter10_replay.audit_responses` 向后兼容已有场景；当Agent额外报告 `next_action_owner` 时，检查 `USER_DECISION_REQUIRED` 不得附 `next_agent_instruction` 且需 `user_options`；`AGENT_DECIDABLE/STRONG_RECOMMENDATION` 必须附简短Agent指令和已核授权声明；`NO_NEXT_ACTION` 不制造新任务。报告 `Q2_POTENTIAL_SUPPORTED` 时必须附 `q2_evidence_ref/q2_venue_ref`。**该检查只验证结构及自述字段，不能查证用户原始许可、文献真实性或Q2科研潜力；真实项目冻结盲回放仍为待验证。**
+
 **Q2判定及人机分流回放（新版）**：将真实冻结节点的Q2判定与具名最近邻原文、可查期刊年度/类别/近期同类论文比较；检验错误Q2成功、把Q2未知当失败、强烈建议却缺权限时误发Agent执行指令、无需用户选择却重复提问、提前生成稿件。只在历史数据可冻结且盲审时记MEASURED，`chapter10_replay.py`仅做契约结构检查。
 
 **选刊分档的行为验证（v1.10）**：历史回放增设对小而可靠发现的漏检率及无新意论文误判率；评估分档是否促成更低成本的关键证据实验，并记录错误使用IF/JCR/CAS作为科研成功率、把C档自动STOP或用开发集数据臆测录用概率的情况。未真实回放仍记`NOT_MEASURED`。
