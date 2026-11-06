@@ -45,6 +45,15 @@
 - 正式图按照 `主题一致→模板一致→数据/来源一致→实际输出一致` 分层验收；自动检查合同和文件结构不能证明真实渲染的色彩、字体、图元或科研正确性。需要实际渲染验收时必须已获本批图片绘制许可；已有合法图可只读复核。
 - 参考可选的 RWF [FIGURE_STYLE_SYSTEM](https://github.com/phr-devil/Research-Workflow-Forge/blob/main/docs/FIGURE_STYLE_SYSTEM.md) 与 [FIGURE_QA_CONTRACT](https://github.com/phr-devil/Research-Workflow-Forge/blob/main/docs/FIGURE_QA_CONTRACT.md)；不要求为普通科研项目安装 Matplotlib、全部第三方绘图 Skill 或 RWF。
 
+## 4.2 科研色板选择、项目配色冻结和数据图质量门槛
+
+- **保留旧项目**：已锁定的科研项目颜色不因升级工作流而自动迁移。新项目可从 `tol-bright`（当前默认，保持兼容）、`tol-muted`（推荐新项目候选）、`tol-vibrant`、`okabe-ito` 或 `tableau10` 中选择；不将“推荐”误认为用户选定或允许出图。色板选择属于**项目文本配置**，只有用户明确要求绘图才能实际渲染/生成图片。
+- **按数据语义选色**：离散模型/类别用分类色板；连续强度优先感知均匀的连续色板，正负差异选发散色板，周期/角度选循环色板。避免将同一六色配色强加给热图、时间轨道、正负效应。功能色与强调色分开，不将强调色默认为额外模型。
+- **配色冻结合同**：正式出图应在项目中保留 `palette_id / palette_registry_version / semantic_colors / theme_version / style_fingerprint`。同一个语义键（如 `model:SF`）在同一项目、同一实验比较范围内固定颜色；类别顺序变化不得触发位置式重新分配。更换色板/语义映射必须有用户相应要求和变更原因，增量更新受影响图片，不能全篇静默重绘。
+- **对白底风险敏感**：高亮度的黄、浅青、淡橙在白底细线/小点上可能不可辨；对比度不足时应优先选较深的颜色、边框或标记形状/线型双重编码。不能通过改数据意义、只隐藏负结果或制造统计显著性来迎合配色。色觉缺陷/灰度可辨性也应在已授权的真实论文图上审阅。
+- **绘图工程与科学审查分离**：优先使用覆盖“建立画布→添加图元→图例→保存”的完整主题上下文，显式验证字体是否回退，保存真实图元的坐标和颜色证据；仍须与合法源Run、真实统计分母和独立样本单位核对。仅验证颜色、SVG标签或文件哈希不能宣称数值正确。禁止因为换色或改字号而启动训练、SEALED访问、论文写作或自动生成预览。
+- 通用色板来源与检查工具由可选的 RWF [FIGURE_STYLE_SYSTEM](https://github.com/phr-devil/Research-Workflow-Forge/blob/main/docs/FIGURE_STYLE_SYSTEM.md) 管理；**没有RWF也能独立遵循上述规则**。
+
 ## 5. 最小交接
 
 已获得明确绘图请求时，按需记录 `USER_FIGURE_REQUEST_REF | REQUEST_SCOPE | FIGURE_KIND | SOURCE_RUN+METRIC+UNIT | DATA_STATUS | OUTPUTS | MACHINE_QA | VISUAL_QA | BLOCKERS`。这些都是证据指针，不是机器可自动颁发的用户许可。没有用户请求时，不初始化绘图流水线、不建图像目录，仅保留原始数值/结果表和文字建议。
