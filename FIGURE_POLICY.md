@@ -36,6 +36,15 @@
 - 实际检查导出图像、渲染尺寸、文字/图例/箭头是否重叠裁切，保留机器检查与人/Agent视觉检查的不同结果。缺陷局部修复并回归检查；Contact Sheet 也只能在已授权绘图范围内生成。
 - 共用可选RWF规范：[FIGURE_QA_CONTRACT](https://github.com/phr-devil/Research-Workflow-Forge/blob/main/docs/FIGURE_QA_CONTRACT.md)。无RWF也能独立开展合法科研和已授权绘图，不能强依赖。
 
+## 4.1 同一项目样式锁与图型模板（仅用户明确要求绘图后适用）
+
+- **请求先于主题与模板执行**：没有用户明确出图要求，只可读取/编辑样式配置、讨论模板和静态检查合同；不得因配置初始化、自动化测试、参考图、快照或质量评分而生成任何图片、预览、Contact Sheet或测试图。CI也不得实际渲染图片作为默认测试。
+- 正式出图默认复用**已批准的项目级主题**（字体、字号、白底、黑色文字、语义色、轴线、线宽、标记、图例、导出方式）及**图型模板族**（同类型共享绘图区几何、边距、坐标/图例惯例）；避免每张图独立写参数。不同科研语义的图不要求使用相同图型、轴尺度或物理高度。
+- 将通用 `publication_base.mplstyle`、`figure_theme.json`、模板索引与项目覆盖配置分离。项目有用户已明确确定的视觉要求时，以项目配置为准；目标期刊未确定时不得冒充已满足期刊版式。论文最终版本应按目标期刊官方规范核对。
+- **冻结后不悄然漂移**：每张正式图在真实科研含义及样式首次通过审查后记录 `theme_version / template_id / style_fingerprint`；后续更换模型数值、数据或文字，只局部调整允许的画布高度和标签间距。更换全局主题、模型颜色、模板族或尺度规则时应说明原因及受影响图范围；未经用户相应要求不得借此出图或重绘无关图。
+- 正式图按照 `主题一致→模板一致→数据/来源一致→实际输出一致` 分层验收；自动检查合同和文件结构不能证明真实渲染的色彩、字体、图元或科研正确性。需要实际渲染验收时必须已获本批图片绘制许可；已有合法图可只读复核。
+- 参考可选的 RWF [FIGURE_STYLE_SYSTEM](https://github.com/phr-devil/Research-Workflow-Forge/blob/main/docs/FIGURE_STYLE_SYSTEM.md) 与 [FIGURE_QA_CONTRACT](https://github.com/phr-devil/Research-Workflow-Forge/blob/main/docs/FIGURE_QA_CONTRACT.md)；不要求为普通科研项目安装 Matplotlib、全部第三方绘图 Skill 或 RWF。
+
 ## 5. 最小交接
 
 已获得明确绘图请求时，按需记录 `USER_FIGURE_REQUEST_REF | REQUEST_SCOPE | FIGURE_KIND | SOURCE_RUN+METRIC+UNIT | DATA_STATUS | OUTPUTS | MACHINE_QA | VISUAL_QA | BLOCKERS`。这些都是证据指针，不是机器可自动颁发的用户许可。没有用户请求时，不初始化绘图流水线、不建图像目录，仅保留原始数值/结果表和文字建议。

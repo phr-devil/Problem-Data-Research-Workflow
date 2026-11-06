@@ -19,6 +19,13 @@ class FigurePermissionGateTests(unittest.TestCase):
             with self.subTest(name=name):
                 self.assertIn("FIGURE_POLICY.md", (ROOT / name).read_text(encoding="utf-8"))
 
+    def test_style_freeze_keeps_opt_in_gate(self):
+        policy = (ROOT / "FIGURE_POLICY.md").read_text(encoding="utf-8")
+        for marker in ("只有用户明确出图要求", "CI也不得实际渲染图片", "style_fingerprint",
+                       "template_id", "不要求为普通科研项目安装"):
+            with self.subTest(marker=marker):
+                self.assertIn(marker, policy)
+
     def test_figure_request_does_not_grant_other_authorizations(self):
         policy = (ROOT / "FIGURE_POLICY.md").read_text(encoding="utf-8")
         self.assertIn("绘图授权**独立于论文写作授权**", policy)
