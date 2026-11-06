@@ -13,7 +13,7 @@
 
 **下一步交付方式**：遵守[NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)：可在既有授权范围内自主决定的技术任务/强烈推荐任务，直接给一段最小可执行Agent指令；需用户判断或新增授权的，先给建议与2–3个选项，不提前输出Agent指令。
 
-**写作锁**：阅读 [WRITING_GATE.md](WRITING_GATE.md)；在用户审查科研成果总结且明确授权写作之前，禁止自动生成论文提纲/章节/初稿。论文潜力判断、DRAFTABLE、可信Run、确认完成都不解除锁定；继续科研与补证据不受影响。
+6. **双文件科研记忆与写作锁**：阅读 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 和 [WRITING_GATE.md](WRITING_GATE.md)。有实际项目工作区时持续维护 `RESEARCH_RECORD.md`；科研方向基本明确后提前规划 `PAPER_BLUEPRINT.md` 的一级/二级标题、各节拟写内容/证据缺口。未经科研总结的用户审查及单独正文授权，不得生成投稿标题、摘要、章节正文或初稿；继续科研及规划不受影响，图片单独授权。
 
 **完成算法后（按需）**：稳定可信Run且拟HOLD/结束/再堆模型时，参考[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)判断一次小规模科学升级是否值得；不新增必经阶段，不自动拟合或写稿。
 

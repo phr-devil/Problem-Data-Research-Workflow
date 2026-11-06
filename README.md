@@ -18,7 +18,9 @@
 
 **下一步Agent指令 / 用户选择分流**：[NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)。已授权且可自行决定或明确值得执行的技术工作，直接给简短可执行Agent指令；需用户判断或新增授权时，先给推荐和选项，不提前给Agent指令。
 
-**论文写作锁（强制）**：[WRITING_GATE.md](WRITING_GATE.md)。默认 `WRITING_LOCKED`：必须先有科研成果总结和用户审查，再有独立明确的写作授权；可发表性、`DRAFTABLE`、确认成功和自动路由均不会启动论文提纲/初稿。证据补齐、科研验证与普通诊断不受影响。
+**双文档持续整理**：[DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md)。每个实际项目维护 `RESEARCH_RECORD.md`（做过什么、哪些尝试及失败、下一步、恢复与二次探索）和 `PAPER_BLUEPRINT.md`（论文一级/二级标题、逐节拟写内容及证据/缺口），在重要科研事件时增量更新。见 [研究记录模板](templates/RESEARCH_RECORD.md) / [论文蓝图模板](templates/PAPER_BLUEPRINT.md)。
+
+**正式稿件写作锁（强制）**：[WRITING_GATE.md](WRITING_GATE.md)。可以提前规划 H1/H2，但正式投稿标题、摘要、章节正文或初稿，仍必须先有科研成果总结经用户审查，再另获明确的写作授权。可发表性、DRAFTABLE、确认成功、蓝图完成不会自动写稿；图片生成也需要用户单独明确请求。
 
 **已有科学价值主动挖掘与贡献充分提炼**：[SCIENCE_RESULT_HARVEST.md](SCIENCE_RESULT_HARVEST.md)。重要Run/负结果/拟HOLD/科研总结前复用现有预测、组级差异和实际成本寻找未发现的科学规律线索；比较不同贡献再选最有价值的主张。区分`ARTICULATION_GAP`（已存在可信证据但科学说明不充分）与`EVIDENCE_GAP`（关键实验还缺），避免反复GPU训练或用漂亮修辞替代验证。可选只读`python -m core.result_harvest --packet DEV_EVIDENCE.json`仅做探索性组级描述，不证明Q2/因果/独立确认；默认写作锁不变。
 

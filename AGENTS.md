@@ -2,7 +2,7 @@
 
 - **最高优先级：用户未明确要求实际绘制/修改图片时，禁止所有图片生成与重绘**（包括诊断图、证据图、论文图、算法框图及预览）。继续研究/可信Run/写作许可不算绘图指令；按需读[FIGURE_POLICY.md](FIGURE_POLICY.md)。
 
-- **最高优先级：论文写作锁**：默认 `WRITING_LOCKED`。必须先完成科研成果总结并获得用户明确审查，再获得本项目明确的论文写作授权，才可写提纲、摘要、章节或初稿。PAPER_PATH_CANDIDATE、DRAFTABLE、CONFIRMED、稿件潜力及用户提问不授权写作；无来源则保持锁定。科研实验和证据补齐照常继续。详见 [WRITING_GATE.md](WRITING_GATE.md)。
+- **最高优先级：双文件科研记忆与正式写稿锁**：见 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 和 [WRITING_GATE.md](WRITING_GATE.md)。实际项目按重要事件增量维护 `RESEARCH_RECORD.md`（尝试、失败、下一步和重启价值），科研方向基本明确后维护 `PAPER_BLUEPRINT.md`（论文 H1/H2、逐节要点与 Claim/Run 证据）。提纲规划无需正式写作授权；默认 `WRITING_LOCKED` 仅允许在成果总结经用户审查、用户另外明确授权后撰写投稿标题、摘要、章节正文或初稿。可信 Run、DRAFTABLE 和蓝图完成不授予写稿许可。
 
 - **唯一科研总控**：[WORKFLOW.md](WORKFLOW.md)。首次先读 [START.md](START.md) 与总控；已有项目先核真实 STATE/Run，按阻碍仅加载必要专题。绝不默认导入其他项目的规则。
 - **Q2科研成功标准**：只有**证据支持的JCR Q2或更高投稿潜力（优先Q1）**才算论文导向项目科研目标达成；无需实际期刊录用。普通专业期刊可发表、B/C自定义档或DRAFTABLE不等于成功。按需读[Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)；不猜录用率，科学事实与项目目标分账。
