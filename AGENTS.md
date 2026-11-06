@@ -5,7 +5,7 @@
 ## 0. 冷启动/跨会话恢复：按此顺序读取
 
 1. **明确本轮用户请求及实际权限**，确认项目目录、研究范围和是否为既有任务；用户最新的原始授权优先于任何状态摘要。
-2. **已有项目**：先读 `RESEARCH_RECORD.md` 顶部“当前快照”（目标、可信成果、失败边界、当前阻碍、下一步），有论文规划需求再读 `PAPER_BLUEPRINT.md` 的“构思快照”和相关 `SEC_ID`。随后核对 STATE/manifest 和与**本轮任务相关**的 EXP/Run/Claim、源码及协议；不通读完整历史。
+2. **已有项目**：先从已知项目路径或现有 STATE 中的 `RESEARCH_RECORD_REF` / `PAPER_BLUEPRINT_REF` **定位文件**，存在才读 `RESEARCH_RECORD.md` 顶部“当前快照”（目标、可信成果、失败边界、当前阻碍、下一步）；论文任务再读 `PAPER_BLUEPRINT.md` 的构思快照和相关 `SEC_ID`。随后核真实 STATE/manifest 及当前任务相关 EXP/Run/Claim、源码和协议；缺文档则按旧项目的 STATE/原始证据继续，不虚构快照或先通读所有历史。
 3. **新项目**：按需读 [START.md](START.md) 和 [WORKFLOW.md](WORKFLOW.md) 对应活动，创建/复用科研记录；方向基本明确后再建立论文蓝图。不重复启动已经选题、下载和验证过的流程。
 4. **规则冲突/来源冲突**：用户原始授权与真实源工件最优先；[WORKFLOW.md](WORKFLOW.md) 管科研选择、阶段与权限；[DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 管两文件更新；专题文件只管其具体任务。STATE、摘要、哈希检查、Agent 判断均不能替代科学证据或真实授权。
 

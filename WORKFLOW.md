@@ -52,13 +52,13 @@
 | 真实DEV残差已核、需要设计新算法或连续工程迭代 | [ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)（按需） | 误差/合法杠杆/直接简单替代/一条不同预言、最小正控、授权内执行结果和论文机会 |
 | 有 TASK/基线/负 Pilot/普通代码故障 | [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md)；写代码才读 [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) | 有效 Run、定向修复或 NEXT_PROBE |
 | 稳定可信算法、拟HOLD/结束/继续投入，或想用小修改提高科学性 | [POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)（按需） | 区分性科学问题、最小有界验证或保留成果并总结；不自动写稿 |
-| 可信Run/关键负Pilot/拟继续投入，需要比较现有科学主张是否具有Q2+竞争力、决定性证据与升级价值 | [PAPER_FIRST.md](PAPER_FIRST.md) | 可发表主张的证据地图（非论文提纲）、必需证据缺口、补证据vs升级模型的选择 |
+| 可信Run/关键负Pilot/拟继续投入，需要比较现有科学主张是否具有Q2+竞争力、决定性证据与升级价值 | [PAPER_FIRST.md](PAPER_FIRST.md) | 可发表主张证据地图、必需证据缺口、补证据vs升级模型的选择；可增量规划 PAPER_BLUEPRINT 的 H1/H2，但不自动写投稿式正文 |
 | 有可信结果、需要收敛论文贡献或判断创新价值 | [PAPER_FIRST.md](PAPER_FIRST.md)；确需转任务才读[TASK_EXPLORATION.md](TASK_EXPLORATION.md) | CLAIM_EVIDENCE_MAP、具名近邻差额与下一必要实验 |
 | 有可信增量Claim且需判断稿件档次/目标期刊 | [VENUE_STRATEGY.md](VENUE_STRATEGY.md)（仅按需） | 非强制的稿件潜力、期刊适配梯队、关键证据缺口；不预测录用率 |
 | 正式科学确认、公开主张、投稿 | [CONFIRMATION.md](CONFIRMATION.md) | 预冻结协议、独立证据或 CONFIRMATION_UNAVAILABLE |
 | 用户改变研究范围/权限/预算 | 本文件＋最新 STATE | 影响范围与真实用户决策 |
 
-已有项目先核STATE/有效Run的索引，再按阻碍只读一份专题与受影响证据；无需每轮重读全章、旧Prompt、历史失败和完整训练日志。规则/协议或证据变化时才重读相关内容。ChatGPT 优先公开资料与科学论证，WorkBuddy/Codex 在用户实际授权范围内核本地资产并执行。状态缓存与现场不符时以原始证据和最新授权为准。
+已有项目先用现有 STATE/项目路径定位双文档（存在才读）、核当前快照，再核真实 STATE/有效Run 索引；按阻碍只读一份专题与受影响证据；无需每轮重读全章、旧Prompt、历史失败和完整训练日志。规则/协议或证据变化时才重读相关内容。ChatGPT 优先公开资料与科学论证，WorkBuddy/Codex 在用户实际授权范围内核本地资产并执行。状态缓存与现场不符时以原始证据和最新授权为准。
 
 ## 2.5 各阶段的最短交接（不是每轮填写全部字段）
 

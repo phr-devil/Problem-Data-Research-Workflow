@@ -29,8 +29,9 @@
 参考 [MLflow](https://github.com/mlflow/mlflow) 的 Run 追踪、[RD-Agent](https://github.com/microsoft/RD-Agent) 的反馈闭环、[ARIS](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep) 的结果到 Claim 与 Paper Plan、[latex-paper-skills](https://github.com/yunshenwuchuxun/latex-paper-skills) 的章节/实验需求规划及 [K-Dense](https://github.com/K-Dense-AI/scientific-agent-skills) 的 Claim–Evidence 对齐。只是参考设计，不依赖安装这些项目或额外调用模型。
 ## 4. AI 冷启动读取优先级（非额外状态机）
 
-- 入口只有 [AGENTS.md](AGENTS.md)。收到既有项目任务时，优先读 RESEARCH_RECORD.md 的**当前快照 → 当前可信成果/失败边界 → 下一步及权限依赖**；如涉及论文，再读 PAPER_BLUEPRINT.md 的构思快照和受影响 SEC_ID。随后读 STATE/manifest 与相关 EXP/Run/Claim 的**真实原始证据**。只有当前问题需要时才读旧事件全文、其他论文节、专题 Skill 或历史日志。新项目按需读 START.md，WORKFLOW.md 仍是唯一科研总控。
-- **信息权威顺序**：原始用户权限/决策与冻结的合法原始工件 > 真实 STATE/Run/协议 > 研究记录当前摘要 > 论文蓝图。若有矛盾，标 `SOURCE_CONFLICT` 并核证，不能默默选择对论文最有利的一项。STATE 保留原来的 Run/机器状态职责，**两份 Markdown 仅提供可读索引**，不能反向改写底层证据。
+- 入口只有 [AGENTS.md](AGENTS.md)。收到既有项目任务时，**先用已知项目目录或既有 STATE 的 RESEARCH_RECORD_REF/PAPER_BLUEPRINT_REF 定位文件**，若存在则优先读 RESEARCH_RECORD.md 的**当前快照 → 当前可信成果/失败边界 → 下一步及权限依赖**；如涉及论文，再读 PAPER_BLUEPRINT.md 的构思快照和受影响 SEC_ID。随后读 STATE/manifest 与相关 EXP/Run/Claim 的**真实原始证据**。只有当前问题需要时才读旧事件全文、其他论文节、专题 Skill 或历史日志。新项目按需读 START.md，WORKFLOW.md 仍是唯一科研总控。
+- **分轴核实而不是混排权限与数据**：用户原始指令与正式授权记录仅决定**允许做什么**；合法原始工件/冻结协议决定**实验事实及可比性**；STATE/Run 索引提供定位、版本和追溯；研究记录与论文蓝图只是摘要/规划。不可用用户意愿推翻数据事实，也不可用已验证 Run 自动授予权限。若有矛盾，标 `SOURCE_CONFLICT` 并核证，不能默默选择对论文最有利的一项。STATE 保留原来的 Run/机器状态职责，**两份 Markdown 仅提供可读索引**，不能反向改写底层证据。
+- **旧项目与并发安全**：真实项目若未建立两份 Markdown，可先按既有 STATE/Run 工作，并在有信息增量时按需建立；同一项目有多个 Agent 时，先比较文件最新版本/内容，再以单一写入者或串行合并局部差异，禁止无条件覆盖、误删另一 Agent 的更新。对现有历史追加更正说明并保留原始 Run。内容可核查但不自动拥有任何授权。
 - **文件中状态要有时点与依据**：快照记录最近实质更新标识（事件/Run/版本）；不知道时间或路径写 UNKNOWN。锁定权限依然须查原始用户指令，文档只能存其引用，不能生成批准。
 
 ## 5. ID、章节层级与局部更新

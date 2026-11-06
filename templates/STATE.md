@@ -1,11 +1,11 @@
 # PD-RW｜最小续做 STATE（按需字段，不是填写表）
 
-**跨会话阅读**：AI 先读项目 RESEARCH_RECORD.md 顶部当前快照和与请求相关的 PAPER_BLUEPRINT.md SEC_ID，再使用本 STATE 索引精确找到原始 Run/协议；任何冲突以真实合法工件及原始用户授权为准。STATE 保留原机器/索引职责，不改为第三份项目记忆文档。
+**跨会话阅读**：先用现有项目路径或本 STATE 的 `RESEARCH_RECORD_REF` / `PAPER_BLUEPRINT_REF` **定位**两份文件（缺失则回退原 STATE/Run，不猜路径、不凭空创建已有证据），再读科研记录当前快照和请求相关的论文 SEC_ID，随后核本 STATE 与原始 Run/协议。原始用户指令决定权限，合法源工件决定科学事实；有冲突标 SOURCE_CONFLICT 并核证。STATE 保留原机器/索引职责，不改为第三份项目记忆文档。
 
 现有STATE、RUNS、CLAIMS、manifest优先**复用原路径**；只更新本轮变化和下一步所需字段，其他不复制、不填空占位。原始日志/图片/代码留在原处；未运行NOT_RUN，证据不足UNKNOWN。
 
 ## 常驻索引（仅变化时更新）
-- WORKFLOW: PD-RW v1.7.1（仅用户明确选择；旧项目兼容）
+- WORKFLOW: PD-RW v1.12（**新项目示例**；旧项目保留其实际流程版本及协议，不强制改写旧 STATE）
 - USER_SCOPE: <本轮用户研究范围或「方向不限」；SCOPE_UNSPECIFIED不继承旧课题>
 - AREA_DATA: <当前大问题及选择来源；未选WAITING_FOR_USER_SELECTION>
 - ACTIVE_TASK: <当前TASK_ID/合法K/部署前信息/协议；可UNDECIDED>
