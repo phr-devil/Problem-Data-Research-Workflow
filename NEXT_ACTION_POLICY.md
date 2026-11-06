@@ -1,5 +1,7 @@
 # Next Action / User Decision｜Agent下一步输出规则
 
+**双文件维护不是论文写作许可**：真实授权科研中，按 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 对关键任务/Run/失败/决策及时增量更新 `RESEARCH_RECORD.md`，仅在章目或 Claim–Evidence 发生变化时增量更新 `PAPER_BLUEPRINT.md`。普通重复调试不生成固定长篇总结，旧项目不强制迁移；正式稿件继续执行 [WRITING_GATE.md](WRITING_GATE.md)。
+
 **绘图不是自主技术默认动作**：只有用户本人明确要求绘制/重绘/修改图片时，才可给出绘图执行命令或实际作图；没有请求只用文字/表格给建议。见[FIGURE_POLICY.md](FIGURE_POLICY.md)。
 
 > **优先级**：对所有PD-RW阶段、WorkBuddy/Codex任务交接、科研收口和Q2评估生效；不改变真实用户授权、[WRITING_GATE.md](WRITING_GATE.md)或[Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)。用于**给用户的下一步输出**，不是授权Agent自动执行尚未批准的动作。

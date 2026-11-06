@@ -30,14 +30,15 @@ class ManuscriptWritingGateTests(unittest.TestCase):
                       "MANUSCRIPT_WRITE_AUTH", "LOCKED"):
             self.assertIn(field, state)
 
-    def test_legacy_early_draft_exceptions_removed(self):
+    def test_early_outline_not_manuscript_draft(self):
         paper = doc("PAPER_FIRST.md")
         confirmation = doc("CONFIRMATION.md")
         self.assertNotIn("可先写标明证据缺口的论文框架", paper)
         self.assertNotIn("候选阶段写带**证据缺口标记**的提纲或初稿", paper)
         self.assertNotIn("`DRAFTABLE`允许写含缺口的初稿", confirmation)
         self.assertNotIn("允许提前写“计划验证的论文草稿”", confirmation)
-        self.assertIn("不得写论文提纲或初稿", paper)
+        self.assertIn("不得写可投稿章节正文或初稿", paper)
+        self.assertIn("PAPER_BLUEPRINT", paper)
 
 
 if __name__ == "__main__":

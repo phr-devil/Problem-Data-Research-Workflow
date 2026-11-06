@@ -12,6 +12,8 @@
 - BEST_VALID_RUN: <有效Run ID＋原始指标/配置/代码路径；NONE>
 - NEXT: <唯一最有价值的合法行动＋POS/NEG/INVALID及成本>
 - PATH_MAP: <现有RUNS/CLAIMS/代码/数据索引，不复述文件内容>
+- RESEARCH_RECORD_REF: <项目关键科研过程、失败与恢复路径的 RESEARCH_RECORD.md；可复用旧文档>
+- PAPER_BLUEPRINT_REF: <论文一级/二级标题、各节要点/证据缺口的 PAPER_BLUEPRINT.md；方向未明可 NONE>
 
 ## 专题索引（当前涉及才添加，其他省略）
 - SEARCH_TRACE: <查询来源/日期/覆盖缺口；SEARCH_PARTIAL>
