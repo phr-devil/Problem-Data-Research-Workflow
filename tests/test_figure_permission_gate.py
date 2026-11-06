@@ -30,12 +30,17 @@ class FigurePermissionGateTests(unittest.TestCase):
         policy = (ROOT / "FIGURE_POLICY.md").read_text(encoding="utf-8")
         for name in ("tol-bright", "tol-muted", "tol-vibrant", "okabe-ito", "tableau10",
                      "semantic_colors", "palette_registry_version", "不因升级工作流而自动迁移",
-                     "只有用户明确要求绘图才能实际渲染", "无法", "SEALED访问"):
-            # The policy wording, not palette metadata, determines actual image permission.
-            if name == "无法":
-                continue
+                     "只有用户明确要求绘图才能实际渲染", "SEALED访问"):
+            # Palette metadata never authorizes image generation.
             with self.subTest(name=name):
                 self.assertIn(name, policy)
+
+    def test_figure_evidence_and_output_integrity_are_scoped(self):
+        policy = (ROOT / "FIGURE_POLICY.md").read_text(encoding="utf-8")
+        for term in ("independent_unit", "missing_policy", "uncertainty_definition",
+                     "selection_history", "SVG+PNG", "单一成功文件误报", "不新增授权门槛"):
+            with self.subTest(term=term):
+                self.assertIn(term, policy)
 
     def test_figure_request_does_not_grant_other_authorizations(self):
         policy = (ROOT / "FIGURE_POLICY.md").read_text(encoding="utf-8")
