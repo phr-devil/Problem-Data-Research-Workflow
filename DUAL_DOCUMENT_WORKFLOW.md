@@ -44,3 +44,15 @@
 ## 6. 冷启动交接验收（不宣称自动测得 AI 理解提升）
 
 接手者不必先读全部历史，也应能从当前快照和所指证据回答：项目问题与用户范围、最佳真实有效 Run 及协议、最重要的负结果/故障原因、下一步及权限、论文受影响的 SEC_ID 和待补证据。静态测试只能检查**结构/链接/权限语句**；真正的 AI 接手成功率和 Token 成本必须通过后续真实或受控的 Agent 接手对照测量，不得宣称 CI 已证明科研质量提升。
+
+## 7. 按需只读文档结构核查（可选，不新增审批）
+
+如果新建/大量修改两份文件、发现断链或 Agent 接手时怀疑 ID 重复，可用标准库运行以下**只读**检查（需在 PD-RW 源码环境）：
+
+```bash
+python -m core.doc_integrity --project PROJECT_DIR
+# 如两份文件不在项目根目录，显式指定相对于 PROJECT_DIR 的路径：
+python -m core.doc_integrity --project PROJECT_DIR --record docs/RESEARCH_RECORD.md --blueprint docs/PAPER_BLUEPRINT.md --json
+```
+
+此工具**只打开指定两份 Markdown**，检查唯一文档 H1、论文 H2/H3 层级、重复 EXP/SEC_ID、简要断链警告；不会打开 Run 数据、SEALED、图片或执行任何训练/生成，不改写文件。缺少两份文件的旧项目返回 INFO 而非失败，旧引用不完整只给 WARN；真正结构错误标 ERROR。项目有多 Agent 并发写入时，需在写前协调最新文件版本，检查器**不**进行文件锁定或自动冲突合并。核查通过仅是格式/ID 一致，**不是科学真实性、用户授权、引用正确性或 AI 接手成功的证明**。没有相关症状无需每轮运行。

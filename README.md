@@ -124,3 +124,5 @@ python -m core.cli forge-verify --root PD_PROJECT --run runs/R.json --forge-repo
 ```
 
 需将**相同字节的原始预测 JSON**保存在PD-RW Run与RWF Run引用路径下，Task/协议/数据版本/独立组/样本ID/合法输入/信息层级需相符；若旧项目仅有CSV或不同样本编号，先在DEV合法地生成等价的标准预测工件并核对，不得靠复制F1制造验证。接口输出仅为 `METRIC_VERIFIED_DEV_ONLY`，不能证明训练执行来源、时间因果合法性、算法增益公平性、论文贡献或封存确认。详情见[FEASIBILITY_ENVELOPE.md](FEASIBILITY_ENVELOPE.md)。
+
+**可选双文档只读核查**：在 PD-RW 源码环境使用 `python -m core.doc_integrity --project PROJECT_DIR`；只检查文档结构、重复 ID 和显式 EXP/SEC_ID 交叉引用，缺失的旧文件不要求迁移。支持 `--record/--blueprint` 自定义相对路径。详见 [双文档规则 §7](DUAL_DOCUMENT_WORKFLOW.md)。它不验证科学结果、不读取 SEALED、不生成图片或改写文件；无相关问题时不需要运行。

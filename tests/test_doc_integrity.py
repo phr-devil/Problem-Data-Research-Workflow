@@ -53,6 +53,12 @@ class DocIntegrityTests(unittest.TestCase):
             self.assertEqual(main(["--project", str(root), "--json"]), 0)
             self.assertEqual(len(list(root.iterdir())), 2)
 
+    def test_optional_check_documented_without_new_gate(self):
+        guide = (ROOT / "DUAL_DOCUMENT_WORKFLOW.md").read_text(encoding="utf-8")
+        self.assertIn("python -m core.doc_integrity --project PROJECT_DIR", guide)
+        self.assertIn("不新增审批", guide)
+        self.assertIn("不是科学真实性", guide)
+
     def test_rejects_path_escape(self):
         with tempfile.TemporaryDirectory() as temp:
             with self.assertRaises(ValueError):
