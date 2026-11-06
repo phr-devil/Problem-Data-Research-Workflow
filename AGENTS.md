@@ -1,23 +1,28 @@
-# AGENTS.md — PD-RW Agent 入口
+# AGENTS.md｜PD-RW Agent 唯一默认入口
 
-- **最高优先级：用户未明确要求实际绘制/修改图片时，禁止所有图片生成与重绘**（包括诊断图、证据图、论文图、算法框图及预览）。继续研究/可信Run/写作许可不算绘图指令；按需读[FIGURE_POLICY.md](FIGURE_POLICY.md)。
+> 这是**导航和权限摘要**，不是第二套科研流程。正式科研决策始终由 [WORKFLOW.md](WORKFLOW.md) 主控；只有用户明确选择 PD-RW 时启用。本文件仅指导“先读什么、再做什么”，专题规则按需加载。
 
-- **最高优先级：双文件科研记忆与正式写稿锁**：见 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 和 [WRITING_GATE.md](WRITING_GATE.md)。实际项目按重要事件增量维护 `RESEARCH_RECORD.md`（尝试、失败、下一步和重启价值），科研方向基本明确后维护 `PAPER_BLUEPRINT.md`（论文 H1/H2、逐节要点与 Claim/Run 证据）。提纲规划无需正式写作授权；默认 `WRITING_LOCKED` 仅允许在成果总结经用户审查、用户另外明确授权后撰写投稿标题、摘要、章节正文或初稿。可信 Run、DRAFTABLE 和蓝图完成不授予写稿许可。
+## 0. 冷启动/跨会话恢复：按此顺序读取
 
-- **唯一科研总控**：[WORKFLOW.md](WORKFLOW.md)。首次先读 [START.md](START.md) 与总控；已有项目先核真实 STATE/Run，按阻碍仅加载必要专题。绝不默认导入其他项目的规则。
-- **Q2科研成功标准**：只有**证据支持的JCR Q2或更高投稿潜力（优先Q1）**才算论文导向项目科研目标达成；无需实际期刊录用。普通专业期刊可发表、B/C自定义档或DRAFTABLE不等于成功。按需读[Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)；不猜录用率，科学事实与项目目标分账。
-- **下一步人机分流（强制）**：见[NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)。无需新授权的技术选择或强烈建议的已授权行动，直接给下一步简洁可执行Agent指令；涉及新增权限、研究范围/项目STOP/封存/投稿/成果总结审查/论文写作等用户决定，先给判断+选项，**不得提前给执行指令**。
-- **真实授权**：选题/选库不等于批准下载、CPU/GPU训练、确认集访问、付费、外传或投稿。STATE中的权限指针不是授权本身，需核用户原始指令；已明确授权下载的范围内连续完成，无需重复询问。
-- **第一阶段防过早收敛（必须尊重用户范围和预算）**：见[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md)。选题在同一ChatGPT答复/2–3轮内完成`BREADTH_SCAN/DEEP_FALSIFICATION/COMPETING_CHOICE`，至少挑战一次不同失败前提的替代机会（查无可比备选则记录有限查询），不能只因“首个题目可行”就停止；[DATA_DISCOVERY.md](DATA_DISCOVERY.md)的`PRE_DOWNLOAD_SCIENCE_FIT`先看公开元信息的科学可评价性。原文/变量有关键不确定性须标暂定，不编造创新、实验或下载授权。数据反证原假设时优先回看保存的备选，重大转向仍由用户决定。
-- **数据先行**：新实证项目定D1及必要数据后，先查本地副本，缺失则在下载授权内获取完整必需文件并验收 `DATA_ACQUIRED_VERIFIED`；未就绪不得进入数据画像、正式TASK、基线/训练。无授权输出下载方案并标等待。备用库、理论或纯仿真按实际依赖处理，不盲目下全网数据。
-- **高价值科学设计（按需）**：新题按[HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md)主动筛重要知识缺口，主库评估能否区分关键混杂/竞争解释，Task写不同预测，机制候选优先具名高价值杠杆+最小DEV判别。允许在实际授权与信息价值合理时探索较高上限方法；不把低难度小增益默认当Q2成功，不因初次负Pilot放弃整题，不增加必经关卡。
-- **已有结果科学信息挖掘与贡献充分性（按需）**：见[SCIENCE_RESULT_HARVEST.md](SCIENCE_RESULT_HARVEST.md)。首个重要可信Run、关键负结果、拟继续大成本或收束/成果总结前，先复用预测/负结果检查尚未提取的条件性规律、能力边界、成本权衡；比较最多3项真正不同的Claim，再区分`ARTICULATION_GAP`（已有证据未说清）和`EVIDENCE_GAP`（科学证据不足）。仅科研证据简报、不写论文故事；同证据不重复挖掘。
-- **算法完成后科学升级**：已有稳定可信Run、拟结束或追加复杂模型时按需读[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)，最多筛3个区别性新假设，先零训练分析，按信息增量与已有授权做有界判别（不预设只能一次）；缺真实新意则保留原算法并科研总结，不写论文。
-- **算法设计与连续工程（v1.12）**：真实数据已验收、明确TASK且需要新算法/复杂训练时，按需读[ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)。优先定位可复核误差→合法新杠杆→区分简单替代→最小正控与可证伪预言→授权内连续修代码/训练/记录Run。保留最简单可信Champion与一个真正不同的Challenger；若已具可信Q2+潜力则优先补决定性证据。代码Agent不等于本库内置GPU执行器。
-- **默认科研顺序（高价值问题及Q2竞争力优先）**：先比较重要知识缺口、可回答性与关键数据辨识力，再寻找可重复的最低可信规律或可证伪需求、复用/建立同信息简单基线，再判断可学性和科学贡献；仅针对明确剩余瓶颈升级复杂模型。保留简单有效结果与负证据，复杂失败不自动STOP，简单成功不自动等于论文。已有项目直接续做，不重启选题。
-- **证据**：真实Run/Claim以可核验工件为准；结构检查不能证明科学正确。使用`core/`时持续更新真实证据索引，现有Markdown项目不强制迁移。
-- **增量成果保护（非Q2成功）**：有据可查的新规律、能力、效率/标定成本收益或合理方法组合可按[PAPER_FIRST.md](PAPER_FIRST.md)登记候选，但先审查重要性、最强近邻、数据科学辨识力和Q2证据差额；无需全指标SOTA、新网络或机械跨库。先写最窄可支持Claim及缺口，再做对应关键证据；不得把DEV发现当独立确认。
-- **完成科研证据优先（不授权写稿）**：新任务可快速对照1–3篇近期同方向真实发表文章（不先给期刊打分）；首个可信Run、关键负Pilot、拟HOLD/PIVOT或昂贵算法升级时先按[PAPER_FIRST.md](PAPER_FIRST.md)检查Q2+科研证据路线。若存在一项有价值的增量贡献和可补齐的关键证据，优先完成可验证的独立科研贡献及必要证据；优先Q1，但只为真实科学增量与可确认的Q2+竞争力投入合理资源。正式确认和投稿授权不放宽。
-- **按需选刊，不作为否决器**：在可信结果/负结果有可检验新规律时，用[PAPER_FIRST.md](PAPER_FIRST.md)审增量Claim；任务设计阶段只在必要时读[VENUE_STRATEGY.md](VENUE_STRATEGY.md)的轻量类似论文；有可信结果且需要确定论文路线、用户要求或确需定稿时才做正式期刊匹配。S/A/B/C是稿件发展潜力，冲刺/主投/保守是期刊相对匹配策略；未知/暂不具备论文 ≠ 自动放弃数据或任务。不得猜IF、分区、APC及录用率。
-- **效率**：按需读取、复用旧Run/负结果、原授权内连续修复；只汇报新增证据、决定、下一动作和成本，早期不做装饰图/大报告。
-- **按需独立复算**：重大DEV基线/正增益可调用 `core.cli forge-verify`；只证实原始指标算术，不宣称源码执行、时间因果或论文确认。无本地RWF时继续合法探索，保留 `REPORTED`。
+1. **明确本轮用户请求及实际权限**，确认项目目录、研究范围和是否为既有任务；用户最新的原始授权优先于任何状态摘要。
+2. **已有项目**：先读 `RESEARCH_RECORD.md` 顶部“当前快照”（目标、可信成果、失败边界、当前阻碍、下一步），有论文规划需求再读 `PAPER_BLUEPRINT.md` 的“构思快照”和相关 `SEC_ID`。随后核对 STATE/manifest 和与**本轮任务相关**的 EXP/Run/Claim、源码及协议；不通读完整历史。
+3. **新项目**：按需读 [START.md](START.md) 和 [WORKFLOW.md](WORKFLOW.md) 对应活动，创建/复用科研记录；方向基本明确后再建立论文蓝图。不重复启动已经选题、下载和验证过的流程。
+4. **规则冲突/来源冲突**：用户原始授权与真实源工件最优先；[WORKFLOW.md](WORKFLOW.md) 管科研选择、阶段与权限；[DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 管两文件更新；专题文件只管其具体任务。STATE、摘要、哈希检查、Agent 判断均不能替代科学证据或真实授权。
+
+## 1. 不可跨越的边界
+
+- **权限**：选题和选库不自动许可下载、安装、CPU/GPU 拟合、SEALED/独立确认、付费、数据外传、项目级 STOP/PIVOT 或投稿；按 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md) 将授权内下一技术行动与用户必须决策的事项分开。
+- **论文**：允许提前维护 `PAPER_BLUEPRINT.md` 的 H1/H2 内容规划及证据缺口；正式稿件标题、摘要、章节正文/初稿须先完成科研成果总结并经用户审查，再由用户明确授权。默认 `WRITING_LOCKED`，见 [WRITING_GATE.md](WRITING_GATE.md)。
+- **图片**：**只有用户明确要求绘制/修改指定图片才能出图**；诊断图、论文图、预览和重绘均不可自动触发。见 [FIGURE_POLICY.md](FIGURE_POLICY.md)。
+- **证据**：开发集增益、通过测试、元数据或论文蓝图不是科研确认。Q2+可信投稿潜力（优先Q1）是科研目标，不保证录用；见 [Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)。
+
+## 2. 按实际阻碍加载一个相关专题
+
+- **新题/选库**：[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md) 的 `BREADTH_SCAN → DEEP_FALSIFICATION → COMPETING_CHOICE`、[DATA_DISCOVERY.md](DATA_DISCOVERY.md) 的 `PRE_DOWNLOAD_SCIENCE_FIT`，必要时 [HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md)；必需数据获授权且验收后才做数据实证。
+- **算法/负结果**：[EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md)、[ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)；复用有效 Run，必要时按 [SCIENCE_RESULT_HARVEST.md](SCIENCE_RESULT_HARVEST.md) 区分 `ARTICULATION_GAP` 与 `EVIDENCE_GAP`。
+- **科学机会/升级**：按需 [PAPER_FIRST.md](PAPER_FIRST.md)、[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)；只有已授权且有决定性新假说才升级复杂模型，重要失败和有价值资产不丢弃。
+- **独立确认/期刊**：[CONFIRMATION.md](CONFIRMATION.md)、[VENUE_STRATEGY.md](VENUE_STRATEGY.md)；RWF 仅在必要时按原始预测与协议进行 DEV 指标复核，不接管科研主控或给予许可。
+
+## 3. 任务结束：只更新重要变化
+
+按 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md)：关键真实事件更新 `RESEARCH_RECORD.md` 首页及末尾对应 EXP/Run；仅当论文内容或科学证据改变时，增量更新 `PAPER_BLUEPRINT.md` 对应 `SEC_ID`。原始日志/数值留原位置，旧项目不强制迁移、不写第三份记忆账本。报告仅需**新增证据 + 当前判断/限制 + 下一合法行动/所需授权**；无信息增量不重复整理。

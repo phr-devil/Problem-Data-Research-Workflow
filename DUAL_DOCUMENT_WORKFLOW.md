@@ -27,3 +27,19 @@
 - 跨会话 STATE 只需按需保留 RESEARCH_RECORD_REF、PAPER_BLUEPRINT_REF 两个路径；Agent 优先读两份文件首页与当前任务的相关事件/章节，再按需打开真实证据，避免无意义的全库重读。
 
 参考 [MLflow](https://github.com/mlflow/mlflow) 的 Run 追踪、[RD-Agent](https://github.com/microsoft/RD-Agent) 的反馈闭环、[ARIS](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep) 的结果到 Claim 与 Paper Plan、[latex-paper-skills](https://github.com/yunshenwuchuxun/latex-paper-skills) 的章节/实验需求规划及 [K-Dense](https://github.com/K-Dense-AI/scientific-agent-skills) 的 Claim–Evidence 对齐。只是参考设计，不依赖安装这些项目或额外调用模型。
+## 4. AI 冷启动读取优先级（非额外状态机）
+
+- 入口只有 [AGENTS.md](AGENTS.md)。收到既有项目任务时，优先读 RESEARCH_RECORD.md 的**当前快照 → 当前可信成果/失败边界 → 下一步及权限依赖**；如涉及论文，再读 PAPER_BLUEPRINT.md 的构思快照和受影响 SEC_ID。随后读 STATE/manifest 与相关 EXP/Run/Claim 的**真实原始证据**。只有当前问题需要时才读旧事件全文、其他论文节、专题 Skill 或历史日志。新项目按需读 START.md，WORKFLOW.md 仍是唯一科研总控。
+- **信息权威顺序**：原始用户权限/决策与冻结的合法原始工件 > 真实 STATE/Run/协议 > 研究记录当前摘要 > 论文蓝图。若有矛盾，标 `SOURCE_CONFLICT` 并核证，不能默默选择对论文最有利的一项。STATE 保留原来的 Run/机器状态职责，**两份 Markdown 仅提供可读索引**，不能反向改写底层证据。
+- **文件中状态要有时点与依据**：快照记录最近实质更新标识（事件/Run/版本）；不知道时间或路径写 UNKNOWN。锁定权限依然须查原始用户指令，文档只能存其引用，不能生成批准。
+
+## 5. ID、章节层级与局部更新
+
+- 复用项目真实的 Task/Run/Claim ID；新记一次重要科研尝试可用 `EXP-001`，新增 Claim 可用 `CLM-001`，但**不强制将已有 C01 或外部 Run 改名**。原始 Run ID 与其数据版本、评估协议、独立组及证据路径一起保留，重跑不得复用旧实验结果来伪装同一运行。
+- 论文结构在 Markdown 中固定为：一个文档 H1（`# PAPER_BLUEPRINT`），论文一级标题用 H2（`## 1. Introduction`），二级标题用 H3（`### 1.1 Research Background`）。章节可有稳定 `SEC_ID`（如 `SEC-INTRO-01`），即使后续改名/调整显示编号也不重用 ID。文档元信息使用未编号的 H2，不能混入论文章节序号。
+- 每个计划小节只记录**目标、拟写要点、真实 Claim/EXP/Run/文献指针、负证据与缺口、状态**。新科学结论改变局部时，只修改相应 SEC_ID 和首页索引，不批量重排整篇。图表规划只写文字，未获具体绘图请求不得生成任何图片。
+- RESEARCH_RECORD.md 推荐首页快照保持简短（通常约 20–40 行，具体按事实增减）；先放当前成果、失败边界与下一合法行动，**完整事件历史放在文档末尾按时间追加**。旧历史原则上保留，明确作废/纠错应追加来源及原因，而不是覆盖原失败。
+
+## 6. 冷启动交接验收（不宣称自动测得 AI 理解提升）
+
+接手者不必先读全部历史，也应能从当前快照和所指证据回答：项目问题与用户范围、最佳真实有效 Run 及协议、最重要的负结果/故障原因、下一步及权限、论文受影响的 SEC_ID 和待补证据。静态测试只能检查**结构/链接/权限语句**；真正的 AI 接手成功率和 Token 成本必须通过后续真实或受控的 Agent 接手对照测量，不得宣称 CI 已证明科研质量提升。

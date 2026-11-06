@@ -1,4 +1,6 @@
-# PD-RW v1.12｜AI 最短入口
+# PD-RW v1.12｜新项目与专题路线（从 AGENTS.md 按需进入）
+
+**唯一默认 Agent 入口为 [AGENTS.md](AGENTS.md)**。已有项目优先读 RESEARCH_RECORD.md 当前快照、相关 PAPER_BLUEPRINT.md 章节及真实 STATE/Run；本文件用于新项目或需要完整科研路线时按需阅读，不能取代 [WORKFLOW.md](WORKFLOW.md) 的原有六项活动与三个决策循环。
 
 仅在用户明确选择PD-RW时启用。**默认科研目标是形成可信、可发表的科学证据，而不是直接撰写论文。** **禁止自动绘图：只有用户明确要求实际绘制或修改图片才可出图**；否则仅可文字建议，见[FIGURE_POLICY.md](FIGURE_POLICY.md)。本轮研究范围以当前用户指令为准；[WORKFLOW.md](WORKFLOW.md) 是科研决策与权限的唯一总控，**无需预读所有专题**。
 

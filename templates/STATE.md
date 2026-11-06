@@ -1,5 +1,7 @@
 # PD-RW｜最小续做 STATE（按需字段，不是填写表）
 
+**跨会话阅读**：AI 先读项目 RESEARCH_RECORD.md 顶部当前快照和与请求相关的 PAPER_BLUEPRINT.md SEC_ID，再使用本 STATE 索引精确找到原始 Run/协议；任何冲突以真实合法工件及原始用户授权为准。STATE 保留原机器/索引职责，不改为第三份项目记忆文档。
+
 现有STATE、RUNS、CLAIMS、manifest优先**复用原路径**；只更新本轮变化和下一步所需字段，其他不复制、不填空占位。原始日志/图片/代码留在原处；未运行NOT_RUN，证据不足UNKNOWN。
 
 ## 常驻索引（仅变化时更新）
