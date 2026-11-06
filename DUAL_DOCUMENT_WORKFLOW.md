@@ -1,0 +1,29 @@
+# Dual Document Workflow｜持续科研记录与论文蓝图
+
+> 每个实际科研项目维护两份核心 Markdown：RESEARCH_RECORD.md（科研事实、历史与恢复）以及 PAPER_BLUEPRINT.md（论文 H1/H2 结构与证据规划）。不新增科研阶段、CLI 状态、固定 Agent 数量或授权门禁。旧项目可复用等价已有文件，不强制迁移。
+
+## 1. 文件职责
+
+- **RESEARCH_RECORD.md**：回答做了什么、为何做、尝试及有效和负向结果、原因与限制、资产与下一步、失败后如何重启。首页为当前状态，重要事件按序追加；原始 Run/日志/代码/哈希只作来源引用，不复制日志，不编造执行。
+- **PAPER_BLUEPRINT.md**：在方向基本明确后规划候选论文的一级/二级标题、各节拟写内容、潜在 Claim、证据指针、缺失实验、文献和图表的文字需求。没有结果的部分标 TENTATIVE、PLANNED、NOT_RUN 或 UNKNOWN；不以蓝图冒充真实论文稿件。
+- 研究记录是实验决策的事实索引；论文蓝图按 EXP/Run/Claim 引用研究记录与原始证据，不重复编一套结果。若二者和合法原始工件冲突，以原始证据/协议为准并标待更正。二者既不是科学确认，也不是用户授权凭证。
+- **规划不等于正式写作**：未经科研成果总结的用户审查和单独的稿件写作授权，可维护章节 H1/H2 和“本节要写什么”的要点，但不得自动写投稿标题、摘要、完整正文段落、论文式图注或初稿。见 [WRITING_GATE.md](WRITING_GATE.md)。文字图表规划不授权出图，任何图片只在用户明确请求时生成，见 [FIGURE_POLICY.md](FIGURE_POLICY.md)。
+
+## 2. 事件驱动的时间顺序
+
+1. **真实项目开始或接手**：核现有 STATE/Run 和权限，若无等价文件则创建 RESEARCH_RECORD.md，记录范围、资产、UNKNOWN、当前阻碍、已知真实证据及下一步。尚未授权的下载、CPU/GPU、SEALED 不能借整理自动执行。
+2. **科学方向或候选贡献初步明确**：建立 PAPER_BLUEPRINT.md 的简要 H1/H2 和逐节“目标、拟写要点、来源、反例、缺口、状态”。可以在实验尚未结束时建立；科研主张尚不确定则保持候选，不强行填完章节/标题。
+3. **发生重要科研事件**：任务/协议/假设变化，有意义的真实 Run、负 Pilot、工程故障、有效修复、科研取舍、HOLD/交接时，优先追加科研记录的简短事件，并刷新首页的有效成果、阻碍与唯一下一行动。纯命令、无变化的重复测试、普通无影响 Debug 不逐条记录。保留旧失败史，不能以成功覆盖、删除或改变评价结论。
+4. **事件改变论文故事或证据时**：再更新 PAPER_BLUEPRINT 的受影响 H1/H2、Claim–Evidence 映射与缺口；只修订相关节，不复制大段日志、不每轮重复全篇计划。负结果和最强反解释必须反映在适用章节。
+5. **暂停/失败/转向/交接**：科研记录突出当前最佳合法 Run、已证实无效/失败路线、未验证替代、可复用资产、恢复条件和下一项区别性 Probe；论文蓝图标记应撤回/更正的主张。项目级 STOP/PIVOT、额外资源和 SEALED 仍需用户决策。
+6. **正式写作阶段**：两道用户条件满足后才以蓝图为基础生成稿件，按新证据有界回填、审稿与修订。正式投稿/外传/付费、图片生成分别需要自己的许可。
+
+**更新粒度**：关键事件发生当轮及时整理，同一证据没有变化则复用；两文档均是轻量人机可读的索引，不新增第三本项目日志、不替代原 STATE 或任何真实 Run。
+
+## 3. 最小事件/章节合同
+
+- 一次重要尝试：EXP ID / 目的假说 / 实际实施与协议 / 数据与分组 / Run或文件指针 / 观察及负结果 / VALID、INVALID、INCONCLUSIVE 或 NOT_RUN / 原因确定性与最强替代解释 / 后续实验或重启价值。INVALID 不等于科学证伪，未知写 UNKNOWN。
+- 每个论文章节：H1/H2 / 本节任务 / 2–5 个要点 / Claim–EXP–Run 证据及真实文献 / 反例和适用范围 / 缺失实验 / 规划状态。显示结果/数字时需指向原始来源、独立统计单位、分母、评价协议和选择历史，不得从图表或项目愿望虚构结论。
+- 跨会话 STATE 只需按需保留 RESEARCH_RECORD_REF、PAPER_BLUEPRINT_REF 两个路径；Agent 优先读两份文件首页与当前任务的相关事件/章节，再按需打开真实证据，避免无意义的全库重读。
+
+参考 [MLflow](https://github.com/mlflow/mlflow) 的 Run 追踪、[RD-Agent](https://github.com/microsoft/RD-Agent) 的反馈闭环、[ARIS](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep) 的结果到 Claim 与 Paper Plan、[latex-paper-skills](https://github.com/yunshenwuchuxun/latex-paper-skills) 的章节/实验需求规划及 [K-Dense](https://github.com/K-Dense-AI/scientific-agent-skills) 的 Claim–Evidence 对齐。只是参考设计，不依赖安装这些项目或额外调用模型。
