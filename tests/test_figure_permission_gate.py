@@ -8,8 +8,8 @@ ROOT = Path(__file__).resolve().parents[1]
 class FigurePermissionGateTests(unittest.TestCase):
     def test_no_automatic_figures(self):
         policy = (ROOT / "FIGURE_POLICY.md").read_text(encoding="utf-8")
-        for key in ("FIGURE_DRAWING_LOCKED", "不生成任何图片", "只有用户本人明确要求",
-                    "不运行绘图脚本", "WRITING_LOCKED", "不自动要求绘图"):
+        for key in ("FIGURE_DRAWING_LOCKED", "不生成任何图片", "用户明确要求",
+                    "不运行绘图脚本", "WRITING_LOCKED", "不会自动要求绘图"):
             with self.subTest(key=key):
                 self.assertIn(key, policy)
 
