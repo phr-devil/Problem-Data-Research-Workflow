@@ -1,5 +1,7 @@
 # AGENTS.md — PD-RW Agent 入口
 
+- **最高优先级：用户未明确要求实际绘制/修改图片时，禁止所有图片生成与重绘**（包括诊断图、证据图、论文图、算法框图及预览）。继续研究/可信Run/写作许可不算绘图指令；按需读[FIGURE_POLICY.md](FIGURE_POLICY.md)。
+
 - **最高优先级：论文写作锁**：默认 `WRITING_LOCKED`。必须先完成科研成果总结并获得用户明确审查，再获得本项目明确的论文写作授权，才可写提纲、摘要、章节或初稿。PAPER_PATH_CANDIDATE、DRAFTABLE、CONFIRMED、稿件潜力及用户提问不授权写作；无来源则保持锁定。科研实验和证据补齐照常继续。详见 [WRITING_GATE.md](WRITING_GATE.md)。
 
 - **唯一科研总控**：[WORKFLOW.md](WORKFLOW.md)。首次先读 [START.md](START.md) 与总控；已有项目先核真实 STATE/Run，按阻碍仅加载必要专题。绝不默认导入其他项目的规则。

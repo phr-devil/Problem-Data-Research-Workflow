@@ -41,7 +41,7 @@
 `IMPORTANT_PROBLEM | WHY_EXISTING_WORK_INSUFFICIENT | ACTUAL_NEW_KNOWLEDGE_OR_CAPABILITY | EVIDENCE_RUNS+FAIR_COMPARISON | SUPPORTING_AND_CONTRADICTORY_RESULTS | STRONGEST_ALTERNATIVE | SCOPE+INDEPENDENCE | ARTICULATION_GAP/EVIDENCE_GAP/BOTH/NONE | DECISIVE_NEXT_ACTION+AUTH`
 
 判别规则：
-- **`ARTICULATION_GAP`**：关键科学证据已经存在，但成果总结遗漏了问题重要性、与近邻的*真正差异*、能力/机制的正确限定、负结果或最直接的实验对应关系。→ 用已有证据修正**科研成果总结/Claim–Evidence表**（允许诊断图与结果表），**不擅自写标题、摘要、引言、讨论、论文大纲或投稿图版**。
+- **`ARTICULATION_GAP`**：关键科学证据已经存在，但成果总结遗漏了问题重要性、与近邻的*真正差异*、能力/机制的正确限定、负结果或最直接的实验对应关系。→ 用已有证据修正**科研成果总结/Claim–Evidence表**（允许结果表；仅用户明确要求出图时制作诊断图），**不擅自写标题、摘要、引言、讨论、论文大纲或投稿图版**。
 - **`EVIDENCE_GAP`**：机制解释/泛化/成本/效应大小依赖未完成或无效验证。→ 标明“尚不能主张”，仅在原授权内选最小决定性实验；新资源/SEALED按[NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)先请用户决策。
 - **`BOTH`**：既有证据没有被准确提炼，且关键实验未完成。→ 先明确现有合法证据到底支持什么，再设计一项最有价值的补证据实验。
 - **`NONE`**：已有科研价值表达清楚，证据也充分到当前限定范围。→ 复用结果，别重复撰写“包装稿”，按Q2与权限规则决定后续。

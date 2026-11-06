@@ -1,6 +1,6 @@
 # PD-RW v1.12｜AI 最短入口
 
-仅在用户明确选择PD-RW时启用。**默认科研目标是形成可信、可发表的科学证据，而不是直接撰写论文。**本轮研究范围以当前用户指令为准；[WORKFLOW.md](WORKFLOW.md) 是科研决策与权限的唯一总控，**无需预读所有专题**。
+仅在用户明确选择PD-RW时启用。**默认科研目标是形成可信、可发表的科学证据，而不是直接撰写论文。** **禁止自动绘图：只有用户明确要求实际绘制或修改图片才可出图**；否则仅可文字建议，见[FIGURE_POLICY.md](FIGURE_POLICY.md)。本轮研究范围以当前用户指令为准；[WORKFLOW.md](WORKFLOW.md) 是科研决策与权限的唯一总控，**无需预读所有专题**。
 
 1. **已有项目**：先核真实STATE/Run、manifest和用户授权。若使用 `STATE.json/EVENTS.jsonl`，先查事件一致性；缺工件不冒充有效结果。仅按当前阻碍读对应专题。
 2. **新课题**：在`USER_SCOPE`内按[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md)进行**BREADTH_SCAN（广度覆盖）→DEEP_FALSIFICATION（最强近邻/反证）→COMPETING_CHOICE（不同失败前提的竞争机会）**三次内部审查（可在ChatGPT同一回复或2–3轮完成，不强制增加对话）；按公开官方元信息先查`PRE_DOWNLOAD_SCIENCE_FIT`，不因第一个可行方向就停搜。选出依据充分或标`PREFERRED_PROVISIONAL`的方向后，自主定D1及必需外部库→核官方版本/必要文件/许可/容量→**优先下载并核验数据**。已有完整副本直接复用；有下载授权的Agent连续完成获取，不再为选库/下载反复请示；无下载授权仅提供已核实的官方来源、文件清单、容量与推荐/授权选项，**不提供下载Agent执行指令或PowerShell命令**，标 `WAITING_FOR_DOWNLOAD_AUTH`，不进入数据实证。详见 [DATA_DISCOVERY.md](DATA_DISCOVERY.md)。

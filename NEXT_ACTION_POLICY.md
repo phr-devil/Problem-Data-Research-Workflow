@@ -1,5 +1,7 @@
 # Next Action / User Decision｜Agent下一步输出规则
 
+**绘图不是自主技术默认动作**：只有用户本人明确要求绘制/重绘/修改图片时，才可给出绘图执行命令或实际作图；没有请求只用文字/表格给建议。见[FIGURE_POLICY.md](FIGURE_POLICY.md)。
+
 > **优先级**：对所有PD-RW阶段、WorkBuddy/Codex任务交接、科研收口和Q2评估生效；不改变真实用户授权、[WRITING_GATE.md](WRITING_GATE.md)或[Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)。用于**给用户的下一步输出**，不是授权Agent自动执行尚未批准的动作。
 
 ## 1. 先判断下一动作是谁能决定
