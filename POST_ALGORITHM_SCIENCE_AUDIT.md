@@ -57,4 +57,4 @@ B或C之后明确回写`SUPPORTED_DEV_ONLY / CONFIRMED / INCONCLUSIVE / REFUTED_
 
 `SOURCE_RUN+VERSION | CLAIM+NEAREST_WORK_GAP(OR UNKNOWN) | OBSERVATION+GROUP_N | STRONG_SIMPLE_ALTERNATIVE | DISTINCT_PREDICTION+COMPETING_EXPLANATION | MIN_PROBE+A/B/C+POS/NEG/INVALID | CONFIRMATION_PATH | COST/AUTH | DECISION`。
 
-已有 `CLAIM_EVIDENCE_MAP`、`PROBE_CANDIDATE`、`STATE.md`可保存，普通Run无须新建表。可写一份短`SCIENCE_UPGRADE_AUDIT.md`备忘，但**不要**重复生成综述、论文大纲或精美图；到研究停止点转[WRITING_GATE.md](WRITING_GATE.md)要求的科研成果总结，再由用户审查与授权写稿。RWF 如参与，只执行具体的工程/实验判别，PD-RW保留科研价值和期刊适配决策权。
+已有 `CLAIM_EVIDENCE_MAP`、`PROBE_CANDIDATE`、`STATE.md`可保存，普通Run无须新建表。可写一份短`SCIENCE_UPGRADE_AUDIT.md`备忘，但**不要**重复生成综述、整份论文蓝图或精美图；已有 PAPER_BLUEPRINT.md 时只更新本轮科学进展影响的章节要点/证据缺口；到研究停止点转[WRITING_GATE.md](WRITING_GATE.md)要求的科研成果总结，再由用户审查与授权写稿。RWF 如参与，只执行具体的工程/实验判别，PD-RW保留科研价值和期刊适配决策权。

@@ -90,6 +90,6 @@
 | UNCERTAINTY / LIMITS | 独立n、CI/效应、训练预算、方法和应用边界 |
 | PAPER_READINESS | NO_INDEPENDENT_CLAIM / CLAIM_WITH_GAPS / DRAFTABLE / SUBMISSION_CANDIDATE |
 
-**若缺关键证据**：仅允许提前写科研验证计划和证据缺口清单，不允许在写作锁未解除时写“计划验证的论文草稿”；计划/代理不能当已验证结果；研究收益、原创性、论文接收和影响因子都不能保证。正式投稿、外传、费用和相应独立确认所需资源仍须真实用户许可。
+**若缺关键证据**：允许提前维护科研验证计划、证据缺口清单及 PAPER_BLUEPRINT.md 的 H1/H2 章节内容规划；在写作锁未解除时不得生成“计划验证的论文草稿”或任何正式稿件段落；计划/代理不能当已验证结果；研究收益、原创性、论文接收和影响因子都不能保证。正式投稿、外传、费用和相应独立确认所需资源仍须真实用户许可。
 
 **来源**：[AI-Scientist-v3](https://github.com/SakanaAI/AI-Scientist-v3) 的 investigation→ablation→sealed evaluation 分离；[MLflow](https://github.com/mlflow/mlflow) 的可追溯实验；[DVC](https://github.com/iterative/dvc) 的数据与流水线版本管理。这里只借证据结构，不安装第三方工具。
