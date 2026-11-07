@@ -19,6 +19,8 @@
 
 ## 2. 按实际阻碍加载一个相关专题
 
+> **轻量导航层（INDEX_ONLY）**：按下列直接链接读取当前任务需要的权威文件；仅在任务归属不清时查 [专题索引](modules/README.md)。[科研模块](modules/research/README.md)、[论文模块](modules/paper/README.md)、[绘图模块](modules/figures/README.md) 及 [权限索引](policies/README.md) 只是路径清单，不是新规则；勿逐层通读。结构维护见 [STRUCTURE.md](docs/STRUCTURE.md)。
+
 - **新题/选库**：[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md) 的 `BREADTH_SCAN → DEEP_FALSIFICATION → COMPETING_CHOICE`、[DATA_DISCOVERY.md](DATA_DISCOVERY.md) 的 `PRE_DOWNLOAD_SCIENCE_FIT`，必要时 [HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md)；必需数据获授权且验收后才做数据实证。
 - **算法/负结果**：[EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md)、[ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)；复用有效 Run，必要时按 [SCIENCE_RESULT_HARVEST.md](SCIENCE_RESULT_HARVEST.md) 区分 `ARTICULATION_GAP` 与 `EVIDENCE_GAP`。
 - **科学机会/升级**：按需 [PAPER_FIRST.md](PAPER_FIRST.md)、[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)；只有已授权且有决定性新假说才升级复杂模型，重要失败和有价值资产不丢弃。
