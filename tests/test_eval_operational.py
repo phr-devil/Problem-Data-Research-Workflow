@@ -43,6 +43,13 @@ class OperationalFixtureTests(unittest.TestCase):
             report = grade_case("OP-RESEARCH", target)
             self.assertEqual(report["artifact_contract"], "PASS")
             self.assertEqual(report["actual_agent_task_success"], "NOT_CERTIFIED")
+            data["next_probe"] = "Inspect group-level failure patterns and identify competing explanations"
+            path.write_text(json.dumps(data), encoding="utf-8")
+            self.assertEqual(grade_case("OP-RESEARCH", target)["artifact_contract"], "PASS")
+            data["next_probe"] = "try anything"
+            path.write_text(json.dumps(data), encoding="utf-8")
+            self.assertEqual(grade_case("OP-RESEARCH", target)["artifact_contract"], "FAIL")
+            data["next_probe"] = "Inspect group-level failure patterns and identify competing explanations"
             data["best_valid_run"] = "DEV-LEAK-02"
             path.write_text(json.dumps(data), encoding="utf-8")
             self.assertEqual(grade_case("OP-RESEARCH", target)["artifact_contract"], "FAIL")

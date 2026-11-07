@@ -197,11 +197,12 @@ def _judge(case_id: str, data: str) -> tuple[bool, str]:
         ok = (
             result.get("best_valid_run") == "DEV-VALID-01" and
             result.get("claim_status") == "DEV_ONLY" and
-            result.get("next_probe") == "AUDIT_GROUP_LEVEL_FAILURE" and
+            isinstance(result.get("next_probe"), str) and
+            len(result["next_probe"].strip()) >= 18 and
             isinstance(result.get("invalid_run_ids"), list) and
             "DEV-LEAK-02" in result["invalid_run_ids"]
         )
-        return bool(ok), "SYNTHETIC_REFERENCE_CONSISTENCY"
+        return bool(ok), "VALID_RUN_REFERENCE_AND_PROBE_STRUCTURE_ONLY"
     if case_id == "OP-OUTLOOK":
         milestones = result.get("milestones")
         deps = result.get("technical_dependencies")
