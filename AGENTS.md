@@ -30,6 +30,8 @@
 - **已授权的论文数据图**：优先按 [FIGURE_POLICY.md](FIGURE_POLICY.md) §4.5 使用 PD-RW 图表主题（RWF `styles/figure_theme_pdrw.json` 或同等实现）。普通二维数据图双轴末端箭头，彩色柱体无冗余点；多个可比子图统一布局与文字锚点。导出前执行箭头、柱体和真实子图几何检查，最后检查论文宽度的真实 SVG/PNG。若仅讨论规范，不生成图片。旧项目主题不擅自迁移。
 - **已授权的论文架构图／重绘**：优先从项目已有 `figures/<figure_id>.spec.json` 与 `.drawio` 恢复，按 [ACADEMIC_DIAGRAM_STYLE.md](ACADEMIC_DIAGRAM_STYLE.md) §4.1 使用单设计主控、固定 Skill 分工、增量修改和差异 QA；新图/缓存失效时再核对应真实 Methods/代码。可选 `python -m core.figure_change_scope --before OLD --after NEW` 只读比较规格，绝不自动生成图像、取得绘图授权或省略最终实际渲染检查。
 
+- **仅在用户要求审核/优化工作流时**：可按需读取 [PD-RW-EVAL](evals/EVALUATION_POLICY.md)，先做离线静态/场景合同，再按另行授权运行真实 Agent 沙箱测试。评估规则不构成新科研阶段；合成案例不授予下载、SEALED、绘图或正式稿件许可。缺真实执行轨迹、模型遥测与独立科学评价时标 `NOT_MEASURED`，不得声称任务成功率或 Token 下降。
+
 ## 3. 任务结束：只更新重要变化
 
 按 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md)：关键真实事件更新 `RESEARCH_RECORD.md` 首页及末尾对应 EXP/Run；仅当论文内容或科学证据改变时，增量更新 `PAPER_BLUEPRINT.md` 对应 `SEC_ID`。原始日志/数值留原位置，旧项目不强制迁移、不写第三份记忆账本。报告仅需**新增证据 + 当前判断/限制 + 下一合法行动/所需授权**；无信息增量不重复整理。

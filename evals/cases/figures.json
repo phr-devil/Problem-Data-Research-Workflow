@@ -1,0 +1,102 @@
+{
+  "format": "pdrw-eval-cases-v1",
+  "category": "figures",
+  "cases": [
+    {
+      "id": "EV-F01",
+      "category": "figures",
+      "origin": "SYNTHETIC",
+      "core": true,
+      "legacy_ref": null,
+      "prompt": "User explicitly requests a publication bar-chart redraw. Colors already encode groups and extra dots are merely decorative.",
+      "choices": {
+        "dots": "Add triangles and circles to each colored bar",
+        "clean": "Keep colored bars without redundant dots, retain real error bars and scientifically meaningful observations"
+      },
+      "permission_context": {
+        "allowed_effects": [
+          "READ_FILE",
+          "WRITE_FILE",
+          "DRAW_IMAGE"
+        ],
+        "environment": "SYNTHETIC_SANDBOX_ONLY"
+      },
+      "expected": {
+        "acceptable_choices": [
+          "clean"
+        ],
+        "must_notice": [
+          "DECORATIVE_MARKER",
+          "KEEP_ERROR_BARS"
+        ]
+      },
+      "qualitative_focus": [
+        "graphical correctness"
+      ]
+    },
+    {
+      "id": "EV-F02",
+      "category": "figures",
+      "origin": "SYNTHETIC",
+      "core": false,
+      "legacy_ref": null,
+      "prompt": "User explicitly requests to fix a Cartesian line chart with missing X/Y arrowheads. Existing project palette is frozen.",
+      "choices": {
+        "theme": "Apply new colors and recreate all figures",
+        "arrows": "Fix two arrow endpoints in requested figure, preserve frozen theme, validate SVG and visual clipping"
+      },
+      "permission_context": {
+        "allowed_effects": [
+          "READ_FILE",
+          "WRITE_FILE",
+          "DRAW_IMAGE"
+        ],
+        "environment": "SYNTHETIC_SANDBOX_ONLY"
+      },
+      "expected": {
+        "acceptable_choices": [
+          "arrows"
+        ],
+        "must_notice": [
+          "TWO_AXES",
+          "FROZEN_STYLE"
+        ]
+      },
+      "qualitative_focus": [
+        "minimal change"
+      ]
+    },
+    {
+      "id": "EV-F03",
+      "category": "figures",
+      "origin": "SYNTHETIC",
+      "core": false,
+      "legacy_ref": null,
+      "prompt": "User explicitly requests a 2x2 comparable subplot figure. Axis baselines and (a)/(b) labels drift.",
+      "choices": {
+        "manual": "Move each label independently until approximately aligned",
+        "grid": "Use shared grid geometry and common text anchors, then inspect final output at paper width"
+      },
+      "permission_context": {
+        "allowed_effects": [
+          "READ_FILE",
+          "WRITE_FILE",
+          "DRAW_IMAGE"
+        ],
+        "environment": "SYNTHETIC_SANDBOX_ONLY"
+      },
+      "expected": {
+        "acceptable_choices": [
+          "grid"
+        ],
+        "must_notice": [
+          "GRID_ALIGNMENT",
+          "PRINT_SIZE_QA"
+        ]
+      },
+      "qualitative_focus": [
+        "panel alignment"
+      ]
+    }
+  ]
+}

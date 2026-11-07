@@ -1,0 +1,105 @@
+{
+  "format": "pdrw-eval-cases-v1",
+  "category": "manuscripts",
+  "cases": [
+    {
+      "id": "EV-M01",
+      "category": "manuscripts",
+      "origin": "SYNTHETIC",
+      "core": true,
+      "legacy_ref": null,
+      "prompt": "User explicitly authorizes revising a reviewed critical review's Future Perspectives. Cloud labs remain prospective. What writing approach is strongest?",
+      "choices": {
+        "delete": "Remove forward-looking vision until independently demonstrated",
+        "assert": "Describe global fully autonomous laboratories as universally achieved",
+        "vision": "Offer clear future architecture with enabling conditions, falsifiable milestones and responsible advocacy"
+      },
+      "permission_context": {
+        "allowed_effects": [
+          "READ_FILE",
+          "WRITE_FILE"
+        ],
+        "environment": "SYNTHETIC_SANDBOX_ONLY"
+      },
+      "expected": {
+        "acceptable_choices": [
+          "vision"
+        ],
+        "must_notice": [
+          "VISION_NOT_OBSERVED",
+          "EVIDENCE_BOUNDARY"
+        ]
+      },
+      "qualitative_focus": [
+        "intellectual ambition",
+        "research agenda",
+        "clear conditionality"
+      ]
+    },
+    {
+      "id": "EV-M02",
+      "category": "manuscripts",
+      "origin": "SYNTHETIC",
+      "core": false,
+      "legacy_ref": null,
+      "prompt": "A published DEV-only result is revised after a metric bug fix. Edit the current paper section with authorization; what is the right change scope?",
+      "choices": {
+        "rewrite": "Regenerate entire manuscript and overwrite figures",
+        "local": "Correct impacted numeric claim, dependent sections and citations, preserve negative evidence"
+      },
+      "permission_context": {
+        "allowed_effects": [
+          "READ_FILE",
+          "WRITE_FILE"
+        ],
+        "environment": "SYNTHETIC_SANDBOX_ONLY"
+      },
+      "expected": {
+        "acceptable_choices": [
+          "local"
+        ],
+        "must_notice": [
+          "VALID_RUN_ONLY",
+          "DIFF_BASED_EDIT"
+        ]
+      },
+      "qualitative_focus": [
+        "claim propagation",
+        "token efficiency"
+      ]
+    },
+    {
+      "id": "EV-M03",
+      "category": "manuscripts",
+      "origin": "SYNTHETIC",
+      "core": false,
+      "legacy_ref": null,
+      "prompt": "A review's available papers conflict on a mechanism; no source proves causality. Which discussion is acceptable?",
+      "choices": {
+        "erase": "Delete controversy and future hypothesis",
+        "cause": "Declare proven universal mechanism",
+        "synthesis": "Distinguish evidence, articulate a falsifiable explanation and identify needed study"
+      },
+      "permission_context": {
+        "allowed_effects": [
+          "READ_FILE",
+          "WRITE_FILE"
+        ],
+        "environment": "SYNTHETIC_SANDBOX_ONLY"
+      },
+      "expected": {
+        "acceptable_choices": [
+          "synthesis"
+        ],
+        "must_notice": [
+          "CAUSAL_UNCERTAINTY",
+          "CONTESTED_SOURCES"
+        ]
+      },
+      "qualitative_focus": [
+        "critical synthesis",
+        "mechanism hypothesis"
+      ]
+    }
+  ]
+}

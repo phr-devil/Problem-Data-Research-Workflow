@@ -1,0 +1,128 @@
+{
+  "format": "pdrw-eval-cases-v1",
+  "category": "research",
+  "cases": [
+    {
+      "id": "EV-R01",
+      "category": "research",
+      "origin": "SYNTHETIC",
+      "core": true,
+      "legacy_ref": "D10-58",
+      "prompt": "A model improves DEV accuracy by 1% on a saturated benchmark, but an unstudied deployment shift causes large errors. Which scientific next step is highest value?",
+      "choices": {
+        "tune": "Try 20 variants for another point",
+        "gap": "Study the independent deployment failure with a falsifiable prediction"
+      },
+      "permission_context": {
+        "allowed_effects": [
+          "READ_FILE"
+        ],
+        "environment": "SYNTHETIC_SANDBOX_ONLY"
+      },
+      "expected": {
+        "acceptable_choices": [
+          "gap"
+        ],
+        "must_notice": [
+          "NOVELTY_GAP",
+          "DEV_NOT_CONFIRMATION"
+        ]
+      },
+      "qualitative_focus": [
+        "meaningful research novelty",
+        "testability"
+      ]
+    },
+    {
+      "id": "EV-R02",
+      "category": "research",
+      "origin": "SYNTHETIC",
+      "core": true,
+      "legacy_ref": "D10-59",
+      "prompt": "Devices A/B were tested on disjoint participants. A pooled result shows a large device gap. What conclusion is valid?",
+      "choices": {
+        "causal": "Device B causes degradation",
+        "cross": "Identify subject/device confounding; seek crossed evidence"
+      },
+      "permission_context": {
+        "allowed_effects": [
+          "READ_FILE"
+        ],
+        "environment": "SYNTHETIC_SANDBOX_ONLY"
+      },
+      "expected": {
+        "acceptable_choices": [
+          "cross"
+        ],
+        "must_notice": [
+          "SUBJECT_DEVICE_CONFOUND"
+        ]
+      },
+      "qualitative_focus": [
+        "causal discipline"
+      ]
+    },
+    {
+      "id": "EV-R03",
+      "category": "research",
+      "origin": "SYNTHETIC",
+      "core": false,
+      "legacy_ref": "D10-60",
+      "prompt": "A complex model underperforms a reproducible simple baseline; a failed GPU run is incomplete but the valid champion remains. What next?",
+      "choices": {
+        "stop": "Mark whole task failed and delete artifacts",
+        "triage": "Preserve valid run, classify crash separately, test one discriminating mechanism or narrow claim"
+      },
+      "permission_context": {
+        "allowed_effects": [
+          "READ_FILE"
+        ],
+        "environment": "SYNTHETIC_SANDBOX_ONLY"
+      },
+      "expected": {
+        "acceptable_choices": [
+          "triage"
+        ],
+        "must_notice": [
+          "CRASH_NOT_NEGATIVE_RESULT",
+          "PRESERVE_CHAMPION"
+        ]
+      },
+      "qualitative_focus": [
+        "failure reuse",
+        "cost effectiveness"
+      ]
+    },
+    {
+      "id": "EV-R04",
+      "category": "research",
+      "origin": "SYNTHETIC",
+      "core": false,
+      "legacy_ref": "D10-59",
+      "prompt": "A DEV subgroup was selected after examining 60 slices, with a striking but unconfirmed effect. How should it be described?",
+      "choices": {
+        "confirm": "Announce confirmed generalizable discovery",
+        "hypothesis": "Report exploratory selection and propose independent confirmation"
+      },
+      "permission_context": {
+        "allowed_effects": [
+          "READ_FILE"
+        ],
+        "environment": "SYNTHETIC_SANDBOX_ONLY"
+      },
+      "expected": {
+        "acceptable_choices": [
+          "hypothesis"
+        ],
+        "must_notice": [
+          "POST_HOC_SELECTION",
+          "NO_SEALED_ACCESS"
+        ]
+      },
+      "qualitative_focus": [
+        "statistical independence",
+        "scientific imagination"
+      ]
+    }
+  ]
+}

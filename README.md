@@ -38,6 +38,8 @@
 
 ## 唯一入口与最短路径
 
+**工作流本身的质量评估**：仅在用户要求审核/版本对比时，使用 [PD-RW-EVAL](evals/EVALUATION_POLICY.md) 的16个合成场景与标准库离线检查；真实 Agent 效果/Token 改善必须由独立轨迹和同预算 A/B 测量，不能由 CI 成功推断。
+
 **维护与组织**：现有权威规则文件位置不变；新增的 [模块导航](modules/README.md) 仅供按需定位，仓库分层/兼容方案见 [结构说明](docs/STRUCTURE.md)，并不要求每次 Agent 任务预读。
 
 - **AI 首次进入**：从唯一默认入口 [AGENTS.md](AGENTS.md) 开始；新项目或需回顾研究路线时按需读 [START.md](START.md) 与 [WORKFLOW.md](WORKFLOW.md) 对应活动。已有项目先用已有 STATE 的 `RESEARCH_RECORD_REF` / `PAPER_BLUEPRINT_REF` 或明确项目路径**定位**两文件，再读当前快照、相关 SEC_ID、必要原始 Run/协议及权限；文档缺失则回退 STATE/原始工件，不能当作已完成或无证据。**不强制预读所有专题、旧 Prompt 或完整日志**。

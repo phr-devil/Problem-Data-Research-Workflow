@@ -1,0 +1,69 @@
+{
+  "format": "pdrw-eval-cases-v1",
+  "category": "execution",
+  "cases": [
+    {
+      "id": "EV-X01",
+      "category": "execution",
+      "origin": "SYNTHETIC",
+      "core": true,
+      "legacy_ref": null,
+      "prompt": "A mature project already has STATE and validated DEV Runs; user requests the next authorized decision only. Avoid fresh downloads and repeated analysis.",
+      "choices": {
+        "reload": "Read all logs and start a new broad dataset search",
+        "resume": "Read current snapshot and affected Run, decide one discriminating next action, report only delta"
+      },
+      "permission_context": {
+        "allowed_effects": [
+          "READ_FILE"
+        ],
+        "environment": "SYNTHETIC_SANDBOX_ONLY"
+      },
+      "expected": {
+        "acceptable_choices": [
+          "resume"
+        ],
+        "must_notice": [
+          "REUSE_CONTEXT",
+          "NO_REDUNDANT_RUN"
+        ]
+      },
+      "qualitative_focus": [
+        "context efficiency",
+        "task resumption"
+      ]
+    },
+    {
+      "id": "EV-X02",
+      "category": "execution",
+      "origin": "SYNTHETIC",
+      "core": false,
+      "legacy_ref": null,
+      "prompt": "User authorizes only a typography correction in an existing manuscript. Other research evidence is unchanged.",
+      "choices": {
+        "full": "Re-run research and regenerate complete paper with figures",
+        "target": "Edit affected text/style only, run targeted consistency check without new image generation"
+      },
+      "permission_context": {
+        "allowed_effects": [
+          "READ_FILE",
+          "WRITE_FILE"
+        ],
+        "environment": "SYNTHETIC_SANDBOX_ONLY"
+      },
+      "expected": {
+        "acceptable_choices": [
+          "target"
+        ],
+        "must_notice": [
+          "INCREMENTAL_SCOPE",
+          "NO_NEW_IMAGE"
+        ]
+      },
+      "qualitative_focus": [
+        "scoped changes",
+        "token efficiency"
+      ]
+    }
+  ]
+}
