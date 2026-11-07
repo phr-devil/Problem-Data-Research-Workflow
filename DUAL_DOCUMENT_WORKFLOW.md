@@ -5,7 +5,7 @@
 ## 1. 文件职责
 
 - **RESEARCH_RECORD.md**：回答做了什么、为何做、尝试及有效和负向结果、原因与限制、资产与下一步、失败后如何重启。首页为当前状态，重要事件按序追加；原始 Run/日志/代码/哈希只作来源引用，不复制日志，不编造执行。
-- **PAPER_BLUEPRINT.md**：在方向基本明确后规划候选论文的一级/二级标题、各节拟写内容、潜在 Claim、证据指针、缺失实验、文献和图表的文字需求。没有结果的部分标 TENTATIVE、PLANNED、NOT_RUN 或 UNKNOWN；不以蓝图冒充真实论文稿件。
+- **PAPER_BLUEPRINT.md**：在方向基本明确后按文章类型规划候选论文的一级/二级标题、各节拟写内容、潜在 Claim、证据指针、缺失实验、文献和图表的文字需求。没有结果的部分标 TENTATIVE、PLANNED、NOT_RUN 或 UNKNOWN；不以蓝图冒充真实论文稿件。
 - 研究记录是实验决策的事实索引；论文蓝图按 EXP/Run/Claim 引用研究记录与原始证据，不重复编一套结果。若二者和合法原始工件冲突，以原始证据/协议为准并标待更正。二者既不是科学确认，也不是用户授权凭证。
 - **规划不等于正式写作**：未经科研成果总结的用户审查和单独的稿件写作授权，可维护章节 H1/H2 和“本节要写什么”的要点，但不得自动写投稿标题、摘要、完整正文段落、论文式图注或初稿。见 [WRITING_GATE.md](WRITING_GATE.md)。文字图表规划不授权出图，任何图片只在用户明确请求时生成，见 [FIGURE_POLICY.md](FIGURE_POLICY.md)。
 
@@ -40,9 +40,10 @@
 
 - 复用项目真实的 Task/Run/Claim ID；新记一次重要科研尝试可用 `EXP-001`，新增 Claim 可用 `CLM-001`，但**不强制将已有 C01 或外部 Run 改名**。原始 Run ID 与其数据版本、评估协议、独立组及证据路径一起保留，重跑不得复用旧实验结果来伪装同一运行。
 - 论文结构在 Markdown 中固定为：一个文档 H1（`# PAPER_BLUEPRINT`），论文一级标题用 H2（`## 1. Introduction`），二级标题用 H3（`### 1.1 Research Background`）。章节可有稳定 `SEC_ID`（如 `SEC-INTRO-01`），即使后续改名/调整显示编号也不重用 ID。文档元信息使用未编号的 H2，不能混入论文章节序号。
-- **算法/机器学习论文标准六章（默认必须优先保持）**：`1. Introduction → 2. Related Work → 3. Proposed Method → 4. Experiments → 5. Discussion → 6. Conclusion`。`Proposed Method` 是常规称法，避免 `Proposal Method`。第4章记录协议、主结果与必要的公平对照/消融；第5章解释机制、证据边界、局限与应用意义，避免复述结果。Abstract、References及目标期刊要求的声明属稿件要素，不占用六章编号；规划阶段不得撰写正式摘要/投稿正文。
-- **六章结构优先，例外先确认（论文框架的人工确认，不是科研实验新关卡）**：初次规划以及获授权的正式写稿均优先使用以上六章，不得仅为简洁、追逐范文风格或 Agent 自主判断擅自合并、删除、增加、调序或重命名六个一级论文章节。确有客观必要时（例如期刊强制格式、理论证明需单列章节、研究性质明显不宜称 `Proposed Method`、篇幅硬限制），**先向用户展示现行章节 → 拟议章节、调整的具体必要性、官方指南/真实证据依据、对主张及实验呈现的影响，并等待该项目对应的明确确认，才可改动**。在确认前保留六章，仅在 Planning Snapshot 记录简短候选变更，禁止将提案当作已批准。可选例外包括将 Related Work 并入 Introduction、合并 Experiments/Discussion、理论稿增 Preliminaries / Theoretical Analysis、工程稿改 Methodology / System Design 或按期刊强制的 Results → Discussion → Methods 排序；以上都不是自动许可。若真实研究结论需要更正，应立即更正 Claim/证据状态，不可等待目录确认或虚构结果。
-- **结构决策留痕**：在蓝图 Planning Snapshot 简记论文类型、结构选择（默认六章/例外提议待确认/用户已确认）、具体调整原因、期刊官方格式来源或 `UNKNOWN`，已确认时须留原始用户确认消息指针；无可核验确认不得标为已确认。保持原 `SEC_ID` 与 Claim–EXP–Run 映射，即使经批准合并/移动节也不伪造证据。优先确保问题/近邻差额、可复现方法、合法实验、主要发现、反解释与局限、结论得到清晰呈现；不因模板漂亮而增加无用实验或改变原科学结论。参考 [IEEE Journal Structure](https://journals.ieeeauthorcenter.ieee.org/create-your-ieee-journal-article/create-the-text-of-your-article/structure-your-article/)、[NeurIPS 2026 Handbook](https://neurips.cc/Conferences/2026/MainTrackHandbook) 与 [Nature Machine Intelligence Content Types](https://www.nature.com/natmachintell/content)（仅作差异化结构案例）。
+- **初次论文规划按文章类型选择结构**：`EMPIRICAL_RESEARCH`（实验/算法）优先使用 [六章蓝图](templates/PAPER_BLUEPRINT.md) 的 Introduction → Related Work → Proposed Method → Experiments → Discussion → Conclusion；`CRITICAL_REVIEW` 参考 [综述蓝图](templates/PAPER_BLUEPRINT_REVIEW.md) 综合证据、争议、原创框架和未来议程；`PERSPECTIVE` 参考 [观点蓝图](templates/PAPER_BLUEPRINT_PERSPECTIVE.md) 组织核心论点、反论点、可证伪假说及研究倡议。专用模板为建议骨架，不机械限定章节数；目标期刊的官方要求优先。初次选类型**不是例外审批**，不需要额外人工确认或新科研阶段。
+- **已经确认的结构不能自动改动**：不论论文类型，用户已批准的一级标题、重大二级结构及稳定 `SEC_ID` 应保留；若确有科学/官方指南上的必要性，先展示当前→拟议结构、依据及对证据表达的影响，经用户明确确认后修改。对尚未确认的新蓝图，Agent 可以按研究内容选初始类型及常见章节；若类型不确定，标 `TYPE_TENTATIVE` 而非反复询问。正式标题/摘要/正文依然由 [WRITING_GATE.md](WRITING_GATE.md) 独立授权。
+- **不同文章的论证职责**：实证稿重点完成 Method↔Result、合法评价、竞争解释及局限；综述重点完成证据覆盖与分歧比较、跨文献新分类和未来研究议程；Perspective 重点完成明确立场、最强反论点、可检验假说与倡议。未来愿景区分 `OBSERVED/INTERPRETATION/HYPOTHESIS/VISION`，不因尚未全面实现就删除有依据的设想，也不能写成既成事实。
+- **结构与证据最小留痕**：Planning Snapshot 记录论文类型、初始模板/期刊要求与已批准目录的原始消息指针。多章节共用的重要证据缺口可以在 `RESEARCH_RECORD.md` 只定义一次 `GAP_ID: GAP-001`，在 `PAPER_BLUEPRINT.md` 中引用其 ID 和受影响 SEC_ID，不复制详细现状。对单一局部缺口继续复用 EXP/Run/Claim 指针，不强制建 GAP ID、迁移旧项目或新增状态机。
 - 每个计划小节只记录**目标、拟写要点、真实 Claim/EXP/Run/文献指针、负证据与缺口、状态**。新科学结论改变局部时，只修改相应 SEC_ID 和首页索引，不批量重排整篇；涉及上述实质结构变更须先获得用户明确确认。图表规划只写文字，未获具体绘图请求不得生成任何图片。
 - RESEARCH_RECORD.md 推荐首页快照保持简短（通常约 20–40 行，具体按事实增减）；先放当前成果、失败边界与下一合法行动，**完整事件历史放在文档末尾按时间追加**。旧历史原则上保留，明确作废/纠错应追加来源及原因，而不是覆盖原失败。
 

@@ -7,7 +7,7 @@
 - **单一科学事实源**：优先复用项目已存在的 \`RESEARCH_RECORD.md\` 当前快照、\`PAPER_BLUEPRINT.md\` 相关 SEC_ID、合法 Run/冻结协议/研究成果总结、真实 Methods、图表源数据和用户批准的结构。摘要、旧图、AI 记忆、项目内部结论标签都不能代替原始证据；冲突时标 \`SOURCE_CONFLICT\` 并追查，不自行选有利版本。
 - **证据不等于表达**：写作只能清楚呈现已经成立的结果，不能把 DEV、探索性观察、负结果、统计不显著、内部确认或无效 Run 提升为新的科学主张；研究数据角色、独立单位、分母、筛选史、统计范围和限制随 Claim 保留。
 - **唯一可编辑正文源**：获授权后使用现有稿件，或建立 \`MANUSCRIPT_TEXT.md\`；不允许不同 Agent 维护互相竞争的完整论文版本。可选 \`MANUSCRIPT_OPEN_ITEMS.md\` 只记录未决引用、公式、证据或作者决定，是稿件待办，不是第三份科研记录。Word/LaTeX/PDF 从正文源按请求生成，不反向成为科学依据。
-- **尊重已批准目录**：默认六章优先；既有项目已获用户确认的 \`Methodology\` 等例外照旧。合并、重排、更名一级章节或重大二级结构调整，依 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 先给必要性/依据/影响并获用户确认；本写作流程不授予自行改章权。
+- **尊重已批准目录**：实证算法稿默认六章，Critical Review / Perspective 按文章类型与目标期刊选用专用规划结构；既有项目已获用户确认的 \`Methodology\` 等例外照旧。合并、重排、更名一级章节或重大二级结构调整，依 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 先给必要性/依据/影响并获用户确认；本写作流程不授予自行改章权。
 - **强表达原则**：科学正确性 > 推理逻辑 > 信息结构 > 清晰度 > 简练度 > 风格。已证实的观察直接写、精确量化；需要保留的不确定性只在适用主张处限定，不以大量 may/might 稀释真实结果，也不以强语气制造因果、机制、泛化或算法优势。
 
 ### 高水平论文范例学习：写正文前必须匹配案例
@@ -37,6 +37,9 @@
 
 ### Claim Strength Calibration：强而不虚
 
+**科研表达不等于保守写作**：`OBSERVED` 有直接证据；`INTERPRETATION` 要符合观测并容许反解释；`HYPOTHESIS` 可提出有科学意义的机制与可证伪预言，但不能称已证明因果；`VISION/ADVOCACY` 可明确提出原创概念框架、技术愿景、标准化或跨学科倡议，讲清实现条件、障碍及可检验里程碑。未来构想无需已被全面实验验证，但不可写成既成事实。不要用大量 may/might 和免责声明消除作者立场。综述/Perspective 的学术贡献可来自高质量证据综合、争议澄清和研究议程，而不必提供算法得分。
+
+
 | 支持程度 | 用词策略 |
 |---|---|
 | 真实直接观察/已确认效应 | \`shows\`、\`accounted for\`、\`was observed\` 等直陈，并就近给出条件、数值或范围。 |
@@ -52,8 +55,8 @@
 | 轮次 | 执行顺序与技能借鉴 | 最小产出 |
 |---|---|---|
 | R1 证据与论证 | **M1→M2**。先核合法科研快照及最强最近邻；定义 North Star、Claim 层级、现有结构与各节职责。复用既有快照，资料没变化不得重复通读全库。 | 临时证据/段落合同；科学冲突的受影响节标 BLOCKER。 |
-| R2 核心正文 | **M3+M4+增量 M5**。先写核心 Method/Measurement definition → 配对主要 Result → 双向校验；再补其余 Methods/Results。 | 两章关键正文及待补公式/图表/文献位置。 |
-| R3 其余正文 | **M3+M4+增量 M5**。先核实近邻文献才写实质 Related Work 比较；据已有 Results 写 Discussion → Related Work → Introduction → Conclusion；最后 Abstract、Title、Keywords。 | 六章完整稿件；无证据文献论断仍待查，不能假完成。 |
+| R2 核心正文 | **M3+M4+增量 M5**。实证稿先配对 Method/Measurement definition 与主要 Result；综述先综合原始文献与争议，Perspective 先组织核心论点与最强反解释；不强造不存在的方法/实验。 | 两章关键正文及待补公式/图表/文献位置。 |
+| R3 其余正文 | **M3+M4+增量 M5**。实证稿据已有 Results 完成 Discussion、Related Work、Introduction 与 Conclusion；综述/Perspective 从核实的文献证据、原创框架及条件性展望组织剩余章节；最后 Abstract、Title、Keywords。 | 六章完整稿件；无证据文献论断仍待查，不能假完成。 |
 | R4 科学与文字闭环 | **M5→M6→针对修改的回归 M5**。先科学/跨章与引用审查，再段落逻辑、语气与格式；按 BLOCKER/MAJOR/MINOR 优先局部修订，不反复整稿重生。 | \`MANUSCRIPT_TEXT.md\` + 必要时 \`MANUSCRIPT_OPEN_ITEMS.md\`。 |
 
 R2 重点是**方法定义与结果一对一对应**，不是一次性写完 Methods 再机械填所有实验。R3 的执行顺序与最终论文阅读顺序不同；最终顺序遵循已批准的目录。四轮可以在同一次已授权 WorkBuddy 任务中连续完成，不额外要求四次用户确认。必要重大结构/科研范围/数据权限变化，仍遵守原有用户决策门禁。

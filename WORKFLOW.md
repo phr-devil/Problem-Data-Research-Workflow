@@ -20,7 +20,7 @@
 
 **Word 排版按需路由**：论文框架审阅版与已获写作授权的稿件 Word 工作版统一采用 [PAPER_WORD_STYLE.md](PAPER_WORD_STYLE.md)；除 Title 外全部段落样式段前/段后均为 0 pt。仅明确要求 Word 导出时生成 `.docx`，不增加科研阶段、不改变写作/绘图许可。
 
-**双文档整理与正式写作锁**：见 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 与 [WRITING_GATE.md](WRITING_GATE.md)。实际项目中按重大事件增量维护 `RESEARCH_RECORD.md`（做过什么、关键失败/原因、要做什么、可复用资产和重启条件），科研方向或贡献基本明确后可提前维护 `PAPER_BLUEPRINT.md`（H1/H2、各节拟写要点、证据/缺口）。**算法论文默认采用 Introduction → Related Work → Proposed Method → Experiments → Discussion → Conclusion 六章；涉及重大结构变动，须先说明必要性、依据和影响并获用户明确确认，不能由 Agent 自行改目录**（详见双文档规则 §5）。论文规划不是正式稿件；科研成果总结经用户审查并另外明确授权前仍 `WRITING_LOCKED`，不得生成正式投稿标题、摘要、章节正文、初稿。可信 Run、DRAFTABLE 和蓝图完成不能自动解锁，图片仍须用户单独明确请求。
+**双文档整理与正式写作锁**：见 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 与 [WRITING_GATE.md](WRITING_GATE.md)。实际项目中按重大事件增量维护 `RESEARCH_RECORD.md`（做过什么、关键失败/原因、要做什么、可复用资产和重启条件），科研方向或贡献基本明确后可提前维护 `PAPER_BLUEPRINT.md`（H1/H2、各节拟写要点、证据/缺口）。**新实证算法论文默认采用 Introduction → Related Work → Proposed Method → Experiments → Discussion → Conclusion 六章；新综述/Perspective 可按类型选择专用蓝图，不属于六章例外、无需为初次类型选择重复请示；已由用户确认目录的重大变更仍需说明必要性、依据和影响，并获用户明确确认**（详见双文档规则 §5）。论文规划不是正式稿件；科研成果总结经用户审查并另外明确授权前仍 `WRITING_LOCKED`，不得生成正式投稿标题、摘要、章节正文、初稿。可信 Run、DRAFTABLE 和蓝图完成不能自动解锁，图片仍须用户单独明确请求。
 
 ## 1. 三个决策循环（六项活动，不是六道审批门）
 
