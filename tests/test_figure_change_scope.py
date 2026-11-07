@@ -78,7 +78,7 @@ class FigureChangeScopeTests(unittest.TestCase):
         policy = (ROOT / "FIGURE_POLICY.md").read_text(encoding="utf-8")
         agent = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
         for token in ("FIGURE_SPEC.example.json", "增量重绘", "差异 QA",
-                      "FINAL", "MUST_SHOW", "drawio-academic-skills"):
+                      "实际渲染", "MUST_SHOW", "drawio-academic-skills"):
             self.assertIn(token, acad)
         for token in ("用户明确", "FIGURE_DRAWING_LOCKED", "论文实际宽度",
                       "core.figure_change_scope"):
