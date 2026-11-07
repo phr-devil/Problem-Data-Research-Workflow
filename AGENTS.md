@@ -24,6 +24,8 @@
 - **科学机会/升级**：按需 [PAPER_FIRST.md](PAPER_FIRST.md)、[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)；只有已授权且有决定性新假说才升级复杂模型，重要失败和有价值资产不丢弃。
 - **独立确认/期刊**：[CONFIRMATION.md](CONFIRMATION.md)、[VENUE_STRATEGY.md](VENUE_STRATEGY.md)；RWF 仅在必要时按原始预测与协议进行 DEV 指标复核，不接管科研主控或给予许可。
 
+- **已授权的论文架构图／重绘**：优先从项目已有 `figures/<figure_id>.spec.json` 与 `.drawio` 恢复，按 [ACADEMIC_DIAGRAM_STYLE.md](ACADEMIC_DIAGRAM_STYLE.md) §4.1 使用单设计主控、固定 Skill 分工、增量修改和差异 QA；新图/缓存失效时再核对应真实 Methods/代码。可选 `python -m core.figure_change_scope --before OLD --after NEW` 只读比较规格，绝不自动生成图像、取得绘图授权或省略最终实际渲染检查。
+
 ## 3. 任务结束：只更新重要变化
 
 按 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md)：关键真实事件更新 `RESEARCH_RECORD.md` 首页及末尾对应 EXP/Run；仅当论文内容或科学证据改变时，增量更新 `PAPER_BLUEPRINT.md` 对应 `SEC_ID`。原始日志/数值留原位置，旧项目不强制迁移、不写第三份记忆账本。报告仅需**新增证据 + 当前判断/限制 + 下一合法行动/所需授权**；无信息增量不重复整理。

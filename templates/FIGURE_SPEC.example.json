@@ -1,0 +1,41 @@
+{
+  "schema_version": "pd-rw-figure-spec-v1",
+  "figure_id": "REPLACE_WITH_FIGURE_ID",
+  "figure_kind": "PUBLICATION",
+  "user_request_ref": "REPLACE_WITH_ORIGINAL_USER_MESSAGE_REF_NOT_PERMISSION",
+  "scientific": {
+    "purpose": "REPLACE_WITH_ONE_SENTENCE_FIGURE_PURPOSE",
+    "must_show": [],
+    "nodes": [],
+    "edges": [],
+    "legal_information_and_boundaries": "UNKNOWN"
+  },
+  "sources": {
+    "method_refs": [],
+    "protocol_refs": [],
+    "run_refs": [],
+    "source_fingerprint": "UNKNOWN"
+  },
+  "design": {
+    "primary_design_skill": "academic-diagram",
+    "editable_engine": "drawio",
+    "reference_path": "UNKNOWN",
+    "layout_family": "UNKNOWN",
+    "theme_fingerprint": "UNKNOWN",
+    "nodes_geometry": {},
+    "labels": {},
+    "icons": {}
+  },
+  "outputs": {
+    "editable_source": "figures/REPLACE_WITH_FIGURE_ID.drawio",
+    "svg": "figures/REPLACE_WITH_FIGURE_ID.svg",
+    "png": "figures/REPLACE_WITH_FIGURE_ID.png"
+  },
+  "qa": {
+    "science_qa": "NOT_RUN",
+    "connectors_qa": "NOT_RUN",
+    "visual_qa": "NOT_RUN",
+    "checked_source_fingerprint": "UNKNOWN",
+    "checked_output_fingerprint": "UNKNOWN"
+  }
+}
