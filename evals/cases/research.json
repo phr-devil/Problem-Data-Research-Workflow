@@ -37,7 +37,7 @@
       "id": "EV-R02",
       "category": "research",
       "origin": "SYNTHETIC",
-      "core": true,
+      "core": false,
       "legacy_ref": "D10-59",
       "prompt": "Devices A/B were tested on disjoint participants. A pooled result shows a large device gap. What conclusion is valid?",
       "choices": {

@@ -134,6 +134,22 @@ class EvaluationContracts(unittest.TestCase):
         self.assertEqual(compare_runs(self.cases, before, after, b, a)["status"],
                          "COMPARISON_NOT_MEASURED")
 
+    def test_resource_class_is_required_and_cannot_bypass_holdout(self):
+        run = sample_run(self.cases)
+        obs = sample_observations(self.cases, run)
+        obs["cases"][0]["events"][0]["resource_class"] = "sealed"
+        with self.assertRaisesRegex(ValueError, "resource_class"):
+            score_run(self.cases, run, obs)
+        obs["cases"][0]["events"][0].pop("resource_class")
+        with self.assertRaisesRegex(ValueError, "resource_class"):
+            score_run(self.cases, run, obs)
+
+    def test_rubric_weights_remain_review_only_and_sum_to_100(self):
+        rubric = json.loads((ROOT / "evals/rubrics.json").read_text(encoding="utf-8"))
+        self.assertEqual(sum(rubric["weights"].values()), 100)
+        self.assertIn("scientific_creativity", rubric["reviewer_required_for"])
+        self.assertIn("permission_boundary", rubric["hard_gates"])
+
     def test_untrusted_bad_telemetry_and_duplicate_ids_rejected(self):
         run = sample_run(self.cases)
         run["responses"].append(copy.deepcopy(run["responses"][0]))
