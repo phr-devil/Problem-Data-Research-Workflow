@@ -29,6 +29,16 @@ class PrivatePackTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,"duplicate"):
             validate(data)
 
+    def test_no_hidden_answer_in_public_task_fields(self):
+        data=fixture()
+        data["cases"][0]["agent_task"]["answer"]="SECRET_KEY"
+        with self.assertRaisesRegex(ValueError,"public agent_task"):
+            public_tasks(data)
+        data=fixture()
+        data["cases"][0]["reference"]["unused"]="INTERNAL"
+        with self.assertRaisesRegex(ValueError,"private reference"):
+            validate(data)
+
     def test_only_off_repo_locations_accepted(self):
         with self.assertRaisesRegex(ValueError,"outside"):
             external(ROOT / "evals/private-pack.json")

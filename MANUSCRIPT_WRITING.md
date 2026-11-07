@@ -55,11 +55,11 @@
 | 轮次 | 执行顺序与技能借鉴 | 最小产出 |
 |---|---|---|
 | R1 证据与论证 | **M1→M2**。先核合法科研快照及最强最近邻；定义 North Star、Claim 层级、现有结构与各节职责。复用既有快照，资料没变化不得重复通读全库。 | 临时证据/段落合同；科学冲突的受影响节标 BLOCKER。 |
-| R2 核心正文 | **M3+M4+增量 M5**。实证稿先配对 Method/Measurement definition 与主要 Result；综述先综合原始文献与争议，Perspective 先组织核心论点与最强反解释；不强造不存在的方法/实验。 | 两章关键正文及待补公式/图表/文献位置。 |
-| R3 其余正文 | **M3+M4+增量 M5**。实证稿据已有 Results 完成 Discussion、Related Work、Introduction 与 Conclusion；综述/Perspective 从核实的文献证据、原创框架及条件性展望组织剩余章节；最后 Abstract、Title、Keywords。 | 六章完整稿件；无证据文献论断仍待查，不能假完成。 |
+| R2 核心正文 | **M3+M4+增量 M5**。实证稿先配对 Method/Measurement definition 与主要 Result；综述先综合原始文献与争议，Perspective 先组织核心论点与最强反解释；不强造不存在的方法/实验。 | 核心论证部分及待补公式/图表/文献位置。 |
+| R3 其余正文 | **M3+M4+增量 M5**。实证稿据已有 Results 完成 Discussion、Related Work、Introduction 与 Conclusion；综述/Perspective 从核实的文献证据、原创框架及条件性展望组织剩余章节；最后 Abstract、Title、Keywords。 | 与获批准的文章类型/目录一致的完整稿件；无证据文献论断仍待查，不能假完成。 |
 | R4 科学与文字闭环 | **M5→M6→针对修改的回归 M5**。先科学/跨章与引用审查，再段落逻辑、语气与格式；按 BLOCKER/MAJOR/MINOR 优先局部修订，不反复整稿重生。 | \`MANUSCRIPT_TEXT.md\` + 必要时 \`MANUSCRIPT_OPEN_ITEMS.md\`。 |
 
-R2 重点是**方法定义与结果一对一对应**，不是一次性写完 Methods 再机械填所有实验。R3 的执行顺序与最终论文阅读顺序不同；最终顺序遵循已批准的目录。四轮可以在同一次已授权 WorkBuddy 任务中连续完成，不额外要求四次用户确认。必要重大结构/科研范围/数据权限变化，仍遵守原有用户决策门禁。
+R2 对实证稿重点是**方法定义与结果一对一对应**；对综述/Perspective 重点是证据综合、争议、中心论点与可证伪路线，不强制填充 Methods/Results。R3 的执行顺序与最终论文阅读顺序不同；最终顺序遵循已批准的目录。四轮可以在同一次已授权 WorkBuddy 任务中连续完成，不额外要求四次用户确认。必要重大结构/科研范围/数据权限变化，仍遵守原有用户决策门禁。
 
 ## 4. 核心质量核验与失败处理
 

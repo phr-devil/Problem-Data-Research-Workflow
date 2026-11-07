@@ -35,6 +35,11 @@ def validate(pack: object) -> list[dict]:
         task, reference = case.get("agent_task"), case.get("reference")
         if not isinstance(task, dict) or not isinstance(reference, dict):
             raise ValueError("separate agent_task and private reference required")
+        # Strict allowlist: no secret answer/rubric fields may hide in the public task.
+        if set(task) != {"prompt", "allowed_effects", "budget_id"}:
+            raise ValueError("unexpected public agent_task keys")
+        if set(reference) != {"rubric_version", "review_criteria"}:
+            raise ValueError("unexpected private reference keys")
         if not isinstance(task.get("prompt"), str) or not task["prompt"].strip():
             raise ValueError("task prompt required")
         if not isinstance(task.get("allowed_effects"), list) or not all(isinstance(z,str) and z.strip() for z in task["allowed_effects"]):
@@ -51,7 +56,10 @@ def validate(pack: object) -> list[dict]:
 def public_tasks(pack: dict) -> dict:
     cases=validate(pack)
     data={"format":"pdrw-private-agent-tasks-v1","pack_id":pack["pack_id"],
-          "cases":[{"case_id":c["case_id"],"agent_task":c["agent_task"]} for c in cases],
+          "cases":[{"case_id":c["case_id"],"agent_task":{
+              "prompt":c["agent_task"]["prompt"],
+              "allowed_effects":c["agent_task"]["allowed_effects"],
+              "budget_id":c["agent_task"]["budget_id"]}} for c in cases],
           "scope":"NOT_REAL_AUTHORIZATION_OR_VERIFIED_BLINDNESS"}
     data["task_sha256"]=hashlib.sha256(json.dumps(data,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
     return data

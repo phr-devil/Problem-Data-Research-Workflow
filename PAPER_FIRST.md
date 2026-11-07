@@ -6,6 +6,8 @@
 
 **Q2科研目标**：本章所有论文路线都须按[Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)评估**有证据支持的JCR Q2+投稿潜力**，优先Q1；不要求实际录用。普通专业期刊、B/C档小稿及`DRAFTABLE`均不能自动判科研项目成功。
 
+**论文类型与高价值探索**：实证算法稿需支持方法/结果/公平对照；Critical Review/Perspective 的学术价值可体现为原始证据的批判综合、新的概念分类、重要争议澄清和可检验未来议程，**不强制要求本论文产生算法 F1 增益**。具名近邻、资料真实性、证据边界和目标期刊同类型文章仍须核实。科学问题重要但暂时无法定位 Q2 期刊时，可在科研记录文字描述 `HIGH_VALUE_UNCERTAIN_VENUE`，只作为保留探索机会的注记，**不是新状态/成功认证**；明确一项现实可证伪预测与成本/授权边界，不因期刊暂未知自动停题。
+
 **已有算法的科学增值选择**：可信Champion稳定后如考虑升级或结束，可按需使用[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)，只为具名近邻未覆盖、可证伪且可确认的科学主张做小实验；否则保留结果而非无限刷分。
 
 **写作权限**：本文件只负责判断可发表证据与最小补证据路线；[WRITING_GATE.md](WRITING_GATE.md) 要求先有经用户审查的科研成果总结，再有独立、明确的写作授权。未解锁时可维护 PAPER_BLUEPRINT.md 的 H1/H2、章节拟写要点与证据缺口，但不得生成正式投稿标题、摘要、章节正文或初稿；`PAPER_COMPLETION_PRIORITY` 只表示 `EVIDENCE_COMPLETION_PRIORITY`。
