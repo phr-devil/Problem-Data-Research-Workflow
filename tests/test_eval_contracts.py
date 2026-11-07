@@ -7,6 +7,7 @@ from tempfile import TemporaryDirectory
 
 from evals.benchmark import (
     CASES, CATEGORIES, blind_cases, compare_runs, load_cases, score_run, suite_hash,
+    task_bundle_digest,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -28,10 +29,21 @@ def sample_run(cases, name="before", core_only=False):
 
 
 def sample_observations(cases, run, core_only=False):
+    import hashlib
+    def digest(value):
+        return hashlib.sha256(value.encode("utf-8")).hexdigest()
+    provenance = {
+        "task_bundle_sha256": task_bundle_digest(cases, core_only=core_only),
+        "environment_sha256": digest("same-env"),
+        "tool_manifest_sha256": digest("same-tools"),
+        "budget_sha256": digest("same-budget"),
+        "capture_id": "trace-" + run["run_id"],
+    }
     return {
         "format": "pdrw-eval-observations-v1",
         "run_id": run["run_id"], "suite_hash": suite_hash(cases),
         "capture_source": "EXTERNAL_INSTRUMENTED",
+        "provenance": provenance,
         "cases": [
             {"case_id": c["id"], "events": [{"type": "READ_FILE", "resource_class": "SYNTHETIC"}],
              "checks": {"task_complete": True, "evidence_consistent": True},
@@ -149,6 +161,40 @@ class EvaluationContracts(unittest.TestCase):
         self.assertEqual(sum(rubric["weights"].values()), 100)
         self.assertIn("scientific_creativity", rubric["reviewer_required_for"])
         self.assertIn("permission_boundary", rubric["hard_gates"])
+
+    def test_allowed_tool_cannot_read_disallowed_resource(self):
+        run = sample_run(self.cases)
+        observations = sample_observations(self.cases, run)
+        target = next(c for c in observations["cases"] if c["case_id"] == "EV-P04")
+        target["events"] = [{"type": "READ_FILE", "resource_class": "EXTERNAL"}]
+        got = score_run(self.cases, run, observations)
+        self.assertEqual(got["verdict"], "BLOCKED")
+        self.assertIn("READ_FILE:EXTERNAL", next(
+            c for c in got["cases"] if c["case_id"] == "EV-P04"
+        )["unauthorized_effects"])
+
+    def test_ab_environment_fingerprint_must_match(self):
+        before, after = sample_run(self.cases), sample_run(self.cases, "after")
+        b = sample_observations(self.cases, before)
+        a = sample_observations(self.cases, after)
+        a["provenance"]["environment_sha256"] = "0" * 64
+        self.assertEqual(compare_runs(self.cases, before, after, b, a)["status"], "INCOMPARABLE")
+        a["provenance"]["environment_sha256"] = b["provenance"]["environment_sha256"]
+        a["provenance"]["task_bundle_sha256"] = "a" * 64
+        with self.assertRaisesRegex(ValueError, "task bundle"):
+            compare_runs(self.cases, before, after, b, a)
+
+    def test_no_provenance_means_no_measured_ab(self):
+        before, after = sample_run(self.cases), sample_run(self.cases, "after")
+        b, a = sample_observations(self.cases, before), sample_observations(self.cases, after)
+        b.pop("provenance")
+        self.assertEqual(compare_runs(self.cases, before, after, b, a)["status"],
+                         "COMPARISON_NOT_MEASURED")
+
+    def test_blind_output_path_must_be_outside_grader_repo(self):
+        from evals.benchmark import _safe_output_path
+        with self.assertRaisesRegex(ValueError, "inside evaluation repository"):
+            _safe_output_path(ROOT / "evals" / "fake_blind.json")
 
     def test_untrusted_bad_telemetry_and_duplicate_ids_rejected(self):
         run = sample_run(self.cases)

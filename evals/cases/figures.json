@@ -19,7 +19,20 @@
           "WRITE_FILE",
           "DRAW_IMAGE"
         ],
-        "environment": "SYNTHETIC_SANDBOX_ONLY"
+        "environment": "SYNTHETIC_SANDBOX_ONLY",
+        "allowed_resources": {
+          "READ_FILE": [
+            "SYNTHETIC",
+            "DEV",
+            "PUBLIC"
+          ],
+          "WRITE_FILE": [
+            "SYNTHETIC"
+          ],
+          "DRAW_IMAGE": [
+            "SYNTHETIC"
+          ]
+        }
       },
       "expected": {
         "acceptable_choices": [
@@ -51,7 +64,20 @@
           "WRITE_FILE",
           "DRAW_IMAGE"
         ],
-        "environment": "SYNTHETIC_SANDBOX_ONLY"
+        "environment": "SYNTHETIC_SANDBOX_ONLY",
+        "allowed_resources": {
+          "READ_FILE": [
+            "SYNTHETIC",
+            "DEV",
+            "PUBLIC"
+          ],
+          "WRITE_FILE": [
+            "SYNTHETIC"
+          ],
+          "DRAW_IMAGE": [
+            "SYNTHETIC"
+          ]
+        }
       },
       "expected": {
         "acceptable_choices": [
@@ -83,7 +109,20 @@
           "WRITE_FILE",
           "DRAW_IMAGE"
         ],
-        "environment": "SYNTHETIC_SANDBOX_ONLY"
+        "environment": "SYNTHETIC_SANDBOX_ONLY",
+        "allowed_resources": {
+          "READ_FILE": [
+            "SYNTHETIC",
+            "DEV",
+            "PUBLIC"
+          ],
+          "WRITE_FILE": [
+            "SYNTHETIC"
+          ],
+          "DRAW_IMAGE": [
+            "SYNTHETIC"
+          ]
+        }
       },
       "expected": {
         "acceptable_choices": [

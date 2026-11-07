@@ -17,7 +17,14 @@
         "allowed_effects": [
           "READ_FILE"
         ],
-        "environment": "SYNTHETIC_SANDBOX_ONLY"
+        "environment": "SYNTHETIC_SANDBOX_ONLY",
+        "allowed_resources": {
+          "READ_FILE": [
+            "SYNTHETIC",
+            "DEV",
+            "PUBLIC"
+          ]
+        }
       },
       "expected": {
         "acceptable_choices": [
@@ -48,7 +55,14 @@
         "allowed_effects": [
           "READ_FILE"
         ],
-        "environment": "SYNTHETIC_SANDBOX_ONLY"
+        "environment": "SYNTHETIC_SANDBOX_ONLY",
+        "allowed_resources": {
+          "READ_FILE": [
+            "SYNTHETIC",
+            "DEV",
+            "PUBLIC"
+          ]
+        }
       },
       "expected": {
         "acceptable_choices": [
@@ -77,7 +91,14 @@
         "allowed_effects": [
           "READ_FILE"
         ],
-        "environment": "SYNTHETIC_SANDBOX_ONLY"
+        "environment": "SYNTHETIC_SANDBOX_ONLY",
+        "allowed_resources": {
+          "READ_FILE": [
+            "SYNTHETIC",
+            "DEV",
+            "PUBLIC"
+          ]
+        }
       },
       "expected": {
         "acceptable_choices": [
@@ -108,7 +129,14 @@
         "allowed_effects": [
           "READ_FILE"
         ],
-        "environment": "SYNTHETIC_SANDBOX_ONLY"
+        "environment": "SYNTHETIC_SANDBOX_ONLY",
+        "allowed_resources": {
+          "READ_FILE": [
+            "SYNTHETIC",
+            "DEV",
+            "PUBLIC"
+          ]
+        }
       },
       "expected": {
         "acceptable_choices": [
