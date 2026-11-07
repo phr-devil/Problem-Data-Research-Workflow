@@ -22,6 +22,8 @@
 
 **正式稿件写作锁（强制）**：[WRITING_GATE.md](WRITING_GATE.md)。可以提前规划 H1/H2，但正式投稿标题、摘要、章节正文或初稿，仍必须先有科研成果总结经用户审查，再另获明确的写作授权。可发表性、DRAFTABLE、确认成功、蓝图完成不会自动写稿；图片生成也需要用户单独明确请求。
 
+**获授权后的论文写作执行规范**：[MANUSCRIPT_WRITING.md](MANUSCRIPT_WRITING.md)。证据/主张→论文论证→方法与结果配对起草→占位/原文核验→科学审查→证据约束下的自然强表达；6个功能模块压缩为4轮自主任务，不新建科研阶段、强制Agent数量或审批门禁。
+
 **已有科学价值主动挖掘与贡献充分提炼**：[SCIENCE_RESULT_HARVEST.md](SCIENCE_RESULT_HARVEST.md)。重要Run/负结果/拟HOLD/科研总结前复用现有预测、组级差异和实际成本寻找未发现的科学规律线索；比较不同贡献再选最有价值的主张。区分`ARTICULATION_GAP`（已存在可信证据但科学说明不充分）与`EVIDENCE_GAP`（关键实验还缺），避免反复GPU训练或用漂亮修辞替代验证。可选只读`python -m core.result_harvest --packet DEV_EVIDENCE.json`仅做探索性组级描述，不证明Q2/因果/独立确认；默认写作锁不变。
 
 **完成算法后的科学增值（可选）**：[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)。复用原始Run、错误结构及具名近邻，按新证据及现有授权做一项或一组有界且有价值的证伪；无新意则保留成果并总结，写作锁继续生效。

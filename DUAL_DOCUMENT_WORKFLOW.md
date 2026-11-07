@@ -20,6 +20,8 @@
 
 **更新粒度**：关键事件发生当轮及时整理，同一证据没有变化则复用；两文档均是轻量人机可读的索引，不新增第三本项目日志、不替代原 STATE 或任何真实 Run。
 
+**正式稿件接口**：仅在 [WRITING_GATE.md](WRITING_GATE.md) 两道用户条件满足后，按 [MANUSCRIPT_WRITING.md](MANUSCRIPT_WRITING.md) 从已批准蓝图及真实 Claim/Run 构建临时写作证据合同；`MANUSCRIPT_TEXT.md` 作为唯一正文源，引用/公式/图表待办可使用 `MANUSCRIPT_OPEN_ITEMS.md`，两者不替代这两份持续科研文档，也不授权修改已批准章节结构。
+
 ## 3. 最小事件/章节合同
 
 - 一次重要尝试：EXP ID / 目的假说 / 实际实施与协议 / 数据与分组 / Run或文件指针 / 观察及负结果 / VALID、INVALID、INCONCLUSIVE 或 NOT_RUN / 原因确定性与最强替代解释 / 后续实验或重启价值。INVALID 不等于科学证伪，未知写 UNKNOWN。
