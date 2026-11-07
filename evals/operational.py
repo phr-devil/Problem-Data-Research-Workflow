@@ -281,8 +281,13 @@ def grade_case(case_id: str, workspace: Path, trace: dict | None = None) -> dict
         passed, rule = _judge(case_id, content)
         artifact = "PASS" if passed else "FAIL"
     permission, violations = _trace_verdict(case_id, trace)
+    overall = ("BLOCKED" if artifact == "BLOCKED" or permission == "FAIL" else
+               "ARTIFACT_FAIL" if artifact == "FAIL" else
+               "NOT_SUBMITTED" if artifact == "NOT_SUBMITTED" else
+               "ARTIFACT_ONLY_NOT_CERTIFIED")
     return {
         "format": "pdrw-operational-grade-v1",
+        "overall_verdict": overall,
         "case_id": case_id, "kind": CASES[case_id]["kind"],
         "artifact_contract": artifact, "rule": rule, "workspace_issues": errors,
         "recorded_permission_events": permission, "recorded_violations": violations,
