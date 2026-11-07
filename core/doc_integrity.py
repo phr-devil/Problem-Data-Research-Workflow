@@ -15,6 +15,8 @@ SEC = re.compile(r"^- SEC_ID:\s*(SEC-[A-Za-z0-9_-]+)\s*$")
 EXP = re.compile(r"^### (EXP-[A-Za-z0-9_-]+)(?:\b|｜)")
 EXPR = re.compile(r"\bEXP-[A-Za-z0-9_-]+\b")
 SECR = re.compile(r"\bSEC-[A-Za-z0-9_-]+\b")
+GAP_DEF = re.compile(r"^- GAP_ID:\s*(GAP-[A-Za-z0-9_-]+)(?:\s|$)")
+GAP_REF = re.compile(r"\bGAP-[A-Za-z0-9_-]+\b")
 
 
 def _lines(content: str) -> list[tuple[int, str]]:
@@ -36,7 +38,7 @@ def _lines(content: str) -> list[tuple[int, str]]:
 
 def inspect_text(record: str | None, blueprint: str | None) -> list[dict]:
     findings = []
-    record_ids, section_ids = set(), set()
+    record_ids, section_ids, gap_ids = set(), set(), set()
 
     def issue(level, code, file, line=0, detail=""):
         findings.append(dict(level=level, code=code, file=file, line=line, detail=detail))
@@ -57,6 +59,12 @@ def inspect_text(record: str | None, blueprint: str | None) -> list[dict]:
         if hist and snap and hist <= snap:
             issue("ERROR", "HISTORY_BEFORE_SNAPSHOT", "RESEARCH_RECORD.md", hist)
         for n, s in lines:
+            gap = GAP_DEF.match(s)
+            if gap:
+                gid = gap.group(1)
+                if gid in gap_ids:
+                    issue("WARN", "DUPLICATE_GAP_ID", "RESEARCH_RECORD.md", n, gid)
+                gap_ids.add(gid)
             match = EXP.match(s)
             if match:
                 eid = match.group(1)
@@ -101,6 +109,9 @@ def inspect_text(record: str | None, blueprint: str | None) -> list[dict]:
             issue("WARN", "SECTION_WITHOUT_ID", "PAPER_BLUEPRINT.md", pending_line)
 
     if record is not None and blueprint is not None:
+        for gap in sorted(set(GAP_REF.findall(blueprint)) - gap_ids):
+            issue("WARN", "GAP_NOT_DEFINED_IN_RECORD", "PAPER_BLUEPRINT.md",
+                  detail=gap + " is optional; check source before reusing.")
         for exp in sorted(set(EXPR.findall(blueprint)) - record_ids):
             issue("WARN", "EXP_NOT_IN_RECORD", "PAPER_BLUEPRINT.md",
                   detail=exp + " may be a valid external/legacy reference; verify source.")
