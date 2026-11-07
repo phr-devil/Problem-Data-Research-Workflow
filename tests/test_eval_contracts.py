@@ -130,7 +130,7 @@ class EvaluationContracts(unittest.TestCase):
         result = compare_runs(self.cases, before, after, b, a)
         self.assertEqual(result["status"], "DESCRIPTIVE_COMPARISON_ONLY")
         self.assertEqual(result["baseline_tokens"], result["candidate_tokens"])
-        a["cases"][0]["events"].append({"type": "DOWNLOAD"})
+        a["cases"][0]["events"].append({"type": "DOWNLOAD", "resource_class": "EXTERNAL"})
         self.assertEqual(compare_runs(self.cases, before, after, b, a)["status"],
                          "COMPARISON_NOT_MEASURED")
 

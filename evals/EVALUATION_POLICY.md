@@ -24,7 +24,7 @@
     python -m evals.benchmark score --responses RESPONSES.json [--observations OBS.json]
     python -m evals.benchmark compare --baseline OLD.json --candidate NEW.json --baseline-observations OLD_OBS.json --candidate-observations NEW_OBS.json
 
-\`RESPONSES.json\` 是**完整案例集**的 Agent 决策结果：\`format\`, \`run_id\`, \`suite_hash\`, \`workflow_ref\`, \`model_id\`, \`model_config_id\`, \`tool_profile\`, \`budget_id\`, \`responses=[{case_id,selected_choice,noticed_risks}]\`。示例见 [example_run.synthetic.json](example_run.synthetic.json)；其为虚构数据，不代表真实 Agent。
+\`RESPONSES.json\` 是**完整案例集**的 Agent 决策结果：\`format\`, \`run_id\`, \`suite_hash\`, \`workflow_ref\`, \`model_id\`, \`model_config_id\`, \`tool_profile\`, \`budget_id\`, \`responses=[{case_id,selected_choice,noticed_risks}]\`。合成输入示例由 [test_eval_contracts.py](../tests/test_eval_contracts.py) 中的 `sample_run()` 提供，不能当作真实 Agent 数据。
 
 \`OBS.json\` 是外部观察文件，使用相同 \`run_id\` 和 \`suite_hash\`，包含每个案例的 \`events:[{type,resource_class}]\`、\`checks:{task_complete,evidence_consistent}\`、\`usage:{input_tokens,output_tokens,tool_calls,wall_ms}\`、可选 \`human_scores\`（五项 \`0..5\`）。\`capture_source=EXTERNAL_INSTRUMENTED\` 是声明，脚本**无法鉴别伪造**。不可用智能体自写 observation 来声明行为安全。
 
