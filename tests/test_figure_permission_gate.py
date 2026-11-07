@@ -48,6 +48,18 @@ class FigurePermissionGateTests(unittest.TestCase):
         self.assertIn("不授予数据下载", policy)
 
 
+    def test_publication_chart_rules_are_explicit_and_do_not_grant_permission(self):
+        policy = (ROOT / "FIGURE_POLICY.md").read_text(encoding="utf-8")
+        agent = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        for marker in ("AXIS_ARROW_QA", "BAR_MARKER_QA", "PANEL_ALIGNMENT_QA",
+                       "SCALE_AND_EVIDENCE_QA", "TYPOGRAPHY_LEGEND_QA",
+                       "EXPORT_QA", "PD_RW_PUBLICATION", "figure_theme_pdrw.json",
+                       "用户明确", "未裁切", "独立统计单位"):
+            with self.subTest(marker=marker):
+                self.assertIn(marker, policy)
+        self.assertIn("**已授权的论文数据图**", agent)
+        self.assertIn("FIGURE_POLICY.md", agent)
+
     def test_academic_diagram_style_entry_and_reference(self):
         policy = (ROOT / "FIGURE_POLICY.md").read_text(encoding="utf-8")
         style = (ROOT / "ACADEMIC_DIAGRAM_STYLE.md").read_text(encoding="utf-8")

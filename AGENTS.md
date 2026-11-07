@@ -24,6 +24,7 @@
 - **科学机会/升级**：按需 [PAPER_FIRST.md](PAPER_FIRST.md)、[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)；只有已授权且有决定性新假说才升级复杂模型，重要失败和有价值资产不丢弃。
 - **独立确认/期刊**：[CONFIRMATION.md](CONFIRMATION.md)、[VENUE_STRATEGY.md](VENUE_STRATEGY.md)；RWF 仅在必要时按原始预测与协议进行 DEV 指标复核，不接管科研主控或给予许可。
 
+- **已授权的论文数据图**：优先按 [FIGURE_POLICY.md](FIGURE_POLICY.md) §4.5 使用 PD-RW 图表主题（RWF `styles/figure_theme_pdrw.json` 或同等实现）。普通二维数据图双轴末端箭头，彩色柱体无冗余点；多个可比子图统一布局与文字锚点。导出前执行箭头、柱体和真实子图几何检查，最后检查论文宽度的真实 SVG/PNG。若仅讨论规范，不生成图片。旧项目主题不擅自迁移。
 - **已授权的论文架构图／重绘**：优先从项目已有 `figures/<figure_id>.spec.json` 与 `.drawio` 恢复，按 [ACADEMIC_DIAGRAM_STYLE.md](ACADEMIC_DIAGRAM_STYLE.md) §4.1 使用单设计主控、固定 Skill 分工、增量修改和差异 QA；新图/缓存失效时再核对应真实 Methods/代码。可选 `python -m core.figure_change_scope --before OLD --after NEW` 只读比较规格，绝不自动生成图像、取得绘图授权或省略最终实际渲染检查。
 
 ## 3. 任务结束：只更新重要变化
