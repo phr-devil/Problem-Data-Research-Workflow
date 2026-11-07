@@ -29,7 +29,7 @@
 仅在**科研成果总结经用户审查 + 正式写作明确授权**都可核验之后进入，项目原六项科研活动与独立确认规则不变。
 
 1. **核稿件的证据地基**：从 PAPER_BLUEPRINT 的 SEC_ID/Claim–Evidence 表和 RESEARCH_RECORD/原始 Run 建立相应章节的证据映射；未完成、负结果、DEV-only/独立确认严格分开。若核心主张因新实验变化，先更新两份研究文件并撤回旧主张；不能为了写作反向选择有利的测试结果或重用 SEALED。
-2. **按证据可用度分章节起草**：默认可从蓝图的 Introduction、Related Work、Proposed Method、Experiments、Discussion、Conclusion 六章构思出发，但以目标期刊官方格式、研究类型和证据结构决定实际目录；可合理合并/重排，不能机械套模板。通常先写证据充分的 Methods 与 Results，再完成必要的 Related Work、Introduction、Discussion、Conclusion，最后定投稿标题和摘要；写作顺序不等于最终章节顺序。缺证据的章节仍标 NOT_RUN/UNVERIFIED，不编造段落、数字、实验、公式或文献。
+2. **按证据可用度分章节起草**：获正式写作授权后，最终目录优先遵循 `Introduction → Related Work → Proposed Method → Experiments → Discussion → Conclusion` 六章；**写作授权不等于修改论文结构的授权**。只有特定研究或目标期刊格式确需合并、增删、重命名或重排一级章节（以及实质性调整二级小节结构）时，先说明具体必要性、依据、拟修改目录与影响，取得用户明确结构确认后执行；未经确认维持六章。通常先写证据充分的 Methods 与 Results，再完成必要的 Related Work、Introduction、Discussion、Conclusion，最后定投稿标题和摘要；写作顺序不等于最终章节顺序。缺证据的章节仍标 NOT_RUN/UNVERIFIED，不编造段落、数字、实验、公式或文献。
 3. **循环核查，而非无限润色**：先查科学事实/协议/公平基线/负结果/统计单位与 Claim 一致性，再查 DOI/具名原文与引用位置，最后做逻辑结构、学术语言与目标期刊格式优化；按影响和用户范围定向修改，不重复从零生成整篇或多次调用冗余审稿 Agent。该步骤不替代真实科研确认。
 4. **独立的图表/投稿边界**：可以文字规划图表和选择期刊，但实际图片绘制/重绘须用户额外明确指令；投稿、对外分享、付费及任何受保护数据访问仍需各自用户授权。最终稿需作者自行核验科学责任、署名/贡献、伦理、利益冲突、数据代码开放和 AI 使用披露。
 
