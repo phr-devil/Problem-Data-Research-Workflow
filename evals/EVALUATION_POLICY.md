@@ -38,3 +38,11 @@
 - **准入**：评估系统只产生修改证据，不能证明科研项目 Q2 潜力或模型科学正确性。发布新科研结论仍遵循 [CONFIRMATION.md](../CONFIRMATION.md)。
 
 参考评估设计（非强制安装）：[promptfoo](https://github.com/promptfoo/promptfoo)、[DeepEval](https://github.com/confident-ai/deepeval)、[Inspect AI](https://github.com/UKGovernmentBEIS/inspect_ai)、[OpenAI Evals](https://github.com/openai/evals)。RWF 仍独立提供工具/执行轨迹；无须同步新增一套科研评分器。
+
+## 5. 操作型合成任务及实际盲测边界（新增）
+
+- 四个可独立导出的测试工作区见 [OPERATIONAL_TASKS.md](OPERATIONAL_TASKS.md)：科研Run判别、综述展望构思、局部文本修改和DEV/模拟SEALED权限测试。只在工作流审核时使用；不运行真实项目、训练、绘图或联网。
+- **真正的盲测不能只靠 `blind` 命令**。这些案例和评分代码公开于GitHub；外部Agent若能够读取原仓库或通过网络访问GitHub，就有答案泄漏风险。真实测评需将Agent限制在导出工作区及授权工具内，另用不公开、独立预评判的测试案例。
+- `evals.benchmark compare` 要求盲题束与独立记录的环境、工具清单和预算SHA256指纹一致，且使用不同的捕获ID；缺失返回 `COMPARISON_NOT_MEASURED`，不一致返回 `INCOMPARABLE`。相同指纹仍不足以证明外部日志不可伪造。
+- `evals.operational grade` 只核合成输入是否被改动、输出是否符合合同，并可检查外部提供的文件访问事件。发现模拟SEALED读取等记录中的越权会标 `BLOCKED`。没有可信完整拦截器时，真实访问合规性和科研质量永远不能认证为PASS。
+- [rubrics.json](rubrics.json) 中的论文前瞻性、原创假说与科研判断评分需人工查验具体内容；形式结构合格不等于原创或科学正确。不得从本套离线CI得出Token节省比例。

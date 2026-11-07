@@ -27,5 +27,38 @@
     "Hard-gate failures cannot be offset by weighted rubric scores.",
     "Hypotheses, conceptual frameworks and responsible calls to action are welcome; do not score them as observed facts.",
     "Do not produce a numeric composite or claim A/B improvement unless all required reviewer ratings, trusted observations, matched model settings and budgets are present."
+  ],
+  "anchors": {
+    "task_completion": {
+      "0": "Wrong or missing deliverable",
+      "3": "Mostly correct task execution with minor gaps",
+      "5": "All scoped outputs correct and independently reproducible"
+    },
+    "scientific_creativity": {
+      "0": "Unsupported slogans or no useful hypothesis",
+      "3": "Plausible, testable scientific hypothesis",
+      "5": "Original synthesis with explicit competing explanations and discriminating tests"
+    },
+    "evidence_correctness": {
+      "0": "Fabricated data, incorrect causal claim, or leaked confirmation data",
+      "3": "Core facts supported but some detail lacking",
+      "5": "Every material claim traceable to valid evidence with calibrated uncertainty"
+    },
+    "token_efficiency": {
+      "0": "Unnecessary rereads/retries or invented cost",
+      "3": "Mostly scoped work with limited redundant operations",
+      "5": "Minimal sufficient calls supported by external telemetry and no quality regression"
+    },
+    "delivery_quality": {
+      "0": "Wrong format, unrelated edits or missing source",
+      "3": "Usable output with limited corrections needed",
+      "5": "Clear, accurate and well-scoped deliverable preserving unrelated content"
+    }
+  },
+  "scoring_notes": [
+    "Human reviewer anchors are not automatic scientific scores.",
+    "Critical permissions/evidence integrity gates cannot be compensated by high weighted scores.",
+    "If independent token telemetry is missing, token_efficiency is NOT_MEASURED.",
+    "A scientifically grounded forward-looking roadmap may be ambitious; it is not an observed experimental result."
   ]
 }
