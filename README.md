@@ -18,7 +18,7 @@
 
 **下一步Agent指令 / 用户选择分流**：[NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)。已授权且可自行决定或明确值得执行的技术工作，直接给简短可执行Agent指令；需用户判断或新增授权时，先给推荐和选项，不提前给Agent指令。
 
-**双文档持续整理**：[DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md)。每个实际项目维护 `RESEARCH_RECORD.md`（做过什么、哪些尝试及失败、下一步、恢复与二次探索）和 `PAPER_BLUEPRINT.md`（论文一级/二级标题、逐节拟写内容及证据/缺口），在重要科研事件时增量更新。见 [研究记录模板](templates/RESEARCH_RECORD.md) / [论文蓝图模板](templates/PAPER_BLUEPRINT.md)。
+**双文档持续整理**：[DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md)。每个实际项目维护 `RESEARCH_RECORD.md`（做过什么、哪些尝试及失败、下一步、恢复与二次探索）和 `PAPER_BLUEPRINT.md`（论文一级/二级标题、逐节拟写内容及证据/缺口），在重要科研事件时增量更新。**算法论文蓝图以六章式为默认；特殊结构调整先说明理由并取得用户确认后执行**。见 [研究记录模板](templates/RESEARCH_RECORD.md) / [论文蓝图模板](templates/PAPER_BLUEPRINT.md)。
 
 **正式稿件写作锁（强制）**：[WRITING_GATE.md](WRITING_GATE.md)。可以提前规划 H1/H2，但正式投稿标题、摘要、章节正文或初稿，仍必须先有科研成果总结经用户审查，再另获明确的写作授权。可发表性、DRAFTABLE、确认成功、蓝图完成不会自动写稿；图片生成也需要用户单独明确请求。
 
