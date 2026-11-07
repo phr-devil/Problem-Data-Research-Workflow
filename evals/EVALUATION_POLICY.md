@@ -46,3 +46,10 @@
 - `evals.benchmark compare` 要求盲题束与独立记录的环境、工具清单和预算SHA256指纹一致，且使用不同的捕获ID；缺失返回 `COMPARISON_NOT_MEASURED`，不一致返回 `INCOMPARABLE`。相同指纹仍不足以证明外部日志不可伪造。
 - `evals.operational grade` 只核合成输入是否被改动、输出是否符合合同，并可检查外部提供的文件访问事件。发现模拟SEALED读取等记录中的越权会标 `BLOCKED`。没有可信完整拦截器时，真实访问合规性和科研质量永远不能认证为PASS。
 - [rubrics.json](rubrics.json) 中的论文前瞻性、原创假说与科研判断评分需人工查验具体内容；形式结构合格不等于原创或科学正确。不得从本套离线CI得出Token节省比例。
+
+## 6. 开放式科研能力与可信外部评估
+
+- **公开16道选项题和4个操作型合成任务均为 `REGRESSION_ONLY`**，不以其分数宣称真实科研能力。私有评估包的格式及导出入口在 [PRIVATE_PACK_CONTRACT.md](PRIVATE_PACK_CONTRACT.md)；它不运行模型、不提供沙箱、不保存私有题库。
+- 科研操作型案例要求 `hypothesis | competing_explanations | falsification_test | evidence_gap | risk`，综述展望补充 `evidence_gap | risk`。确定性评分仅核受保护的 Run 选择、输出结构及编辑合同；**原创性、具体假说合理性及愿景价值须独立评审，接受不同的合理答案**。
+- 外部 JSON 的 `capture_source` 与SHA并非可认证轨迹，只有能查证的拦截/权限执行器才可能支持行为结论；当前仅 `TRACE_DECLARATIVE_ONLY`，不足以宣称无越权或 Token 改善。
+- A/B 分层：CI仅合成无模型检查；任务语义/权限/评价器重要变更才跑受影响操作型测试，重大升级才跑配对 A/B。仅在模型、任务、预算、工具等实际条件仍相同且遥测可信时复用旧基线；否则 `NOT_MEASURED`。

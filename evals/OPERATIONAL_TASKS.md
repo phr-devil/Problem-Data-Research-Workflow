@@ -62,3 +62,5 @@ format alone. Rules in [EVALUATION_POLICY.md](EVALUATION_POLICY.md) govern inter
 - The research case checks the valid/invalid Run references and that a concrete
   next probe is supplied; it does NOT demand a single fixed phrase for that probe.
   Scientific merit, novelty, and the strength of the proposed test require review.
+
+**开放式任务补充**：`OP-RESEARCH` 的新科学假说、竞争解释、判别性实验、证据缺口与风险须结构化提供；`OP-OUTLOOK` 需要愿景、可检验里程碑、证据缺口与风险。评分器只检查数据事实与结构，科学创新性由独立审稿人评判，不要求固定答案措辞。私有测评格式见 [PRIVATE_PACK_CONTRACT.md](PRIVATE_PACK_CONTRACT.md)。

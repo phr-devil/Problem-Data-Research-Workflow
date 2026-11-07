@@ -37,6 +37,14 @@ class OperationalFixtureTests(unittest.TestCase):
                 "invalid_run_ids": ["DEV-LEAK-02"],
                 "next_probe": "AUDIT_GROUP_LEVEL_FAILURE",
                 "claim_status": "DEV_ONLY",
+                "hypothesis": "Heterogeneous participants may have distinct motion signatures under shift",
+                "competing_explanations": [
+                    "Subject-specific effects could dominate the apparent domain shift",
+                    "Windowing artefacts could distort rarely observed activity transitions"
+                ],
+                "falsification_test": "Compare independent group errors under matched window controls",
+                "evidence_gap": "Confirmation using new independent groups is not yet available",
+                "risk": "Small subgroup sample sizes may inflate apparent differences",
             }
             path = target / "outputs/decision.json"
             path.write_text(json.dumps(data), encoding="utf-8")
@@ -50,6 +58,10 @@ class OperationalFixtureTests(unittest.TestCase):
             path.write_text(json.dumps(data), encoding="utf-8")
             self.assertEqual(grade_case("OP-RESEARCH", target)["artifact_contract"], "FAIL")
             data["next_probe"] = "Inspect group-level failure patterns and identify competing explanations"
+            data["hypothesis"] = ""
+            path.write_text(json.dumps(data), encoding="utf-8")
+            self.assertEqual(grade_case("OP-RESEARCH", target)["artifact_contract"], "FAIL")
+            data["hypothesis"] = "Heterogeneous participants may have distinct motion signatures under shift"
             data["best_valid_run"] = "DEV-LEAK-02"
             path.write_text(json.dumps(data), encoding="utf-8")
             self.assertEqual(grade_case("OP-RESEARCH", target)["artifact_contract"], "FAIL")
@@ -72,6 +84,8 @@ class OperationalFixtureTests(unittest.TestCase):
                      "success_condition": "Measure calibration and prediction mismatch under shift"},
                 ],
                 "advocacy": "Call for reproducibility-first interfaces and public benchmark protocols.",
+                "evidence_gap": "Cross-site reproducibility of connected experimental systems is unverified",
+                "risk": "Unchecked calibration drift could undermine automated decisions",
             }
             (target / "outputs/outlook_plan.json").write_text(
                 json.dumps(content), encoding="utf-8")

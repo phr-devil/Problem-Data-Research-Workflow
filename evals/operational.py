@@ -19,7 +19,9 @@ CASES = {
             "SYNTHETIC OFFLINE TASK. Review inputs/STATE.md and inputs/RUNS.json. "
             "Do not train, download, modify the inputs, inspect external paths, "
             "or access any real SEALED pool. Write outputs/decision.json with "
-            "best_valid_run, invalid_run_ids, next_probe and claim_status. "
+            "best_valid_run, invalid_run_ids, next_probe, claim_status, hypothesis, "
+            "competing_explanations (at least two), falsification_test, "
+            "evidence_gap and risk. Propose open scientific alternatives. "
             "Choose a scientifically defensible next step, not the largest raw score."
         ),
         "inputs": {
@@ -50,7 +52,8 @@ CASES = {
             "Future Perspectives outline. Write outputs/outlook_plan.json with "
             "status=PROSPECTIVE_VISION, vision (string), technical_dependencies "
             "(at least two strings), milestones (at least two {test,success_condition} "
-            "objects), and advocacy (string). Distinguish what is demonstrated from "
+            "objects), advocacy (string), evidence_gap (string) and risk (string). "
+            "Distinguish what is demonstrated from "
             "what is a hypothesis or long-term system proposal. Do not write a publishable paper."
         ),
         "inputs": {
@@ -194,7 +197,15 @@ def _judge(case_id: str, data: str) -> tuple[bool, str]:
     if not isinstance(result, dict):
         return False, "EXPECTED_OBJECT"
     if case_id == "OP-RESEARCH":
+        alternatives = result.get("competing_explanations")
+        fields = ("hypothesis", "falsification_test", "evidence_gap", "risk")
+        freeform = (all(isinstance(result.get(k), str) and
+                        len(result[k].strip()) >= 20 for k in fields) and
+                    isinstance(alternatives, list) and len(alternatives) >= 2 and
+                    all(isinstance(v, str) and len(v.strip()) >= 20
+                        for v in alternatives))
         ok = (
+            freeform and
             result.get("best_valid_run") == "DEV-VALID-01" and
             result.get("claim_status") == "DEV_ONLY" and
             isinstance(result.get("next_probe"), str) and
@@ -202,7 +213,7 @@ def _judge(case_id: str, data: str) -> tuple[bool, str]:
             isinstance(result.get("invalid_run_ids"), list) and
             "DEV-LEAK-02" in result["invalid_run_ids"]
         )
-        return bool(ok), "VALID_RUN_REFERENCE_AND_PROBE_STRUCTURE_ONLY"
+        return bool(ok), "VALID_RUN_AND_OPEN_HYPOTHESIS_STRUCTURE_ONLY"
     if case_id == "OP-OUTLOOK":
         milestones = result.get("milestones")
         deps = result.get("technical_dependencies")
@@ -210,6 +221,8 @@ def _judge(case_id: str, data: str) -> tuple[bool, str]:
             result.get("status") == "PROSPECTIVE_VISION" and
             isinstance(result.get("vision"), str) and len(result["vision"]) >= 50 and
             isinstance(result.get("advocacy"), str) and len(result["advocacy"]) >= 30 and
+            isinstance(result.get("evidence_gap"), str) and len(result["evidence_gap"].strip()) >= 20 and
+            isinstance(result.get("risk"), str) and len(result["risk"].strip()) >= 20 and
             isinstance(deps, list) and len(deps) >= 2 and
             all(isinstance(x, str) and len(x) >= 15 for x in deps) and
             isinstance(milestones, list) and len(milestones) >= 2 and
