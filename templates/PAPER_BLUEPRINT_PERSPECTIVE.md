@@ -14,8 +14,8 @@
 |---|---|---|---|---|
 | CLM-P01 (TENTATIVE) | SEC-PERSPECTIVE-01 | SOURCE_UNVERIFIED | UNKNOWN | HYPOTHESIS |
 
-## 1. Central Thesis and Scientific Importance
-### 1.1 Why the Thesis Matters
+## 1. Introduction
+- **新 Perspective 默认呈现**：以连续、有递进的英文段落提出有科学意义的中心立场和真实知识缺口，不设 1.1 子标题，不将倡议写成散点列表；须区分证据与前瞻性主张，期刊/已批准结构优先。
 - SEC_ID: SEC-PERSPECTIVE-01
 - 拟写要点：清晰而值得讨论的原创立场、应用及学术重要性；不把口号当贡献。
 
@@ -34,8 +34,8 @@
 - SEC_ID: SEC-PERSPECTIVE-04
 - 拟写要点：实现条件、重大风险、近期可检验里程碑、长远科学愿景和有依据的合作/标准化倡议。
 
-## 5. Concluding Implications
-### 5.1 What Changes if the Thesis Holds
+## 5. Conclusion
+- **默认呈现**：连贯归纳科学意义、实施条件与尚待验证的命题，不强设 5.1。
 - SEC_ID: SEC-PERSPECTIVE-05
 - 拟写要点：作者立场、对领域的可能影响、最重要的待答问题；不得宣称尚未发生的成果。
 
