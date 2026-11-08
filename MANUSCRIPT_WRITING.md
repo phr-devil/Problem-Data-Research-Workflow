@@ -24,7 +24,7 @@
 |---|---|---|
 | M1 Evidence Contract | 复用可信 Claim–EXP/Run–协议–数据/图表映射；记录 metric、unit、denominator、independent_unit、cohort/split、CI、selection_history、confirmatory/descriptive/exploratory、负证据及作废版本。只查看已有合法数据，不重跑科研/SEALED。 | **精简证据快照**；未验证项标 \`UNVERIFIED\` / \`SOURCE_CONFLICT\` / \`NOT_RUN\`，不进入确定性陈述。 |
 | M2 Argument Architecture | 用一行写清研究问题、主 Claim、贡献类型、3个以内关键支持证据、最强反解释和适用边界；为相关 SEC_ID 设定 section contract。 | **North Star + Claim hierarchy + 段落职责**；主结果与图片对应，非贡献信息可移到 SI/省略，但不得删负证据。 |
-| M3 Evidence-to-Prose | 先固定决定结果含义的测量/评价定义，再将对应主要 Results 写成自然英文；补齐 Methods/Results 后处理 Related Work、Discussion、Introduction、Conclusion、Abstract、Title。 | **可直接修改的正文**；先事实后诠释，不写实验流水账，不为凑字数重复背景或结果。 |
+| M3 Evidence-to-Prose | 先固定决定结果含义的测量/评价定义，再将对应主要 Results 写成自然英文；补齐 Methods/Results 后处理 Related Work、Discussion、Introduction、Conclusion、Abstract、Title。 | **可直接修改的连续正文**；Introduction 默认无二级标题/罗列式贡献清单，按证据与创新价值详略展开，不写实验流水账或等长模板段落。 |
 | M4 Source & Placeholder | 需要外部文献时核实「原文具体段落是否支持该句」及 DOI/版本/条件；用户自行补文献时仅保留可追溯的具体引用需求。公式、图表只占位，不伪造公式或图。 | \`[REF:R01 — claim requiring source]\`、\`[EQ:E01 — exact definition]\`、\`[FIG:F01 — intended panel]\`；不使用虚构 [1]/DOI 或占位文献推导确定性近邻结论。 |
 | M5 Scientific Audit | 核 Method ↔ Result ↔ figure/table ↔ Discussion ↔ Abstract 的数值、口径和定义；查证据强度、统计单位、因果措辞、失效/负结果、最近邻原文。 | 分级问题：\`BLOCKER\`（无证据/无效/冲突），\`MAJOR\`（口径/论证改变），\`MINOR\`（术语/衔接），\`STYLE\`；仅修复受影响位置。 |
 | M6 Prose & Delivery | 科学主线稳定后再去机械化、审计口吻和过度防御；段落连接、重复、语气及刊物格式按需精修。精修后再次核查所有改变了的数值、限制、Claim、图/引用与公式占位。 | **最终可审阅纯文字稿 + 未解决事项**；完成文字 ≠ 科学确认、正式投稿准备或作者审批。 |
@@ -40,6 +40,18 @@
 \`Question | Main message | Evidence IDs & status | Paragraph roles | Figures/Tables | Boundary\`
 
 按论证需要设段落，不固定段数或字数。段落只承担一项主要任务；图呈现数据，正文陈述推断。相同核心数值可在 Results、Abstract、Conclusion 按各自功能有限重复，但禁止各章重复整段解释。若现有 \`PAPER_BLUEPRINT.md\` 已含这些字段，复用而不另造计划文件。
+
+### 连续引言与证据加权的详略分配（M2→M3 的默认写作合同）
+
+**Introduction（面向新的实证研究稿）**：正式稿件只保留一级 `Introduction`，以下使用**连续、完整、有逻辑连接的学术段落**。默认不设 `1.1 Background` / `1.2 Research Gap` / `1.3 Contributions` 等二级小标题，不使用项目符号或编号清单罗列背景、Related Work、困难或创新点。蓝图里的 `SEC-INTRO-01/02`、Question/Key Points/Paragraph roles 只是作者内部设计，不应打印到投稿正文。引言的逻辑应使读者自然理解 **重要问题 → 最相关工作已做到什么 → 具体未解决的知识或能力缺口 → 本研究为何采用该思路 → 可核实的主要贡献和意义**；允许一段承担多个紧密相关的功能，**不强制五段、三条贡献或每段等字数**。引言应建立贡献的必要性和差异，不抢占 Methods/Results 的全部技术推导与数值细节。除明确的目标期刊或用户已批准的特殊结构外，该默认写法不得由 Agent 自行改成分节引言；既有用户已确认的目录仍按 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 的变更权限办理。
+
+**正文优先完整论证，不优先填满模板**：将论文主张映射到需要解释的读者问题，按 **科学重要性 × 新颖差额 × 机制/任务的理解难度 × 证据密度** 分配篇幅，而非给所有小节、段落、方法组件和结果平均字数。不要预设各段长度范围，也不要为制造节奏而机械拉长/缩短段落。相关内容可以用一个紧凑段落讲清；真正复杂的重要结果可以由数个相互推进、各有明确推理任务的长短不同段落解释。每段应有明确中心信息，并且与前后段构成推理关系，**不是把蓝图每一条要点扩写成一个长度近似的段落**。
+
+**核心创新/优势必须做足具体解释（有真实证据边界）**：对最关键的 1–2 个中心贡献，按实际需要写清：①之前最相关方法在什么输入/约束/协议下解决了什么，哪里仍不足；②本方法独有的技术机制、设计理由、合法信息流、算法步骤/关键公式及可复现细节；③为什么这个差别可能解决上述缺口，与更简单替代及最强具名近邻有什么**实质区别**；④真正的主结果、公平比较、决定性消融/反例/边界与不确定性；⑤这些结果让我们获得了什么新知识或能力，代价与适用范围是什么。**这些是内部论证视角，不是须逐条输出的五点清单，也不强求所有贡献都具备全部层次**。不同层次应由 Introduction、Proposed Method、Experiments 和 Discussion 分工深入，不能只在引言用几句 `novel/robust/superior` 宣告创新；证据不足处清楚收窄，不能靠追加字数虚构优势。对于规律/测量/综述论文，将“方法机制”替换为相应的辨识设计、证据综合或论证框架，而非硬造新网络。
+
+**章内取舍**：常规背景、常识定义、已知标准方法和弱相关文献简述或引用；任务的特殊条件、原创设计、决定性对照、复杂/异常结果及最强竞争解释详写。Results 以**科学问题与结果主张**组织，而不是按图号 `Fig.1 shows...` 顺序写图解流水账；可引用图证明同一推断，但每组核心数据需解释“与谁比较、差多少、在什么条件、为什么能支持该主张”，不将解释含糊地留给读者。Discussion 重点展开机制/规律解释与相关工作差异、失效边界和应用价值，不重复整段 Results。Conclusion 通常用连贯短文回答中心问题，不为单段强加 `6.1` 小节。
+
+**先论证后润色的反向提纲检查**：R2/R3 每完成核心章节，快速按现有段落顺序抽取“这段实际在主张什么 → 对应何种证据/推理 → 下一段为何必需”；如只剩平行要点、反复过渡、对等长度的模板段、创新点只有口号或方法一笔带过，则先在授权范围内重排/扩写**相关段落内容**，再做句子级润色。修订须先核原始 Run/代码/文献，不改变用户已批准重大结构，不为修语言而生成新实验、图像或其他稿件。只有篇幅或长度形态异常不能单独判定论文科学质量差。
 
 ### Claim Strength Calibration：强而不虚
 
