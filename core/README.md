@@ -68,6 +68,15 @@ python -m core.cli literature-search --query "sensor calibration transfer" --lim
 **按需可行性结果判读：** `python -m core.cli feasibility-check --file PROJECT/FEASIBILITY_ENVELOPE.json` 仅对 Forge 生成的候选/参照差值提出下一个实验方向，不重新打开数据、不拟合、不把传入 JSON 自报内容当独立验证。原始数据和运行工件仍应先在 Forge 用 `tools.feasibility_probe` 核验。任务集分层与具体用法见 [FEASIBILITY_ENVELOPE.md](../FEASIBILITY_ENVELOPE.md)。
 
 
+## 稿件语义与独立确认标注的离线警报（仅按需）
+
+```bash
+python -m core.manuscript_claim_guard compare before.md after.md --output alerts.json
+python -m core.manuscript_claim_guard provenance claims.json --output provenance.json
+```
+
+第二个命令读取明确提供的 JSON `{"claims":[{"claim_id":"C01","text_anchor":"independently confirmed","asserted_role":"INDEPENDENT_CONFIRMATION","source_role":"CONFIRMATION","split_id":"CONFIRM-01","development_split_ids":["DEV-01"],"selected_on_source":false,"protocol_frozen":true,"evidence_ref":"runs/confirm-01"}]}`，仅核声明的 split/角色是否存在**明显矛盾或缺项**。第一命令对修改前后已变化文本做词法警报（数值、否定、因果、显著性、DEV/VAL/TEST 等角色），不替代语言理解、来源核对或合法的科学修改。支持 `.md/.txt/.docx` 的文本抽取，未提供完整证据映射、修改范围过大、原始证据不可用时均须人工审阅；无警报不代表语义不变。**不会读 SEALED、联网、画图或自动改论文**。稿件授权和审核由 [MANUSCRIPT_WRITING.md](../MANUSCRIPT_WRITING.md) / [MANUSCRIPT_QA.md](../MANUSCRIPT_QA.md) 决定。
+
 ## 可选跨仓库独立指标复算
 
 本地有最新 RWF checkout 时，可运行 `python -m core.cli forge-verify --root PD_PROJECT --run runs/R.json --forge-repo RWF_REPO --forge-project FORGE_PROJECT --forge-run runs/R/RUN.json --metric MAE`。PD Run与RWF Run的原始预测文件需字节相同，RWF在自己的工作目录和Python进程内核真实DEV标签/组/指标；避免两个仓库同名 `core` 包发生导入冲突。输出仅为 `METRIC_VERIFIED_DEV_ONLY`，旧Run无验证证据时保留`REPORTED`，不修改原Run/STATE或封存数据。若相对路径参数，`--run` 相对于 PD_PROJECT，`--forge-run` 相对于 FORGE_PROJECT。
