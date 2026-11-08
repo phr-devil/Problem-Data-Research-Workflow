@@ -36,7 +36,7 @@ GOOD_REF = {"ref_id": "R1", "doi": "10.1234/example",
 class DirectionReviewTests(unittest.TestCase):
     def test_unspecified_direction_never_yields_interpreted_improvement(self):
         result = compare_runs(run(), run("b", 0.5), "error")
-        self.assertEqual(result["delta"], -0.1)
+        self.assertAlmostEqual(result["delta"], -0.1)
         self.assertIsNone(result["improvement"])
         self.assertEqual(result["comparison_status"], "METRIC_DIRECTION_REVIEW_REQUIRED")
         self.assertTrue(result["metric_direction_review_required"])
