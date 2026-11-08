@@ -53,15 +53,15 @@ def _read_markdown(path: Path) -> list[dict]:
                          "location": i, "level": len(h.group(1))})
         elif not line:
             flush()
-        elif BULLET.match(raw):
-            flush()
-            rows.append({"kind": "list", "text": line, "location": i, "level": None})
         elif path.suffix.lower() == ".txt" and (
                 clean_title(line) in MAIN_SECTIONS | {"introduction"} or
                 re.match(r"^\d+(?:\.\d+)+\s+\S", line)):
             flush()
             rows.append({"kind": "heading", "text": line, "location": i,
                          "level": 1 if re.match(r"^\d+\.\s", line) else 2})
+        elif BULLET.match(raw):
+            flush()
+            rows.append({"kind": "list", "text": line, "location": i, "level": None})
         else:
             if not pending:
                 first = i
