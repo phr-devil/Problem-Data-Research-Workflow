@@ -92,5 +92,52 @@ class ManuscriptFlowTests(unittest.TestCase):
             scan_file(path)
 
 
+class NarrativeWorkflowContracts(unittest.TestCase):
+    """Cross-file policy regression, not evidence of actual LLM writing quality."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.root = Path(__file__).resolve().parents[1]
+
+    def read(self, name):
+        return (self.root / name).read_text(encoding="utf-8")
+
+    def test_new_empirical_blueprint_has_no_intro_subheadings(self):
+        text = self.read("templates/PAPER_BLUEPRINT.md")
+        introduction = text.split("## 1. Introduction\n", 1)[1].split("## 2. Related Work", 1)[0]
+        self.assertNotIn("### ", introduction)
+        self.assertNotIn("### 1.1", text)
+        self.assertIn("SEC-INTRO-01", introduction)
+        self.assertIn("SEC-INTRO-02", introduction)
+        self.assertIn("连续英文段落", introduction)
+
+    def test_conclusion_not_forced_into_single_subsection(self):
+        text = self.read("templates/PAPER_BLUEPRINT.md")
+        conclusion = text.split("## 6. Conclusion\n", 1)[1].split("## Planning Change Notes", 1)[0]
+        self.assertNotIn("### ", conclusion)
+        self.assertIn("SEC-CONCLUSION-01", conclusion)
+
+    def test_writing_and_qa_both_cover_depth_and_intro(self):
+        writing = self.read("MANUSCRIPT_WRITING.md")
+        qa = self.read("MANUSCRIPT_QA.md")
+        for word in ("连续引言", "核心创新", "不强制五段", "不强制所有贡献", "core.manuscript_flow"):
+            self.assertIn(word, writing)
+        for word in ("INTRO_SUBHEADING", "UNDERDEVELOPED", "OVEREXPANDED",
+                     "REPETITIVE_TEMPLATE", "SUBSTANTIVE_EXPANSION", "core.manuscript_flow"):
+            if word == "INTRO_SUBHEADING":
+                self.assertIn(word, self.read("core/manuscript_flow.py"))
+            else:
+                self.assertIn(word, qa)
+
+    def test_authorization_and_publisher_override_survive(self):
+        for name in ("MANUSCRIPT_WRITING.md", "MANUSCRIPT_QA.md",
+                     "DUAL_DOCUMENT_WORKFLOW.md", "WRITING_GATE.md"):
+            self.assertIn("用户确认", self.read(name))
+        self.assertIn("WRITING_LOCKED", self.read("WRITING_GATE.md"))
+        self.assertIn("FIGURE_POLICY.md", self.read("MANUSCRIPT_WRITING.md"))
+        self.assertIn("Heading 2", self.read("PAPER_WORD_STYLE.md"))
+        self.assertIn("Introduction", self.read("PAPER_WORD_STYLE.md"))
+
+
 if __name__ == "__main__":
     unittest.main()
