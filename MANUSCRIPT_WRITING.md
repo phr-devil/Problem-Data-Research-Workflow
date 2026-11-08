@@ -76,7 +76,14 @@
 
 R2 对实证稿重点是**方法定义与结果一对一对应**；对综述/Perspective 重点是证据综合、争议、中心论点与可证伪路线，不强制填充 Methods/Results。R3 的执行顺序与最终论文阅读顺序不同；最终顺序遵循已批准的目录。四轮可以在同一次已授权 WorkBuddy 任务中连续完成，不额外要求四次用户确认。必要重大结构/科研范围/数据权限变化，仍遵守原有用户决策门禁。
 
-## 4. 核心质量核验与失败处理
+### 不同实证贡献类型的正文组织（R2/M3 只切换论证重心，不改批准目录）
+
+- **算法/方法 Claim**：`Problem/Information Contract → Method Difference → Fair Comparator → Main Result → Decisive Ablation/Boundary`；Methods 与 Results 定义与评估应双向对应，但不是按实验日志时间顺序叙述。
+- **规律/边界/测量 Claim**：`Relevant Condition → Observed Pattern+Uncertainty → Competing Explanation/Artefact Check → Reproducibility/Boundary → Scientific Implication`；Results 可按条件与发现组织，不要求出现“新网络贡献”。
+- **系统/benchmark/部署能力 Claim**：`Unmet Real-world Capability → Architecture/Benchmark Contract → Component+End-to-end Evidence → Robustness/Generalization+Cost → Deployment Boundary`；系统组合是否必要须通过合理的替代方案或消融判别，不能仅罗列组件。
+- **叙事层级**：每章/主要小节首先清楚表达一句中心信息，段落依功能承担“科学动机→知识差额→设计理由→核心证据→反解释或意义”的**必要部分**；最重要发现提前呈现，不把旧日志逐条搬入 Results。不要为“故事精彩”删负证据或拼出未证实的因果机制，也不强制每节五段/固定字数。只对与当前 Claim 有关的段落组织，不制作新的长期写作账本。
+
+## 4. 核心质量核验与失败处理## 4. 核心质量核验与失败处理
 
 1. **科学事实**：所有重要数字、效应、比较与方法必须有原始证据指针；同一指标检查样本、窗口、事件、受试者、分母及 CI 是否匹配；不得用 AI 总结、截图、美化图代替冻结数据源。
 2. **验证边界**：明确 DEV、VAL、封存确认、外部验证及其他项目的既有接触史；不可把同源 held-out 说成全独立外部验证，不能由图片或论文生成流程读取 SEALED。
