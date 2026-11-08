@@ -52,6 +52,8 @@
 - [manuscript_qa_cases.json](manuscript_qa_cases.json) 包含独立稿件审核的公开对抗案例：DEV/确认混淆、统计单位错误、文献未核、过度保守、未证实因果、擅自改目录、虚构 AI 检测比例、语言润色后语义漂移、无出图授权和缺少 Word 渲染等。参见 [MANUSCRIPT_QA.md](../MANUSCRIPT_QA.md)。
 - `tests/test_manuscript_qa_contracts.py` 仅检验案例结构、必要边界、权威路由及规则存在性；**不调用真实 Agent，不评定其审稿准确率**。实际行为需冻结版本、遮蔽预期答案、提供可信来源和外部记录，再由独立审稿人评价；未做则标 `NOT_MEASURED`。
 
+**Q5/Q7/Q9 扩展**：行为测试应覆盖检测器虚构分数、风格标记后语义漂移、虚构/错误 DOI 与正确 DOI 错题名、文献真实但不支持论断、漏列参考文献、不公平 SOTA 与未验证未来能力。新增 [tests/test_manuscript_qa_behavior.py](../tests/test_manuscript_qa_behavior.py) 为不联网的**确定性工具单元测试**；只证明扫描/书目比对函数对合成输入的行为，不能证明 Agent 审稿质量。需要真实审稿质量结论时仍须盲案例、独立专家评价和真实运行轨迹。
+
 ## 6. 开放式科研能力与可信外部评估
 
 - **公开16道选项题和4个操作型合成任务均为 `REGRESSION_ONLY`**，不以其分数宣称真实科研能力。私有评估包的格式及导出入口在 [PRIVATE_PACK_CONTRACT.md](PRIVATE_PACK_CONTRACT.md)；它不运行模型、不提供沙箱、不保存私有题库。
