@@ -15,8 +15,8 @@
 |---|---|---|---|---|
 | CLM-R01 (TENTATIVE) | SEC-REVIEW-01 | SOURCE_UNVERIFIED | HYPOTHESIS | UNKNOWN |
 
-## 1. Scientific Scope and Evidence Landscape
-### 1.1 Question, Coverage and Selection Boundaries
+## 1. Introduction
+- **新综述默认呈现**：连续英文段落，不设 1.1 子标题，不把内部文献规划写成贡献 bullet 清单；用证据和争议逐步导向综述的独立综合价值。目标期刊或已有批准结构优先。
 - SEC_ID: SEC-REVIEW-01
 - 拟写要点：明确问题、证据类型和覆盖边界；不虚构系统综述的检索数量、PRISMA 合格性或文献原文。
 
@@ -36,7 +36,7 @@
 - 拟写要点：未来愿景、现实使能条件、实现障碍、可证伪里程碑和有依据的科学倡议；区分 VISION/HYPOTHESIS/OBSERVED。
 
 ## 5. Conclusion
-### 5.1 Independent Synthesis and Open Questions
+- **默认呈现**：连续短文总结独立综合、开放问题与真实局限，不强设 5.1。
 - SEC_ID: SEC-REVIEW-05
 - 拟写要点：总结综合获得的新理解、局限及下一步议程；无需虚构本研究的算法实验。
 

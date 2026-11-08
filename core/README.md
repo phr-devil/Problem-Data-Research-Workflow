@@ -58,6 +58,8 @@ python -m core.cli literature-search --query "sensor calibration transfer" --lim
 
 `literature-search`**只有显式执行才联网**；最多返回有限的OpenAlex/Crossref论文元数据（原始DOI、标题和时间），失败标记且不覆盖已有输出。返回的元数据不是论文方法复核，不得凭搜索为空声称创新。无法联网时保持原有手工检索/NEIGHBOR_UNVERIFIED路径。
 
+**论文叙述连续性（可选、只读）**：`python -m core.manuscript_flow MANUSCRIPT_TEXT.md` 或 `python -m core.manuscript_flow draft.docx --output intro_structure.json`。支持 `.md/.txt/.docx`，定位 Introduction 内多余小标题、编号/项目符号清单；输出段落词数仅用于人工定位，不设等长阈值，不判断创新深度、文本质量、AI 作者身份、结构例外是否经过用户批准或科研正确性。此工具只面向用户合法提供/授权审核的正文，不用于把 `PAPER_BLUEPRINT.md` 规划要点误判为论文，也不执行改写。完整的创新解释与论证权重由 [MANUSCRIPT_WRITING.md](../MANUSCRIPT_WRITING.md) 和 [MANUSCRIPT_QA.md](../MANUSCRIPT_QA.md) 依据原始证据审查。
+
 **兼容性**：旧v1.4`STATE.json/EVENTS.jsonl`继续可读；新增Run推荐携带`task_spec_ref/task_spec_sha256`与`execution{command,git_commit,python_version,seed,environment_ref}`，但不反向要求迁移历史Run。deep核验大型预测文件可能产生额外I/O，仅在有科学结论变化、恢复或正式确认前调用。程序不判定论文价值、时间因果、确认集资格或授权。
 
 **探针预算（可选）**：`probe.json`可加入`cost_estimate:{"gpu_hours":0.4,"tokens":5000}`；`probe-check --file probe.json --remaining-budget-file budget.json`会在给定JSON预算内提示`BUDGET_REVIEW_REQUIRED`，绝不自动STOP或将预算文件视为用户训练授权。

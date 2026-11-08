@@ -20,8 +20,14 @@ class PaperTypeAndGapTests(unittest.TestCase):
                 subheadings=re.findall(r"(?m)^### (\d+)\.(\d+) ",source)
                 sec=re.findall(r"(?m)^- SEC_ID: (SEC-[A-Z0-9-]+)$",source)
                 self.assertEqual(chapters,[str(i) for i in range(1,number+1)])
-                self.assertEqual(len(sec),len(subheadings))
+                # Introduction/Conclusion may have stable internal SEC_IDs
+                # without visible second-level headings in journal prose.
+                self.assertGreaterEqual(len(sec),len(subheadings))
                 self.assertEqual(len(sec),len(set(sec)))
+                intro=source.split("## 1. Introduction",1)[1].split("## 2.",1)[0]
+                self.assertNotIn("### ",intro)
+                self.assertRegex(intro,r"(?m)^- SEC_ID: SEC-[A-Z0-9-]+$")
+                self.assertTrue(source.count("## 1. Introduction") == 1)
                 self.assertTrue(all(any(int(ch)==int(num) for ch in chapters)
                                     for num,_ in subheadings))
                 self.assertEqual([x for x in inspect_text(None,source)

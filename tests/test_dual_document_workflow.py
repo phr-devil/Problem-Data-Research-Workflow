@@ -30,7 +30,13 @@ class DualDocumentTests(unittest.TestCase):
         ids = re.findall(r"(?m)^- SEC_ID: (SEC-[A-Z0-9-]+)$", blueprint)
         self.assertEqual(len(h1), 1)
         self.assertEqual([int(n) for n, _ in chapters], list(range(1, 7)))
-        self.assertEqual(len(ids), len(subheads))
+        # Two Introduction planning anchors and one Conclusion anchor are
+        # intentionally not exported as visible paper subsections.
+        self.assertEqual(len(ids), len(subheads) + 3)
+        for expected in ("SEC-INTRO-01", "SEC-INTRO-02", "SEC-CONCLUSION-01"):
+            self.assertIn(expected, ids)
+        intro = blueprint.split("## 1. Introduction", 1)[1].split("## 2.", 1)[0]
+        self.assertNotIn("### ", intro)
         self.assertEqual(len(ids), len(set(ids)))
         self.assertTrue(all(any(int(chap) == int(n) for n, _ in chapters)
                             for chap, _, _ in subheads))
