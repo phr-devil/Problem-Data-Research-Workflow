@@ -15,27 +15,40 @@ def audit_batch(payload: dict, *, fetch=None) -> dict:
     if not isinstance(refs, list):
         raise ValueError("references must be a list")
     n = payload.get("expected_count")
-    if not isinstance(n, int) or n < 0:
+    if type(n) is not int or n < 0:
         raise ValueError("expected_count must be the independently counted bibliography size")
     if len(refs) != n:
         return {"status": "REFERENCE_SET_INCOMPLETE", "expected_count": n,
                 "extracted_count": len(refs), "references": []}
     checked = []
     seen = set()
+    seen_ids = set()
     for i, ref in enumerate(refs, 1):
         if not isinstance(ref, dict):
             raise ValueError("each reference must be an object")
         result = (verify_reference_metadata(ref, fetch=fetch)
                   if fetch is not None else verify_reference_metadata(ref))
         result["ref_id"] = str(ref.get("ref_id") or f"R{i}")
+        if result["ref_id"] in seen_ids:
+            result["duplicate_ref_id"] = True
+        seen_ids.add(result["ref_id"])
         if result.get("doi"):
             if result["doi"] in seen:
                 result["duplicate_doi"] = True
             seen.add(result["doi"])
         checked.append(result)
     counts = Counter(x["status"] for x in checked)
+    duplicate_dois = sum(bool(x.get("duplicate_doi")) for x in checked)
+    duplicate_ids = sum(bool(x.get("duplicate_ref_id")) for x in checked)
+    all_matched = (all(x["status"] == "METADATA_MATCH" for x in checked)
+                   and not duplicate_dois and not duplicate_ids)
     return {"status": "DOI_METADATA_AUDITED_NOT_CLAIMS", "expected_count": n,
             "extracted_count": len(refs), "status_counts": dict(counts),
+            "duplicate_doi_count": duplicate_dois,
+            "duplicate_ref_id_count": duplicate_ids,
+            "metadata_integrity": ("ALL_MATCHED_NOT_CLAIM_VERIFIED" if all_matched
+                                   else "ISSUES_REQUIRE_MANUAL_REVIEW"),
+            "source_claim_support": "NOT_CHECKED",
             "references": checked,
             "remaining_work": "Check all original publication records, corrections/retractions, and cited claims by source passages."}
 

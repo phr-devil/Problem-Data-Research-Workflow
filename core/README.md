@@ -23,9 +23,11 @@ python -m core.cli record --root research --kind run --artifact runs/r1.json
 python -m core.cli record --root research --kind claim --artifact claims/c1.json
 python -m core.cli record --root research --kind note --note "待核实的假设；不升级证据"
 python -m core.cli status --root research
-python -m core.cli compare --champion research/runs/r1.json --challenger research/runs/r2.json --metric macro_f1
+python -m core.cli compare --champion research/runs/r1.json --challenger research/runs/r2.json --metric macro_f1 --higher-is-better
 python -m unittest discover -s tests -v
 ```
+
+`compare` 不再默认指标越大越好：两份 Run 同时声明相同 `metric_direction=max|min` 时按该方向计算；否则需要显式 `--higher-is-better` / `--lower-is-better`。未声明则 `improvement=null`、`METRIC_DIRECTION_REVIEW_REQUIRED`（预算不匹配仍优先报告预算复核）；方向及 Run 声明都不是独立科学核验，需比对 TaskSpec 的真实评价定义。封存 Run 永远不能用来迭代比较。
 
 工件路径相对`--root`。Run/Claim的JSON字段见`contracts.py`；机器索引使用`STATE.json`和append-only `EVENTS.jsonl`。发生断电导致状态与事件尾部不一致时，`status`报警，可在检查日志与工件后显式调用`recover`。仅核验JSON和相对路径存在不能证明原始实验真实、公平或可复现。
 

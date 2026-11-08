@@ -52,8 +52,11 @@ def advise(before: dict | None, after: dict) -> dict:
             raise ValueError("cannot compare different figure IDs")
     if before is None:
         flags = ["FIRST_RENDER"]
-        checks = ["ALL_MUST_SHOW_AND_SCIENCE", "ALL_CONNECTORS",
+        checks = ["REAL_SOURCE_AND_CLAIMS", "ALL_MUST_SHOW_AND_SCIENCE", "ALL_CONNECTORS",
                   "GLOBAL_LAYOUT", "FINAL_PAPER_WIDTH_VISUAL", "OUTPUT_PAIR_INTEGRITY"]
+        fingerprint = after["sources"].get("source_fingerprint")
+        if not isinstance(fingerprint, str) or not fingerprint.strip() or fingerprint == "UNKNOWN":
+            flags.append("SOURCE_UNVERIFIED")
     else:
         flags = [name for name, selector in GROUPS
                  if selector(before) != selector(after)]
