@@ -43,10 +43,7 @@ class ManuscriptQAContracts(unittest.TestCase):
                       "DIRECT_COMPARABLE", "SOURCE_ACCESS_LIMITED",
                       "REFERENCE_SET_INCOMPLETE", "METADATA_MATCH",
                       "EXTERNAL_AI_RATE_NOT_MEASURED"):
-            if label == "METADATA_MATCH":
-                self.assertIn("核验", self.qa)
-            else:
-                self.assertIn(label, self.qa)
+            self.assertIn(label, self.qa)
         self.assertIn("core.manuscript_style", self.qa)
         self.assertIn("core.reference_audit", self.qa)
 
