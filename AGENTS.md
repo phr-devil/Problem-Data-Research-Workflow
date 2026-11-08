@@ -15,6 +15,7 @@
 - **论文**：允许提前维护 `PAPER_BLUEPRINT.md` 的 H1/H2 内容规划及证据缺口；新论文按类型规划：实证算法论文默认六章，Critical Review / Perspective 可采用相应论证蓝图；已获用户确认目录的重大变更仍需说明理由并获确认（见 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) §5）；正式稿件标题、摘要、章节正文/初稿须先完成科研成果总结并经用户审查，再由用户明确授权。默认 `WRITING_LOCKED`，见 [WRITING_GATE.md](WRITING_GATE.md)。
 - **Word 格式**：用户要求论文蓝图 Word 审阅版或获授权稿件 Word 排版时，按 [PAPER_WORD_STYLE.md](PAPER_WORD_STYLE.md) 使用统一格式；仅导出不解除 `WRITING_LOCKED`，不自动生成 Word 文件。
 - **已获授权的正式正文写作**：按 [MANUSCRIPT_WRITING.md](MANUSCRIPT_WRITING.md) 以证据→主张→章节→正文→科学审查→语言精修进行；R1 必查 [高水平论文案例库](paper_exemplars/README.md)，按需阅读1–3张相关策略卡。采用6个功能模块/4轮按需连续执行、单一稿件源和增量验证。此路由不解除 [WRITING_GATE.md](WRITING_GATE.md) 的两道门禁，也不允许自动更改已批准目录。
+- **已有完整论文的审核/修订**：按 [MANUSCRIPT_QA.md](MANUSCRIPT_QA.md) 执行独立审稿→证据/引用审计→获授权的局部修订→语言检查→交付回归；十个检查域按需合并为五轮，不重复触发正文生成。审核不授予改写、变更已批准重大结构、读取 SEALED、绘图、实验或投稿权限；修订前须核原始授权。
 - **图片**：**只有用户明确要求绘制/修改指定图片才能出图**；诊断图、论文图、预览和重绘均不可自动触发。见 [FIGURE_POLICY.md](FIGURE_POLICY.md)。
 - **证据**：开发集增益、通过测试、元数据或论文蓝图不是科研确认。Q2+可信投稿潜力（优先Q1）是科研目标，不保证录用；见 [Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)。
 
@@ -25,6 +26,7 @@
 - **新题/选库**：[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md) 的 `BREADTH_SCAN → DEEP_FALSIFICATION → COMPETING_CHOICE`、[DATA_DISCOVERY.md](DATA_DISCOVERY.md) 的 `PRE_DOWNLOAD_SCIENCE_FIT`，必要时 [HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md)；必需数据获授权且验收后才做数据实证。
 - **算法/负结果**：[EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md)、[ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)；复用有效 Run，必要时按 [SCIENCE_RESULT_HARVEST.md](SCIENCE_RESULT_HARVEST.md) 区分 `ARTICULATION_GAP` 与 `EVIDENCE_GAP`。
 - **科学机会/升级**：按需 [PAPER_FIRST.md](PAPER_FIRST.md)、[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)；只有已授权且有决定性新假说才升级复杂模型，重要失败和有价值资产不丢弃。
+- **完整稿件质量复核/投稿前预检**：直接读 [MANUSCRIPT_QA.md](MANUSCRIPT_QA.md)；已有合法稿件按真实证据、原稿→修订稿语义回归与按需真实 Word/PDF 渲染核验；Skill 只按需选用，不安装全套。
 - **独立确认/期刊**：[CONFIRMATION.md](CONFIRMATION.md)、[VENUE_STRATEGY.md](VENUE_STRATEGY.md)；RWF 仅在必要时按原始预测与协议进行 DEV 指标复核，不接管科研主控或给予许可。
 
 - **已授权的论文数据图**：优先按 [FIGURE_POLICY.md](FIGURE_POLICY.md) §4.5 使用 PD-RW 图表主题（RWF `styles/figure_theme_pdrw.json` 或同等实现）。普通二维数据图双轴末端箭头，彩色柱体无冗余点；多个可比子图统一布局与文字锚点。导出前执行箭头、柱体和真实子图几何检查，最后检查论文宽度的真实 SVG/PNG。若仅讨论规范，不生成图片。旧项目主题不擅自迁移。
