@@ -52,6 +52,7 @@
 | 规划字段 `Purpose / Key Points / Evidence / Gaps / Planned Figures` | `Blueprint Note` 正文加粗字段名，不作为标题 |
 | 获授权正式稿件的 `Abstract / Keywords / References / Acknowledgments` | `Unnumbered Heading`，不编号 |
 
+- **正式稿件引言/结论的样式映射**：新实证稿 `Introduction` 为一个 `Heading 1`，默认后续直接使用 `Normal` 连续英文段落，**不从蓝图的 `SEC-INTRO-01/02` 或内部标签产生 `Heading 2`、数字 `1.1/1.2`、`List Paragraph` 或贡献清单**；`Conclusion` 通常也直接用 `Normal`，不为唯一段落强造 `6.1`。正式排版时用真实 Heading 样式检查，而不是只看段落字体；期刊规范、文章类型及项目已批准结构需要例外时遵守其约束及用户确认。段落篇幅随科学信息量变化，不为段距 `0/0 pt` 规定统一字数或插入人为换行。
 - 使用 Word 的**真实标题样式与多级列表**生成 `1.` / `3.2` / `3.2.1`；源 Markdown 若自带 `1.` / `3.2` 等编号，导出前剥离显示编号，禁止出现 `1. 1. Introduction`。保留原 `SEC_ID`/Claim–Evidence 映射，不把 ID 当打印标题。
 - Markdown H1/H2/H3 与 Word Title/Heading 1/Heading 2 **并非同级直映**；导出流程必须显式转换，不能只用默认的 Pandoc heading 映射并宣称准确。
 - Word 蓝图是现有 `PAPER_BLUEPRINT.md` 的**按需可再生导出件**，不是新增第三份长期科研记忆；无用户明确 Word 导出请求不自动输出 `.docx`。纯框架审阅版仅含提纲/规划字段，不产生投稿式标题、摘要或正文。
