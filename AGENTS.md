@@ -21,6 +21,7 @@
 - **论文正文生成的图片编排**：正式稿件撰写时按 [MANUSCRIPT_WRITING.md](MANUSCRIPT_WRITING.md)“正文生成阶段的图片位置与 Fig. 图题”以及 [PAPER_WORD_STYLE.md](PAPER_WORD_STYLE.md)：图片全部置于全部文字、声明和 References 后，正文仅保留图号引用；单面板 `Fig.1 Overview.`，多面板 `Fig.1 Overview. (a) ... (b) ...`；不把它误作事后 [MANUSCRIPT_QA.md](MANUSCRIPT_QA.md) 的修复要求，也不授权自行绘图。
 - **论文叙述的默认形态**：新论文 Introduction 默认只保留一个一级标题，正文以连贯段落说明问题、最近邻局限、科学缺口、思路和有证据支持的创新，不将蓝图内部小节/项目符号直接导出。核心创新、方法机制和决定性对照按内容需要充分解释，背景简洁，段落不追求等长；稿件审查按 [MANUSCRIPT_QA.md](MANUSCRIPT_QA.md) 的 Q2/Q5/Q8 检查“核心贡献是否真正展开”，可选只读 `core.manuscript_flow` 仅定位引言标题/列表，不评估创新或正文质量。既有获批准目录不得静默改动，仍受写作/改稿授权门禁约束。
 - **正文不得清单化或括号堆砌**：所有类型论文的正式叙述性正文应是连续学术段落，**禁止**将多段论述写成 `▪/•/①②③/1.2.3.` 等分点作答；避免频繁圆括号旁注、嵌套或重复缩写，优先融入正常句子。仅保留首次术语缩写、引用、公式/函数、子图与必要统计等专业用途，并区分算法伪代码、表格、期刊强制结构。具体修订与全文 QA 按 [MANUSCRIPT_WRITING.md](MANUSCRIPT_WRITING.md) / [MANUSCRIPT_QA.md](MANUSCRIPT_QA.md)，不影响写作授权门禁。
+- **反模板化审稿分级**：正文创作按 [MANUSCRIPT_WRITING.md](MANUSCRIPT_WRITING.md) 的 `HARD / MAJOR / STYLE` 合同：对话式/Markdown 残留、分点正文、投稿版未消解占位和无根据科学结论不得放行；引言空话、近邻差别与方法解释不足、Results/Discussion 重复、段落孤岛和术语漂移必须审查；`delve/underscore/pivotal`、破折号、被动语态等只作语境提示，不机械禁词或设置 AI 率阈值。审稿按 [MANUSCRIPT_QA.md](MANUSCRIPT_QA.md) 路由，保留授权与科研证据门禁。
 - **已有完整论文的审核/修订**：按 [MANUSCRIPT_QA.md](MANUSCRIPT_QA.md) 执行独立审稿→证据/引用审计→获授权的局部修订→语言检查→交付回归；十个检查域按需合并为五轮，不重复触发正文生成。审核不授予改写、变更已批准重大结构、读取 SEALED、绘图、实验或投稿权限；修订前须核原始授权。
 - **稿件语义和独立确认检查**：优先按现有 [MANUSCRIPT_QA.md](MANUSCRIPT_QA.md) G2/Q3/Q4/R4 复核数字、因果、显著性和 DEV/VAL/CONFIRMATION 真实证据归属；可选 `core.manuscript_claim_guard` 只做离线警报，不保证全文语义正确或独立确认成立。写作阶段先按 [MANUSCRIPT_WRITING.md](MANUSCRIPT_WRITING.md) 保留科学信息，不能为去 AI 味改写事实。
 
