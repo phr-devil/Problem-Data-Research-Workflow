@@ -29,7 +29,7 @@
 
 | 轮次 | 范围与行为 | 最小产出 | 参考 Skill/工具（仅已安装且实际可用时调用） |
 |---|---|---|---|
-| R1 独立审稿 | Q1/Q2/Q5；**只读**，独立给出中心 Claim、反解释、审稿风险和问题优先级；不先润色全文。 | 定位清楚的 BLOCKER/MAJOR 问题与受影响章节 | K-Dense `peer-review`、`scholar-evaluation`；Nature-Paper-Skills `manuscript-optimizer` / `review-article-architecture` |
+| R1 独立审稿 | Q1/Q2/Q5；**只读**，独立识别中心 Claim、问题重要性与最近邻局限、方法必要性、结果如何支撑解释及最强反论点，检查**整篇论证链是否断裂**；不先润色全文。 | 定位清楚的 BLOCKER/MAJOR 问题与受影响章节 | K-Dense `peer-review`、`scholar-evaluation`；Nature-Paper-Skills `manuscript-optimizer` / `review-article-architecture` |
 | R2 科学与引用审计 | Q3/Q4/Q6/Q7；逐项配对 Method/Result/Abstract/Discussion、图与 Run；对**全部参考条目**验证身份及元数据，对正文关键引用逐一核原文支持；明确无法核验项。 | `REFERENCE_AUDIT` + Claim–Evidence 差异及需补证项目 | `scientific-critical-thinking`、`stats-reporting-audit`、`citation-verifier`、`claim-source-verification`；可选 PaperQA2 |
 | R3 结构与贡献修订 | Q1/Q2/Q5；建立具名最近邻+强简单基线**可比性矩阵**，区分 OBSERVED / INTERPRETATION / HYPOTHESIS / VISION；在获修稿许可后强化可信差额及可证伪展望；重大结构改变仍须用户确认。 | 贡献差额、原句→新句→证据状态；重大结构变化待确认 | `manuscript-optimizer`、`results-section-revision`、`anti-defensive-writing` |
 | R4 英语与机械化修订 | Q5/Q8/Q9；全稿风格扫描→定位句段→对问题位置精修→**复扫**；记录范围、规则、被标记词覆盖率与修改前后变化，语义回归仍必需。 | `LANGUAGE_AUDIT` + 已修位置及剩余问题；外部 AI/相似性检测另列 | `scientific-prose-style`、`scientific-writing`；可选 LanguageTool、Vale |
