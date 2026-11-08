@@ -15,6 +15,7 @@
 - **论文**：允许提前维护 `PAPER_BLUEPRINT.md` 的 H1/H2 内容规划及证据缺口；新论文按类型规划：实证算法论文默认六章，Critical Review / Perspective 可采用相应论证蓝图；已获用户确认目录的重大变更仍需说明理由并获确认（见 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) §5）；正式稿件标题、摘要、章节正文/初稿须先完成科研成果总结并经用户审查，再由用户明确授权。默认 `WRITING_LOCKED`，见 [WRITING_GATE.md](WRITING_GATE.md)。
 - **Word 格式**：用户要求论文蓝图 Word 审阅版或获授权稿件 Word 排版时，按 [PAPER_WORD_STYLE.md](PAPER_WORD_STYLE.md) 使用统一格式；仅导出不解除 `WRITING_LOCKED`，不自动生成 Word 文件。
 - **已获授权的正式正文写作**：按 [MANUSCRIPT_WRITING.md](MANUSCRIPT_WRITING.md) 以证据→主张→章节→正文→科学审查→语言精修进行；R1 必查 [高水平论文案例库](paper_exemplars/README.md)，按需阅读1–3张相关策略卡。采用6个功能模块/4轮按需连续执行、单一稿件源和增量验证。此路由不解除 [WRITING_GATE.md](WRITING_GATE.md) 的两道门禁，也不允许自动更改已批准目录。
+- **论文正文生成的图片编排**：正式稿件撰写时按 [MANUSCRIPT_WRITING.md](MANUSCRIPT_WRITING.md)“正文生成阶段的图片位置与 Fig. 图题”以及 [PAPER_WORD_STYLE.md](PAPER_WORD_STYLE.md)：图片全部置于全部文字、声明和 References 后，正文仅保留图号引用；单面板 `Fig.1 Overview.`，多面板 `Fig.1 Overview. (a) ... (b) ...`；不把它误作事后 [MANUSCRIPT_QA.md](MANUSCRIPT_QA.md) 的修复要求，也不授权自行绘图。
 - **已有完整论文的审核/修订**：按 [MANUSCRIPT_QA.md](MANUSCRIPT_QA.md) 执行独立审稿→证据/引用审计→获授权的局部修订→语言检查→交付回归；十个检查域按需合并为五轮，不重复触发正文生成。审核不授予改写、变更已批准重大结构、读取 SEALED、绘图、实验或投稿权限；修订前须核原始授权。
 - **稿件 QA 三项必检**：若执行完整稿件审核，Q9 全文风格定位与复检（只报告风格覆盖率，不虚构真实 AI 比例）、Q7 参考文献身份/元数据逐条核验与关键论断原文支持、Q5 最近邻公平差别与 OBSERVED/INTERPRETATION/HYPOTHESIS/VISION 分层均按 [MANUSCRIPT_QA.md](MANUSCRIPT_QA.md)；不可用自动文本评分替代科学审核。
 - **图片**：**只有用户明确要求绘制/修改指定图片才能出图**；诊断图、论文图、预览和重绘均不可自动触发。见 [FIGURE_POLICY.md](FIGURE_POLICY.md)。
