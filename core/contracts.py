@@ -35,6 +35,8 @@ def validate_run(value: Any) -> dict:
     for opt in ("level_id", "k_unit", "support_query_policy", "budget_basis"):
         if opt in obj:
             _text(obj, opt)
+    if "metric_direction" in obj and obj["metric_direction"] not in {"max", "min"}:
+        raise ContractError("metric_direction must be max or min when declared")
     metrics = obj.get("metrics", {})
     if not isinstance(metrics, dict):
         raise ContractError("metrics must be an object")
