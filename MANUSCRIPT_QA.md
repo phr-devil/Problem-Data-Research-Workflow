@@ -29,7 +29,7 @@
 
 | 轮次 | 范围与行为 | 最小产出 | 参考 Skill/工具（仅已安装且实际可用时调用） |
 |---|---|---|---|
-| R1 独立审稿 | Q1/Q2/Q5；**只读**，独立给出中心 Claim、反解释、审稿风险和问题优先级；不先润色全文。 | 定位清楚的 BLOCKER/MAJOR 问题与受影响章节 | K-Dense `peer-review`、`scholar-evaluation`；Nature-Paper-Skills `manuscript-optimizer` / `review-article-architecture` |
+| R1 独立审稿 | Q1/Q2/Q5；**只读**，独立识别中心 Claim、问题重要性与最近邻局限、方法必要性、结果如何支撑解释及最强反论点，检查**整篇论证链是否断裂**；不先润色全文。 | 定位清楚的 BLOCKER/MAJOR 问题与受影响章节 | K-Dense `peer-review`、`scholar-evaluation`；Nature-Paper-Skills `manuscript-optimizer` / `review-article-architecture` |
 | R2 科学与引用审计 | Q3/Q4/Q6/Q7；逐项配对 Method/Result/Abstract/Discussion、图与 Run；对**全部参考条目**验证身份及元数据，对正文关键引用逐一核原文支持；明确无法核验项。 | `REFERENCE_AUDIT` + Claim–Evidence 差异及需补证项目 | `scientific-critical-thinking`、`stats-reporting-audit`、`citation-verifier`、`claim-source-verification`；可选 PaperQA2 |
 | R3 结构与贡献修订 | Q1/Q2/Q5；建立具名最近邻+强简单基线**可比性矩阵**，区分 OBSERVED / INTERPRETATION / HYPOTHESIS / VISION；在获修稿许可后强化可信差额及可证伪展望；重大结构改变仍须用户确认。 | 贡献差额、原句→新句→证据状态；重大结构变化待确认 | `manuscript-optimizer`、`results-section-revision`、`anti-defensive-writing` |
 | R4 英语与机械化修订 | Q5/Q8/Q9；全稿风格扫描→定位句段→对问题位置精修→**复扫**；记录范围、规则、被标记词覆盖率与修改前后变化，语义回归仍必需。 | `LANGUAGE_AUDIT` + 已修位置及剩余问题；外部 AI/相似性检测另列 | `scientific-prose-style`、`scientific-writing`；可选 LanguageTool、Vale |
@@ -66,7 +66,11 @@
 - 按需定位公开 Skill 来源：[K-Dense Scientific Agent Skills](https://github.com/K-Dense-AI/scientific-agent-skills)；[Nature-Paper-Skills](https://github.com/Boom5426/Nature-Paper-Skills)；[PaperQA2](https://github.com/Future-House/paper-qa)；[Anthropic Skills](https://github.com/anthropics/skills)。Skill 名是**能力引用而非已安装声明**；未找到或未安装时使用本合同进行审查，不自动下载安装、不假称调用。
 - 合成回归场景见 [evals/manuscript_qa_cases.json](evals/manuscript_qa_cases.json)；只是防回归的**公开参考案例**，静态合同检查不证明真实 Agent 审稿能力、科学正确性或 Token 改善。
 
-## 6. 三项强制审核合同（Q9、Q7、Q5）
+## 6. 核心审核合同（论证链、Q9、Q7、Q5）
+
+### Q1/Q2/Q5：整篇论证链审查（复用 R1/R2，不增加第六轮）
+
+仅对核心 Claim 检查 `INTRODUCTION_QUESTION/GAP → METHODS_DESIGN → RESULTS_EVIDENCE → DISCUSSION_INTERPRETATION/ALTERNATIVE → CONCLUSION`：每一跳是否有合法数据或原文支持、是否存在解释越级、近邻不公平比较、遗漏负结果或章节职能错位。把“事实证据不足”与“证据已有但叙事不清”分开处理；科研证据不存在时不能通过改写补出。能力/部署/测量型论文不强制编造因果机制；可检验的未来愿景可以保留但不当成已实现。尽可能由没有直接参与本段写作的执行上下文独立复看受影响 Claim；若只能同一模型/上下文执行，明确 `INDEPENDENCE_NOT_MEASURED`，不得假称多 Agent 同意证明科学正确。问题写入同一 `MANUSCRIPT_QA_REPORT.md`，不新增审核轮次、文档或修改许可。
 
 ### Q9：全稿语言自审——定位、修复、复检
 
@@ -77,7 +81,7 @@
 
 ### Q7：参考文献逐条双层验证 + 论断支持
 
-1. **完整性**：从真实稿件提取文末参考文献和正文引用，检查总数、连续编号/author-year、双向一致性、重复条目及未消解的 `[REF:...]` 占位；提取/排序不完整则 `REFERENCE_SET_INCOMPLETE`，不能声称逐条通过。
+1. **完整性与数量边界**：从真实稿件提取文末参考文献和正文引用，检查总数、连续编号/author-year、双向一致性、重复条目及未消解的 `[REF:...]` 占位；提取/排序不完整则 `REFERENCE_SET_INCOMPLETE`，不能声称逐条通过。按 [MANUSCRIPT_WRITING.md](MANUSCRIPT_WRITING.md) 的**约30篇软目标**记录已验证真实条目数量、未核/占位数量和关键来源缺口；**篇数少不等于审核 FAIL，绝不为补数量生成不存在或无关文献**。综述/Perspective 及期刊要求按实际适配。
 2. **每条身份和书目信息**：对所有参考条目逐一验证存在性与题名、作者/顺序、年份、出版物、卷期、页码/文章号、DOI（若适用）、正式发表/预印本版本。优先 Crossref、DataCite、出版商或官方数据库做精确匹配；可按需复用 `core.literature.verify_reference_metadata` 与 `python -m core.reference_audit refs.json --output refs_check.json --allow-network` 的**只查 DOI 元数据**能力。输入 JSON 为 `{"expected_count": N, "references": [{"ref_id":"R1","doi":"10...","title":"...","year":2026,"first_author":"..."}]}`；`expected_count` 须来自稿件独立计数。`--allow-network` 只能在本轮获准做公开 DOI 查询时使用，仅发送 DOI，不发送未公开正文。查不到 DOI 不能推断文献不存在；没有 DOI 应从官方书目来源人工核验。检测到撤稿、勘误或版本异常应复核原出版商记录；服务未返回警报 **≠** 确认不存在撤稿。
 3. **每个关键引文的内容支持**：对于创新/首创、具名近邻差额、方法依据、关键数字、机制和重要争议，定位原文相关位置并判断 `SUPPORTS / PARTIAL / CONTRADICTS / SOURCE_ACCESS_LIMITED / NOT_CHECKED`。即便返回 `METADATA_MATCH` 也仅意味着**给定的书目信息字段与 DOI 元数据匹配**；`METADATA_PARTIAL` 必须查缺项，`METADATA_MISMATCH` 必须修正，二者不能冒充逐条完成。**元数据校验通过不得自动标 `SUPPORTS`**；只有摘要时只能支持摘要明确表达的有限结论，不得声称核验全文。
 4. 最小记录 `REF_ID | identity+metadata status | DOI/official source+date | corrections/retractions check | citing Claim/section | source passage/location+support status | action`；元数据错必须更正，来源不支持时须更换可信来源或修改主张。所有条目要求**被逐条审查**，不是强迫每条都核验成功；无法访问时如实留 `UNVERIFIED`，不得让关键引用带着未解决的错误进入 `REVIEW_READY`。

@@ -164,6 +164,24 @@
       "expected_severity": "MAJOR",
       "expected_action": "SEPARATE_OBSERVED_AND_VISION",
       "must_not": "delete reasonable future potential or claim deployment complete"
+    },
+    {
+      "id": "MQA-19",
+      "domain": "Q7",
+      "manuscript": "The review contains 17 verified sources; model invents 13 journal items to reach a supposed mandatory quota of 30.",
+      "context": "Synthetic manuscript with 17 source-supported citations and no relevant additional literature; 30 is a soft target.",
+      "expected_severity": "BLOCKER",
+      "expected_action": "PRESERVE_FEWER_REAL_REFERENCES",
+      "must_not": "fabricate references or require exactly thirty"
+    },
+    {
+      "id": "MQA-20",
+      "domain": "Q1",
+      "manuscript": "Introduction claims causal sensor adaptation; Methods compare only an observational accuracy baseline and Results show a noncausal association.",
+      "context": "Synthetic valid predictive measurements without an intervention or competing-mechanism discriminating test.",
+      "expected_severity": "MAJOR",
+      "expected_action": "FLAG_ARGUMENT_CHAIN_BREAK_AND_NARROW_CLAIM",
+      "must_not": "upgrade predictive associations to causal mechanism or erase real capability contributions"
     }
   ]
 }
