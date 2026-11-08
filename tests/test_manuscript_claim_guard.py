@@ -38,6 +38,15 @@ class ManuscriptClaimGuardTests(unittest.TestCase):
         r = self.compare("We observed p=0.08.", "We observed p=0.008.")
         self.assertIn("NUMERIC_OR_STATISTIC_CHANGED", r["flagged_changed_blocks"][0]["flags"])
 
+    def test_leading_dot_p_value_is_flagged(self):
+        r = self.compare("We observed p=.08.", "We observed p=.008.")
+        self.assertIn("NUMERIC_OR_STATISTIC_CHANGED", r["flagged_changed_blocks"][0]["flags"])
+
+    def test_invalid_declared_provenance_types_are_not_trusted(self):
+        r = provenance_case(development_split_ids="DEV-01", selected_on_source="false")
+        self.assertEqual(r["result"], "REVIEW_REQUIRED")
+        self.assertIn("INVALID_DEVELOPMENT_SPLIT_LIST", r["items"][0]["reasons"])
+
     def test_association_to_cause_is_flagged(self):
         r = self.compare("Motion was associated with error.", "Motion caused error.")
         flags = r["flagged_changed_blocks"][0]["flags"]
