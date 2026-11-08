@@ -66,7 +66,7 @@
 - 按需定位公开 Skill 来源：[K-Dense Scientific Agent Skills](https://github.com/K-Dense-AI/scientific-agent-skills)；[Nature-Paper-Skills](https://github.com/Boom5426/Nature-Paper-Skills)；[PaperQA2](https://github.com/Future-House/paper-qa)；[Anthropic Skills](https://github.com/anthropics/skills)。Skill 名是**能力引用而非已安装声明**；未找到或未安装时使用本合同进行审查，不自动下载安装、不假称调用。
 - 合成回归场景见 [evals/manuscript_qa_cases.json](evals/manuscript_qa_cases.json)；只是防回归的**公开参考案例**，静态合同检查不证明真实 Agent 审稿能力、科学正确性或 Token 改善。
 
-## 6. 三项强制审核合同（Q9、Q7、Q5）
+## 6. 核心审核合同（论证链、Q9、Q7、Q5）
 
 ### Q1/Q2/Q5：整篇论证链审查（复用 R1/R2，不增加第六轮）
 
