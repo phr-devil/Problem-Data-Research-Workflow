@@ -113,8 +113,9 @@ def inspect_blocks(rows: list[dict]) -> dict:
         if row["kind"] == "heading":
             # A new major recognized section ends the Introduction. A smaller
             # heading nested within the Introduction is a formatting risk.
-            if title in MAIN_SECTIONS and (row["level"] is None or
-                                           row["level"] <= intro_level):
+            is_explicit_subsection = bool(re.match(r"^\\d+\\.\\d+(?:\\.|\\s)", row["text"]))
+            if (title in MAIN_SECTIONS and not is_explicit_subsection and
+                    (row["level"] is None or row["level"] <= intro_level)):
                 break
             flags.append({"code": "INTRO_SUBHEADING", "location": row["location"],
                           "excerpt": row["text"][:180]})
