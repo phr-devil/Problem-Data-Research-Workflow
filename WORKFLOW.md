@@ -84,6 +84,8 @@
 4. **主张与任务比较**：可信新发现（哪怕只是窄口径增量贡献）或有不同失败前提的更好备用机会 → `CLAIM_REVIEW`，比较可行性、独立价值和续投成本；若有真实差额，先评估该新知识的独立重要性与Q2+证据路径；满足目标则补最小必需证据，尚不足且有可辨识的高价值升级时允许有界研究；不为SOTA无界UP。若同问题有可靠层级转化路径，按 [TASK_LADDER.md](TASK_LADDER.md) 选择 `UP / DOWN / NARROW / LATERAL / HOLD`，不需要先把当前方法“彻底判死”；但任何切换都**不得跨级继承不合法的标签/未来信息**，也不能把同一失败前提包装成新Task。
 5. **确认**：匹配、未污染确认资源可用且 Claim/协议冻结、获用户确认性实验授权 → `CONFIRMATION`；不满足则限缩 Claim 或记 CONFIRMATION_UNAVAILABLE。
 
+**科学机会型止损复核（融入当前 HOLD/PIVOT 决策，不新增许可或固定实验）**：重要方向拟暂停时，先判断当前失败是有效否定哪一项 RUN/机制/Task 前提，还是仅 DEV 总分停滞；复用 [SCIENCE_RESULT_HARVEST.md](SCIENCE_RESULT_HARVEST.md) 按能力、机制、边界/规律回收有效负结果，并问是否仍有**成本可承受、可区分竞争解释、可能改变科学价值判断**的下一 Probe。存在则作为推荐在既有许可内做有界判别；不存在、信息价值低、关键真值/资源不可达或预算不允许时可 HOLD 本分支，重大项目 STOP/PIVOT 仍归用户。**不把“尚有未检验假说”设为无限续投理由，也不以指标不涨直接否定科学问题。** 不为本项重复扫描已有 Run 或添加状态机。
+
 **分支记账（仅有负结果、转向或重大新证据时更新）**：复用已有Run/STATE记录`BRANCH_ID | FAILED_PREMISE | NEXT_DISTINCT_PROBE | CUMULATIVE_COST`。继续/暂停看下一实验的信息价值、可复用能力和GPU/Token/人工总成本；到达预算复盘点**触发重新判断而非自动STOP**。无法提供不同可检验预测时不靠换模型名续命。
 
 **每轮最小合同**：`CURRENT_EVIDENCE | BLOCKER_OR_UNKNOWN | NEXT_PROBE | POSSIBLE_OUTCOMES_AND_DECISION | AUTH/BUDGET | DELIVERABLE`。NEXT_PROBE 可以产生观察、能力或判别信息，不要求每次提高分数。优先单一主实验，原授权内连续完成关联修复和验证；无新增信息/能力且成本不值得才 HOLD 对应分支，不无限循环。
