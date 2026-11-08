@@ -24,7 +24,12 @@
     "theme_fingerprint": "UNKNOWN",
     "nodes_geometry": {},
     "labels": {},
-    "icons": {}
+    "icons": {},
+    "review": {
+      "issue_scope": "UNKNOWN",
+      "stalled": false,
+      "rejected_layout_reason": ""
+    }
   },
   "outputs": {
     "editable_source": "figures/REPLACE_WITH_FIGURE_ID.drawio",
@@ -36,6 +41,7 @@
     "connectors_qa": "NOT_RUN",
     "visual_qa": "NOT_RUN",
     "checked_source_fingerprint": "UNKNOWN",
-    "checked_output_fingerprint": "UNKNOWN"
+    "checked_output_fingerprint": "UNKNOWN",
+    "global_design_qa": "NOT_RUN"
   }
 }
