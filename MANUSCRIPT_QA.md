@@ -72,7 +72,13 @@
 
 仅对核心 Claim 检查 `INTRODUCTION_QUESTION/GAP → METHODS_DESIGN → RESULTS_EVIDENCE → DISCUSSION_INTERPRETATION/ALTERNATIVE → CONCLUSION`：每一跳是否有合法数据或原文支持、是否存在解释越级、近邻不公平比较、遗漏负结果或章节职能错位。把“事实证据不足”与“证据已有但叙事不清”分开处理；科研证据不存在时不能通过改写补出。能力/部署/测量型论文不强制编造因果机制；可检验的未来愿景可以保留但不当成已实现。尽可能由没有直接参与本段写作的执行上下文独立复看受影响 Claim；若只能同一模型/上下文执行，明确 `INDEPENDENCE_NOT_MEASURED`，不得假称多 Agent 同意证明科学正确。问题写入同一 `MANUSCRIPT_QA_REPORT.md`，不新增审核轮次、文档或修改许可。
 
-### Q9：全稿语言自审——定位、修复、复检
+### Q3/Q4/R4：证据来源绑定与修稿语义回归（原有轮次内执行）
+
+**宣称 independent / confirmed / held-out 时必须核真实来源**：从真实稿件对核心的独立确认断言逐一追到 `claim_id → evidence_ref → split_id → source_role → selection_history → frozen_protocol`，同源开发/验证数据、用于选题/调参的切片或与开发组重叠的样本**不能**因为改名成 TEST 而充当独立确认。没有可核对的 `split_id`（或理论证明的具体假设/证明指针）就标 `SOURCE_NOT_VERIFIED`，不能声称已通过；**不能机械判断所有包含“independent”的英文句子都是统计确认**，需审阅上下文与主张类型。核验原始 Run/冻结协议/权限和实际选择史，自动脚本只能检查用户显式提供的关联元数据。
+
+**重点句段的语义变更提示**：可按需在已授权正文精修前后运行 `python -m core.manuscript_claim_guard compare BEFORE.md AFTER.md --output guard.json`，定位变化中的数字、否定词、因果语言、数据角色及显著性表述；合法科学更正可保留但必须核原始证据与修订依据。需要核独立确认措辞时，先从合法记录准备**已经覆盖关键断言**的简短 JSON，运行 `python -m core.manuscript_claim_guard provenance CLAIM_SOURCES.json --output provenance.json`；格式见脚本文档。工具不读取 SEALED，不发送网络请求，不会证实元数据真实性、所有正文 Claim 已覆盖或科学因果正确；其 `NO_HEURISTIC_ALERT_NOT_PROOF`、`DECLARED_METADATA_NO_CONFLICT_NOT_PROOF` 均不是科学 PASS。**原有 G2 / Q7 / 十域审查保持**，新增检测仅针对有变更或确实需要验证的关键句，警报须人工核对，避免全稿重写式循环。
+
+### Q9：全稿语言自审——定位、修复、复检### Q9：全稿语言自审——定位、修复、复检
 
 1. 对本轮实际可访问的**完整正文**执行一次有界扫描（排除 References、代码块、公式/元数据及图表源文件）；识别模板化开场、无信息修饰、重复小结、机械连接、过度保守、冗长、突然的风格跳变及缺实质主张的陈述。可使用 `python -m core.manuscript_style scan MANUSCRIPT_TEXT.md --output style_before.json`；对 Word 可读文稿也可用该工具的 `.docx` 文本提取。该工具只是**启发式风格定位器**；不可替代上下文语言审读，PDF 需先合法提取可核对文本。
 2. 在 `LANGUAGE_AUDIT` 中记录：稿件版本、检查范围、扫描规则/工具版本、总词数、被标记句段/段落位置与理由、`style_flagged_word_coverage_percent`。其计算是**至少被一个规则标记的句子中词数÷被扫描正文词数**（同一词不重复计数）；**不是 AI 作者概率，也不叫作真实 AI 率**。扫描局限（如中英文混排、参考文献检测、DOCX 解析不完整）必须说明。
