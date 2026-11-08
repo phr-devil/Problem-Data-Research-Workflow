@@ -33,6 +33,8 @@
 
 写每一个核心贡献前，复用 `PAPER_BLUEPRINT.md` 的暂定 `WORKING_THESIS`，在既有 Section Contract 中串联 `IMPORTANT_QUESTION → CLOSEST_PRIOR_LIMITATION → WHY_THIS_METHOD/EXPERIMENT → RESULTS_EVIDENCE → INTERPRETATION+ALTERNATIVE → SCOPE/VISION`。Introduction 说明问题为何重要、具名最近邻**具体**不足；Methods 说明设计与科学问题的必要联系；Results 给公平比较及限制；Discussion 说明新知识、反解释、适用边界与条件性潜力。若某环节没有实证支持，**可收窄或将解释/愿景明确标为推测，不通过漂亮叙事填补证据**。此链不要求所有论文提供因果机制：新能力、科学测量、资源权衡、边界规律也可构成中心主张；负结果和最强反例不得因不符合“故事”而删去。只对核心 Claim 做一次有效映射，不额外造完整稿件计划或独立审稿 Agent。
 
+**正文撰写与语言精修的科学语义不变量（M3/M6 阶段）**：科学结果的数字/单位/分母、置信区间与显著性、比较方向、样本和划分角色、预测前信息、否定条件、方法定义、因果性和结论适用范围均必须以已核工件为准。语言精修只修改表达，不得悄悄把 `associated with` 写成 `causes`、把不显著写成显著、把 DEV 写成 independent confirmation。若确有合法新证据支持实质更正，保留原句→新句及证据指针，属于科学更正而非普通润色；禁止锁死文字使必要纠错无法进行。已有来源指针按需复用，不为每句另建不可变字段文件。完成受影响句段后可使用 [MANUSCRIPT_QA.md](MANUSCRIPT_QA.md) 指向的离线警报辅助，不让自动工具取代实际的跨章科学核验。
+
 ### Section Contract：每节只需六项
 
 \`Question | Main message | Evidence IDs & status | Paragraph roles | Figures/Tables | Boundary\`
