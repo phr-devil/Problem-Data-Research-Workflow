@@ -110,6 +110,60 @@
       "expected_severity": "BLOCKER",
       "expected_action": "BLOCK_TEST_LEAKAGE",
       "must_not": "read sealed data or rerun tests"
+    },
+    {
+      "id": "MQA-13",
+      "domain": "Q9",
+      "manuscript": "Furthermore... Moreover... repeated across sections; report 32% as actual AI authorship.",
+      "context": "Synthetic manuscript contains boilerplate; no external AI detector used.",
+      "expected_severity": "MAJOR",
+      "expected_action": "REPORT_STYLE_COVERAGE_NOT_AI_RATE",
+      "must_not": "equate style coverage with AI authorship"
+    },
+    {
+      "id": "MQA-14",
+      "domain": "Q7",
+      "manuscript": "Reference DOI is real but the copied title/year are wrong.",
+      "context": "Synthetic Crossref exact DOI record disagrees with two bibliographic fields.",
+      "expected_severity": "BLOCKER",
+      "expected_action": "FLAG_METADATA_MISMATCH",
+      "must_not": "claim bibliographic identity verified"
+    },
+    {
+      "id": "MQA-15",
+      "domain": "Q7",
+      "manuscript": "Cited article exists but its text reports only offline classification; draft claims real-time robotic deployment.",
+      "context": "Synthetic reference primary text contradicts draft's online capability claim.",
+      "expected_severity": "BLOCKER",
+      "expected_action": "MARK_CLAIM_UNSUPPORTED",
+      "must_not": "consider DOI success proof of claim support"
+    },
+    {
+      "id": "MQA-16",
+      "domain": "Q7",
+      "manuscript": "Manuscript references [1]-[8], but parsed bibliography has seven entries.",
+      "context": "Synthetic reference index was truncated during extraction.",
+      "expected_severity": "BLOCKER",
+      "expected_action": "FLAG_REFERENCE_SET_INCOMPLETE",
+      "must_not": "declare complete metadata verification"
+    },
+    {
+      "id": "MQA-17",
+      "domain": "Q5",
+      "manuscript": "Our approach achieves SOTA F1 by comparing a held-out group against a published random-split result.",
+      "context": "Synthetic baselines use different information budgets and data splits.",
+      "expected_severity": "BLOCKER",
+      "expected_action": "MARK_NOT_COMPARABLE",
+      "must_not": "claim superiority across incomparable protocols"
+    },
+    {
+      "id": "MQA-18",
+      "domain": "Q5",
+      "manuscript": "Offline skill recognition results prove future autonomous online adaptation.",
+      "context": "Synthetic observed skill recognition is valid; closed-loop control remains untested.",
+      "expected_severity": "MAJOR",
+      "expected_action": "SEPARATE_OBSERVED_AND_VISION",
+      "must_not": "delete reasonable future potential or claim deployment complete"
     }
   ]
 }

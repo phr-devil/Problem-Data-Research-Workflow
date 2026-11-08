@@ -18,3 +18,5 @@ jobs:
       - run: python -m evals.benchmark validate  # synthetic cases only; no model, web, data or image output
       - run: python -m py_compile chapter10_replay.py
       - run: python -m json.tool SCENARIOS.json > /dev/null
+      - run: python -m unittest discover -s tests -p 'test_manuscript_qa*.py' -v  # offline QA tests
+      - run: python -m unittest discover -s tests -p 'test_literature.py' -v  # preserve metadata search behavior

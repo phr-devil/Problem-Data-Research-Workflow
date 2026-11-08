@@ -36,8 +36,16 @@ class ManuscriptQAContracts(unittest.TestCase):
                       "NOT_MEASURED", "RENDER_NOT_VERIFIED",
                       "OVERCLAIM", "UNDERCLAIM", "MANUSCRIPT_QA_REPORT.md"):
             self.assertIn(label, self.qa)
-        self.assertIn("不将 AI 检测器数值当事实", self.qa)
+        self.assertIn("不得当作真实 AI 创作比例", self.qa)
         self.assertIn("修改只在用户明确要求修改时进行", self.qa)
+        for label in ("style_flagged_word_coverage_percent", "LANGUAGE_AUDIT",
+                      "REFERENCE_AUDIT", "CLAIM_CONTRIBUTION_AUDIT",
+                      "DIRECT_COMPARABLE", "SOURCE_ACCESS_LIMITED",
+                      "REFERENCE_SET_INCOMPLETE", "METADATA_MATCH",
+                      "EXTERNAL_AI_RATE_NOT_MEASURED"):
+            self.assertIn(label, self.qa)
+        self.assertIn("core.manuscript_style", self.qa)
+        self.assertIn("core.reference_audit", self.qa)
 
     def test_fixture_integrity_and_adversarial_coverage(self):
         self.assertEqual(self.data["format"], "pdrw-manuscript-qa-cases-v1")
