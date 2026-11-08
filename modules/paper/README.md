@@ -7,6 +7,7 @@
 | 持续科研记录与论文蓝图 | [DUAL_DOCUMENT_WORKFLOW.md](../../DUAL_DOCUMENT_WORKFLOW.md)；按类型使用 [实证蓝图](../../templates/PAPER_BLUEPRINT.md)、[综述蓝图](../../templates/PAPER_BLUEPRINT_REVIEW.md) 或 [Perspective 蓝图](../../templates/PAPER_BLUEPRINT_PERSPECTIVE.md) |
 | 原有正式写作授权门禁 | [WRITING_GATE.md](../../WRITING_GATE.md) |
 | 已授权正文的证据驱动写作、科学审校与语言精修 | [MANUSCRIPT_WRITING.md](../../MANUSCRIPT_WRITING.md) |
+| 已有完整稿件的独立审稿、证据/引用审计、局部修改与投稿前验收 | [MANUSCRIPT_QA.md](../../MANUSCRIPT_QA.md)；审核不自动授予改写或新科研行动权限 |
 | 论文写作时的范例选择、原文定位与结构/语言策略 | [paper_exemplars/README.md](../../paper_exemplars/README.md) |
 | Word 标题、缩进、段落与格式 | [PAPER_WORD_STYLE.md](../../PAPER_WORD_STYLE.md) |
 | 论文科研贡献与证据范围 | [PAPER_FIRST.md](../../PAPER_FIRST.md) |
