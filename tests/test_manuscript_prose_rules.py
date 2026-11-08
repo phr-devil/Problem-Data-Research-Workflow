@@ -26,7 +26,7 @@ class ManuscriptProsePolicyTests(unittest.TestCase):
             "反模板化三层验收", "HARD 格式/完整性",
             "HARD 科学真实性", "MAJOR 论证结构",
             "MAJOR 信息密度/准确性", "STYLE 弱线索",
-            "作者批准", "不能自动", "不设任何禁词数量",
+            "作者批准", "不能因此自动画图", "不设任何禁词数量",
             "不允许以特定检测器得分",
         ):
             with self.subTest(term=term):
