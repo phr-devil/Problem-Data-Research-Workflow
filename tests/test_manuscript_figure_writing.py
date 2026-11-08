@@ -25,7 +25,7 @@ class ManuscriptFigureWritingContract(unittest.TestCase):
 
     def test_figure_blocks_only_in_tail_and_no_implicit_drawing(self):
         for term in ("Figures", "图题紧随各自图片下方", "正文中间不嵌入图片",
-                     "MISSING_FIGURE", "不自动绘图"):
+                     "MISSING_FIGURE", "不会因为正文引用图号或写图题而自动绘图"):
             self.assertIn(term, self.writing)
         self.assertIn("图题紧跟对应图片下方", self.word)
         self.assertIn("FIGURE_POLICY.md", self.word)
