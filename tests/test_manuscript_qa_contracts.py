@@ -37,7 +37,7 @@ class ManuscriptQAContracts(unittest.TestCase):
                       "OVERCLAIM", "UNDERCLAIM", "MANUSCRIPT_QA_REPORT.md"):
             self.assertIn(label, self.qa)
         self.assertIn("不将 AI 检测器数值当事实", self.qa)
-        self.assertIn("只有用户", self.qa)
+        self.assertIn("修改只在用户明确要求修改时进行", self.qa)
 
     def test_fixture_integrity_and_adversarial_coverage(self):
         self.assertEqual(self.data["format"], "pdrw-manuscript-qa-cases-v1")
