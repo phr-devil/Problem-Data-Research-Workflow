@@ -47,6 +47,11 @@
 - `evals.operational grade` 只核合成输入是否被改动、输出是否符合合同，并可检查外部提供的文件访问事件。发现模拟SEALED读取等记录中的越权会标 `BLOCKED`。没有可信完整拦截器时，真实访问合规性和科研质量永远不能认证为PASS。
 - [rubrics.json](rubrics.json) 中的论文前瞻性、原创假说与科研判断评分需人工查验具体内容；形式结构合格不等于原创或科学正确。不得从本套离线CI得出Token节省比例。
 
+### 完整稿件 QA 合成回归（不计入既有 16 道任务）
+
+- [manuscript_qa_cases.json](manuscript_qa_cases.json) 包含独立稿件审核的公开对抗案例：DEV/确认混淆、统计单位错误、文献未核、过度保守、未证实因果、擅自改目录、虚构 AI 检测比例、语言润色后语义漂移、无出图授权和缺少 Word 渲染等。参见 [MANUSCRIPT_QA.md](../MANUSCRIPT_QA.md)。
+- `tests/test_manuscript_qa_contracts.py` 仅检验案例结构、必要边界、权威路由及规则存在性；**不调用真实 Agent，不评定其审稿准确率**。实际行为需冻结版本、遮蔽预期答案、提供可信来源和外部记录，再由独立审稿人评价；未做则标 `NOT_MEASURED`。
+
 ## 6. 开放式科研能力与可信外部评估
 
 - **公开16道选项题和4个操作型合成任务均为 `REGRESSION_ONLY`**，不以其分数宣称真实科研能力。私有评估包的格式及导出入口在 [PRIVATE_PACK_CONTRACT.md](PRIVATE_PACK_CONTRACT.md)；它不运行模型、不提供沙箱、不保存私有题库。
