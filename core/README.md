@@ -60,6 +60,8 @@ python -m core.cli literature-search --query "sensor calibration transfer" --lim
 
 **论文叙述连续性（可选、只读）**：`python -m core.manuscript_flow MANUSCRIPT_TEXT.md` 或 `python -m core.manuscript_flow draft.docx --output intro_structure.json`。支持 `.md/.txt/.docx`，定位 Introduction 内多余小标题、编号/项目符号清单；输出段落词数仅用于人工定位，不设等长阈值，不判断创新深度、文本质量、AI 作者身份、结构例外是否经过用户批准或科研正确性。此工具只面向用户合法提供/授权审核的正文，不用于把 `PAPER_BLUEPRINT.md` 规划要点误判为论文，也不执行改写。完整的创新解释与论证权重由 [MANUSCRIPT_WRITING.md](../MANUSCRIPT_WRITING.md) 和 [MANUSCRIPT_QA.md](../MANUSCRIPT_QA.md) 依据原始证据审查。
 
+**反模板化风格定位范围**：`python -m core.manuscript_style scan MANUSCRIPT_TEXT.md --output style.json` 可定位有限的英语套话、重复连接词和冗长句子；规则命中只表明 `STYLE_REVIEW` 候选，不是 AI 写作证明或自动通过判据。**无法自动检测**近邻证据是否正确、方法解释是否充分、段落科学逻辑、细粒度 Word 格式例外和投稿占位是否全部消解；按 [MANUSCRIPT_QA.md](../MANUSCRIPT_QA.md) 的 HARD/MAJOR/STYLE 合同人工核验。不得凭“无警报”标 `REVIEW_READY`，也不使用覆盖率门槛驱动机械改写。
+
 **兼容性**：旧v1.4`STATE.json/EVENTS.jsonl`继续可读；新增Run推荐携带`task_spec_ref/task_spec_sha256`与`execution{command,git_commit,python_version,seed,environment_ref}`，但不反向要求迁移历史Run。deep核验大型预测文件可能产生额外I/O，仅在有科学结论变化、恢复或正式确认前调用。程序不判定论文价值、时间因果、确认集资格或授权。
 
 **探针预算（可选）**：`probe.json`可加入`cost_estimate:{"gpu_hours":0.4,"tokens":5000}`；`probe-check --file probe.json --remaining-budget-file budget.json`会在给定JSON预算内提示`BUDGET_REVIEW_REQUIRED`，绝不自动STOP或将预算文件视为用户训练授权。
