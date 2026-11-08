@@ -33,7 +33,9 @@ def main(argv: list[str] | None = None) -> int:
     compare.add_argument("--champion", type=Path, required=True)
     compare.add_argument("--challenger", type=Path, required=True)
     compare.add_argument("--metric", required=True)
-    compare.add_argument("--lower-is-better", action="store_true")
+    direction = compare.add_mutually_exclusive_group()
+    direction.add_argument("--lower-is-better", action="store_true", help="Explicitly declare min is better")
+    direction.add_argument("--higher-is-better", action="store_true", help="Explicitly declare max is better")
     task = sub.add_parser("task-check", help="Read-only TaskSpec and split qualification")
     task.add_argument("--root", type=Path, required=True)
     task.add_argument("--spec", required=True, help="TaskSpec JSON path relative to root")
@@ -104,7 +106,8 @@ def main(argv: list[str] | None = None) -> int:
         else:
             a = json.loads(args.champion.read_text(encoding="utf-8"))
             b = json.loads(args.challenger.read_text(encoding="utf-8"))
-            result = compare_runs(a, b, args.metric, lower_is_better=args.lower_is_better)
+            direction = (True if args.lower_is_better else False if args.higher_is_better else None)
+            result = compare_runs(a, b, args.metric, lower_is_better=direction)
     except (ContractError, OSError, ValueError) as exc:
         parser.exit(2, f"Evidence check failed: {exc}\n")
     print(json.dumps(result, ensure_ascii=False, indent=2))
