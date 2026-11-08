@@ -196,6 +196,8 @@ def verify_reference_metadata(reference: dict, *, fetch=_get_json) -> dict:
     critical = ("title", "year", "first_author")
     if "MISMATCH" in checks.values():
         status = "METADATA_MISMATCH"
+    elif any(value == "METADATA_MISSING" for value in checks.values()):
+        status = "METADATA_PARTIAL"
     elif all(checks[k] == "MATCH" for k in critical):
         status = "METADATA_MATCH"
     else:
