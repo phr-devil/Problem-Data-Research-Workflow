@@ -68,6 +68,10 @@
 
 ## 6. 三项强制审核合同（Q9、Q7、Q5）
 
+### Q1/Q2/Q5：整篇论证链审查（复用 R1/R2，不增加第六轮）
+
+仅对核心 Claim 检查 `INTRODUCTION_QUESTION/GAP → METHODS_DESIGN → RESULTS_EVIDENCE → DISCUSSION_INTERPRETATION/ALTERNATIVE → CONCLUSION`：每一跳是否有合法数据或原文支持、是否存在解释越级、近邻不公平比较、遗漏负结果或章节职能错位。把“事实证据不足”与“证据已有但叙事不清”分开处理；科研证据不存在时不能通过改写补出。能力/部署/测量型论文不强制编造因果机制；可检验的未来愿景可以保留但不当成已实现。尽可能由没有直接参与本段写作的执行上下文独立复看受影响 Claim；若只能同一模型/上下文执行，明确 `INDEPENDENCE_NOT_MEASURED`，不得假称多 Agent 同意证明科学正确。问题写入同一 `MANUSCRIPT_QA_REPORT.md`，不新增审核轮次、文档或修改许可。
+
 ### Q9：全稿语言自审——定位、修复、复检
 
 1. 对本轮实际可访问的**完整正文**执行一次有界扫描（排除 References、代码块、公式/元数据及图表源文件）；识别模板化开场、无信息修饰、重复小结、机械连接、过度保守、冗长、突然的风格跳变及缺实质主张的陈述。可使用 `python -m core.manuscript_style scan MANUSCRIPT_TEXT.md --output style_before.json`；对 Word 可读文稿也可用该工具的 `.docx` 文本提取。该工具只是**启发式风格定位器**；不可替代上下文语言审读，PDF 需先合法提取可核对文本。
