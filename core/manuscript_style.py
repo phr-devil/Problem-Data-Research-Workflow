@@ -17,6 +17,13 @@ RULES = {
     "META_FILLER": re.compile(r"\b(?:it is worth noting that|it should be noted that|it is important to note that|it can be seen that)\b", re.I),
     "HYPE_WITHOUT_SPECIFICS": re.compile(r"\b(?:holds (?:great|immense) promise|plays a (?:crucial|pivotal) role|demonstrates (?:the )?(?:great|enormous) potential)\b", re.I),
     "GENERIC_BOILERPLATE": re.compile(r"\b(?:in (?:today's|the) rapidly (?:evolving|changing) (?:world|landscape)|this study underscores the importance of)\b", re.I),
+    # High-confidence prose smells are contextual review prompts, not banned expressions.
+    "CHAT_OUTLINE_LABEL": re.compile(
+        r"^\s*(?:(?:the\s+)?(?:key\s+)?(?:challenge|solution|insight|our\s+advantages?|motivation|contribution|takeaway|evidence))\s*:\s+", re.I),
+    "GENERIC_RESEARCH_PROMISE": re.compile(
+        r"\b(?:paves? the way for|sheds? light on|opens? (?:up )?(?:new )?avenues? for future research)\b", re.I),
+    "TEMPLATE_RESEARCH_FRAMING": re.compile(
+        r"\b(?:with the rapid (?:advancement|development|evolution) of|our contributions? (?:are|can be summarized) as follows)\b", re.I),
 }
 TRANSITION = re.compile(r"^(moreover|furthermore|additionally|in addition)[,\s]+", re.I)
 REFERENCES = re.compile(r"^(?:#{1,6}\s*)?(?:references|bibliography)\s*:?\s*$", re.I)
