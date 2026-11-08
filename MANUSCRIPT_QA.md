@@ -78,7 +78,7 @@
 ### Q7：参考文献逐条双层验证 + 论断支持
 
 1. **完整性**：从真实稿件提取文末参考文献和正文引用，检查总数、连续编号/author-year、双向一致性、重复条目及未消解的 `[REF:...]` 占位；提取/排序不完整则 `REFERENCE_SET_INCOMPLETE`，不能声称逐条通过。
-2. **每条身份和书目信息**：对所有参考条目逐一验证存在性与题名、作者/顺序、年份、出版物、卷期、页码/文章号、DOI（若适用）、正式发表/预印本版本。优先 Crossref、DataCite、出版商或官方数据库做精确匹配；可按需复用 `core.literature.verify_reference_metadata` 与 `python -m core.reference_audit ...` 的**只查 DOI 元数据**能力。查不到 DOI 不能推断文献不存在；没有 DOI 应从官方书目来源人工核验。检测到撤稿、勘误或版本异常应复核原出版商记录；服务未返回警报 **≠** 确认不存在撤稿。
+2. **每条身份和书目信息**：对所有参考条目逐一验证存在性与题名、作者/顺序、年份、出版物、卷期、页码/文章号、DOI（若适用）、正式发表/预印本版本。优先 Crossref、DataCite、出版商或官方数据库做精确匹配；可按需复用 `core.literature.verify_reference_metadata` 与 `python -m core.reference_audit refs.json --output refs_check.json --allow-network` 的**只查 DOI 元数据**能力。输入 JSON 为 `{"expected_count": N, "references": [{"ref_id":"R1","doi":"10...","title":"...","year":2026,"first_author":"..."}]}`；`expected_count` 须来自稿件独立计数。`--allow-network` 只能在本轮获准做公开 DOI 查询时使用，仅发送 DOI，不发送未公开正文。查不到 DOI 不能推断文献不存在；没有 DOI 应从官方书目来源人工核验。检测到撤稿、勘误或版本异常应复核原出版商记录；服务未返回警报 **≠** 确认不存在撤稿。
 3. **每个关键引文的内容支持**：对于创新/首创、具名近邻差额、方法依据、关键数字、机制和重要争议，定位原文相关位置并判断 `SUPPORTS / PARTIAL / CONTRADICTS / SOURCE_ACCESS_LIMITED / NOT_CHECKED`。**元数据校验通过不得自动标 `SUPPORTS`**；只有摘要时只能支持摘要明确表达的有限结论，不得声称核验全文。
 4. 最小记录 `REF_ID | identity+metadata status | DOI/official source+date | corrections/retractions check | citing Claim/section | source passage/location+support status | action`；元数据错必须更正，来源不支持时须更换可信来源或修改主张。所有条目要求**被逐条审查**，不是强迫每条都核验成功；无法访问时如实留 `UNVERIFIED`，不得让关键引用带着未解决的错误进入 `REVIEW_READY`。
 5. 使用网络检索仅在真实授权和合法来源范围内进行；不外传未公开稿件、原始数据或受许可限制的全文。不要用自动生成的 DOI/[1] 填补空缺，优先复用已有已核证据。
