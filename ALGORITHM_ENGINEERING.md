@@ -32,6 +32,8 @@
 3. **为什么不是简单方法就行**：先比较真实同输入同K的强简单替代；新机制必须有**不同的可观察预言**，例如只在特定可预定义场景改善、标签减少而性能不减、延迟下降但失真范围明确。
 4. **论文能增加什么**：对应最近邻的哪一条有限新知识/能力/成本权衡；**小而真实即有价值**，但不能靠开发集随机小增益宣布论文成立。
 
+**新机制派单的科学假说溯源（复用原 PROBE，不增加全任务必填表）**：真正新增模型模块、归纳偏置或科研主张时，确保能从既有 `PROBE_CANDIDATE` 读出 `HYPOTHESIS（为什么该机制可能有用） | FALSIFIER（什么可观察结果会反驳它） | CONTRIBUTION_TYPE（现有 CAPABILITY/MECHANISM/LAW_BOUNDARY 或普通工程） | MINIMAL_SUFFICIENT_CHANGE（相对强简单基线只需改什么）`；可继续引用既有 `ERROR_EVIDENCE / DISTINCT_PREDICTION / MINIMUM_TEST`，不是另造 schema，也不是每次 Bug 修复/小超参变化都要写科研假说。若暂不能区分竞争解释，保留 `HYPOTHESIZED` 并只做明确获授权的探索；不能将新增模块自动宣传成原始科学发现。
+
 机制候选复用现有`PROBE_CANDIDATE`及 `python -m core.cli probe-check --file probe.json`：`ERROR_EVIDENCE | LEGAL_LEVER | SIMPLE_ALTERNATIVE | DISTINCT_PREDICTION | MINIMUM_TEST | IF_POS/NEG/INVALID | COST/AUTH`；不新建复杂候选表。**不要求每个调参都填写机制卡**，只在新机制、重要转向或高成本实验时使用。
 
 **基准/任务/系统级路线（沿用原路由，不新增状态）**：当合法证据表明现有 benchmark 无法测试关键能力、评价条件与部署目标错配，或研究需要新的真值/时间因果定义时，先提出**哪些问题在旧评估中不可被识别**，规划可复现的新任务/评价合同、有效真值和公平参照，再评估新测量是否带来独立学术价值。新的协议是**新版本 Task/Claim**，不能静默改变既有冻结评价器或用重新定义指标制造“提升”；公开基准、标签收集和实验仍按授权门禁。创新也可来自**新传感/决策系统组合、物理/生物学归纳偏置、在线学习范式或真实资源边界**，但须映射到具体可观察预言与公平替代，不能用概念灵感或组件数量冒充科学机制。只有确定需要时才增加算法复杂度。

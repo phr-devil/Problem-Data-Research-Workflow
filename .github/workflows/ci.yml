@@ -19,6 +19,7 @@ jobs:
       - run: python -m py_compile chapter10_replay.py
       - run: python -m json.tool SCENARIOS.json > /dev/null
       - run: python -m unittest discover -s tests -p 'test_manuscript_qa*.py' -v  # offline QA tests
+      - run: python -m unittest discover -s tests -p 'test_manuscript_claim_guard.py' -v  # offline semantic/provenance alert behavior
       - run: python -m unittest discover -s tests -p 'test_literature.py' -v  # preserve metadata search behavior
       - run: python -m unittest discover -s tests -p 'test_research_claim_writing_contracts.py' -v  # offline science-to-paper policy regression
       - run: python -m unittest discover -s tests -p 'test_positive_science_value_contracts.py' -v  # offline value/evidence/claims checks
