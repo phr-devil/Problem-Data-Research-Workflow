@@ -37,7 +37,7 @@
 | `Equation` | 数学字体 11 pt | 公式居中、编号右对齐 | 0 | 0 | 1.15 倍 |
 | `Reference` | Times New Roman 10 pt | 常规、左对齐 | 0 | 0 | 单倍 |
 
-- 不允许超过三级**论文章节标题**；需要更细层次时用正文内加粗短标签，不建立 Heading 4/5。文档元信息、Abstract、Keywords、References、Acknowledgments 等使用无编号样式，不占用六章编号。
+- 不允许超过三级**论文章节标题**；需要更细层次时优先以连贯正文段落表达，不建立 Heading 4/5；仅在正式技术定义或目标期刊实际要求时使用短行内术语标记，**不得**靠粗体 `Challenge: / Solution: / Key Insight:` 等对话式标签制造伪小节。文档元信息、Abstract、Keywords、References、Acknowledgments 等使用无编号样式，不占用六章编号。
 - 空白应来自内容语义和章节编排，而不是段前/段后间距；标题在 Word 中设置 `keep_with_next`、正文 `widow_control`，必要时为完整表行设置不跨页。
 
 ## 3. 标题编号与 Markdown → Word 映射
