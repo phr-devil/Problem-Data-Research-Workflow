@@ -29,6 +29,10 @@
 | M5 Scientific Audit | 核 Method ↔ Result ↔ figure/table ↔ Discussion ↔ Abstract 的数值、口径和定义；查证据强度、统计单位、因果措辞、失效/负结果、最近邻原文。 | 分级问题：\`BLOCKER\`（无证据/无效/冲突），\`MAJOR\`（口径/论证改变），\`MINOR\`（术语/衔接），\`STYLE\`；仅修复受影响位置。 |
 | M6 Prose & Delivery | 科学主线稳定后再去机械化、审计口吻和过度防御；段落连接、重复、语气及刊物格式按需精修。精修后再次核查所有改变了的数值、限制、Claim、图/引用与公式占位。 | **最终可审阅纯文字稿 + 未解决事项**；完成文字 ≠ 科学确认、正式投稿准备或作者审批。 |
 
+### 写作中的科学论证链（M2→M3，属于正文创作而非格式修复）
+
+写每一个核心贡献前，复用 `PAPER_BLUEPRINT.md` 的暂定 `WORKING_THESIS`，在既有 Section Contract 中串联 `IMPORTANT_QUESTION → CLOSEST_PRIOR_LIMITATION → WHY_THIS_METHOD/EXPERIMENT → RESULTS_EVIDENCE → INTERPRETATION+ALTERNATIVE → SCOPE/VISION`。Introduction 说明问题为何重要、具名最近邻**具体**不足；Methods 说明设计与科学问题的必要联系；Results 给公平比较及限制；Discussion 说明新知识、反解释、适用边界与条件性潜力。若某环节没有实证支持，**可收窄或将解释/愿景明确标为推测，不通过漂亮叙事填补证据**。此链不要求所有论文提供因果机制：新能力、科学测量、资源权衡、边界规律也可构成中心主张；负结果和最强反例不得因不符合“故事”而删去。只对核心 Claim 做一次有效映射，不额外造完整稿件计划或独立审稿 Agent。
+
 ### Section Contract：每节只需六项
 
 \`Question | Main message | Evidence IDs & status | Paragraph roles | Figures/Tables | Boundary\`
