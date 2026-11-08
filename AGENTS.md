@@ -16,6 +16,7 @@
 - **Word 格式**：用户要求论文蓝图 Word 审阅版或获授权稿件 Word 排版时，按 [PAPER_WORD_STYLE.md](PAPER_WORD_STYLE.md) 使用统一格式；仅导出不解除 `WRITING_LOCKED`，不自动生成 Word 文件。
 - **已获授权的正式正文写作**：按 [MANUSCRIPT_WRITING.md](MANUSCRIPT_WRITING.md) 以证据→主张→章节→正文→科学审查→语言精修进行；R1 必查 [高水平论文案例库](paper_exemplars/README.md)，按需阅读1–3张相关策略卡。采用6个功能模块/4轮按需连续执行、单一稿件源和增量验证。此路由不解除 [WRITING_GATE.md](WRITING_GATE.md) 的两道门禁，也不允许自动更改已批准目录。
 - **已有完整论文的审核/修订**：按 [MANUSCRIPT_QA.md](MANUSCRIPT_QA.md) 执行独立审稿→证据/引用审计→获授权的局部修订→语言检查→交付回归；十个检查域按需合并为五轮，不重复触发正文生成。审核不授予改写、变更已批准重大结构、读取 SEALED、绘图、实验或投稿权限；修订前须核原始授权。
+- **稿件 QA 三项必检**：若执行完整稿件审核，Q9 全文风格定位与复检（只报告风格覆盖率，不虚构真实 AI 比例）、Q7 参考文献身份/元数据逐条核验与关键论断原文支持、Q5 最近邻公平差别与 OBSERVED/INTERPRETATION/HYPOTHESIS/VISION 分层均按 [MANUSCRIPT_QA.md](MANUSCRIPT_QA.md)；不可用自动文本评分替代科学审核。
 - **图片**：**只有用户明确要求绘制/修改指定图片才能出图**；诊断图、论文图、预览和重绘均不可自动触发。见 [FIGURE_POLICY.md](FIGURE_POLICY.md)。
 - **证据**：开发集增益、通过测试、元数据或论文蓝图不是科研确认。Q2+可信投稿潜力（优先Q1）是科研目标，不保证录用；见 [Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)。
 
