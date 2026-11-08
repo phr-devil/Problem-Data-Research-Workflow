@@ -109,6 +109,13 @@ def check_provenance(packet: dict) -> dict:
         split = claim.get("split_id")
         development_splits = claim.get("development_split_ids", [])
         failures, unknowns = [], []
+        if not isinstance(development_splits, list) or any(not isinstance(x, str) for x in development_splits):
+            unknowns.append("INVALID_DEVELOPMENT_SPLIT_LIST")
+            development_splits = []
+        if "selected_on_source" in claim and not isinstance(claim["selected_on_source"], bool):
+            unknowns.append("INVALID_SELECTION_FLAG")
+        if "protocol_frozen" in claim and not isinstance(claim["protocol_frozen"], bool):
+            unknowns.append("INVALID_PROTOCOL_FROZEN_FLAG")
         if asserted == "INDEPENDENT_CONFIRMATION":
             if source in {"DEV", "VALIDATION", "VAL", "EXPLORATORY"}:
                 failures.append("DEVELOPMENT_OR_VALIDATION_MISLABELED_INDEPENDENT")
