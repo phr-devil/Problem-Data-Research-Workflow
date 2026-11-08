@@ -129,6 +129,24 @@ class NarrativeWorkflowContracts(unittest.TestCase):
             else:
                 self.assertIn(word, qa)
 
+    def test_manuscript_narrative_hard_constraints_are_present(self):
+        writing = self.read("MANUSCRIPT_WRITING.md")
+        qa = self.read("MANUSCRIPT_QA.md")
+        style = self.read("PAPER_WORD_STYLE.md")
+        agents = self.read("AGENTS.md")
+        for term in ("正文禁止分点作答", "括号只作必要功能",
+                     "全文自然段落与括号克制", "不得频繁以圆括号插入旁注",
+                     "纯蓝图规划", "算法伪代码"):
+            self.assertIn(term, writing)
+        for term in ("全文括号与分点式正文", "不得分点作答",
+                     "减少非必要括号", "真正改写而非删符号",
+                     "修稿许可"):
+            self.assertIn(term, qa)
+        for term in ("叙述性正文不得排成列表", "首次缩写",
+                     "Word 自动项目符号"):
+            self.assertIn(term, style)
+        self.assertIn("正文不得清单化或括号堆砌", agents)
+
     def test_authorization_and_publisher_override_survive(self):
         for name in ("MANUSCRIPT_WRITING.md", "MANUSCRIPT_QA.md",
                      "DUAL_DOCUMENT_WORKFLOW.md", "WRITING_GATE.md"):
