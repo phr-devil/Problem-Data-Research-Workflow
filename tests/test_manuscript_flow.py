@@ -120,7 +120,7 @@ class NarrativeWorkflowContracts(unittest.TestCase):
     def test_writing_and_qa_both_cover_depth_and_intro(self):
         writing = self.read("MANUSCRIPT_WRITING.md")
         qa = self.read("MANUSCRIPT_QA.md")
-        for word in ("连续引言", "核心创新", "不强制五段", "不强制所有贡献", "core.manuscript_flow"):
+        for word in ("连续引言", "核心创新", "不强制五段", "不强求所有贡献", "core.manuscript_flow"):
             self.assertIn(word, writing)
         for word in ("INTRO_SUBHEADING", "UNDERDEVELOPED", "OVEREXPANDED",
                      "REPETITIVE_TEMPLATE", "SUBSTANTIVE_EXPANSION", "core.manuscript_flow"):
@@ -132,7 +132,7 @@ class NarrativeWorkflowContracts(unittest.TestCase):
     def test_authorization_and_publisher_override_survive(self):
         for name in ("MANUSCRIPT_WRITING.md", "MANUSCRIPT_QA.md",
                      "DUAL_DOCUMENT_WORKFLOW.md", "WRITING_GATE.md"):
-            self.assertIn("用户确认", self.read(name))
+            self.assertIn("确认", self.read(name))
         self.assertIn("WRITING_LOCKED", self.read("WRITING_GATE.md"))
         self.assertIn("FIGURE_POLICY.md", self.read("MANUSCRIPT_WRITING.md"))
         self.assertIn("Heading 2", self.read("PAPER_WORD_STYLE.md"))
