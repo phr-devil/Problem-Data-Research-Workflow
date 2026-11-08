@@ -14,6 +14,7 @@
 - **权限**：选题和选库不自动许可下载、安装、CPU/GPU 拟合、SEALED/独立确认、付费、数据外传、项目级 STOP/PIVOT 或投稿；按 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md) 将授权内下一技术行动与用户必须决策的事项分开。
 - **论文**：允许提前维护 `PAPER_BLUEPRINT.md` 的 H1/H2 内容规划及证据缺口；新论文按类型规划：实证算法论文默认六章，Critical Review / Perspective 可采用相应论证蓝图；已获用户确认目录的重大变更仍需说明理由并获确认（见 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) §5）；正式稿件标题、摘要、章节正文/初稿须先完成科研成果总结并经用户审查，再由用户明确授权。默认 `WRITING_LOCKED`，见 [WRITING_GATE.md](WRITING_GATE.md)。
 - **Word 格式**：用户要求论文蓝图 Word 审阅版或获授权稿件 Word 排版时，按 [PAPER_WORD_STYLE.md](PAPER_WORD_STYLE.md) 使用统一格式；仅导出不解除 `WRITING_LOCKED`，不自动生成 Word 文件。
+- **高价值科研决策与实证评测**：重要性/负结果/新基准/系统级贡献优先读 [HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md)、[PAPER_FIRST.md](PAPER_FIRST.md) 当前相关节；科研机制和科学证据路径均按用户已授权范围执行。理论/仿真与真实独立数据的确认资格不得混淆，见 [CONFIRMATION.md](CONFIRMATION.md)。真实 Agent 改善只能经 [REPLAY_PROTOCOL.md](REPLAY_PROTOCOL.md) 对照，CI 仅证明规则/程序行为，不证明科研质量。
 - **科学发现与可信论文的执行主线**：选题按 [SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md) 考虑现实需求、理论/测量张力、已有合法数据异常与具名文献矛盾；重要机制按 [ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md) 区分竞争解释；科研成果按 [SCIENCE_RESULT_HARVEST.md](SCIENCE_RESULT_HARVEST.md) 按 Claim 类型识别证据缺口。论文蓝图用可修订的 `WORKING_THESIS` 保持问题—设计—结果—解释连贯；这些不是新阶段、自动科研/写作许可或固定额外实验。
 
 - **已获授权的正式正文写作**：按 [MANUSCRIPT_WRITING.md](MANUSCRIPT_WRITING.md) 以证据→主张→章节→正文→科学审查→语言精修进行；R1 必查 [高水平论文案例库](paper_exemplars/README.md)，按需阅读1–3张相关策略卡。采用6个功能模块/4轮按需连续执行、单一稿件源和增量验证。此路由不解除 [WRITING_GATE.md](WRITING_GATE.md) 的两道门禁，也不允许自动更改已批准目录。
