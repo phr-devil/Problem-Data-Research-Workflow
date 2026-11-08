@@ -94,6 +94,26 @@ class ReferenceMetadataBehavior(unittest.TestCase):
         record = verify_reference_metadata(GOOD_REF, fetch=fail)
         self.assertEqual(record["status"], "METADATA_UNAVAILABLE")
 
+    def test_datacite_fallback_and_partial_fields(self):
+        def datacite_fetch(url):
+            if "crossref" in url:
+                raise ValueError("not registered at Crossref")
+            return {"data": {"attributes": {
+                "doi": "10.1234/test.2026",
+                "titles": [{"title": "Reliable Sensor Fusion"}],
+                "creators": [{"familyName": "Zhang", "givenName": "Alice"}],
+                "publicationYear": 2026,
+            }}}
+        expected = {k: GOOD_REF[k] for k in ("doi", "title", "year", "first_author")}
+        record = verify_reference_metadata(expected, fetch=datacite_fetch)
+        self.assertEqual(record["provider"], "datacite")
+        self.assertEqual(record["status"], "METADATA_MATCH")
+        # If the bibliography includes fields absent from the provider,
+        # the correct result is partial verification, not a silent pass.
+        detailed = verify_reference_metadata(GOOD_REF, fetch=datacite_fetch)
+        self.assertEqual(detailed["status"], "METADATA_PARTIAL")
+        self.assertEqual(detailed["checks"]["volume"], "METADATA_MISSING")
+
     def test_reference_set_count_and_duplicate(self):
         incomplete = audit_batch({"expected_count": 3, "references": [GOOD_REF]},
                                  fetch=fake_doi_fetch)
