@@ -19,7 +19,7 @@ import re
 from core.manuscript_style import paragraphs_from_file
 
 NUMERIC = re.compile(
-    r"(?<![\w.])(?:[pP]\s*(?:=|<|>|≤|≥)\s*)?[+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?%?(?![\w])"
+    r"(?<![\w.])(?:[pP]\s*(?:=|<|>|≤|≥)\s*)?[+-]?(?:\d+(?:\.\d+)?|\.\d+)(?:[eE][+-]?\d+)?%?(?![\w])"
 )
 NEGATION = re.compile(r"\b(?:not|no|never|neither|without|cannot|failed to)\b", re.I)
 CAUSAL = re.compile(r"\b(?:caus(?:e|es|ed)|driv(?:e|es|en)|results? in|leads? to|due to)\b", re.I)
