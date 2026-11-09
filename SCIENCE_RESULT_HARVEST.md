@@ -39,6 +39,8 @@
 
 **结果重释的证据边界（吸收真实项目审查反馈）**：先核同协议同指标的原始有效 Run 与源代码；如冻结说明、稿件、摘要同源码/Run 冲突，明确 `SOURCE_CONFLICT/STALE` 与可信优先来源，**不静默修改冻结工件或混拼不同版本数值**。对阈值、单调律、因果机制、跨条件/跨场次推广，辨别 `EX_POST_INTERPRETATION`（事后解释）、`OBSERVED_CONDITION`（已有受限现象）与 `NEW_FALSIFIABLE_HYPOTHESIS`（新的可证伪命题），后验解释不能升级成“当初已预测/已经证实”的 Claim。实验协议、独立单位、评价覆盖、代理标签或 Oracle 权限不匹配时保留现象、降级推断；例如测试标签驱动的 oracle 不是部署可用方法或信息上界，回填背景不是真实 Idle，帧级对象留出不能宣称独立场次泛化。若原始工件无法核实，`REPORTED/UNKNOWN` 保留而不强行回收正面科学故事；不要求额外实验或重新训练。
 
+**描述性发现 ≠ 合法规则增益**：从固定的已保存 DEV 预测读取象限/类别错误属于探索性描述；一旦以同批评价标签筛出类条件传感器选择器、阈值或最佳后验切片，便发生**选择—评价复用**。即使零拟合，也须按 [HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md) 的 `SELECTION_SOURCE / EVALUATION_SOURCE` 核查；没有独立人/场次级验证时，仅报 `EXPLORATORY/SELECTION_LEAKAGE_RISK`，不写成部署性能或“已验证改进”。已有归档状态和 SEALED 门禁不变。
+
 ### B. 横向比较候选贡献，再选主张
 
 最多少量、通常1–3个**真正不同**的`SCIENTIFIC_CLAIM_CANDIDATE`，不是三个不同写法的同一创新。每个注明：
