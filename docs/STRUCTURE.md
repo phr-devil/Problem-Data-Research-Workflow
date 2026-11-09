@@ -6,6 +6,7 @@
 - 唯一科研决策主控：[`WORKFLOW.md`](../WORKFLOW.md)；原有三循环/六活动和授权门禁不修改。
 - [`policies/README.md`](../policies/README.md) 与 [`modules/README.md`](../modules/README.md) 及其研究、论文、绘图专题索引只是轻量**路径清单**（INDEX_ONLY），无新增规则或审批。旧路径与脚本全部保留，无双份规范。
 - 研究项目内的 `RESEARCH_RECORD.md` / `PAPER_BLUEPRINT.md`、Run/STATE 和所有原始证据位置不变；原测试仍可直接访问根目录权威文档。
+- **历史科研案例统一归属**：[LESSONS/CASE_REGISTRY.md](../LESSONS/CASE_REGISTRY.md) 是项目成功/失败/证据缺口的按需单一索引；细节与最终事实仍以用户项目原始 Run/归档为准。RWF 仅链接此索引，不复制，不纳入 AGENTS 默认预读。
 - RWF 保持独立仓库：PD-RW 设科研问题、科学主张、论文及图像授权；RWF 可选地实现真实指标复算、图型模板和静态 QA。PD-RW 不复制其实现代码。
 - 论文正文写作的稳定执行规范放在根目录 [MANUSCRIPT_WRITING.md](../MANUSCRIPT_WRITING.md)；
 - 完整稿件**生成之后**的独立审核与局部修订验收由根目录 [MANUSCRIPT_QA.md](../MANUSCRIPT_QA.md) 主责；不复制写作流程或新增授权机制。[WRITING_GATE.md](../WRITING_GATE.md) 继续唯一负责写作授权，模块索引只提供路径指针，不出现第二套权限。
