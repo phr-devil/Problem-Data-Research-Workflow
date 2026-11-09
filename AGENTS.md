@@ -25,6 +25,7 @@
 | 贡献、停止或追加投入 | [PAPER_FIRST.md](PAPER_FIRST.md) 或 [POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md) |
 | 正文撰写/已有稿审核/Word | [MANUSCRIPT_WRITING.md](MANUSCRIPT_WRITING.md) / [MANUSCRIPT_QA.md](MANUSCRIPT_QA.md) / [PAPER_WORD_STYLE.md](PAPER_WORD_STYLE.md)，按任务选择；写作锁仍有效 |
 | 独立确认/期刊/出图 | [CONFIRMATION.md](CONFIRMATION.md) / [VENUE_STRATEGY.md](VENUE_STRATEGY.md) / [FIGURE_POLICY.md](FIGURE_POLICY.md) |
+| **跨项目成功/失败/身份追溯** | [LESSONS/CASE_REGISTRY.md](LESSONS/CASE_REGISTRY.md)，仅在明确复盘、案例核查、历史回放时加载；非项目原始科研真值 |
 | 工作流维护/测评 | [docs/STRUCTURE.md](docs/STRUCTURE.md) / [evals/EVALUATION_POLICY.md](evals/EVALUATION_POLICY.md)，真实盲评才读 [REPLAY_PROTOCOL.md](REPLAY_PROTOCOL.md) |
 
 **专业要求不再复制进默认入口**：正式写作按需参考 [paper_exemplars/README.md](paper_exemplars/README.md)；已授权架构图才读 [ACADEMIC_DIAGRAM_STYLE.md](ACADEMIC_DIAGRAM_STYLE.md)，需要判断局部修改还是全图重构时再用只读工具 `core.figure_change_scope`；不自动绘图。“正文不得清单化或括号堆砌”与“正文生成阶段的图片位置与 Fig. 图题”由写作专题主责。**已授权的论文数据图**由 FIGURE_POLICY 主责，轴、配色、几何 QA 只在出图任务读取。分类不清才读 [modules/README.md](modules/README.md)（INDEX_ONLY）。
