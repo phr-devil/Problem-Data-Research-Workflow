@@ -4,6 +4,8 @@
 
 **执行优先级（旧文档出现“最小论文优先”时覆盖旧口径）**：先对知识价值、最近邻差额和科学辨识力做可审计的比较，再寻找可执行的最低成本试验；**不能以最便宜的训练、最容易提高F1或任何Q3/Q4可发性代替Q2+科研目标**。可信小成果仍保护。已有数据/Run可直接跳到决定性缺口，不重启搜索。
 
+**三种科研目标分流（任务意图，不是新状态或评分器）**：①用户要求**发现未来重要问题**时，按 `QUESTION_DISCOVERY` 比较科学后果、未解机制/能力、原文近邻差额、可反驳预测与可能的证据路径；**暂缺现成数据库、近期 Run 或低成本 Probe 不应自动降级科学潜力**。②要求**审查已有成果**时，按 `RESULT_AUDIT` 比较现有有效证据、反例、可陈述 Claim 与缺口；证据最硬的解释不自动是最有突破潜力的选题。③要求**决定下一实验**时，按 `DECISIVE_EVIDENCE_DESIGN` 选择最能区分竞争解释、改变研究决策的合法证据动作，并评价成本与权限。三者分别回答“什么值得研究 / 目前知道什么 / 怎样最有效地判断”，不合并成单一加权分数；只读构思不能触发拟合、下载、SEALED 或项目重开。用户目标不明确时依当前任务和已有项目状态判断，不追加审批。
+
 **可用工具（均为非强制只读辅助）**：`python -m core.scientific_discriminability --metadata DEV_METADATA.json --factor-a device --factor-b class --group subject --role DEV` 检查已获许可元数据的交叉/独立组结构；`python -m core.science_choice_replay --cases evals/science_choice_cases.synthetic.json --blind` 导出不含专家答案的构造场景。两者**不能证明因果关系、选题价值、Q2水平或真实行为改进**。历史冻结回放必须独立准备真实来源和专家参考后另行执行，见[REPLAY_PROTOCOL.md](REPLAY_PROTOCOL.md)。
 
 **活动01防首个满意解**：不要求固定3次ChatGPT回复，而要在同一次或2–3轮内先作`BREADTH_SCAN`广搜重要且不同的科学问题，接`DEEP_FALSIFICATION`核最强原文/反证，再以`COMPETING_CHOICE`用至少一次**不同失败前提的替代机会搜索**挑战首选；没有可比备选可以保留唯一首选，但必须记录搜索限制。D1正式选定前通过官方公开元数据做`PRE_DOWNLOAD_SCIENCE_FIT`，未知仅`PREFERRED_PROVISIONAL`，不在未授权情况下读取DEV/test或自动下载。详情见[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md)与[DATA_DISCOVERY.md](DATA_DISCOVERY.md)。
@@ -57,6 +59,8 @@
 **比较性与规律识别的最低科学合同（按风险触发，不增加关卡）**：当候选要从多项结果推导规律、阈值、单调曲线、机制、泛化或系统能力时，先核 `RUN_VERSION | TRAIN_TEST_SPLIT | LEGAL_INFORMATION | DECODER/EVALUATOR | METRIC/DENOMINATOR | INDEPENDENT_GROUP | LABEL_PROVENANCE`。仅同协议同口径才可直接形成趋势或差额；不同折、旧解码、不同训练量/指标只能列为互不等价的线索，不能拼成因果曲线。少数观察点、打乱输入和 Oracle/真值上界不能识别普适的阈值或单调律；需要受控变化、足够覆盖及不确定性估计，缺失时明确写“待验证的条件性假说”，不报臆测阈值。
 
 **信息与泛化边界**：`LABEL_USING_ORACLE`、预测期可用的真实方案、简单参照、代理/回填标签必须分开；带测试真值的 oracle 决策上界**不是信息论上界或可部署策略**，其接近关系不能证明“没有额外信息”。评价仅标注帧、完整连续时间轴、已知段边界重置、不同组/日期的测试都要写清；对象帧留出不自动构成独立 Episode/场次泛化，独立录制确认不自动构成新日期/现场验证。此类缺口属于收窄主张或设计判别证据的问题，不能由更强措辞解决。
+
+**零拟合分析同样必须防止后验选择泄漏**：查看已保存预测/误差、描述预先固定的分组与失效象限可以是合法的探索性分析；但根据**评价集真值**选择最优传感器、类别规则、阈值、权重或报告切片，即使未拟合模型，也属于数据驱动的选择，**不得用同一评价集再声称无偏泛化增益**。在合法 DEV 内可探索，但必须记录 `SELECTION_SOURCE | RULE_SELECTION | EVALUATION_SOURCE | GROUP_UNIT | PROXY_LABEL_STATUS`，将选择与独立评价按人/场次等真实单位隔离；不能满足时只报 `EXPLORATORY/SELECTION_LEAKAGE_RISK`，提出未来合法验证路径。用测试真值构造的 oracle、类条件选择器上界或回填 Idle 代理标签均不能当作可部署规则或独立真实标签；不得为零拟合分析读取 SEALED 或把只读/计算权限自行扩大。
 
 **严禁伪创新与自行认证**：改论文题目、重命名机制、叠加常见模块、换数据库复现、选择性使用 DEV 指标或“文献未搜到”均不能单独证明创新；最小独立差额应对应可反驳的机制、能力、规律、测量或资源边界，并指明最强原文邻居尚未覆盖什么。提案 Agent、元数据工具、静态检查与 LLM 自评分都不得自行将 `HYPOTHESIZED/UNKNOWN` 升级为已确认原创性；必须使用可核来源、有效实验和必要的独立判断，实证确认仍按 [CONFIRMATION.md](CONFIRMATION.md)。新 Claim 不预设固定数量，既有 `PAPER_BLUEPRINT.md` 中早期创新点可随证据修订，不得静默重写冻结协议或未经授权写稿。
 
