@@ -70,7 +70,8 @@
 5. **输出证据优先**：默认短文本/指标/路径；图表只为判别科学问题或验证证据，01–05不自动做精美图片、长报告或PPT/PDF。避免重复读取、无效多Agent与重绘；不为省Token跳过科学验证。见[WORKFLOW.md](WORKFLOW.md) §5。
 
 ## 相关材料
-- **真实成功与失败一体案例**：[APACE → SAFE-Gait](LESSONS/SAFE_GAIT_APACE.md)；包含 Oracle/可辨识性差距、K=0→K=1 合法信息变化、目标级异质性与论文边界。
+- **按需跨项目案例台账**：[2026-10～11 成功、失败、待证实与身份冲突](LESSONS/CASE_REGISTRY.md)；已识别的研究线分别记录算法/科学/论文/确认状态及原始证据缺口，**仅在案例复盘、选题对照或回放任务加载**，不是全局科研规则。
+- **真实成功与失败一体详细案例**：[APACE → SAFE-Gait](LESSONS/SAFE_GAIT_APACE.md)；包含 Oracle/可辨识性差距、K=0→K=1 合法信息变化、目标级异质性与论文边界。
 - **可重复只读工具**：`python -m core.cli information-check --file LESSONS/SAFE_GAIT_INFO_PROBE.json`，核 K/信息时点/support-query/成本与共同失败前提；不拟合、不可替代科学判决。
 - **历史盲回放设计**：[SAFE_GAIT_REPLAY.json](LESSONS/SAFE_GAIT_REPLAY.json)，当前为事后重构案例，未宣称已执行真正盲回放。
 
