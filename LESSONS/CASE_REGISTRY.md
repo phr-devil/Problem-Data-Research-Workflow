@@ -10,7 +10,7 @@
 - **独立成功轴**：`ALGO_DEV_POSITIVE`（在指定合法 DEV 评价下有正增益），`SCIENTIFIC_RESULT_SUPPORTED`（有受限科研发现/测量结果），`PAPER_PATH_CANDIDATE`（有可审查的论文证据路线），`CONFIRMATION_DONE_SCOPED`（限定义的确认已做）。一个项目可以同时有 `MECHANISM_NOT_SUPPORTED`、`ARCHIVED`、`UNKNOWN`；归档算法分支不取消其它已成立的科学结论。
 - **证据层**：`REPOSITORY_LESSON`（仓库现有复盘，但不代表原始复算）；`SECONDARY_LOCAL_AUDIT`（WorkBuddy 报告从本地 JSON/NPZ/稿件核对，本次未直取）；`DOCUMENT_HANDOFF`（用户提供的交接/论文蓝图）；`USER_REPORTED`（聊天或用户表态）；`UNKNOWN`（关键原始证据不可得）。不可把这些升级为 `INDEPENDENTLY_RECOMPUTED_HERE`。结构 CI 只验证案例文本约束。
 - **不执行**：此台账不授权下载、拟合/CPU/GPU、SEALED 访问、数据外传、项目解归档、正式论文写作、图片生成或投稿；不含真实受试者个人数据、逐样本预测、原始信号或本地完整源文件。
-- **来源简称**：`S19` = 用户提供的 `NOVELTY_REFRAMING_REVIEW(1).md` v2（2026-11-09，包含 19 和 21）；`S19P` = `PROJECT19_MANUSCRIPT_EVIDENCE_ADDENDUM_2026-11-05.md`；`S23` = `Galaxy_HRGuard_论文写作阶段_AI对话重启交接_2026-11-05.md` 及后续论文蓝图；`SCARE` = `传感器算法项目_完整接力汇总_2026-10-26.md`；`STAC` = `PD-RW_Research_Round_2026-11-04.md` 及随后 TacVerse DEV 审查回报；`SNEW` = `PD-RW_01_传感器算法研究_2026-11-05.md` 及后续 WorkBuddy 状态；`CHAT` = 用户聊天报告（原始工件未在此核对）。上述交接材料不自动公开上传到本仓库，文件名用于用户环境内溯源。
+- **来源简称**：`S19` = 用户提供的 `NOVELTY_REFRAMING_REVIEW(1).md` v2（2026-11-09，包含 19 和 21）；`S19P` = `PROJECT19_MANUSCRIPT_EVIDENCE_ADDENDUM_2026-11-05.md`；`S23` = `Galaxy_HRGuard_论文写作阶段_AI对话重启交接_2026-11-05.md` 及后续论文蓝图；`SCARE` = `传感器算法项目_完整接力汇总_2026-10-26.md`；`STAC` = `PD-RW_Research_Round_2026-11-04.md` 及随后 TacVerse DEV 审查回报；`S24E` = `00_MASTER_HANDOFF.md`（2026-10-03 CATS-PD/TacQuad 早期研究，非最新实验）；`SNEW` = `PD-RW_01_传感器算法研究_2026-11-05.md` 及后续 WorkBuddy 状态；`CHAT` = 用户聊天报告（原始工件未在此核对）。上述交接材料不自动公开上传到本仓库，文件名用于用户环境内溯源。
 
 ## 1. 已识别案例（成功、失败、边界、数据与未完成项均保留）
 
@@ -32,8 +32,10 @@
 | `CRFW-P19`（项目19早期） | REASSEMBLE 上约3s提前失败预测，最强方案未提供稳定时间建模增益；随后另立低层技能任务 | 原 Task `MECHANISM_NOT_SUPPORTED`；**成功转向 ≠ 原 Task 复活** | `CHAT` |
 | **`CRPS-P19`（项目19）** | 预测父动作后验+本体/力觉低层技能识别，主对象折 `SF=0.6717`、`GRUctx=0.7135`，segF1 **+0.0418**；算法轮 GRUctx `0.7091` 为另一构造，不能拼表 | **`ALGO_DEV_POSITIVE` / `PAPER_IN_PROGRESS`**；全 Episode 边界 F1 未改善；37 条 SEALED 跨录制确认 `NOT_RUN`，不能称部署/独立泛化成功 | `S19` §1–3，`S19P` |
 | `TACTILE-DATA-P20`（项目20） | FeelingOfSuccess 与 GraspStability 数据获取和 CRC 验收报告；尚无在该项目成立的独立算法胜负结论 | `DATA_ACQUIRED`，算法 `UNKNOWN` | `CHAT` |
+| **`PRELIFT-F3-P20`（项目20后期算法）** | 2026-11-08 报告的 pre-lift 四指时间中心化空间动态8维触觉特征 F3；同设备未见物体独立 SEALED（9物体/339试次）：物体均值 AURC **0.279983** vs F3-base **0.516129**（Δ−0.236145，95% CI [−0.354329,−0.118586]；8/9物体有利，p≈0.01172）；pooled AUC **0.749707** vs **0.536927** | **`ALGO_DEV_POSITIVE` / `CONFIRMATION_DONE_SCOPED` / `SCIENTIFIC_RESULT_SUPPORTED`**；排序有效不等于概率校准/Brier/ECE 有效，亦非跨设备、多中心或在线部署确认；本仓库尚未独立读取 F3 原始 Run | `CHAT`（2026-11-08本机报告，原始 Run 待导入） |
 | **`DUAL-IMU-P21`（项目21）** | HARTH/HAR70+/MHEALTH/PAMAP2 线；both6 macro-F1 `0.9728`、micro `0.9880`；oracle-OR `0.9854`，净 79 窗但一人占 +92；容量置换对照 `NOT_RUN` | **`BASELINE_POSITIVE`**、协同/因果解释 `WITHDRAWN`；`AREA_DATA_PIVOT / CURRENT_PROJECT_ARCHIVED`（最新 manifest 76 文件），非 SRCS-IMU 原始线 | `S19` §0、§4–6 |
 | **`GALAXY-HRGUARD-P23`（项目23）** | 16 人 DEV 24,924 参考有效窗（726 wrong、2,723 missing）；5 人同数据源确认 7,713 窗（147 wrong、1,066 missing）；确认队列的不可靠窗中 missing 约 **87.88%** | **`SCIENTIFIC_RESULT_SUPPORTED` / `CONFIRMATION_DONE_SCOPED` / `PAPER_PATH_CANDIDATE`**；强预测新算法的普遍部署收益 `NOT_SUPPORTED/ARCHIVED`；5人、跨项目接触史限制“完全独立”说法 | `S23` |
+| `CATS-PD-TACQUAD-EARLY`（项目24相关早期线） | 2026-10-03 TacQuad 输入/弱序列配对 pilot：112 records / 1,896 files；B Test MRR≈0.750，shuffled 同≈0.750；sensor probe 100%、effective rank≈1.1–1.4，物理不变表征受外观 shortcut 与低秩阻断 | **`EARLY_MECHANISM_NOT_SUPPORTED`** / `FULL_LOSO_NOT_RUN`；是早期 CATS-PD 阶段，不得用它覆盖后来 MV-Uncertainty-RealData-Launch 的独立结果或用户成功判断；后续同一命题身份尚需项目原件复核 | `S24E` |
 | **`MV-UNCERTAINTY-P24`（用户确认的项目24）** | `MV-Uncertainty-RealData-Launch`，已报告 17 幅图、34 份 PNG/SVG 和图件审计 PASS；用户明确认为该项目成功 | **`USER_ASSERTED_SUCCESS` / `ALGO_FINAL_METRICS_UNKNOWN`**；图件 PASS 不是算法效果或论文证据验证，待读取项目真实 RESULT/Run/冻结表 | `CHAT`（2026-11-05、11-09）；原始结果待补 |
 | `PMSM-THERMAL`（曾被称“项目24”的**冲突别名**） | 电机温度线：简单 B2 OOF MAE≈4.010°C；双时间尺度/观测器候选 E2≈4.825°C（历史报告），未优于简单方案 | `MECHANISM_NOT_SUPPORTED`；**不覆盖**正式项目24 MV 的身份；项目号 `IDENTITY_CONFLICT` | `CHAT` |
 | `LR-IMU-P25`（项目25） | SRCS-IMU 数据上的窗口级 HAR 因果平滑；frame/window 增益大部分可由平滑解释，历史前沿 F1≈0.8040、延迟≈1.80s（对应特定条件） | `SCOPED_MEASUREMENT_RESULT` / `NARROW`；**不同于项目21**，不能拼其 ρ、F1、归档状态 | `S19` §0、`CHAT` |
@@ -60,19 +62,19 @@
 | CRPS19 / Galaxy23 | **算法指标正向**与**连续部署/评价合约**并非同一主张；三状态测量结果可以独立有论文价值 | 把 segF1 增益说成跨录制确认，或把 HR 强预测路线 ARCHIVE 说成全项目失败 |
 | 项目24 MV / TacVerse / PMSM | 编号相似或被历史误用时，必须用任务+目录+原始 Run 锁定身份；图件通过、标签审计、拟合结果是不同对象 | 混合三个项目的成功、失败、数据或封存状态 |
 | 项目13 / 18 / 21 / 25 | SRCS-IMU 是数据集名，双IMU-HARTH和窗口平滑是不同 Task/冻结切分；独立单位通常是人而非窗口 | 将不同项目的数值、受试者ID、结论拼成一个“最新性能” |
-| TacVerse / RCT / Auricle / Battery | 数据验收或理论可行性是科研资产，尚未建立算法胜负 | 下载 CRC PASS、合成测试 PASS 或论文路线图即算法成功 |
+| 项目20 数据准备 → F3 独立确认 | F3 在固定同设备/未见物体范围给出可重复的排序改进，必须保留确认指标和校准未完成的界限 | 将较早数据验收快照当成项目最终结论，或从 AURC/AUC 直接宣称 Brier/ECE、跨设备可靠性 |\n| TacVerse / RCT / Auricle / Battery | 数据验收或理论可行性是科研资产，尚未建立算法胜负 | 下载 CRC PASS、合成测试 PASS 或论文路线图即算法成功 |
 | 旧负结果重释 | 事后重要问题可以生成新假说，但应保留强反解释、真实最近邻和缺少的判别证据 | 将 `EX_POST_REFRAMING` 误写成事前假设或已确认原创新 |
 
 ## 3. 实际缺口清单（按价值排序，原始文件不在仓库时不得造值）
 
-1. **P24-MV 最紧缺**：取项目实际 `PROJECT_SPEC/STATE`、核心 Run/冻结协议、与最强合法基线的配对指标和组级样本、原始科研成果总结/确认结果、论文状态。用户的成功判定先保留为 `USER_ASSERTED_SUCCESS`，不因图件已完成而升级为 `ALGO_DEV_POSITIVE`，也不因缺证据判失败。
+1. **P20-F3 成功确认补录**：取11-08一次性 SEALED 对应真实评价协议、9物体/339试次结果表、F3-base 与 F0 参照、代码和选择史，核对独立单位及 Brier/ECE 未确认的限制；**不能仍将整个项目20记为只完成数据下载**。\n3*P24-MV 最紧缺**：取项目实际 `PROJECT_SPEC/STATE`、核心 Run/冻结协议、与最强合法基线的配对指标和组级样本、原始科研成果总结/确认结果、论文状态。用户的成功判定先保留为 `USER_ASSERTED_SUCCESS`，不因图件已完成而升级为 `ALGO_DEV_POSITIVE`，也不因缺证据判失败。
 2. **P19-CRPS**：对象折父动作预测精度没有持久化；readout 保留帧特征对照 `NOT_RUN`；37 SEALED 跨录制确认 `NOT_RUN`；现有文件 v2 与旧日志版本不能混数。保留其合法 DEV 算法成功，不额外自动开展推理/训练。
-3. **P23-Galaxy**：强预测在线增益未被证实，已成立的窄测量结果和5人同源确认必须单列；有关图/稿件可用性以本机最终版本为准，不宣称外部多中心验证；确认是否已获独立正式写作授权。
-4. **P21-HARTH**：容量匹配置换对照 `NOT_RUN`，`N2dc/N2dp` 不得写为负结果；当前是归档只读，缺原历史源码的实验不可冒充可复现。 `S19` v2 的76文件优先于旧稿74文件。
-5. **身份差异**：P24 MV vs PMSM/TacVerse；13/18/21/25；项目31的 W1 vs PTLG；通过项目真实 `PROJECT_PATH/Task/PRIMARY_DATA/ARCHIVE_MANIFEST` 定位，任何冲突标 `IDENTITY_UNVERIFIED`。
-6. **早期案例和新选题**：CARE、PhysTok、CC-DRA、RISC、CRIA、ACRF、CAR-IMU、RevGraph、P18/P20/P25/P26/P28/P29/P30/P31/Auricle 缺跨版本 Run ledger 或一手科研终判；仅保留已知报告事实，不造置信区间、投稿等级、训练完成时间。
-7. **候选线索**：其他未核实名称只有最小占位，不能拿来算项目总量、总体成功率或“全部算法失败”。目前**全时间范围项目总数 UNKNOWN**，因为一个项目包含多个 Task，且编号复用。
-8. **无法从 GitHub 补齐的内容**：用户 Windows 私有项目工件及这些历史记录未全部同步到两工作流仓库。后续只有在可访问本机且获相关授权时才能按真实资产逐项填补，先用只读核对，不进行拟合、SEALED 或归档修改。
+4*P23-Galaxy**：强预测在线增益未被证实，已成立的窄测量结果和5人同源确认必须单列；有关图/稿件可用性以本机最终版本为准，不宣称外部多中心验证；确认是否已获独立正式写作授权。
+5*P21-HARTH**：容量匹配置换对照 `NOT_RUN`，`N2dc/N2dp` 不得写为负结果；当前是归档只读，缺原历史源码的实验不可冒充可复现。 `S19` v2 的76文件优先于旧稿74文件。
+6*身份差异**：P24 MV vs PMSM/TacVerse；13/18/21/25；项目31的 W1 vs PTLG；通过项目真实 `PROJECT_PATH/Task/PRIMARY_DATA/ARCHIVE_MANIFEST` 定位，任何冲突标 `IDENTITY_UNVERIFIED`。
+7*早期案例和新选题**：CARE、PhysTok、CC-DRA、RISC、CRIA、ACRF、CAR-IMU、RevGraph、P18/P20/P25/P26/P28/P29/P30/P31/Auricle 缺跨版本 Run ledger 或一手科研终判；仅保留已知报告事实，不造置信区间、投稿等级、训练完成时间。
+8*候选线索**：其他未核实名称只有最小占位，不能拿来算项目总量、总体成功率或“全部算法失败”。目前**全时间范围项目总数 UNKNOWN**，因为一个项目包含多个 Task，且编号复用。
+9*无法从 GitHub 补齐的内容**：用户 Windows 私有项目工件及这些历史记录未全部同步到两工作流仓库。后续只有在可访问本机且获相关授权时才能按真实资产逐项填补，先用只读核对，不进行拟合、SEALED 或归档修改。
 
 ## 4. 轻量维护、使用与验证
 
