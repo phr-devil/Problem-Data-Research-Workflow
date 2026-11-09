@@ -35,6 +35,21 @@ class RoutingStructureTests(unittest.TestCase):
         self.assertIn("DUAL_DOCUMENT_WORKFLOW.md", agent)
         self.assertIn("modules/README.md", agent)
 
+    def test_compact_entry_and_provenance_contract(self):
+        agent = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        workflow = (ROOT / "WORKFLOW.md").read_text(encoding="utf-8")
+        structure = (ROOT / "docs/STRUCTURE.md").read_text(encoding="utf-8")
+        self.assertLess(len(agent), 4500, "Keep AGENTS as a router, not a second policy")
+        self.assertLess(len(workflow), 10000, "Detailed rules belong in topic owners")
+        for marker in ("RULE_REPO", "RULE_COMMIT", "LOADED_FILES",
+                       "RULE_VERSION_UNVERIFIED", "按实际阻碍"):
+            self.assertIn(marker, agent)
+        for marker in ("三个决策循环（六项活动", "SCIENCE_RESULT_HARVEST.md",
+                       "WRITING_LOCKED", "CONFIRMATION.md"):
+            self.assertIn(marker, workflow)
+        self.assertIn("单一权威", structure)
+        self.assertIn("优先替换", structure)
+
     def test_new_indexes_are_pointers_with_valid_relative_links(self):
         for name in INDEXES:
             with self.subTest(index=name):
