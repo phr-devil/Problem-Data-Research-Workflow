@@ -80,6 +80,22 @@ class ResearchToManuscriptContracts(unittest.TestCase):
         self.assertIn("WRITING_LOCKED", read("WRITING_GATE.md"))
         self.assertIn("图题格式精确固定", self.writing)
 
+    def test_hindsight_and_evidence_scope_are_not_promoted_to_discovery(self):
+        high = read("HIGH_VALUE_RESEARCH_DESIGN.md")
+        replay = read("REPLAY_PROTOCOL.md")
+        for term in ("EX_POST_REFRAMING", "EX_ANTE_QUESTION", "不同预测"):
+            self.assertIn(term, self.discovery)
+        for term in ("RUN_VERSION", "LABEL_PROVENANCE", "LABEL_USING_ORACLE",
+                     "信息论上界", "单调"):
+            self.assertIn(term, high)
+        for term in ("SOURCE_CONFLICT/STALE", "EX_POST_INTERPRETATION",
+                     "NEW_FALSIFIABLE_HYPOTHESIS", "回填背景"):
+            self.assertIn(term, self.harvest)
+        for term in ("EX_ANTE_DISCOVERY", "EX_POST_REFRAMING",
+                     "INVALID_CLAIM_ESCALATION", "NOT_MEASURED"):
+            self.assertIn(term, replay)
+        self.assertIn("WRITING_LOCKED", read("WRITING_GATE.md"))
+
     def test_single_entry_and_existing_gate_are_preserved(self):
         self.assertIn("WORKFLOW.md", self.agent)
         self.assertIn("MANUSCRIPT_WRITING.md", self.agent)
