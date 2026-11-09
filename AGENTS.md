@@ -4,8 +4,8 @@
 
 ## 0. 冷启动与版本
 
-1. 先核当前用户目标、`USER_SCOPE` 和**原始授权**。已有项目从已知路径/STATE 定位 `RESEARCH_RECORD_REF`，存在才读 `RESEARCH_RECORD.md` 的**当前快照**；论文任务按需读 `PAPER_BLUEPRINT_REF` 对应 `SEC_ID`，再核相关 Run/协议/manifest。新项目再按需读 [START.md](START.md)。
-2. 冷启动、来源不明或规则变化时，核本地 Git HEAD 与必要时的远端 commit；同一任务所读文件应来自同一可识别版本，简记 `RULE_REPO | RULE_COMMIT | LOADED_FILES`。本地非 Git 副本、无法联网或未核对时写 `RULE_VERSION_UNVERIFIED`，**不声称最新**。版本已确认且任务不变时复用，不反复拉取/通读。
+1. 先核当前用户目标、`USER_SCOPE` 和**原始授权**。已有项目先核编号/研究线/数据集是否指向同一真实目录，按 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 做 `PROJECT_IDENTITY_CHECK`；再从已知路径/STATE 定位 `RESEARCH_RECORD_REF`，存在才读 `RESEARCH_RECORD.md` 的**当前快照**；论文任务按需读 `PAPER_BLUEPRINT_REF` 对应 `SEC_ID`，再核相关 Run/协议/manifest。新项目再按需读 [START.md](START.md)。
+2. 冷启动、来源不明或规则变化时，在可用访问权限内核**本地 Git HEAD 与远端最新 commit**；有 `.git` 不等于已同步。不一致标 `RULE_SOURCE_STALE`，优先按确定的远端 commit 只读必要规则；未经授权不覆盖本地文件或运行 pull/rebase，获同步许可且工作树干净才允许 fast-forward。不能核远端/来源时记 `RULE_VERSION_UNVERIFIED`，**不声称最新**。同一任务只用可识别版本，简记 `RULE_REPO | RULE_COMMIT | LOADED_FILES`；版本和任务未变就复用。
 3. 决策冲突：用户原始授权优先；科研流程由 WORKFLOW 主控；科研事实以实际合法原始工件为准；专业细则仅由对应权威专题负责。既有项目直接续做，不重开选题/数据/训练。
 
 ## 1. 不可跨越的边界
