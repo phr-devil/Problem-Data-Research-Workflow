@@ -58,6 +58,18 @@ class DualDocumentTests(unittest.TestCase):
         self.assertIn("原始", agent)
         self.assertIn("WORKFLOW.md", agent)
 
+    def test_project_identity_and_rule_origin_are_not_assumed(self):
+        handoff = doc("DUAL_DOCUMENT_WORKFLOW.md")
+        agent = doc("AGENTS.md")
+        for marker in ("PROJECT_IDENTITY_CHECK", "PROJECT_IDENTITY_UNVERIFIED",
+                       "PROJECT_PATH", "PRIMARY_DATA", "ARCHIVE_STATUS"):
+            self.assertIn(marker, handoff)
+        for marker in ("PROJECT_IDENTITY_CHECK", "RULE_SOURCE_STALE",
+                       "RULE_VERSION_UNVERIFIED", "远端最新 commit",
+                       "未经授权不覆盖", "RULE_COMMIT"):
+            self.assertIn(marker, agent)
+        self.assertLess(len(agent), 4500)
+
     def test_preserved_science_and_authorization(self):
         workflow = doc("WORKFLOW.md")
         self.assertIn("三个决策循环（六项活动", workflow)
