@@ -45,7 +45,10 @@ class CaseRegistryContracts(unittest.TestCase):
         discovery = (ROOT / "SEARCH_DISCOVERY.md").read_text(encoding="utf-8")
         for x in (readme, structure, discovery):
             self.assertIn("LESSONS/CASE_REGISTRY.md", x)
-        self.assertNotIn("LESSONS/CASE_REGISTRY.md", self.agent)
+        self.assertIn("跨项目成功/失败/身份追溯", self.agent)
+        self.assertIn("LESSONS/CASE_REGISTRY.md", self.agent)
+        self.assertIn("仅在明确复盘", self.agent)
+        self.assertLess(len(self.agent), 4500)
         self.assertIn("CASE_INDEX_ONLY", self.case)
         self.assertIn("REPLAY_PROTOCOL.md", self.case)
 
