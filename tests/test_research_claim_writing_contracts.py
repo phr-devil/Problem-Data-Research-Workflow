@@ -96,6 +96,19 @@ class ResearchToManuscriptContracts(unittest.TestCase):
             self.assertIn(term, replay)
         self.assertIn("WRITING_LOCKED", read("WRITING_GATE.md"))
 
+    def test_frontier_selection_and_zero_fit_selection_are_separate(self):
+        high = read("HIGH_VALUE_RESEARCH_DESIGN.md")
+        harvest = read("SCIENCE_RESULT_HARVEST.md")
+        for label in ("QUESTION_DISCOVERY", "RESULT_AUDIT",
+                      "DECISIVE_EVIDENCE_DESIGN", "暂缺现成数据库"):
+            self.assertIn(label, high)
+        for label in ("SELECTION_SOURCE", "EVALUATION_SOURCE",
+                      "SELECTION_LEAKAGE_RISK", "零拟合", "SEALED"):
+            self.assertIn(label, high)
+        self.assertIn("SELECTION_LEAKAGE_RISK", harvest)
+        self.assertIn("高影响力科学问题构思时再读", self.agent)
+        self.assertIn("WRITING_LOCKED", read("WRITING_GATE.md"))
+
     def test_single_entry_and_existing_gate_are_preserved(self):
         self.assertIn("WORKFLOW.md", self.agent)
         self.assertIn("MANUSCRIPT_WRITING.md", self.agent)
