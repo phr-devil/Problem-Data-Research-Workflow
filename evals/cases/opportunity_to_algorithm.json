@@ -159,6 +159,48 @@
       ],
       "authorization": "READ_ONLY_NO_DOWNLOAD_NO_FIT_NO_SEALED_NO_MANUSCRIPT",
       "evidence_strength": "HYPOTHESIZED_OR_DEV_EXPLORATORY"
+    },
+    {
+      "id": "OD-12",
+      "origin": "SYNTHETIC",
+      "source_route": "CROSS_DOMAIN",
+      "contribution_route": "BREAKTHROUGH",
+      "context": "An AI agent proposes ViT + Mamba + MoE because all three are popular, without a documented failure mechanism or nearest whole-system comparator.",
+      "preferred_action": "Identify specific missing capability and functional complementary roles, inspect prior whole-combination papers, then propose a falsifiable coupling prediction; popularity and stacking alone are not novelty.",
+      "must_notice": [
+        "POPULARITY_NOT_NOVELTY",
+        "NEAREST_WHOLE_COMBINATION"
+      ],
+      "authorization": "READ_ONLY_NO_DOWNLOAD_NO_FIT_NO_SEALED_NO_MANUSCRIPT",
+      "evidence_strength": "HYPOTHESIZED_OR_DEV_EXPLORATORY"
+    },
+    {
+      "id": "OD-13",
+      "origin": "SYNTHETIC",
+      "source_route": "FAILURE_BOUNDARY",
+      "contribution_route": "PERFORMANCE",
+      "context": "A sensor scheduling proposal masks full tactile signals offline but uses future contact labels to decide which channels to observe, then claims online power savings.",
+      "preferred_action": "Reject future-label oracle as causal online policy; verify predecision information and treat offline masking as information-budget simulation, not measured device energy.",
+      "must_notice": [
+        "FUTURE_LABEL_NOT_LEGAL_INPUT",
+        "OFFLINE_MASK_NOT_ENERGY"
+      ],
+      "authorization": "READ_ONLY_NO_DOWNLOAD_NO_FIT_NO_SEALED_NO_MANUSCRIPT",
+      "evidence_strength": "HYPOTHESIZED_OR_DEV_EXPLORATORY"
+    },
+    {
+      "id": "OD-14",
+      "origin": "SYNTHETIC",
+      "source_route": "CROSS_DOMAIN",
+      "contribution_route": "DISCOVERY",
+      "context": "Modules A and B together improve metric but with more parameters and compute; neither A only nor B only nor naive A+B has been compared, yet the agent claims synergistic causal novelty.",
+      "preferred_action": "Plan task-matched ablations and a same-component naive-composition comparator; report budget and uncertainty and treat interaction delta as metric-scale descriptive evidence only.",
+      "must_notice": [
+        "NAIVE_COMPOSITION_REQUIRED_FOR_COUPLING_CLAIM",
+        "INTERACTION_NOT_CAUSAL_PROOF"
+      ],
+      "authorization": "READ_ONLY_NO_DOWNLOAD_NO_FIT_NO_SEALED_NO_MANUSCRIPT",
+      "evidence_strength": "HYPOTHESIZED_OR_DEV_EXPLORATORY"
     }
   ]
 }
