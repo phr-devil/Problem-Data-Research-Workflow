@@ -41,6 +41,10 @@
 
 **描述性发现 ≠ 合法规则增益**：从固定的已保存 DEV 预测读取象限/类别错误属于探索性描述；一旦以同批评价标签筛出类条件传感器选择器、阈值或最佳后验切片，便发生**选择—评价复用**。即使零拟合，也须按 [HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md) 的 `SELECTION_SOURCE / EVALUATION_SOURCE` 核查；没有独立人/场次级验证时，仅报 `EXPLORATORY/SELECTION_LEAKAGE_RISK`，不写成部署性能或“已验证改进”。已有归档状态和 SEALED 门禁不变。
 
+### 科学结果向课题发现的定向反馈
+
+只有有效、合法的 DEV Run 或已获证据支持的历史结论确实改变科学假设时，将 `OBSERVED_ANOMALY_OR_BOUNDARY | VALIDITY | COMPETING_EXPLANATIONS | NEW_QUESTION | STRONGEST_NEIGHBOR | NEXT_DISCRIMINATING_CHECK | EX_POST_REFRAMING` 回传既有 `SEARCH_HANDOFF` / `RESEARCH_RECORD.md`；引用原 Run，不重写历史假设、不重复全领域搜索，不新增第三份科研日志。没有有效独立现象时只保存负证据或工程错误，不硬造“认知纠正”贡献。新主张仍须活动03/05与活动06相应审查和独立确认。
+
 ### B. 横向比较候选贡献，再选主张
 
 最多少量、通常1–3个**真正不同**的`SCIENTIFIC_CLAIM_CANDIDATE`，不是三个不同写法的同一创新。每个注明：

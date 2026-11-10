@@ -1,0 +1,164 @@
+{
+  "format": "pd-rw-opportunity-to-algorithm-synthetic-v1",
+  "purpose": "Offline policy regression only; examples and expected answers are public. Not an Agent blind test, scientific novelty proof, token improvement or training authorization.",
+  "source_routes": [
+    "BOTTLENECK",
+    "CONTRADICTION",
+    "FAILURE_BOUNDARY",
+    "DATA_EVALUATION",
+    "CROSS_DOMAIN",
+    "ANOMALY_NEGATIVE"
+  ],
+  "contribution_routes": [
+    "BREAKTHROUGH",
+    "PERFORMANCE",
+    "DISCOVERY",
+    "INFRASTRUCTURE",
+    "CORRECTION"
+  ],
+  "cases": [
+    {
+      "id": "OD-01",
+      "origin": "SYNTHETIC",
+      "source_route": "BOTTLENECK",
+      "contribution_route": "BREAKTHROUGH",
+      "context": "Public papers identify costly sensor calibration; a strong subsequent paper may already remove this need.",
+      "preferred_action": "Check nearest full-text method and whether unmet deployment capability remains.",
+      "must_notice": [
+        "NEIGHBOR_MAY_COVER_CLAIM"
+      ],
+      "authorization": "READ_ONLY_NO_DOWNLOAD_NO_FIT_NO_SEALED_NO_MANUSCRIPT",
+      "evidence_strength": "HYPOTHESIZED_OR_DEV_EXPLORATORY"
+    },
+    {
+      "id": "OD-02",
+      "origin": "SYNTHETIC",
+      "source_route": "CONTRADICTION",
+      "contribution_route": "DISCOVERY",
+      "context": "Two studies disagree about tactile benefit but use different tasks and sensor budgets.",
+      "preferred_action": "Align protocol and formulate a variable with distinct competing predictions.",
+      "must_notice": [
+        "PROTOCOL_DIFFERENCE_NOT_PROVEN_CONTRADICTION"
+      ],
+      "authorization": "READ_ONLY_NO_DOWNLOAD_NO_FIT_NO_SEALED_NO_MANUSCRIPT",
+      "evidence_strength": "HYPOTHESIZED_OR_DEV_EXPLORATORY"
+    },
+    {
+      "id": "OD-03",
+      "origin": "SYNTHETIC",
+      "source_route": "FAILURE_BOUNDARY",
+      "contribution_route": "PERFORMANCE",
+      "context": "A model fails only for unseen devices, but participants also change by device.",
+      "preferred_action": "Inspect independent groups and confounding before proposing domain generalization.",
+      "must_notice": [
+        "DEVICE_SUBJECT_CONFOUNDING"
+      ],
+      "authorization": "READ_ONLY_NO_DOWNLOAD_NO_FIT_NO_SEALED_NO_MANUSCRIPT",
+      "evidence_strength": "HYPOTHESIZED_OR_DEV_EXPLORATORY"
+    },
+    {
+      "id": "OD-04",
+      "origin": "SYNTHETIC",
+      "source_route": "DATA_EVALUATION",
+      "contribution_route": "INFRASTRUCTURE",
+      "context": "A widely used benchmark uses split windows from the same acquisition sequence.",
+      "preferred_action": "Audit original group IDs and measurement truth; propose a valid benchmark contract.",
+      "must_notice": [
+        "LEAKAGE_NOT_AUTOMATIC_PUBLICATION"
+      ],
+      "authorization": "READ_ONLY_NO_DOWNLOAD_NO_FIT_NO_SEALED_NO_MANUSCRIPT",
+      "evidence_strength": "HYPOTHESIZED_OR_DEV_EXPLORATORY"
+    },
+    {
+      "id": "OD-05",
+      "origin": "SYNTHETIC",
+      "source_route": "CROSS_DOMAIN",
+      "contribution_route": "BREAKTHROUGH",
+      "context": "An agent suggests adding a standard contrastive module to tactile prediction.",
+      "preferred_action": "Identify required new capability and distinguish it from existing domain equivalents.",
+      "must_notice": [
+        "MODULE_COMBINATION_NOT_NOVELTY"
+      ],
+      "authorization": "READ_ONLY_NO_DOWNLOAD_NO_FIT_NO_SEALED_NO_MANUSCRIPT",
+      "evidence_strength": "HYPOTHESIZED_OR_DEV_EXPLORATORY"
+    },
+    {
+      "id": "OD-06",
+      "origin": "SYNTHETIC",
+      "source_route": "ANOMALY_NEGATIVE",
+      "contribution_route": "CORRECTION",
+      "context": "A reliable existing DEV result contradicts a published claim; holdout untouched.",
+      "preferred_action": "Separate bug/protocol causes, seek competing explanation, and label ex-post hypothesis.",
+      "must_notice": [
+        "NEGATIVE_RESULT_NOT_CONFIRMATION"
+      ],
+      "authorization": "READ_ONLY_NO_DOWNLOAD_NO_FIT_NO_SEALED_NO_MANUSCRIPT",
+      "evidence_strength": "HYPOTHESIZED_OR_DEV_EXPLORATORY"
+    },
+    {
+      "id": "OD-07",
+      "origin": "SYNTHETIC",
+      "source_route": "FAILURE_BOUNDARY",
+      "contribution_route": "DISCOVERY",
+      "context": "An offline oracle uses future labels to select scarce sensing channels.",
+      "preferred_action": "Reject deployable improvement claim; check legitimate predecision information.",
+      "must_notice": [
+        "ORACLE_NOT_DEPLOYABLE"
+      ],
+      "authorization": "READ_ONLY_NO_DOWNLOAD_NO_FIT_NO_SEALED_NO_MANUSCRIPT",
+      "evidence_strength": "HYPOTHESIZED_OR_DEV_EXPLORATORY"
+    },
+    {
+      "id": "OD-08",
+      "origin": "SYNTHETIC",
+      "source_route": "DATA_EVALUATION",
+      "contribution_route": "CORRECTION",
+      "context": "Official stiffness tags are proxy labels; no independent modulus truth.",
+      "preferred_action": "Do not claim physical hardness; narrow to measurable proxies or propose true measurement.",
+      "must_notice": [
+        "PROXY_NOT_PHYSICAL_TRUTH"
+      ],
+      "authorization": "READ_ONLY_NO_DOWNLOAD_NO_FIT_NO_SEALED_NO_MANUSCRIPT",
+      "evidence_strength": "HYPOTHESIZED_OR_DEV_EXPLORATORY"
+    },
+    {
+      "id": "OD-09",
+      "origin": "SYNTHETIC",
+      "source_route": "BOTTLENECK",
+      "contribution_route": "PERFORMANCE",
+      "context": "An easy benchmark baseline is already near saturation; novel system is expensive.",
+      "preferred_action": "Compare important real-world constraint and a minimal discriminating test before investment.",
+      "must_notice": [
+        "EASY_GAIN_NOT_SCIENTIFIC_VALUE"
+      ],
+      "authorization": "READ_ONLY_NO_DOWNLOAD_NO_FIT_NO_SEALED_NO_MANUSCRIPT",
+      "evidence_strength": "HYPOTHESIZED_OR_DEV_EXPLORATORY"
+    },
+    {
+      "id": "OD-10",
+      "origin": "SYNTHETIC",
+      "source_route": "ANOMALY_NEGATIVE",
+      "contribution_route": "DISCOVERY",
+      "context": "A promising post-hoc DEV subgroup improves but was selected on the same evaluation data.",
+      "preferred_action": "Keep exploratory with selection history; reserve independent evidence without reading sealed.",
+      "must_notice": [
+        "SELECTION_EVALUATION_REUSE"
+      ],
+      "authorization": "READ_ONLY_NO_DOWNLOAD_NO_FIT_NO_SEALED_NO_MANUSCRIPT",
+      "evidence_strength": "HYPOTHESIZED_OR_DEV_EXPLORATORY"
+    },
+    {
+      "id": "OD-11",
+      "origin": "SYNTHETIC",
+      "source_route": "CONTRADICTION",
+      "contribution_route": "INFRASTRUCTURE",
+      "context": "A new dataset could align incompatible tactile task protocols but licenses are unknown.",
+      "preferred_action": "Read official metadata only; stop at planning before unapproved download or fitting.",
+      "must_notice": [
+        "NO_DOWNLOAD_AUTHORIZATION"
+      ],
+      "authorization": "READ_ONLY_NO_DOWNLOAD_NO_FIT_NO_SEALED_NO_MANUSCRIPT",
+      "evidence_strength": "HYPOTHESIZED_OR_DEV_EXPLORATORY"
+    }
+  ]
+}
