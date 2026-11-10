@@ -34,7 +34,7 @@ class PaperWordStyleTests(unittest.TestCase):
         style = (ROOT / "PAPER_WORD_STYLE.md").read_text(encoding="utf-8")
         for s in ("A4", "2.5 cm", "Times New Roman",
                   "11 pt", "1.15 倍行距", "首行缩进 `0.5 in`",
-                  "1.27 cm", "标题零缩进", "全部样式", "真实标题样式",
+                  "1.27 cm", "标题不设左缩进或首行缩进", "全部样式", "真实标题样式",
                   "3.2.1", "PAGE", "Fig. 1.", "Table 1.", "自动序号",
                   "不能只用默认的 Pandoc"):
             with self.subTest(marker=s):
