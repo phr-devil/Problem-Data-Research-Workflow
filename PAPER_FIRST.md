@@ -57,6 +57,10 @@
 
 **最低可信贡献**必须是具名近邻以外、可被反驳且有合法确认路径的一项，不是自动需要三种贡献。只有高分/复现/多seed/Oracle上限但无独立差额时记`NO_INDEPENDENT_CLAIM`，保留工程资产。实际确认由活动06完成。
 
+### 五类论文竞争力路线与现有 Claim 的证据对应
+
+五类路线只用于**比较研究意义与证据要求**，不增加新状态或五套论文模板。重大创新型→已有 `CAPABILITY/MECHANISM`：证明此前缺失的能力与机制必要性；性能突破型→`CAPABILITY/PERFORMANCE`：公平强基线、效应大小、实际成本；科学发现型→`LAW_BOUNDARY/MECHANISM`：可区分竞争解释与适用边界；基础设施型→原测量/benchmark/系统 Claim：真值、协议有效性与可复用的重要新能力；认知纠正型→原 `LAW_BOUNDARY` 或测量 Claim：严格复核原结果、排除泄漏/混杂并证明修正的重要性。相同论文可具备多个有效贡献，不强制每类都有；普通复现、修复 Bug、改变评价口径或开发集单次负结果不自动形成后两类贡献。活动01可标候选贡献路线，活动05只依据合法 Run/原文近邻与证据重新确认；活动06仍是独立验证唯一出口。
+
 ### 从Claim反推最有价值的实验
 
 维护简短`CLAIM_EVIDENCE_MAP = CLAIM_TYPE + CLAIM_SENTENCE | STRONGEST_SIMPLE_ALTERNATIVE | STRONGEST_NAMED_NEIGHBOR+DIFFERENCE | DEV_EVIDENCE_PATH | REQUIRED_DECISIVE_TEST | CONFIRMATION_ROUTE+CONTAMINATION | NEXT_PROBE+COST/AUTH`。没有实验结果写`HYPOTHESIZED`，直接近邻未读原文写`NEIGHBOR_UNVERIFIED`。不为了填表启动无关消融。对照、组级稳健、标签/资源公平和理论正控按主张选择；未经授权不拟合或读sealed。

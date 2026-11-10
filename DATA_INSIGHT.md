@@ -39,6 +39,12 @@
 
 不要因数据不整齐而硬找创新：明显Bug/错误单位/泄漏优先修数据；新科学问题需能对应可验证、非虚构的真实目标。
 
+### 失败条件矩阵：把数据观察变成可测试问题（按需）
+
+围绕当前科学主张，按需要比较同任务/同真值下的 `group / device / time / contact_state / missingness / observation_budget / environment` 等**有实际意义且可合法观察**的条件轴；只检查具备独立变化或明确解释意义的少量轴，不作无界后验切片搜索。每个有效条件记录 `FAILURE_CONDITION | INDEPENDENT_GROUP_N | EVALUATOR/SPLIT | BASELINE_ERROR_OR_UNKNOWN | CONFOUNDERS | DIFFERENT_PREDICTIONS | NEXT_LEGAL_CHECK`。没有可靠预测时写 `PERFORMANCE_UNKNOWN`，不能把分布漂移当性能失败；没有真实接触标签时不能仅凭触觉变化宣称接触状态真值。可比性不成立则先核评价而不是直接创造“鲁棒算法”。
+
+有效稳定失效回传活动03的任务假设及活动04的机制诊断；疑似泄漏/代理真值失效先给活动01的研究问题重构或活动02的测量修复，不能将无效实验包装为认知纠正型论文。探索性条件轴的最佳结果不能用同一组再次声称独立确认。
+
 ## 4. 现象 → 科研机会（不是自动推荐算法）
 
 | 真实观察或异常 | 可能产生的任务 | 首先排除的替代解释 |

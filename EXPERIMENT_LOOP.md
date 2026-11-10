@@ -87,6 +87,10 @@ ChatGPT 只传已核实的问题—数据、TASK、最大 UNKNOWN、证据指针
 
 已有负Pilot分类保留；若不是评价无效、训练不足或基线不公，才用`error_evidence_refs → failed_premise → competing_explanation → mechanism/lever → distinct_prediction → minimum_test → if_positive/if_negative/if_invalid → estimated_cost/authorization_scope`形成**一条**`PROBE_CANDIDATE`（按需记JSON，不强制所有Run产出）。`python -m core.cli probe-check --file probe.json`仅检查假设是否有可分辨的实验承诺，不会训练，也不会证明机制创新。对已失败的同一前提优先复盘/寻找新杠杆，而非换网络名字续命；保留旧Run与parent关系。预算阈值只触发复盘/授权检查，不做项目自动STOP。一个有效实验可同时服务可靠性能与机制诊断，不必强制双轨GPU并行。
 
+### 新机制的最小判别实验与反馈（使用原 Champion–Challenger）
+
+在原 `PROBE_CANDIDATE` 中对比 `SIMPLE_FIX / MECHANISM_CANDIDATE / STRONG_EXISTING_ALTERNATIVE` 的不同科学预测，选择**最可能改变当前决策**且获授权的一次测试，预先固定真值/分组/评价器/信息与预算公平条件。`POS`：检查组级效应、必要性及可迁移范围，再决定是否扩充证据；`NEG`：确认运行有效、模型充分训练且对照公平，只约束本机制前提；`INVALID`：修复受影响的测量/协议/代码而不作科研否定；`INCONCLUSIVE`：报告不确定性，只有存在新的区别性信息时再投入。结果可以反向更新活动01的不同失败前提候选或活动05的 Claim，但不得重写当初 `EX_ANTE` 假设或用 SEALED 做模型选择。
+
 ## 3. 正负 Pilot 后的按症状实验选择
 
 **APACE → SAFE-Gait 型故障的最短实验（必要时才触发）**：`ORACLE_GAIN>0` 且真实动态策略不胜固定/随机参照时，先确认训练/协议有效，再在 DEV 上检查最佳动作**在决策前是否可预测**；可见输入近似但最优动作不同，应怀疑隐藏信息或不可辨识性（不凭少量样本证明不可能）。若实际应用可合法获得一次目标残差或历史反馈，提出 `K=1` 新 Task，核标定发生于 query 前、support/query 无交叉、同 K 简单残差修正/收缩、标签成本及独立组；不要继续仅靠大模型调参追回 Oracle。若结果按目标/方向不均匀，转为条件特定的机制/边界检验，不能事后把最好切片包装成普适成功。[案例](LESSONS/SAFE_GAIT_APACE.md)。

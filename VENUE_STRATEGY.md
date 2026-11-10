@@ -8,6 +8,10 @@
 - **可信结果/重要Claim变化/准备收束**：读具名最近邻原文，核最相关的1–3本真实期刊及近期同类型论文，判断科学主张是否具备Q2竞争力，指出最重要的1–3项证据差距。
 - **具体投稿前（经用户授权）**：重新核索引、最新JCR、文章类型、官方Aims & Scope、投稿要求与费用；不需每轮重复检索。
 
+### 已发表论文成功机制对照（不是声望打分）
+
+早期或核心 Claim 改变时，对少量**同类型、确实发表**的近期论文记录 `QUESTION_IMPORTANCE | CONTRIBUTION_ROUTE | NAMED_NEIGHBOR_DELTA | DECISIVE_EVIDENCE | VALIDATION_SCOPE | REUSABILITY_OR_DEPLOYMENT | READER_STAKE`，以及与我们当前数据/设备/算力条件的实质差异。比较“为什么这些论文的科学主张值得该刊读者关注”及哪些验证可迁移，而不是照抄模型、图表或结果规模。热点、作者资历、合作网络、独特资源和投稿时机属于发表环境或投入优势，不是科学真值、原创性或录用概率；没有编辑/审稿资料时不得断言某篇论文因导师声誉而录用。缺原文或分区信息保持 UNKNOWN。
+
 ## 1. JCR Q2+ 核验口径（不等于“IF固定阈值”）
 
 每个具体期刊按下列字段留证：`JOURNAL | JCR_EDITION | JCR_SUBJECT_CATEGORY | QUARTILE(Q1/Q2/OTHER/UNKNOWN) | INDEX(SCIE/ESCI/other) | VERIFICATION_SOURCE+DATE | ACCEPTED_ARTICLE_TYPE | RECENT_ANALOGS`。

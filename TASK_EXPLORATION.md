@@ -93,6 +93,10 @@
 
 **不要因想象中的期刊等级提前淘汰Task**：早期只评估数据/真值、可学信号、科学差额和下一最便宜证据；S/A/B/C稿件潜力只能在有具体Claim或初步Run时暂估，且不参与硬性选题PASS/STOP。研究任务在困难L2/L3上未成功时，检查是否留下可独立复核的窄规律/局部收益/标注成本边界；若有，移交[PAPER_FIRST.md](PAPER_FIRST.md)，不要默认继续追逐复杂模型。
 
+### 将科学问题转换为可否定的任务（不新增 TASK 审批）
+
+对当前首选问题，仅补足 `HYPOTHESIS | STRONGEST_COMPETING_EXPLANATION | REQUIRED_OBSERVABLE_FACTORS | LEGAL_PREDECISION_INPUT | INDEPENDENT_TRUTH/GROUP | FALSIFIER | MINIMUM_DISCRIMINATING_TEST`。区分“预测能力”“机制归因”“失效规律”“新基准有效性”各自需要的真值与对照；仅能观察相关性时缩窄主张，不自动宣称因果机制。实验前记录 `IF_POS/NEG/INVALID` 会改变哪个 Task/机制/Claim 决策；负Pilot只影响该前提，不自动否决方向。最小测试是控制风险的入口，不以廉价性取代科学价值；没有下载/训练许可时仅形成计划并标 AUTH_REQUIRED。复用原 `TASK_CARD` 与 `NEXT_DISCRIMINATING_PROBE`，不得提前读取 SEALED。
+
 ## 2. 最小 TASK_CARD 与当前选择
 
 每项最多八要素，可复用现有文件：`TASK_ID/ORIGIN`｜`SCIENTIFIC_QUESTION`｜`INPUT_TARGET`（部署可见输入、独立真值/证明义务、组）｜`TESTABLE_DIFFERENCE`（只有机制归因才必须要求竞争 A/B 预测）｜`BASELINE`｜`VALUE`（近邻之外可能新增的知识或真实能力）｜`MINIMUM_PROBE`｜`COST_RISK`。
