@@ -40,7 +40,7 @@ class ManuscriptProsePolicyTests(unittest.TestCase):
                        "公开数据集"):
             self.assertIn(marker, writing)
         for marker in ("内部项目编号与编号式稿件表达：HARD 检查",
-                       "纯文字连贯学术叙述", "不能机械搜索替换"):
+                       "纯文字连贯学术叙述", "不得机械搜索替换"):
             self.assertIn(marker, qa)
 
     def test_authorization_and_scientific_boundaries_stay_intact(self):
