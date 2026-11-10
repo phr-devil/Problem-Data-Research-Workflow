@@ -32,6 +32,17 @@ class ManuscriptProsePolicyTests(unittest.TestCase):
             with self.subTest(term=term):
                 self.assertIn(term, qa)
 
+    def test_submission_prose_excludes_internal_project_numbers(self):
+        writing = (ROOT / "MANUSCRIPT_WRITING.md").read_text(encoding="utf-8")
+        qa = (ROOT / "MANUSCRIPT_QA.md").read_text(encoding="utf-8")
+        for marker in ("投稿正文只能使用自然语言描述研究", "Project 19",
+                       "EXP-003", "SEC-INTRO-01", "纯文字、连贯段落",
+                       "公开数据集"):
+            self.assertIn(marker, writing)
+        for marker in ("内部项目编号与编号式稿件表达：HARD 检查",
+                       "纯文字连贯学术叙述", "不能机械搜索替换"):
+            self.assertIn(marker, qa)
+
     def test_authorization_and_scientific_boundaries_stay_intact(self):
         for path in ("MANUSCRIPT_WRITING.md", "MANUSCRIPT_QA.md"):
             content = (ROOT / path).read_text(encoding="utf-8")
