@@ -59,6 +59,28 @@ class OpportunityToAlgorithmTests(unittest.TestCase):
                 with self.subTest(path=path, marker=marker):
                     self.assertIn(marker, doc)
 
+    def test_bounded_composition_novelty_and_ablations(self):
+        research = read("ALGORITHM_ENGINEERING.md")
+        search = read("SEARCH_DISCOVERY.md")
+        experiment = read("EXPERIMENT_LOOP.md")
+        high_value = read("HIGH_VALUE_RESEARCH_DESIGN.md")
+        for term in ("MODULE_A_ROLE", "MODULE_B_ROLE", "COUPLING_RULE",
+                     "NEAREST_COMBINATION", "SIMPLE_COMPOSITION_COMPARATOR",
+                     "COUPLING_SPECIFIC_PREDICTION", "FEEDBACK", "NAS"):
+            with self.subTest(term=term):
+                self.assertIn(term, research)
+        for term in ("A+B", "整体组合", "Star"):
+            self.assertIn(term, search)
+        for term in ("NAIVE_AB", "COUPLED_AB", "INTERACTION_DELTA",
+                     "Y_AB - Y_A - Y_B + Y_BASE", "SEALED"):
+            self.assertIn(term, experiment)
+        self.assertIn("成熟模块创新组合", high_value)
+        by_id = {c["id"]: c for c in json.loads(DATA.read_text(encoding="utf-8"))["cases"]}
+        self.assertTrue({"OD-12", "OD-13", "OD-14"} <= set(by_id))
+        self.assertIn("POPULARITY_NOT_NOVELTY", by_id["OD-12"]["must_notice"])
+        self.assertIn("OFFLINE_MASK_NOT_ENERGY", by_id["OD-13"]["must_notice"])
+        self.assertIn("INTERACTION_NOT_CAUSAL_PROOF", by_id["OD-14"]["must_notice"])
+
     def test_no_new_permissions_states_or_parallel_logs(self):
         workflow = read("WORKFLOW.md")
         self.assertIn("三个决策循环（六项活动", workflow)
