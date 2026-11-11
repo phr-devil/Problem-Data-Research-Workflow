@@ -38,4 +38,4 @@
 
 ## 3. 任务交接与后续扩展
 
-只输出新增证据及路径、决策或 UNKNOWN、下一合法行动及 AUTH；实质变化才按 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 更新两份科研记录。新规则按 [docs/STRUCTURE.md](docs/STRUCTURE.md) 的单一权威、替换优先、最小回归原则落到对应专题，不增状态/重复审批/默认阅读量。
+结果按 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md) 自适应 L1/L2/L3，简报结果、证据及合法下一步；无价值的重复读取、长报告不做。重要科研变化才按 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 增量记载；按 [docs/STRUCTURE.md](docs/STRUCTURE.md) 单一权威、最小回归原则修规则，不新增审批。
