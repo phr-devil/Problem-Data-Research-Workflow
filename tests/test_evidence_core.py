@@ -27,6 +27,8 @@ class ContractTests(unittest.TestCase):
         del obj["sample_ids_hash"]
         with self.assertRaises(ContractError):
             validate_run(obj)
+        with self.assertRaisesRegex(ContractError, "Run records are empirical"):
+            validate_run(dict(run_record(), evidence_path="NON_DATA"))
 
     def test_claim_evidence_required(self):
         bad = {"claim_id":"c1","task_id":"task1","claim_text":"new mechanism",
@@ -51,6 +53,9 @@ class ContractTests(unittest.TestCase):
                 invalid.pop(missing)
                 with self.assertRaises(ContractError):
                     validate_claim(invalid)
+        initial = dict(proof, status="HYPOTHESIZED")
+        initial.pop("assumptions_ref")
+        self.assertEqual(validate_claim(initial)["status"], "HYPOTHESIZED")
         improper = dict(proof, evidence_run_ids=["fake_run"])
         with self.assertRaisesRegex(ContractError, "may not disguise"):
             validate_claim(improper)
@@ -76,6 +81,11 @@ class ContractTests(unittest.TestCase):
             validate_claim(dict(base, confirmation_scope="EMPIRICAL_GENERALIZATION"))
         with self.assertRaises(ContractError):
             validate_claim(dict(base, independent_validation_refs=[]))
+        with self.assertRaisesRegex(ContractError, "separate artifact"):
+            validate_claim(dict(base, independent_validation_refs=["sim_report.md"]))
+        with self.assertRaises(ContractError):
+            validate_claim(dict(base, evidence_type="AUDITED_MECHANISM",
+                                confirmation_scope="EMPIRICAL_GENERALIZATION"))
         theorem = dict(base, evidence_type="THEORETICAL_PROOF",
                        confirmation_scope="THEOREM_SCOPE_ONLY")
         validate_claim(theorem)
