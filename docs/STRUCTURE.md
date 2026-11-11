@@ -35,3 +35,23 @@
 - **可复现版本**：跨会话/外部 Agent 应能说明 `RULE_REPO | RULE_COMMIT | LOADED_FILES`；本地非 Git 复制件无法验证远端 HEAD 时标 `RULE_VERSION_UNVERIFIED`，不得自称已同步。离线工作允许继续按已知版本及用户授权执行，不强制联网，不把 Markdown 中写的 SHA 当成实时 HEAD。
 - **变更验收**：记录受影响的任务行为、原规则去向、适用授权；运行受影响的离线结构/语义回归，关键安全门禁不得退化。需要宣称科研质量或 Token 改善时依 [REPLAY_PROTOCOL.md](../REPLAY_PROTOCOL.md) 另行真实同预算评测；未实测一律 `NOT_MEASURED`。不为提交文档重跑科研模型。
 - **上下文预算**：以 `AGENTS.md` 精简入口与按需专题为默认；大块理论、图件、Word 格式、历史经验只在对应任务加载。Token 预算是维护提示而不是科学正确性的上限；必要的安全和证据要求不得因缩短入口而被删除。
+
+
+## 5. 本次规则收敛的保护合同（维护者按需读，不加入Agent默认上下文）
+
+**先恢复语义，再考虑压缩或移动**：从 Git 历史比对变更前后受影响的关键义务，按 `PRESERVED / MOVED / MERGED / REPLACED / RETIRED / UNKNOWN` 逐项判定；单纯缩短文字或关键词测试变绿不等于保真。`UNKNOWN` 不擅自删规则。历史代码/协议/冻结Run和用户原消息依然分别决定工程事实、科研真值与用户许可；不得靠文档为旧项目补写虚假授权。
+
+| 稳定追踪 ID（仅维护定位，不增CLI状态或审批） | 规则的唯一权威与适用触发 | 反例验证重点 |
+|---|---|---|
+| `AUTH-EXEC` | [WORKFLOW.md](../WORKFLOW.md) 权限边界 + [NEXT_ACTION_POLICY.md](../NEXT_ACTION_POLICY.md) 用户原指令/下一动作；实际下载、拟合、成本、外传之前 | 未获许可时不能执行；选择课题不等于资源许可 |
+| `AUTH-SEALED` | [CONFIRMATION.md](../CONFIRMATION.md)；访问/复核独立池之前 | SEALED不能替代DEV选模或自动开启 |
+| `AUTH-WRITE` | [WRITING_GATE.md](../WRITING_GATE.md)；正式标题/摘要/正文之前 | 蓝图或科研成功不自动解锁 |
+| `AUTH-FIGURE` | [FIGURE_POLICY.md](../FIGURE_POLICY.md)；生成/重绘图片之前 | 未明确要求不得主动出图 |
+| `EVIDENCE-VALIDITY` | [WORKFLOW.md](../WORKFLOW.md) 科研总控 + [EXPERIMENT_LOOP.md](../EXPERIMENT_LOOP.md) 实验有效性；形成Claim/决定下一Probe时 | INVALID/NOT_RUN不升格成成功或负科学结论 |
+| `RULE-RELOAD` | [AGENTS.md](../AGENTS.md) 入口/版本和 [DUAL_DOCUMENT_WORKFLOW.md](../DUAL_DOCUMENT_WORKFLOW.md) 恢复；会话/Task/规则变化及敏感操作前 | 不因读过一次就假设永久生效，版本/授权不明不自我许可 |
+
+**变更前核归属**：新的科研限制先标 `HARD_GATE`（必须满足）、`CONDITIONAL`（在具体场景触发）、`HEURISTIC`（可按任务调整）；每项只有一个详细定义的owner，其他文件只保留导航或最小禁令提醒。只有真正新增独立职责才新建专题。对运行工具可控的场景，应在执行层实施权限检查；Markdown和静态CI不能证明真实拦截，未验证的机制必须如实标明。
+
+**每个涉及规则的PR描述最短覆盖**：`OLD_REQUIREMENT+COMMIT/PR → PRESERVED/MOVED/MERGED/REPLACED/RETIRED(+WHY) → OWNER+TRIGGER → AFFECTED_CALLERS → NEGATIVE_CASES/TESTS → UNMEASURED_RISKS`。仅分析受影响的要求，不强制全仓长篇审计；更新机器可读镜像时检查与文字owner一致，旧路径/调用方保持兼容。一次重要规则修改若丢失原要求或未解除相互矛盾，不因CI绿灯直接合并。
+
+**取消机械字符上限**：`AGENTS.md`、`WORKFLOW.md` 及索引均不因字符数超过阈值而测试失败；以导航职责、完整引用、实际加载路径和关键条件覆盖检查为准。必要内容可以变长，重复或未用内容应删除/移至其owner，但保留可追溯的旧要求映射。Token下降、Agent真实理解与门禁合规必须由 [REPLAY_PROTOCOL.md](../REPLAY_PROTOCOL.md) 的同条件捕获验证，未测记 `NOT_MEASURED`。

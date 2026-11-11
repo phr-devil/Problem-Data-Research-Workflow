@@ -20,7 +20,7 @@ class AdaptiveOutputTokenPolicyTests(unittest.TestCase):
         self.assertIn("自适应 L1/L2/L3", agent)
         self.assertIn("唯一权威", policy)
         self.assertFalse((ROOT / "OUTPUT_CONTRACT.md").exists())
-        self.assertLess(len(agent), 4500)
+        self.assertIn("适用规则重核", agent)
 
     def test_adaptive_levels_are_not_word_limits_or_required_templates(self):
         policy = doc("NEXT_ACTION_POLICY.md")
