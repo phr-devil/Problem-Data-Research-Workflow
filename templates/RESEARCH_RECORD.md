@@ -24,6 +24,8 @@
 
 **统一协议当前快照（只用本记录，不设第三份用户审批表）**：`protocol_version: pd-rw-human-review-v1.1`；`current_review: REVIEW:H#`；`completed_or_delegated_dimensions: ...`；`remaining_required_dimensions: ...`；`evidence_refs: ...`；`original_user_message_refs: ...`；`dependent_action_held: ...`。只保存当前相关、受影响字段与事件指针，不为所有十节点造固定长日志。旧项目 `protocol_version=legacy_unverified` 时，核原语义后再迁移，不能凭旧H2同名自动写新版H2为完成。
 
+**六活动交接快照（不增加第三份日志）**：按 [research_activity_protocol.v1.json](../contracts/research_activity_protocol.v1.json) 只记录当前相关 `ACTIVITY_ID | EVIDENCE_PATH | ORIGINAL_EVIDENCE_REFS+STATUS | DELIVERABLE_REFS | CRITICAL_UNKNOWN | NEXT_LEGAL_ACTION | REVIEW:H#_REF | OPERATION_AUTH_REF`；复用未改变的 Run/协议与旧事件指针。文件级验收、科学有效性、H 节点选择、操作授权、独立确认和正式写作永不使用一个总 PASS 代替。理论/无算法任务使用对应 PROOF/不适用说明，不生成虚假 Run。
+
 ## 1. 研究问题与协议 / 可复用资产
 - 研究意义、六类线索中的问题来源（可多选）、具名最近邻研究差额、任务定义、竞争假说与可否定预测：
 - 数据来源/版本/完整性/独立单位、DEV/VAL/SEALED 角色及合法输入：

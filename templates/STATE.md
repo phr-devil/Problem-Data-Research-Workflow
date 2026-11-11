@@ -23,6 +23,8 @@
 - REVIEW_PROTOCOL_VERSION: <protocol_version: pd-rw-human-review-v1.1 或 legacy_unverified；来源 contracts/human_review_protocol.v1.json；仅索引，不自动认证任何审核>
 - REVIEW_CURRENT: <current_review: REVIEW:H#；在 RESEARCH_RECORD 中核 completed_or_delegated_dimensions、remaining_required_dimensions、原消息及用户决定>
 
+- CURRENT_ACTIVITY_HANDOFF: <`ACTIVITY_ID` 01–06 + `research_activity_protocol.v1.json` 对应 RESEARCH_RECORD 交接快照位置；记录受影响关键证据/UNKNOWN/下一合法动作，仅索引，不认证科学或授权>
+
 ## 专题索引（当前涉及才添加，其他省略）
 - SEARCH_TRACE: <查询来源/日期/覆盖缺口；SEARCH_PARTIAL>
 - SEARCH_CHOICE_REVIEW: <可选SEARCH_HANDOFF/SEARCH_DECISION.json路径：覆盖与不同前提挑战/具名原文反证/首选优于对照的理由/初筛D1适配/核心UNKNOWN；仅结构检查不认证创新；已验证未变化可复用>

@@ -40,6 +40,8 @@
 
 **新项目决策统一协议**：[`contracts/human_review_protocol.v1.json`](contracts/human_review_protocol.v1.json) 是 [WORKFLOW.md](WORKFLOW.md) H1–H10 的机器可读镜像（科研语义只由WORKFLOW定义）。新项目所有方向固定 `H1研究目标 → H2六类问题来源与五类贡献路线 → H3候选科学问题 → H4数据库或PROOF_PATH → H5最终问题`；每轮展示统一进度和用户选择，研究候选/检索深度/实证方法则按领域调整。选择不等于下载、模型拟合、SEALED或写稿许可。结构检查可复用 `core.human_decision_review`；真实 Agent 效果未通过静态CI证明。
 
+**固定研发组织、开放科学探索**：六项活动 01科研机会→02数据/理论证据观察→03 Task→04方法/实验↔05科研贡献→06独立确认与总结；每项活动的最低进入/证据/交付由 [research_activity_protocol.v1.json](contracts/research_activity_protocol.v1.json) 统一说明，具体科学问题、技术路线、实验数量按证据决定。H1–H10仍由 [human_review_protocol.v1.json](contracts/human_review_protocol.v1.json) 管重大选择；操作授权分别核用户原消息。合成检查不代表真实Agent已履约。
+
 ## 唯一入口与最短路径
 
 **工作流本身的质量评估**：仅在用户要求审核/版本对比时，使用 [PD-RW-EVAL](evals/EVALUATION_POLICY.md) 的16个合成场景与标准库离线检查；真实 Agent 效果/Token 改善必须由独立轨迹和同预算 A/B 测量，不能由 CI 成功推断。

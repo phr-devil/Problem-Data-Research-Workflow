@@ -2,6 +2,8 @@
 
 > 最高优先级：适用于 PD-RW、WorkBuddy、Codex 和子 Agent。科研过程和纯规划的章节结构见 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md)，不额外新增实验审批门禁。
 
+**六活动出口与写作锁分离**：完成 [研究活动交接合同](contracts/research_activity_protocol.v1.json) 的活动06、H10 科研总结或存在 `CONFIRMATION_UNAVAILABLE`，均不自动完成本文件的两道写作授权条件；只有真实用户审查科研总结并另外明确指定正文写作范围，才可能解除 `WRITING_LOCKED`。不因合同结构检查结果自动生成摘要、论文图或正式投稿文件。
+
 ## 一、默认锁定期也持续整理两份文件
 
 - **RESEARCH_RECORD.md**：记录实际科研任务、完成的工作、关键实验和失败、有效/负向结果、原因与复用资产、下一步与重启条件。引用原始 Run、协议、配置、代码，而不是重复复制日志。

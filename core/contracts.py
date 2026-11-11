@@ -81,3 +81,117 @@ def validate_state(value: Any) -> dict:
     if not isinstance(obj.get("evidence_refs"), list):
         raise ContractError("evidence_refs must be a list")
     return obj
+
+
+# Existing six activities: declared evidence-handoff check, not a permission gate.
+# Scientific scope belongs to WORKFLOW.md; the JSON is a tested structural mirror.
+def review_activity_handoff(packet: dict) -> dict:
+    """Review caller-supplied handoff metadata without opening source artifacts."""
+    import json
+    from pathlib import Path
+
+    if not isinstance(packet, dict) or packet.get("format") != "pd-rw-activity-handoff-v1":
+        raise ContractError("invalid activity handoff format")
+    path = Path(__file__).resolve().parents[1] / "contracts" / "research_activity_protocol.v1.json"
+    contract = json.loads(path.read_text(encoding="utf-8"))
+    if packet.get("contract_version") != contract["contract_version"]:
+        raise ContractError("unsupported activity contract version")
+    activity_id = packet.get("activity_id")
+    if activity_id not in contract["activities"]:
+        raise ContractError("unknown activity")
+    spec = contract["activities"][activity_id]
+    evidence_path = packet.get("evidence_path")
+    if evidence_path not in spec["alternative_evidence_paths"]:
+        raise ContractError("unsupported evidence path")
+    evidence = packet.get("evidence", {})
+    deliverables = packet.get("deliverable_refs", {})
+    if not isinstance(evidence, dict) or not isinstance(deliverables, dict):
+        raise ContractError("evidence and deliverable_refs must be objects")
+    if any(not isinstance(k, str) for k in evidence):
+        raise ContractError("evidence keys must be strings")
+    statuses = {"VERIFIED", "REPORTED", "EXPLORATORY", "UNKNOWN",
+                "NOT_RUN", "INVALID", "STALE", "NOT_APPLICABLE"}
+    positive = {"VERIFIED", "REPORTED", "EXPLORATORY"}
+    missing = []
+    unresolved_critical = []
+    reported_gaps = []
+    malformed = []
+    for item in spec["mandatory_evidence"]:
+        key = item["key"]
+        statement = evidence.get(key)
+        if statement is None:
+            missing.append(key)
+            continue
+        if not isinstance(statement, dict) or statement.get("status") not in statuses:
+            malformed.append(key)
+            continue
+        status = statement["status"]
+        ref = statement.get("ref")
+        if status in positive and (not isinstance(ref, str) or not ref.strip()):
+            malformed.append(key)
+            continue
+        if status not in positive:
+            reported_gaps.append(key)
+            if item["critical"]:
+                unresolved_critical.append(key)
+        elif item["critical"] and status == "EXPLORATORY":
+            # Exploratory evidence is usable as a hypothesis, not decisive
+            # evidence for a formal downstream scientific assertion.
+            unresolved_critical.append(key)
+
+    def has_ref(key: str) -> bool:
+        return isinstance(deliverables.get(key), str) and bool(deliverables[key].strip())
+
+    missing_outputs = [key for key in spec["required_deliverables"] if not has_ref(key)]
+    missing_alternatives = [
+        group for group in spec["one_of_deliverables"]
+        if not any(has_ref(key) for key in group)
+    ]
+    missing_path_deliverables = [
+        key for key in spec.get("path_required_deliverables", {}).get(evidence_path, [])
+        if not has_ref(key)
+    ]
+    contradictory_confirmation = (
+        activity_id == "06"
+        and has_ref("INDEPENDENT_CONFIRM")
+        and has_ref("CONFIRMATION_UNAVAILABLE")
+    )
+    applicability = packet.get("applicability", "ACTIVE")
+    if applicability not in {"ACTIVE", "NOT_APPLICABLE"}:
+        raise ContractError("invalid applicability declaration")
+    skip_reason = packet.get("not_applicable_reason")
+    if applicability == "NOT_APPLICABLE":
+        if activity_id != "04" or not isinstance(skip_reason, str) or not skip_reason.strip():
+            raise ContractError("only non-method activity 04 may declare justified NOT_APPLICABLE")
+    skip_declared = applicability == "NOT_APPLICABLE"
+    declared_complete = not (
+        missing or unresolved_critical or malformed or missing_outputs
+        or missing_alternatives or missing_path_deliverables
+        or contradictory_confirmation or skip_declared
+    )
+    unavailable = activity_id == "06" and has_ref("CONFIRMATION_UNAVAILABLE")
+    return {
+        "activity_id": activity_id,
+        "contract_version": contract["contract_version"],
+        "evidence_path": evidence_path,
+        "missing_evidence_declarations": missing,
+        "malformed_evidence_declarations": malformed,
+        "unresolved_critical_evidence": unresolved_critical,
+        "documented_gaps": reported_gaps,
+        "missing_deliverables": missing_outputs,
+        "missing_alternative_deliverable_groups": missing_alternatives,
+        "missing_evidence_path_deliverables": missing_path_deliverables,
+        "contradictory_confirmation_outputs": contradictory_confirmation,
+        "human_review_nodes": spec["human_review"],
+        "parallel_science_activities": spec["allowed_parallel_activities"],
+        "declared_handoff_complete_not_verified": declared_complete,
+        "justified_non_method_skip_declared": skip_declared,
+        "confirmation_unavailable_declared": unavailable,
+        "real_evidence_and_user_message_authentication_required": True,
+        "scientific_truth_verified": False,
+        "authorizes_download_fitting_sealed_figures_or_writing": False,
+        "note": "Structural review of untrusted declarations only. Check original artifacts, "
+                "actual human choices and separate operation permissions. UNKNOWN/NOT_RUN "
+                "must not be upgraded to positive evidence. A recorded unavailable "
+                "confirmation does not certify the Claim.",
+    }
