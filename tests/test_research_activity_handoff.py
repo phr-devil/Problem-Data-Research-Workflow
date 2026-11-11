@@ -101,6 +101,7 @@ class ResearchActivityHandoffTests(unittest.TestCase):
         p = packet("04", "NON_DATA")
         p["applicability"] = "NOT_APPLICABLE"
         p["not_applicable_reason"] = "pure conceptual review, no method claim"
+        p["not_applicable_evidence_ref"] = "synthetic/proof_of_no_algorithm_claim"
         r = review_activity_handoff(p)
         self.assertTrue(r["justified_non_method_skip_declared"])
         self.assertFalse(r["declared_handoff_complete_not_verified"])
@@ -180,6 +181,133 @@ class ResearchActivityHandoffTests(unittest.TestCase):
                 with self.assertRaises(ContractError):
                     review_activity_handoff(p)
 
+
+
+def _human_packet(*nodes):
+    from core.human_decision_review import CONTRACT as H_CONTRACT
+    return {
+        "format": "pd-rw-human-review-v1",
+        "protocol_version": H_CONTRACT["protocol_version"],
+        "target": nodes[-1],
+        "decisions": {
+            step: {
+                "kind": "USER_CONFIRMED",
+                "original_user_message_ref": f"synthetic/original/{step}",
+                "chosen_option": f"synthetic choice {step}",
+                "dimension_decisions": {
+                    key: "synthetic scoped decision"
+                    for key in H_CONTRACT["steps"][step]["required_dimensions"]
+                },
+                "evidence_refs": {
+                    key: "synthetic/source"
+                    for key in H_CONTRACT["steps"][step]["evidence_minimum"]
+                },
+            }
+            for step in nodes
+        }
+    }
+
+
+class ActivityEntryAndHumanReviewTests(unittest.TestCase):
+    def _entered(self, activity, evidence_path="EMPIRICAL"):
+        p = packet(activity, evidence_path)
+        checks = CONTRACT["activities"][activity].get("entry_checks", {})
+        keys = checks.get("all", []) + checks.get(evidence_path, [])
+        p["entry_evidence_refs"] = {key: f"synthetic/{key}" for key in keys}
+        return p
+
+    def test_activity_cannot_claim_ready_from_handoff_fields_alone(self):
+        p = packet("02")
+        r = review_activity_handoff(p)
+        self.assertTrue(r["declared_handoff_complete_not_verified"])
+        self.assertFalse(r["entry_declarations_complete_not_authenticated"])
+        self.assertEqual(r["human_review_declarations_status"], "NOT_CHECKED")
+        self.assertFalse(r["declared_activity_ready_not_authenticated"])
+
+    def test_activity02_requires_both_h5_and_data_acceptance(self):
+        p = self._entered("02")
+        r = review_activity_handoff(p)
+        self.assertTrue(r["entry_declarations_complete_not_authenticated"])
+        self.assertFalse(r["declared_activity_ready_not_authenticated"])
+        p["human_review_packet"] = _human_packet("H1", "H2", "H3", "H4", "H5")
+        r = review_activity_handoff(p)
+        self.assertEqual(r["human_review_declarations_status"],
+                         "DECLARED_COMPLETE_NOT_AUTHENTICATED")
+        self.assertTrue(r["declared_activity_ready_not_authenticated"])
+        self.assertFalse(r["authorizes_download_fitting_sealed_figures_or_writing"])
+        del p["entry_evidence_refs"]["required_files_acceptance_ref"]
+        r = review_activity_handoff(p)
+        self.assertFalse(r["declared_activity_ready_not_authenticated"])
+        self.assertIn("required_files_acceptance_ref",
+                      r["missing_entry_evidence_declarations"])
+
+    def test_h5_reference_unbacked_by_declared_human_decision_is_insufficient(self):
+        p = self._entered("03")
+        p["human_review_packet"] = _human_packet("H1", "H2", "H3", "H4", "H5")
+        self.assertEqual(review_activity_handoff(p)["human_review_declarations_missing"], ["H6"])
+        self.assertFalse(review_activity_handoff(p)["declared_activity_ready_not_authenticated"])
+
+    def test_nonmethod_scope_has_disposition_not_fake_experiment_pass(self):
+        p = self._entered("04", "NON_DATA")
+        p["execution_kind"] = "NO_CONTROLLED_EXPERIMENT"
+        p["applicability"] = "NOT_APPLICABLE"
+        p["not_applicable_reason"] = "proof-only task, no model claim"
+        p["not_applicable_evidence_ref"] = "synthetic/nonmethod_rationale"
+        p["human_review_applicability"] = {
+            "H7": {"status": "NOT_APPLICABLE",
+                   "reason": "no new algorithm or major experimental choice",
+                   "evidence_ref": "synthetic/no_h7"}
+        }
+        p["human_review_packet"] = _human_packet("H1", "H2", "H3", "H4", "H5", "H6")
+        r = review_activity_handoff(p)
+        self.assertTrue(r["declared_non_method_scope_ready_not_authenticated"])
+        self.assertFalse(r["declared_handoff_complete_not_verified"])
+        self.assertEqual(r["non_method_disposition"], "JUSTIFIED_NOT_APPLICABLE_DECLARED")
+        self.assertEqual(r["required_human_review_declarations"], ["H6"])
+        self.assertFalse(r["authorizes_download_fitting_sealed_figures_or_writing"])
+
+    def test_method_scope_requires_h7_for_major_mechanism(self):
+        p = self._entered("04")
+        p["execution_kind"] = "CONTROLLED_EXPERIMENT"
+        p["entry_evidence_refs"]["original_execution_permission_ref"] = "synthetic/user/permit"
+        p["human_review_packet"] = _human_packet("H1", "H2", "H3", "H4", "H5", "H6")
+        r = review_activity_handoff(p)
+        self.assertIn("H7", r["human_review_declarations_missing"])
+        p["human_review_packet"]["decisions"]["H7"] = _human_packet("H7")["decisions"]["H7"]
+        r = review_activity_handoff(p)
+        self.assertTrue(r["declared_activity_ready_not_authenticated"])
+
+    def test_confirmation_unavailable_needs_h10_not_fake_h9(self):
+        p = self._entered("06")
+        p["deliverable_refs"].pop("INDEPENDENT_CONFIRM")
+        p["deliverable_refs"]["CONFIRMATION_UNAVAILABLE"] = "synthetic/unavailable"
+        p["entry_evidence_refs"]["confirmation_unavailability_basis_ref"] = "synthetic/no_holdout"
+        p["human_review_applicability"] = {
+            "H9": {"status": "NOT_APPLICABLE",
+                   "reason": "no scientifically eligible independent confirmation",
+                   "evidence_ref": "synthetic/no_resource"}
+        }
+        p["human_review_packet"] = _human_packet(
+            "H1", "H2", "H3", "H4", "H5", "H6", "H8", "H10")
+        r = review_activity_handoff(p)
+        self.assertEqual(r["required_human_review_declarations"], ["H10"])
+        self.assertTrue(r["declared_activity_ready_not_authenticated"])
+        self.assertTrue(r["confirmation_unavailable_declared"])
+        self.assertFalse(r["scientific_truth_verified"])
+
+    def test_real_confirmation_requires_h9_and_separate_access_ref(self):
+        p = self._entered("06")
+        p["human_review_packet"] = _human_packet("H1", "H2", "H3", "H4", "H5", "H6", "H8", "H10")
+        r = review_activity_handoff(p)
+        self.assertIn("H9", r["human_review_declarations_missing"])
+        self.assertIn("original_confirmation_access_permission_ref",
+                      r["missing_entry_evidence_declarations"])
+        p["human_review_packet"]["decisions"]["H9"] = _human_packet("H9")["decisions"]["H9"]
+        p["entry_evidence_refs"]["frozen_confirmation_protocol_ref"] = "synthetic/frozen"
+        p["entry_evidence_refs"]["original_confirmation_access_permission_ref"] = "synthetic/permit"
+        r = review_activity_handoff(p)
+        self.assertTrue(r["declared_activity_ready_not_authenticated"])
+        self.assertFalse(r["authorizes_download_fitting_sealed_figures_or_writing"])
 
 if __name__ == "__main__":
     unittest.main()
