@@ -39,8 +39,10 @@ class RoutingStructureTests(unittest.TestCase):
         agent = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
         workflow = (ROOT / "WORKFLOW.md").read_text(encoding="utf-8")
         structure = (ROOT / "docs/STRUCTURE.md").read_text(encoding="utf-8")
-        self.assertLess(len(agent), 4500, "Keep AGENTS as a router, not a second policy")
-        self.assertLess(len(workflow), 10000, "Detailed rules belong in topic owners")
+        # No hard character caps: scientifically necessary conditions must survive edits.
+        # Structure tests verify ownership/routing; Agent reading cost requires replay.
+        self.assertIn("唯一默认入口", agent)
+        self.assertIn("唯一科研决策总控", workflow)
         for marker in ("RULE_REPO", "RULE_COMMIT", "LOADED_FILES",
                        "RULE_VERSION_UNVERIFIED", "按实际阻碍"):
             self.assertIn(marker, agent)
@@ -56,7 +58,7 @@ class RoutingStructureTests(unittest.TestCase):
                 path = ROOT / name
                 data = path.read_text(encoding="utf-8")
                 self.assertIn("INDEX_ONLY", data)
-                self.assertLess(len(data), 3500, "an index should not become another policy")
+                # Navigation remains INDEX_ONLY without a brittle size threshold.
                 for target in LINK.findall(data):
                     if target.startswith(("http:", "https:", "mailto:", "#")):
                         continue

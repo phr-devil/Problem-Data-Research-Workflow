@@ -94,7 +94,7 @@
 | TASK / 信息条件 | `UP / DOWN / NARROW / LATERAL`，协议与证据独立更新 |
 | AREA_DATA / 项目 | 提出保留、暂停或转向选项；重大决策由用户批准 |
 
-**每次最小交接**：`ACTIVITY | EVIDENCE_REF/UNKNOWN | NEXT_PROBE | H_REVIEW_REF | ACTION_AUTH`。复用旧 Run，活动05与04可并行；理论和无算法任务按适用证据路径推进。
+**每次最小交接**：`ACTIVITY | EVIDENCE_REF/UNKNOWN | NEXT_PROBE | H_REVIEW_REF | ACTION_AUTH`。若下一 Probe 是有区别性结果的实验，还需按 [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md) 的 `DECISION_IF_POS/NEG/INVALID | COST_CAP` 说明结果如何改变下一决定；若依赖用户授权，核 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md) 的对象、期限/时效、资源与费用范围。普通修复及理论/无算法任务不凑实验分支；复用旧 Run，活动05与04可并行。
 
 ## 4. 不可覆盖的边界与项目资产
 

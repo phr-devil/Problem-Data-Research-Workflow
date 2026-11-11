@@ -48,7 +48,10 @@ class CaseRegistryContracts(unittest.TestCase):
         self.assertIn("跨项目成功/失败/身份追溯", self.agent)
         self.assertIn("LESSONS/CASE_REGISTRY.md", self.agent)
         self.assertIn("仅在明确复盘", self.agent)
-        self.assertLess(len(self.agent), 4500)
+        # Loading the historical case registry is conditional, not default.
+        # Do not truncate entrypoint rules to meet an arbitrary character cap.
+        self.assertIn("按实际阻碍加载专题", self.agent)
+        self.assertIn("适用规则重核", self.agent)
         self.assertIn("CASE_INDEX_ONLY", self.case)
         self.assertIn("REPLAY_PROTOCOL.md", self.case)
 

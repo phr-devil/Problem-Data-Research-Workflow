@@ -43,6 +43,10 @@
 
 **交付前必查的遗漏**：仅针对本轮受影响决策核 `当前H_ID + 原用户选择/委托范围 + 关键证据/反证 + 依赖是否失效 + 独立执行授权`；未有真实选择时给推荐而非自称用户已批准，已确认且未变化则不重复打断。若上游H节点因数据不适配/协议更改失效，下游旧用户选择**不得被自动当作对新条件的批准**；重新核对实际影响范围并只重开必要节点。 `REVIEW:H#` 与论文标题 `HEADING:H#` 不能互换。
 
+**恢复历史交接条件（PR #24 六项检查的有效语义，按影响范围应用）**：在准备下一行动或改变科学决策时核：①当前 `USER_SCOPE`、项目身份、活动及 H 节点一致；②真实原用户消息明确的**操作对象、期限/时效（如有）、委托范围、数据/模型/设备与资源上限**；③原始科学证据、最强具名近邻、真值与竞争解释是否足以支持所报结论；④上游数据、Task、评价、算法、Claim、确认等依赖是否失效；⑤拟执行操作的**独立许可、费用/算力上限**和外传/SEALED等边界；⑥输出实际结果、`UNKNOWN/CONFLICT`、`NEXT_LEGAL_ACTION_OR_USER_CHOICE`。这不是六轮审批/强制六段报告：已核且未变化的条件复用来源指针，只阻断依赖缺失条件的动作。授权不能由项目状态、模型自评、历史摘要或用户选库自行生成。
+
+**可辨别实验的结果分支（仅在涉及实际 Probe 时）**：保留 `IF_POS/NEG/INVALID` 对应的下一决定与 `AUTH/COST`，具体定义及 `INCONCLUSIVE` 归因只由 [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md) 主责；本文件负责将该结果反馈给用户/Agent，不复制算法决策逻辑。无试验、无算法或纯理论任务使用适合其证据类型的条件，不虚构 Run 或实验三分支。
+
 ### 新项目统一审核卡片：相同节点、不同科学内容
 
 在 `USER_DEEP_PARTICIPATION` 下，人工节点定义来自 [`contracts/human_review_protocol.v1.json`](contracts/human_review_protocol.v1.json) 的 `required_dimensions`，科研语义仍归 [WORKFLOW.md](WORKFLOW.md)。每轮只有**当前需要用户决定**的H节点成为主卡片，按 `PROTOCOL_VERSION | H1–H5_PROGRESS | CURRENT_REVIEW(ID+固定名称) | AI_RECOMMENDATION+SOURCE | RISKS/UNKNOWN | OPTIONS+TRADEOFFS | REQUIRED_DIMENSIONS/CHOICE_OR_DELEGATION | NEXT_DEPENDENT_ACTION` 给出内容。选项因领域不同而不同，但H1研究目标、H2来源+贡献路线、H3问题、H4证据资源、H5最终题目永不互换定义。允许用户一条消息明确完成多个节点、逐项委托或暂缓；已决定且未变化的内容不再询问。当前节点只涉及一个合理候选也可如实说明，不凑假选项。

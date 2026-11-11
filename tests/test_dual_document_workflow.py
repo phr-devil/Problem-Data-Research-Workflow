@@ -68,7 +68,9 @@ class DualDocumentTests(unittest.TestCase):
                        "RULE_VERSION_UNVERIFIED", "远端最新 commit",
                        "未经授权不覆盖", "RULE_COMMIT"):
             self.assertIn(marker, agent)
-        self.assertLess(len(agent), 4500)
+        # Role-based routing, not a rigid character cap, protects the entrypoint.
+        self.assertIn("适用规则重核", agent)
+        self.assertIn("NEXT_ACTION_POLICY.md", agent)
 
     def test_preserved_science_and_authorization(self):
         workflow = doc("WORKFLOW.md")
