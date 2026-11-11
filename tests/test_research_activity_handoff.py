@@ -102,6 +102,7 @@ class ResearchActivityHandoffTests(unittest.TestCase):
         p["applicability"] = "NOT_APPLICABLE"
         p["not_applicable_reason"] = "pure conceptual review, no method claim"
         p["not_applicable_evidence_ref"] = "synthetic/proof_of_no_algorithm_claim"
+        p["execution_kind"] = "NO_CONTROLLED_EXPERIMENT"
         r = review_activity_handoff(p)
         self.assertTrue(r["justified_non_method_skip_declared"])
         self.assertFalse(r["declared_handoff_complete_not_verified"])
