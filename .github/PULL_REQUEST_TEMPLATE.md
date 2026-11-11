@@ -2,7 +2,7 @@
 - What existing behavior is affected? Keep scientific/permission scope and original user approval distinct.
 
 ## Rule inheritance (only for rule-changing PRs)
-- **Original requirement + commit/PR:** 
+- **Original requirement + commit/PR:** (For pre-compaction rules, consult `docs/RULE_INHERITANCE_AUDIT.md` and cite affected IDs.) 
 - **Disposition:** PRESERVED / MOVED / MERGED / REPLACED / RETIRED / UNKNOWN (reason for changes)
 - **Owner / trigger:** 
 - **Changed callers and compatibility:** 
