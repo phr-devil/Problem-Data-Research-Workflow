@@ -147,6 +147,15 @@ def review_activity_handoff(packet: dict) -> dict:
         group for group in spec["one_of_deliverables"]
         if not any(has_ref(key) for key in group)
     ]
+    missing_path_deliverables = [
+        key for key in spec.get("path_required_deliverables", {}).get(evidence_path, [])
+        if not has_ref(key)
+    ]
+    contradictory_confirmation = (
+        activity_id == "06"
+        and has_ref("INDEPENDENT_CONFIRM")
+        and has_ref("CONFIRMATION_UNAVAILABLE")
+    )
     applicability = packet.get("applicability", "ACTIVE")
     if applicability not in {"ACTIVE", "NOT_APPLICABLE"}:
         raise ContractError("invalid applicability declaration")
@@ -157,7 +166,8 @@ def review_activity_handoff(packet: dict) -> dict:
     skip_declared = applicability == "NOT_APPLICABLE"
     declared_complete = not (
         missing or unresolved_critical or malformed or missing_outputs
-        or missing_alternatives or skip_declared
+        or missing_alternatives or missing_path_deliverables
+        or contradictory_confirmation or skip_declared
     )
     unavailable = activity_id == "06" and has_ref("CONFIRMATION_UNAVAILABLE")
     return {
@@ -170,6 +180,8 @@ def review_activity_handoff(packet: dict) -> dict:
         "documented_gaps": reported_gaps,
         "missing_deliverables": missing_outputs,
         "missing_alternative_deliverable_groups": missing_alternatives,
+        "missing_evidence_path_deliverables": missing_path_deliverables,
+        "contradictory_confirmation_outputs": contradictory_confirmation,
         "human_review_nodes": spec["human_review"],
         "parallel_science_activities": spec["allowed_parallel_activities"],
         "declared_handoff_complete_not_verified": declared_complete,
