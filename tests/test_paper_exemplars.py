@@ -39,9 +39,9 @@ class PaperExemplarTests(unittest.TestCase):
         self.assertIn("C05", route)
         self.assertIn("FULLTEXT_NOT_REVIEWED", route)
         self.assertIn("EX13–EX16", route)
-        self.assertIn("不批准H3/H4/H5", route)
+        self.assertIn("案例不能替用户确认 H3/H4/H5", route)
         self.assertNotIn("C01–C05", route)
-        self.assertIn("不批准H3/H4/H5", route)
+        self.assertIn("案例不能替用户确认 H3/H4/H5", route)
 
     def test_pdf_manifest_deduplicates_and_tracks_uploaded_fulltext(self):
         manifest = (DIR / "PDF_SOURCE_MANIFEST.md").read_text(encoding="utf-8")
