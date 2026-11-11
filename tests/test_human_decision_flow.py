@@ -1,5 +1,6 @@
 """Human review decision chain: structural regression only, never approval."""
 import unittest
+import json
 from pathlib import Path
 
 from core.human_decision_review import DEPENDENCIES, STEPS, dependencies_of, review
@@ -176,6 +177,162 @@ class HumanDecisionFlowTests(unittest.TestCase):
         search = (ROOT / "SEARCH_DISCOVERY.md").read_text(encoding="utf-8")
         self.assertNotIn("不增加用户轮次", search)
 
+
+
+# The unified policy is a structural contract; authentic user messages, scientific
+# quality and action authorization cannot be certified by any synthetic packet.
+from core.human_decision_review import CONTRACT
+
+
+def filled_review(step, delegated_choice=False, proof=False):
+    spec = CONTRACT["steps"][step]
+    entry = {
+        "kind": "USER_DELEGATED" if delegated_choice else "USER_CONFIRMED",
+        "original_user_message_ref": "synthetic-message-" + step,
+        "dimension_decisions": {name: "explicit scoped choice" for name in spec["required_dimensions"]},
+        "evidence_refs": {name: "synthetic-evidence-" + name for name in spec["evidence_minimum"]},
+    }
+    if delegated_choice:
+        entry["delegated_scope"] = "choose only H4 dataset under stated costs"
+    else:
+        entry["chosen_option"] = "explicit synthetic H step choice"
+    if proof and step == "H4":
+        entry["dimension_decisions"]["dataset_or_proof_path"] = "PROOF_PATH mathematical demonstration"
+    return entry
+
+
+def strict_packet(target, completed, *, delegated_h4=False, proof=False):
+    return {
+        "format": "pd-rw-human-review-v1",
+        "protocol_version": CONTRACT["protocol_version"],
+        "target": target,
+        "decisions": {
+            step: filled_review(step, delegated_choice=(step == "H4" and delegated_h4), proof=proof)
+            for step in completed
+        },
+    }
+
+
+class UnifiedInteractionProtocolTests(unittest.TestCase):
+    def test_single_machine_contract_and_fixed_definitions(self):
+        self.assertEqual(CONTRACT["owner"], "WORKFLOW.md")
+        self.assertEqual(CONTRACT["new_project_sequence"], ["H1", "H2", "H3", "H4", "H5"])
+        self.assertEqual(len(CONTRACT["steps"]), 10)
+        self.assertEqual(set(CONTRACT["steps"]), set(STEPS))
+        self.assertEqual(len(CONTRACT["vocabularies"]["question_sources"]), 6)
+        self.assertEqual(len(CONTRACT["vocabularies"]["contribution_routes"]), 5)
+        for name in STEPS:
+            spec = CONTRACT["steps"][name]
+            self.assertEqual(tuple(spec["prerequisites"]), DEPENDENCIES[name])
+            self.assertTrue(spec["required_dimensions"])
+            self.assertTrue(spec["evidence_minimum"])
+            self.assertTrue(spec["name"])
+        self.assertEqual(CONTRACT["steps"]["H2"]["required_dimensions"],
+                         ["question_sources", "contribution_routes", "search_focus"])
+        self.assertIn("dataset_or_proof_path", CONTRACT["steps"]["H4"]["required_dimensions"])
+        self.assertEqual(dependencies_of("H5"), {"H1", "H2", "H3", "H4"})
+
+    def test_malformed_or_partial_h2_cannot_complete_review(self):
+        p = strict_packet("H3", ("H1", "H2"))
+        del p["decisions"]["H2"]["dimension_decisions"]["contribution_routes"]
+        r = review(p)
+        self.assertEqual(r["missing_required_dimensions"]["H2"], ["contribution_routes"])
+        self.assertIn("H2", r["missing_prerequisites"])
+        self.assertFalse(r["can_present_review_declarations_only"])
+        self.assertFalse(r["can_advance_declarations_only"])
+        self.assertEqual(r["next_review"], "H2")
+
+    def test_h2_unknown_does_not_count_as_choice(self):
+        p = strict_packet("H3", ("H1", "H2"))
+        p["decisions"]["H2"]["dimension_decisions"]["contribution_routes"] = "UNKNOWN"
+        self.assertEqual(review(p)["next_review"], "H2")
+
+    def test_incomplete_evidence_blocks_declared_completion(self):
+        p = strict_packet("H5", ("H1", "H2", "H3", "H4"))
+        del p["decisions"]["H4"]["evidence_refs"]["source_and_feasibility_comparison"]
+        r = review(p)
+        self.assertEqual(r["missing_evidence_refs"]["H4"], ["source_and_feasibility_comparison"])
+        self.assertIn("H4", r["missing_prerequisites"])
+
+    def test_can_present_does_not_mean_user_has_chosen(self):
+        p = strict_packet("H5", ("H1", "H2", "H3", "H4"))
+        r = review(p)
+        self.assertTrue(r["can_present_review_declarations_only"])
+        self.assertFalse(r["can_advance_declarations_only"])
+        self.assertEqual(r["next_review"], "H5")
+        self.assertFalse(r["allows_download_training_sealed_or_writing"])
+        p["decisions"]["H5"] = filled_review("H5")
+        r = review(p)
+        self.assertTrue(r["can_advance_declarations_only"])
+        self.assertEqual(r["next_review"], "H6")
+        self.assertTrue(r["requires_original_user_message_review"])
+
+    def test_cross_project_synthetic_cases_enforce_sequence(self):
+        cases = json.loads(
+            (ROOT / "evals" / "cases" / "human_review_sequences.json").read_text(encoding="utf-8")
+        )
+        self.assertTrue(cases["synthetic_only"])
+        self.assertGreaterEqual(len(cases["cases"]), 10)
+        domains = set()
+        for item in cases["cases"]:
+            domain, mode, target = item["domain"], item["mode"], item["target"]
+            domains.add(domain)
+            completed = {
+                "new_full": ("H1", "H2", "H3", "H4"),
+                "partial_h2": ("H1", "H2"),
+                "missing_h4": ("H1", "H2", "H3"),
+                "h1h2": ("H1", "H2"),
+                "delegated_h4": ("H1", "H2", "H3", "H4"),
+                "proof_path": ("H1", "H2", "H3", "H4"),
+                "reopened_h4": ("H1", "H2", "H3", "H4", "H5", "H6"),
+                "legacy": ("H1", "H2", "H3", "H4", "H5"),
+                "full_h5": ("H1", "H2", "H3", "H4", "H5"),
+            }[mode]
+            if mode == "legacy":
+                p = packet(target, {s: user(s) for s in completed})
+            else:
+                p = strict_packet(target, completed, delegated_h4=(mode == "delegated_h4"),
+                                  proof=(mode == "proof_path"))
+            if mode == "partial_h2":
+                del p["decisions"]["H2"]["dimension_decisions"]["contribution_routes"]
+            if mode == "reopened_h4":
+                p["invalidated_decisions"] = ["H4"]
+            r = review(p)
+            with self.subTest(case=item["id"], domain=domain):
+                self.assertEqual(r["next_review"], item["expected_next"])
+                self.assertEqual(r["can_present_review_declarations_only"],
+                                 item["expected_can_present"])
+                self.assertEqual(r["can_advance_declarations_only"],
+                                 item["expected_can_advance"])
+                self.assertFalse(r["allows_download_training_sealed_or_writing"])
+        self.assertGreaterEqual(len(domains), 4)
+
+    def test_wrong_version_is_rejected_and_legacy_is_supported(self):
+        p = strict_packet("H3", ("H1", "H2"))
+        p["protocol_version"] = "invented-version"
+        with self.assertRaises(ValueError):
+            review(p)
+        r = review(packet("H3", {"H1": user("H1"), "H2": user("H2")}))
+        self.assertEqual(r["protocol_version"], "legacy_unverified")
+        self.assertTrue(r["can_present_review_declarations_only"])
+
+    def test_consistency_between_canonical_policy_and_entrypoints(self):
+        doc = lambda name: (ROOT / name).read_text(encoding="utf-8")
+        for name in ("WORKFLOW.md", "START.md", "AGENTS.md",
+                     "NEXT_ACTION_POLICY.md", "README.md"):
+            with self.subTest(name=name):
+                self.assertIn("human_review_protocol.v1.json", doc(name))
+        for name, markers in {
+            "SEARCH_DISCOVERY.md": ["H2", "H3", "question_sources", "contribution_routes"],
+            "HIGH_VALUE_RESEARCH_DESIGN.md": ["H2", "contribution_routes"],
+            "DATA_DISCOVERY.md": ["H4", "dataset_or_proof_path"],
+            "templates/RESEARCH_RECORD.md": ["protocol_version", "current_review"],
+            "templates/STATE.md": ["protocol_version", "HUMAN_REVIEW_CURRENT"],
+            "REPLAY_PROTOCOL.md": ["human_review_sequences.json"],
+        }.items():
+            with self.subTest(name=name):
+                for marker in markers:
+                    self.assertIn(marker, doc(name))
 
 if __name__ == "__main__":
     unittest.main()

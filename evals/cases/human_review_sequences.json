@@ -1,0 +1,106 @@
+{
+  "format": "pd-rw-human-review-sequences-v1",
+  "synthetic_only": true,
+  "notes": "Structural contract fixtures, not actual agent conversations or original user authorizations; legacy has no forced v1.1 next-review inference.",
+  "cases": [
+    {
+      "id": "S1_TACTILE",
+      "domain": "flexible tactile sensors",
+      "mode": "new_full",
+      "target": "H5",
+      "expected_next": "H5",
+      "expected_can_present": true,
+      "expected_can_advance": false
+    },
+    {
+      "id": "S2_BIOMED",
+      "domain": "biomedical sensing",
+      "mode": "new_full",
+      "target": "H5",
+      "expected_next": "H5",
+      "expected_can_present": true,
+      "expected_can_advance": false
+    },
+    {
+      "id": "S3_ROBOTICS",
+      "domain": "robotic embodied intelligence",
+      "mode": "new_full",
+      "target": "H5",
+      "expected_next": "H5",
+      "expected_can_present": true,
+      "expected_can_advance": false
+    },
+    {
+      "id": "S4_H2_HALF",
+      "domain": "tactile sensing",
+      "mode": "partial_h2",
+      "target": "H3",
+      "expected_next": "H2",
+      "expected_can_present": false,
+      "expected_can_advance": false
+    },
+    {
+      "id": "S5_SKIP_H4",
+      "domain": "robotics",
+      "mode": "missing_h4",
+      "target": "H5",
+      "expected_next": "H4",
+      "expected_can_present": false,
+      "expected_can_advance": false
+    },
+    {
+      "id": "S6_USER_GAVE_H1H2",
+      "domain": "medical",
+      "mode": "h1h2",
+      "target": "H3",
+      "expected_next": "H3",
+      "expected_can_present": true,
+      "expected_can_advance": false
+    },
+    {
+      "id": "S7_DELEGATED_H4",
+      "domain": "robotics",
+      "mode": "delegated_h4",
+      "target": "H5",
+      "expected_next": "H5",
+      "expected_can_present": true,
+      "expected_can_advance": false
+    },
+    {
+      "id": "S8_PROOF",
+      "domain": "formal theory",
+      "mode": "proof_path",
+      "target": "H5",
+      "expected_next": "H5",
+      "expected_can_present": true,
+      "expected_can_advance": false
+    },
+    {
+      "id": "S9_REOPEN_H4",
+      "domain": "sensors",
+      "mode": "reopened_h4",
+      "target": "H6",
+      "expected_next": "H4",
+      "expected_can_present": false,
+      "expected_can_advance": false
+    },
+    {
+      "id": "S10_OLD_PROJECT",
+      "domain": "legacy project",
+      "mode": "legacy",
+      "target": "H6",
+      "expected_next": null,
+      "expected_can_present": true,
+      "expected_can_advance": false
+    },
+    {
+      "id": "S11_USER_DONE_H5",
+      "domain": "wearable sensing",
+      "mode": "full_h5",
+      "target": "H5",
+      "expected_next": "H6",
+      "expected_can_present": true,
+      "expected_can_advance": true
+    }
+  ]
+}

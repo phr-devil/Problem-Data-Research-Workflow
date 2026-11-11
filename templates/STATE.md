@@ -20,6 +20,9 @@
 - HUMAN_REVIEW_CURRENT: <可选；新项目默认 `USER_DEEP_PARTICIPATION`，当前 H1–H10 节点/已确认或明确委托及原始消息指针；未决定 `HUMAN_REVIEW_PENDING` 仅是文字注记，不是新 CLI 状态>
 - HUMAN_DECISION_REF: <对应 RESEARCH_RECORD.md 当前快照与第5节事件，记录依赖、局部重开和待复核下游；审核节点写 REVIEW:H#，论文章节Markdown层级写 HEADING:H#，不得混用；未经消息核实不视为批准，操作AUTH仍看原始用户指令>
 
+- REVIEW_PROTOCOL_VERSION: <protocol_version: pd-rw-human-review-v1.1 或 legacy_unverified；来源 contracts/human_review_protocol.v1.json；仅索引，不自动认证任何审核>
+- REVIEW_CURRENT: <current_review: REVIEW:H#；在 RESEARCH_RECORD 中核 completed_or_delegated_dimensions、remaining_required_dimensions、原消息及用户决定>
+
 ## 专题索引（当前涉及才添加，其他省略）
 - SEARCH_TRACE: <查询来源/日期/覆盖缺口；SEARCH_PARTIAL>
 - SEARCH_CHOICE_REVIEW: <可选SEARCH_HANDOFF/SEARCH_DECISION.json路径：覆盖与不同前提挑战/具名原文反证/首选优于对照的理由/初筛D1适配/核心UNKNOWN；仅结构检查不认证创新；已验证未变化可复用>

@@ -8,7 +8,9 @@
 
 **可用工具（均为非强制只读辅助）**：`python -m core.scientific_discriminability --metadata DEV_METADATA.json --factor-a device --factor-b class --group subject --role DEV` 检查已获许可元数据的交叉/独立组结构；`python -m core.science_choice_replay --cases evals/science_choice_cases.synthetic.json --blind` 导出不含专家答案的构造场景。两者**不能证明因果关系、选题价值、Q2水平或真实行为改进**。历史冻结回放必须独立准备真实来源和专家参考后另行执行，见[REPLAY_PROTOCOL.md](REPLAY_PROTOCOL.md)。
 
-**活动01防首个满意解**：不要求固定3次ChatGPT回复，而要在同一次或2–3轮内先作`BREADTH_SCAN`广搜重要且不同的科学问题，接`DEEP_FALSIFICATION`核最强原文/反证，再以`COMPETING_CHOICE`用至少一次**不同失败前提的替代机会搜索**挑战首选；没有可比备选可以保留唯一首选，但必须记录搜索限制。D1正式选定前通过官方公开元数据做`PRE_DOWNLOAD_SCIENCE_FIT`，未知仅`PREFERRED_PROVISIONAL`，不在未授权情况下读取DEV/test或自动下载。详情见[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md)与[DATA_DISCOVERY.md](DATA_DISCOVERY.md)。
+**活动01防首个满意解**：不要求固定聊天轮数；在已获H1/H2的用户选择或明确委托后，AI可在同一只读研究批次进行`BREADTH_SCAN`，广搜重要且不同的科学问题，接`DEEP_FALSIFICATION`核最强原文/反证，再以`COMPETING_CHOICE`用至少一次**不同失败前提的替代机会搜索**挑战首选；没有可比备选可以保留唯一首选，但必须记录搜索限制。D1正式选定前通过官方公开元数据做`PRE_DOWNLOAD_SCIENCE_FIT`，未知仅`PREFERRED_PROVISIONAL`，不在未授权情况下读取DEV/test或自动下载。详情见[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md)与[DATA_DISCOVERY.md](DATA_DISCOVERY.md)。
+
+**统一 H2 贡献路线字段**：`contribution_routes` 是下面五类 *预期研究贡献* 的选择/委托，必须与 `question_sources`（六类课题来源）分别交给用户，不得在项目之间交换H2与H3的意义。允许研究命题后来产生不同贡献，但 H2 完成只表示明确选择了探索偏好，不代表算法原创/Q2潜力已经认证。为避免内容因Agent不同而漏掉，按 [`contracts/human_review_protocol.v1.json`](contracts/human_review_protocol.v1.json) 的 H2 `required_dimensions` 进行结构核对；科学判断及真实近邻审查仍在本文件与 [SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md)。
 
 ## A｜研究问题发现：先评价知识价值，再比较实现难度
 

@@ -9,20 +9,17 @@ import argparse
 import json
 from pathlib import Path
 
-STEPS = tuple(f"H{i}" for i in range(1, 11))
+# A machine-readable mirror of the scientific review definitions in WORKFLOW.md.
+# Changing a definition must update the canonical policy and its regression tests.
+CONTRACT_PATH = Path(__file__).resolve().parents[1] / "contracts" / "human_review_protocol.v1.json"
+CONTRACT = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
+STEPS = tuple(CONTRACT["steps"])
 DEPENDENCIES = {
-    "H1": (),
-    "H2": ("H1",),
-    "H3": ("H1", "H2"),
-    "H4": ("H3",),
-    "H5": ("H3", "H4"),
-    "H6": ("H5",),
-    "H7": ("H6",),
-    "H8": ("H6",),  # No H7 for theory, measurement or discovery claims.
-    "H9": ("H8",),
-    "H10": ("H8",),  # Missing/unsuitable confirmation must be disclosed, not fabricated.
+    step: tuple(spec["prerequisites"]) for step, spec in CONTRACT["steps"].items()
 }
 DECISIONS = {"USER_CONFIRMED", "USER_DELEGATED", "PENDING"}
+UNDECIDED = {"", "UNKNOWN", "UNDECIDED", "PENDING", "TBD", "N/A"}
+
 
 
 def dependencies_of(node: str) -> set[str]:
@@ -47,9 +44,15 @@ def review(packet: dict) -> dict:
     if not isinstance(rows, dict) or any(k not in STEPS for k in rows):
         raise ValueError("decisions must be an H-ID keyed object")
 
+    protocol_version = packet.get("protocol_version")
+    if protocol_version not in (None, CONTRACT["protocol_version"]):
+        raise ValueError("Unsupported human review protocol version")
+    strict = protocol_version == CONTRACT["protocol_version"]
     present = set()
     malformed = []
     pending = set()
+    missing_dimensions = {}
+    missing_evidence = {}
     for name, entry in rows.items():
         if not isinstance(entry, dict) or entry.get("kind") not in DECISIONS:
             malformed.append(name)
@@ -64,6 +67,26 @@ def review(packet: dict) -> dict:
         if not isinstance(entry.get(key), str) or not entry[key].strip():
             malformed.append(name)
             continue
+        if strict:
+            spec = CONTRACT["steps"][name]
+            dims = entry.get("dimension_decisions")
+            refs = entry.get("evidence_refs")
+            dims = dims if isinstance(dims, dict) else {}
+            refs = refs if isinstance(refs, dict) else {}
+            missing_d = [
+                dim for dim in spec["required_dimensions"]
+                if not isinstance(dims.get(dim), str) or dims[dim].strip().upper() in UNDECIDED
+            ]
+            missing_e = [
+                evidence for evidence in spec["evidence_minimum"]
+                if not isinstance(refs.get(evidence), str) or not refs[evidence].strip()
+            ]
+            if missing_d:
+                missing_dimensions[name] = missing_d
+            if missing_e:
+                missing_evidence[name] = missing_e
+            if missing_d or missing_e:
+                continue
         present.add(name)
 
     # A previously declared choice may be obsolete after a change in upstream
@@ -91,8 +114,28 @@ def review(packet: dict) -> dict:
         if not (missing or malformed or blocked_by_reopened)
         else "REVIEW_REQUIRED"
     )
+    can_present = not (missing or blocked_by_reopened or malformed)
+    can_advance = can_present and target in effective_present
+    next_review = None
+    if strict:
+        next_review = next(
+            (step for step in CONTRACT["new_project_sequence"] if step not in effective_present),
+            "H6" if target in CONTRACT["new_project_sequence"] else target,
+        )
+        if target not in CONTRACT["new_project_sequence"] and not missing:
+            next_review = target if not can_advance else None
+        if can_advance and target in CONTRACT["new_project_sequence"][:-1]:
+            next_review = CONTRACT["new_project_sequence"][
+                CONTRACT["new_project_sequence"].index(target) + 1
+            ]
     return {
         "target": target,
+        "protocol_version": protocol_version or "legacy_unverified",
+        "can_present_review_declarations_only": can_present,
+        "can_advance_declarations_only": can_advance,
+        "next_review": next_review,
+        "missing_required_dimensions": missing_dimensions,
+        "missing_evidence_refs": missing_evidence,
         "result": result,
         "missing_prerequisites": missing,
         "malformed_declarations": sorted(malformed, key=STEPS.index),
