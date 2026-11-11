@@ -1,8 +1,8 @@
 # Paper Exemplar Library｜论文案例库
 
-> 本库根据用户提供的7篇论文全文PDF提炼**原创的论证结构和语言策略**，供PD-RW获授权的论文写作参考。每张卡带 DOI/原文链接、PDF页码、适用范围与禁用边界。**不在GitHub公开PDF、原文段落、图或表**；IEEE学校授权件和Elsevier版权全文尤其不得镜像。原始PDF位于用户本次上传的会话，并不意味着WorkBuddy本地自动拥有同名文件。核对日期：2026-11-07。
+> 本库根据用户提供的原有7篇及本轮新增5篇论文全文PDF提炼**原创的论证结构和语言策略**，供PD-RW获授权的论文写作参考。每张卡带 DOI/原文链接、PDF页码、适用范围与禁用边界。**不在GitHub公开PDF、原文段落、图或表**；IEEE学校授权件和Elsevier版权全文尤其不得镜像。原始PDF位于用户本次上传的会话，并不意味着WorkBuddy本地自动拥有同名文件。核对日期：原有EX01–EX07为2026-11-07；新增EX08–EX12为2026-11-11。
 
-## 七篇论文与单篇策略卡
+## 十二篇论文与单篇策略卡
 
 | ID | 研究类型 / 优先用途 | 来源 | 策略卡 |
 |---|---|---|---|
@@ -13,10 +13,20 @@
 | EX05 | HAR、IMU物理角色与复杂方法组织；**预印本** | [arXiv 2605.02743v1 · Triple Spectral Fusion (2026)](https://arxiv.org/abs/2605.02743) | [EX05](cases/EX05_ARXIV_TSF.md) |
 | EX06 | 传感器域泛化、分阶段方法、独立Discussion | [Expert Systems with Applications · ASAM (2026)](https://doi.org/10.1016/j.eswa.2026.131585) | [EX06](cases/EX06_ESWA_ASAM.md) |
 | EX07 | IEEE HAR、跨窗口/模态机制与消融 | [IEEE TNNLS · LCwmcaR (2025)](https://doi.org/10.1109/TNNLS.2025.3581226) | [EX07](cases/EX07_TNNLS_LCWMCAR.md) |
+| EX08 | 欠约束与失败边界；科学发现/认知纠正 | [JMLR · Underspecification (2022)](https://www.jmlr.org/papers/v23/20-1335.html) | [EX08](cases/EX08_JMLR_UNDERSPEC.md) |
+| EX09 | 机器人软手、掌指协同能力；高成本系统结构范例 | [Nature Communications · TacPalm (2025)](https://doi.org/10.1038/s41467-025-57741-6) | [EX09](cases/EX09_NATCOMM_TACPALM.md) |
+| EX10 | 柔性传感器物理结构/灵敏度—线性度权衡；硬件范例 | [npj Flexible Electronics · GSS (2024)](https://doi.org/10.1038/s41528-024-00301-7) | [EX10](cases/EX10_NPJ_GSS_SENSOR.md) |
+| EX11 | 实际分布偏移、独立group与基准构建 | [ICML · WILDS (2021)](https://proceedings.mlr.press/v139/koh21a.html) | [EX11](cases/EX11_ICML_WILDS.md) |
+| EX12 | 协变量偏移下的预测区间、理论假设与范围 | [NeurIPS · Conformal Shift (2019)](https://proceedings.neurips.cc/paper/2019/hash/8fb21ee7a2207526da55a679f0332de2-Abstract.html) | [EX12](cases/EX12_NEURIPS_CONFORMAL_SHIFT.md) |
+
+## H2 科研机会映射（选题时可按需参考，不等于写作授权）
+
+- [六类问题来源×五类贡献路线的科研范例图谱](RESEARCH_OPPORTUNITY_MAP.md)：区分 **已核用户全文的 EX08–EX12** 与 **仅核官方出版信息、尚无全文策略卡的候选 C01–C05**。优先借鉴小而真实的科学矛盾/失效/评价切口，而非按影响因子或硬件规模排名。
+- 这是 H2 **可选文献启发**，不是每个科研项目必须搜索六类或阅读12篇，不替代近期具名近邻、H3/H4/H5真实用户选择、许可或操作授权。论文正式结构借鉴仍须满足WRITING_GATE。
 
 ## WorkBuddy 使用合同（M2 / R1 必查索引，非额外审批）
 
-1. 已经具备科研成果审查与正文写作授权时，在写作 R1 按**研究贡献类型→目标小节职责→期刊读者**选1–3篇；单凭期刊名气不可优先。主张没有变化时重用已有选择，不重复下载、重新通读7篇。没有适合者记录 **EXEMPLAR_NONE + reason**，不得硬套。
+1. 已经具备科研成果审查与正文写作授权时，在写作 R1 按**研究贡献类型→目标小节职责→期刊读者**选1–3篇；单凭期刊名气不可优先。主张没有变化时重用已有选择，不重复下载、重新通读12篇。没有适合者记录 **EXEMPLAR_NONE + reason**，不得硬套。
 2. **只读入选的策略卡**，内部 Section Contract 暂记 **EXEMPLAR_IDS / why_match / ADOPT / AVOID**，不向投稿正文写入这些元信息。R2参考Methods/Results的论证顺序，R3参考引言与讨论的段落职责，R4仅在科学审核后参考语言清晰度。
 3. **学习写作决策，不复制原文**。不从范例直接迁移数据、模型机制、统计显著性、实验规模、声称首创的结论或独特句式；案例不自动成为本项目Related Work引用。科学事实仍要经单独的Claim–Source核验。
 4. 需要原文细节时用卡中PDF页码定位，在合法可访问情况下有界回看；原PDF不可得时可以使用经本轮提炼的策略卡，但**不得声称本轮重读原文**，也不得由DOI或摘要推测全文句法。
@@ -27,7 +37,8 @@
 
 - **测量/腕式心率可靠性（如Galaxy-HRGuard）**：EX02为主，EX01辅助；负结果和部署条件可借EX04的“何时有效”论证。
 - **算法/HAR/IMU/跨域**：在EX03、EX05、EX06、EX07中按真实任务问题选1–3个，避免把所有算法写成SOTA+消融模板。
-- **机器人/触觉/具身**：EX04为主；有合法跨窗口多模态任务再参考EX07。
+- **机器人/触觉/具身**：EX04为主，EX09适用于真实软手系统能力叙事但开发成本高；有合法跨窗口多模态任务再参考EX07。
+- **科学发现/评价纠错/边界**：EX08、EX11优先；纯理论/统计有界保证才参考EX12；柔性传感器真实物理机制才参考EX10。真实证据有限的公开数据项目优先查图谱中的C01–C04公开候选，不把尚未读全文的候选说成已入库策略卡。
 - **置信不足或缺失近邻原文**：不让案例填充科学证据缺口；继续支持已经核实的正文，针对缺口留标记。
 
 源PDF没有提交，策略卡只是原创分析。特别说明：EX05是**上传的arXiv v1预印本**，其正式发表状态没有从该文件得到确认。见 [正式写作规范](../MANUSCRIPT_WRITING.md)。
