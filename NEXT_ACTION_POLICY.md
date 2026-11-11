@@ -14,7 +14,7 @@
 
 ### 深度参与模式中的用户科学决策（复用已有 USER_DECISION_REQUIRED）
 
-新 PD-RW 课题按 [WORKFLOW.md](WORKFLOW.md) 的 H1–H10 确定哪个科学选择当前由用户负责。用户可一次明确批准多个节点或将具体节点有限委托AI；原用户消息必须可核，Agent 自评、选库表、状态字段/布尔值均非批准。旧项目已有真实选择不重新问；新证据仅重开直接受影响的节点。技术性查证、普通Bug、已有授权实验不进入新审批循环。
+新 PD-RW 课题默认 `USER_DEEP_PARTICIPATION`，按 [WORKFLOW.md](WORKFLOW.md) 的 H1–H10 确定哪个科学选择当前由用户负责。用户可一次明确批准多个节点或将具体节点有限委托AI；原用户消息必须可核，Agent 自评、选库表、状态字段/布尔值均非批准。旧项目已有真实选择不重新问；新证据仅重开直接受影响的节点。技术性查证、普通Bug、已有授权实验不进入新审批循环。
 
 **待用户决策时**输出 `DECISION_ID | RECOMMENDATION+SOURCE | OPTIONS(通常2–3项)+TRADEOFFS | REQUIRED_USER_CHOICE | DEPENDENT_ACTION_HELD`。未确认节点只暂停**依赖该决定**的定稿/资源动作，仍可在既有授权范围内进行独立合法只读核查。明确委托的选题决策不授予`DOWNLOAD/TRAIN/SEALED/WRITING`权限；项目与主张事实不能由用户偏好升级成 VERIFIED。用户决定已在本轮给出时直接引用，不机械增加一次对话。
 
