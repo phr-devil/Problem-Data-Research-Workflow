@@ -113,6 +113,25 @@ class ResearchActivityHandoffTests(unittest.TestCase):
         with self.assertRaises(ContractError):
             review_activity_handoff(p)
 
+    def test_empirical_data_acceptance_cannot_be_substituted_by_proof_card(self):
+        p = packet("02", "EMPIRICAL")
+        del p["deliverable_refs"]["DATA_MANIFEST"]
+        del p["deliverable_refs"]["DATA_INSIGHT_CARD"]
+        p["deliverable_refs"]["PROOF_EVIDENCE_CARD"] = "synthetic/proof"
+        p["deliverable_refs"]["PROOF_OBSERVATION_CARD"] = "synthetic/proof/observation"
+        result = review_activity_handoff(p)
+        self.assertEqual(result["missing_alternative_deliverable_groups"], [])
+        self.assertEqual(result["missing_evidence_path_deliverables"],
+                         ["DATA_MANIFEST", "DATA_INSIGHT_CARD"])
+        self.assertFalse(result["declared_handoff_complete_not_verified"])
+
+    def test_confirmed_and_unavailable_cannot_be_both_reported(self):
+        p = packet("06", "EMPIRICAL")
+        p["deliverable_refs"]["CONFIRMATION_UNAVAILABLE"] = "synthetic/unavailable"
+        result = review_activity_handoff(p)
+        self.assertTrue(result["contradictory_confirmation_outputs"])
+        self.assertFalse(result["declared_handoff_complete_not_verified"])
+
     def test_confirmation_unavailable_is_not_confirmed(self):
         p = packet("06", "NON_DATA")
         self.assertIn("CONFIRMATION_UNAVAILABLE", p["deliverable_refs"])
