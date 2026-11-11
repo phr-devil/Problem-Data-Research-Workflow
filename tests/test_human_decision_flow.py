@@ -90,6 +90,19 @@ class HumanDecisionFlowTests(unittest.TestCase):
         self.assertEqual(result["stale_declarations"], ["H4", "H5", "H6"])
         self.assertEqual(result["target_blocked_by_reopening"], ["H4"])
 
+    def test_revised_database_does_not_automatically_restore_old_h5(self):
+        decisions = {s: user(s) for s in ("H1", "H2", "H3", "H4", "H5", "H6")}
+        decisions["H4"] = user("H4", "new D1 after original was rejected")
+        p = packet("H6", decisions)
+        # H4 is newly settled, but H5 was chosen against the *old* D1:
+        # outstanding downstream invalidation must persist until re-reviewed.
+        p["invalidated_decisions"] = ["H5"]
+        r = review(p)
+        self.assertEqual(r["result"], "REVIEW_REQUIRED")
+        self.assertEqual(r["missing_prerequisites"], ["H5"])
+        self.assertEqual(r["stale_declarations"], ["H5", "H6"])
+        self.assertFalse(r["allows_download_training_sealed_or_writing"])
+
     def test_reopened_target_cannot_be_silently_reapproved(self):
         choices = {s: user(s) for s in ("H1", "H2", "H3", "H4", "H5")}
         p = packet("H5", choices)
