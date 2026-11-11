@@ -24,7 +24,7 @@
 | 多模态 | 各模态独立身份、同步和缺失、标签对应、预测前可用性 | 额外模态是否提供**合法且可利用**的新信息？ |
 | 理论/仿真 | 假设、参数域、可观测量、数值精度和可复核证据路径 | 何种参数/反例能区分竞争解释？ |
 
-**仅在用户明确授权本次指定图像时**才实际绘图；无授权可用文字/表格/统计摘要进行诊断、规划需画的图，绝不调用绘图程序或生成预览。图有科学价值本身不是授权。数据未变复用旧图，默认朴素诊断图，不自动生成全字段仪表盘或精美图组。工具按需选：`fg-data-profiling`看表格画像，`Data Formulator`追问/可视化，`Spotlight/Sliceguard`查复杂数据切片，`Evidently/Alibi Detect`查分布变化，`tsfresh/sktime`查时序；工具不可用就用现有Python/统计函数，不因此阻塞；**不同工具的统计输出不是科研发现**。特征学习、聚类拟合、embedding计算、模型预测及自动标签诊断若涉及CPU/GPU拟合或安装，必须有对应授权。任何从数据学习的归一化、表示或特征选择只在合法开发/训练部分拟合。
+**仅在用户明确授权本次指定图像时**才实际绘图；无授权可用文字/表格/统计摘要进行诊断、规划需画的图，绝不调用绘图程序或生成预览。图有科学价值本身不是授权。数据未变复用旧图；获授权时默认朴素诊断图，不自动生成全字段仪表盘或精美图组。工具按需选：`fg-data-profiling`看表格画像，`Data Formulator`追问/可视化，`Spotlight/Sliceguard`查复杂数据切片，`Evidently/Alibi Detect`查分布变化，`tsfresh/sktime`查时序；工具不可用就用现有Python/统计函数，不因此阻塞；**不同工具的统计输出不是科研发现**。特征学习、聚类拟合、embedding计算、模型预测及自动标签诊断若涉及CPU/GPU拟合或安装，必须有对应授权。任何从数据学习的归一化、表示或特征选择只在合法开发/训练部分拟合。
 
 **与科学主张关联的数据画像**：可先用 `python -m core.scientific_discriminability --metadata DEV_METADATA.json --factor-a device --factor-b class --group subject --role DEV` 对合法提取的元数据做无拟合描述性交叉检查；先核组数及设备是否与人绑定，结果不是因果效应或科学成功证明。字段名按真实数据替换；公开元信息可用`--role PUBLIC_METADATA`。额外只对当前核心Claim的1–2个条件轴检查**独立变化是否存在**（例如人/设备与标签/日期是否共线）、交叉单元是否仅有极少真实独立组，记录`CONTRAST | GROUP_N | UNRESOLVED_CONFOUND | LEGAL_INFO | WHAT_CAN_BE_CLAIMED`。见[HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md) B。交叉存在仅说明描述性可比，**不证明因果识别或足够效应量**；严重混杂时限制结论、换可证伪问题，不能通过精美可视化掩盖。只使用合法DEV；封存集仅记录用途/存在性，禁止看分布、标签或性能。
 
