@@ -194,12 +194,111 @@ def review_activity_handoff(packet: dict) -> dict:
         if activity_id != "04" or not isinstance(skip_reason, str) or not skip_reason.strip():
             raise ContractError("only non-method activity 04 may declare justified NOT_APPLICABLE")
     skip_declared = applicability == "NOT_APPLICABLE"
+
+    # Activity entry, human choice and operational authorization are orthogonal.
+    # Every reference below is untrusted caller metadata, not an authenticated grant.
+    entry_refs = packet.get("entry_evidence_refs", {})
+    if not isinstance(entry_refs, dict):
+        raise ContractError("entry_evidence_refs must be an object")
+    entry_checks = spec.get("entry_checks", {})
+    entry_keys = list(entry_checks.get("all", []))
+    entry_keys += entry_checks.get(evidence_path, [])
+    execution_kind = packet.get("execution_kind", "UNSPECIFIED")
+    if activity_id == "04":
+        if execution_kind not in {
+            "UNSPECIFIED", "CONTROLLED_EXPERIMENT", "NO_CONTROLLED_EXPERIMENT"
+        }:
+            raise ContractError("invalid execution_kind")
+        if execution_kind == "CONTROLLED_EXPERIMENT":
+            entry_keys += entry_checks.get("when_controlled_experiment", [])
+    if activity_id == "06":
+        entry_keys += entry_checks.get(
+            "when_unavailable" if has_ref("CONFIRMATION_UNAVAILABLE")
+            else "when_confirming", []
+        )
+    missing_entry = [
+        key for key in entry_keys
+        if not isinstance(entry_refs.get(key), str) or not entry_refs[key].strip()
+    ]
+    entry_declarations_complete = not missing_entry
+    applicability_map = packet.get("human_review_applicability", {})
+    if not isinstance(applicability_map, dict):
+        raise ContractError("human_review_applicability must be an object")
+
+    def review_not_applicable(name: str) -> bool:
+        entry = applicability_map.get(name)
+        return (
+            isinstance(entry, dict)
+            and entry.get("status") == "NOT_APPLICABLE"
+            and isinstance(entry.get("reason"), str) and bool(entry["reason"].strip())
+            and isinstance(entry.get("evidence_ref"), str) and bool(entry["evidence_ref"].strip())
+        )
+
+    if activity_id == "04" and skip_declared:
+        if not isinstance(packet.get("not_applicable_evidence_ref"), str) or not packet["not_applicable_evidence_ref"].strip():
+            raise ContractError("non-method activity 04 needs an independent rationale evidence ref")
+        if execution_kind == "CONTROLLED_EXPERIMENT":
+            raise ContractError("non-method activity 04 cannot report controlled experiment")
+    required_review = {
+        "01": ["H5"], "02": ["H5"], "03": ["H6"],
+        "04": ["H6"] if review_not_applicable("H7") else ["H7"],
+        "05": ["H8"],
+        "06": ["H10"] if (has_ref("CONFIRMATION_UNAVAILABLE")
+                         and review_not_applicable("H9")) else ["H9", "H10"],
+    }[activity_id]
+    if any(name not in {"H7", "H9"} for name in applicability_map):
+        raise ContractError("only H7 and H9 are conditional review nodes")
+    if "H7" in applicability_map and not review_not_applicable("H7"):
+        raise ContractError("invalid H7 NOT_APPLICABLE declaration")
+    if "H9" in applicability_map and not review_not_applicable("H9"):
+        raise ContractError("invalid H9 NOT_APPLICABLE declaration")
+    if activity_id != "04" and "H7" in applicability_map:
+        raise ContractError("H7 applicability belongs to activity 04")
+    if activity_id != "06" and "H9" in applicability_map:
+        raise ContractError("H9 applicability belongs to activity 06")
+    if activity_id == "06" and has_ref("INDEPENDENT_CONFIRM") and review_not_applicable("H9"):
+        raise ContractError("H9 cannot be skipped when independent confirmation is claimed")
+
+    human_packet = packet.get("human_review_packet")
+    human_status = "NOT_CHECKED"
+    human_missing = required_review
+    if human_packet is not None:
+        if not isinstance(human_packet, dict):
+            raise ContractError("human_review_packet must be an object")
+        from core.human_decision_review import CONTRACT as HUMAN_CONTRACT, review as review_human
+        if human_packet.get("protocol_version") != HUMAN_CONTRACT["protocol_version"]:
+            human_status = "LEGACY_OR_UNSUPPORTED_NOT_VERIFIED"
+        else:
+            human_missing = []
+            for name in required_review:
+                candidate = dict(human_packet)
+                candidate["target"] = name
+                try:
+                    decision = review_human(candidate)
+                except ValueError as exc:
+                    raise ContractError(f"invalid human_review_packet: {exc}") from exc
+                if not decision["can_advance_declarations_only"]:
+                    human_missing.append(name)
+            human_status = ("DECLARED_COMPLETE_NOT_AUTHENTICATED"
+                            if not human_missing else "DECLARED_INCOMPLETE")
+    human_declared_complete = human_status == "DECLARED_COMPLETE_NOT_AUTHENTICATED"
     declared_complete = not (
         missing or unresolved_critical or malformed or missing_outputs
         or missing_alternatives or missing_path_deliverables
         or contradictory_confirmation or skip_declared
     )
     unavailable = activity_id == "06" and has_ref("CONFIRMATION_UNAVAILABLE")
+    # Legacy handoff completeness remains evidence/deliverables only; the new
+    # stage disposition cannot silently promote it to entry or permission PASS.
+    non_method_scope_ready = (
+        skip_declared and review_not_applicable("H7")
+        and entry_declarations_complete and human_declared_complete
+    )
+    full_scope_ready = (
+        declared_complete and entry_declarations_complete
+        and human_declared_complete and not skip_declared
+        and (activity_id != "04" or execution_kind != "UNSPECIFIED")
+    )
     return {
         "activity_id": activity_id,
         "contract_version": contract["contract_version"],
@@ -213,6 +312,16 @@ def review_activity_handoff(packet: dict) -> dict:
         "missing_evidence_path_deliverables": missing_path_deliverables,
         "contradictory_confirmation_outputs": contradictory_confirmation,
         "human_review_nodes": spec["human_review"],
+        "required_human_review_declarations": required_review,
+        "human_review_declarations_status": human_status,
+        "human_review_declarations_missing": human_missing,
+        "missing_entry_evidence_declarations": missing_entry,
+        "entry_declarations_complete_not_authenticated": entry_declarations_complete,
+        "declared_activity_ready_not_authenticated": full_scope_ready,
+        "declared_non_method_scope_ready_not_authenticated": non_method_scope_ready,
+        "non_method_disposition": ("JUSTIFIED_NOT_APPLICABLE_DECLARED"
+                                  if skip_declared else "ACTIVE"),
+        "execution_kind": execution_kind if activity_id == "04" else None,
         "parallel_science_activities": spec["allowed_parallel_activities"],
         "declared_handoff_complete_not_verified": declared_complete,
         "justified_non_method_skip_declared": skip_declared,
@@ -220,8 +329,9 @@ def review_activity_handoff(packet: dict) -> dict:
         "real_evidence_and_user_message_authentication_required": True,
         "scientific_truth_verified": False,
         "authorizes_download_fitting_sealed_figures_or_writing": False,
-        "note": "Structural review of untrusted declarations only. Check original artifacts, "
-                "actual human choices and separate operation permissions. UNKNOWN/NOT_RUN "
-                "must not be upgraded to positive evidence. A recorded unavailable "
-                "confirmation does not certify the Claim.",
+        "note": "Structural review of untrusted declarations only. Entry refs and H "
+                "packet are not authenticated; declared readiness NEVER authorizes "
+                "downloads, fitting, SEALED, figures or writing. UNKNOWN/NOT_RUN "
+                "must not become positive science; an unavailable confirmation "
+                "does not confirm a Claim.",
     }
