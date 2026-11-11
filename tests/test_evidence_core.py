@@ -27,12 +27,68 @@ class ContractTests(unittest.TestCase):
         del obj["sample_ids_hash"]
         with self.assertRaises(ContractError):
             validate_run(obj)
+        with self.assertRaisesRegex(ContractError, "Run records are empirical"):
+            validate_run(dict(run_record(), evidence_path="NON_DATA"))
 
     def test_claim_evidence_required(self):
         bad = {"claim_id":"c1","task_id":"task1","claim_text":"new mechanism",
                "status":"SUPPORTED","evidence_run_ids":[],"artifact_refs":[]}
         with self.assertRaises(ContractError):
             validate_claim(bad)
+
+    def test_non_data_claim_path_needs_bounded_real_evidence(self):
+        proof = {
+            "claim_id": "th1", "task_id": "theory_task",
+            "claim_text": "Bounded theorem", "status": "SUPPORTED",
+            "evidence_path": "NON_DATA", "evidence_type": "THEORETICAL_PROOF",
+            "claim_scope": "Under explicitly named assumptions",
+            "assumptions_ref": "assumptions.md",
+            "strongest_alternative": "different assumptions",
+            "evidence_refs": ["proof.md"], "artifact_refs": ["proof.md"],
+        }
+        self.assertEqual(validate_claim(proof)["evidence_path"], "NON_DATA")
+        for missing in ("evidence_refs", "assumptions_ref", "claim_scope", "evidence_type"):
+            with self.subTest(missing=missing):
+                invalid = dict(proof)
+                invalid.pop(missing)
+                with self.assertRaises(ContractError):
+                    validate_claim(invalid)
+        initial = dict(proof, status="HYPOTHESIZED")
+        initial.pop("assumptions_ref")
+        self.assertEqual(validate_claim(initial)["status"], "HYPOTHESIZED")
+        improper = dict(proof, evidence_run_ids=["fake_run"])
+        with self.assertRaisesRegex(ContractError, "may not disguise"):
+            validate_claim(improper)
+        mixed = dict(proof, evidence_path="MIXED")
+        with self.assertRaises(ContractError):
+            validate_claim(mixed)
+
+    def test_non_data_confirmation_is_not_empirical_generalization(self):
+        base = {
+            "claim_id": "th1", "task_id": "t1",
+            "claim_text": "Domain bounded result", "status": "CONFIRMED",
+            "evidence_path": "NON_DATA", "evidence_type": "SIMULATION",
+            "claim_scope": "Only parameterized simulation conditions",
+            "assumptions_ref": "assumptions.md", "strongest_alternative": "domain shift",
+            "evidence_refs": ["sim_report.md"], "artifact_refs": ["sim_report.md"],
+            "independent_validation_refs": ["independent_sim.md"],
+            "confirmation_protocol_ref": "frozen_protocol_v1",
+            "confirmation_scope": "SIMULATION_DOMAIN_ONLY",
+            "independence_limit": "shared simulator assumptions",
+        }
+        validate_claim(base)
+        with self.assertRaises(ContractError):
+            validate_claim(dict(base, confirmation_scope="EMPIRICAL_GENERALIZATION"))
+        with self.assertRaises(ContractError):
+            validate_claim(dict(base, independent_validation_refs=[]))
+        with self.assertRaisesRegex(ContractError, "separate artifact"):
+            validate_claim(dict(base, independent_validation_refs=["sim_report.md"]))
+        with self.assertRaises(ContractError):
+            validate_claim(dict(base, evidence_type="AUDITED_MECHANISM",
+                                confirmation_scope="EMPIRICAL_GENERALIZATION"))
+        theorem = dict(base, evidence_type="THEORETICAL_PROOF",
+                       confirmation_scope="THEOREM_SCOPE_ONLY")
+        validate_claim(theorem)
 
     def test_comparison_rejects_sealed(self):
         with self.assertRaisesRegex(ContractError, "sealed"):
@@ -118,6 +174,43 @@ class StateTests(unittest.TestCase):
         record_event(self.root, "run", artifact="r1.json")
         record_event(self.root, "claim", artifact="claim.json")
         self.assertEqual(status(self.root)["evidence_count"], 2)
+
+    def test_non_data_claim_event_uses_real_fingerprinted_sources(self):
+        for name in ("assumptions.md", "proof.md", "independent.md"):
+            (self.root / name).write_text("reviewable " + name, encoding="utf-8")
+        claim = {
+            "claim_id": "c_theorem", "task_id": "theorem1", "claim_text": "A conditional lemma",
+            "status": "CONFIRMED", "evidence_path": "NON_DATA",
+            "evidence_type": "THEORETICAL_PROOF", "claim_scope": "bounded theorem only",
+            "assumptions_ref": "assumptions.md", "strongest_alternative": "weaker theorem",
+            "evidence_refs": ["proof.md"], "artifact_refs": ["proof.md"],
+            "independent_validation_refs": ["independent.md"],
+            "confirmation_scope": "THEOREM_SCOPE_ONLY",
+            "confirmation_protocol_ref": "frozen_review_1",
+            "independence_limit": "shared formal assumptions",
+        }
+        (self.root / "c_theorem.json").write_text(json.dumps(claim), encoding="utf-8")
+        record_event(self.root, "claim", artifact="c_theorem.json")
+        self.assertEqual(status(self.root, deep=True)["evidence_count"], 1)
+        self.assertIsNone(status(self.root)["latest_valid_run_id"])
+        (self.root / "proof.md").write_text("tampered", encoding="utf-8")
+        with self.assertRaisesRegex(ContractError, "fingerprint"):
+            status(self.root, deep=True)
+
+    def test_non_data_claim_event_rejects_missing_real_evidence_file(self):
+        (self.root / "assumptions.md").write_text("assumptions", encoding="utf-8")
+        (self.root / "proof.md").write_text("proof", encoding="utf-8")
+        claim = {
+            "claim_id": "c_missing", "task_id": "theory1", "claim_text": "claim",
+            "status": "SUPPORTED", "evidence_path": "NON_DATA",
+            "evidence_type": "THEORETICAL_PROOF", "claim_scope": "theorem only",
+            "assumptions_ref": "assumptions.md", "strongest_alternative": "counterexample",
+            "evidence_refs": ["missing_independent_proof.md"],
+            "artifact_refs": ["proof.md"],
+        }
+        (self.root / "c_missing.json").write_text(json.dumps(claim), encoding="utf-8")
+        with self.assertRaisesRegex(ContractError, "artifact path missing"):
+            record_event(self.root, "claim", artifact="c_missing.json")
 
     def test_writer_lock_blocks_mutations(self):
         path = self.root / ".evidence-write.lock"

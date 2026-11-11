@@ -42,7 +42,7 @@
 
 **局部回退（不得保留失效的下游批准）**：D1/真值/许可与研究要求冲突→重开H4；科学问题变动→H3/H5；Task或预测前合法输入/评价变动→H6；主要机制变化→H7；主Claim/增投/STOP→H8；独立确认协议/资格变化→H9。若H4失效，原依赖该D1的H5及后续Task/机制/Claim/确认**暂停沿用**，须先用新证据核相容性，不能只把H4改成新的库而默默复用全部下游批准；同理，上游决定变更后所有依赖结果先标待复核，而非全部机械重新搜索。保留原始用户选择、影响链、旧Run及不依赖该变化的合法只读工作。**上游重新确认后也不能一次清空下游待复核项**：例如新H4已选，但旧H5/H6仍依赖旧D1时，至少将H5继续标记待复核；只有用新来源逐项重新确认实际相容性，才能恢复对应下游选择。
 
-**六活动交接**：固定的进入、证据、交付及回退关系见 [research_activity_protocol.v1.json](contracts/research_activity_protocol.v1.json)；科学判断、权限仍以本文件及原始证据为准。只核本轮受影响节点、真实用户选择、重要反证与合法权限。合同 PASS 不认证科学、人工授权或实际执行。
+**六活动交接**：科研义务见 [research_activity_protocol.v1.json](contracts/research_activity_protocol.v1.json)。交接字段、活动进入证据、H 节点选择与**实际操作授权**分开；仅声明齐备不等于合法推进。理论/仿真 Claim 使用有界 `NON_DATA` 证据与独立核验，不伪造 Run/SEALED；实证 Run 规则不放宽。H7/H9 的不适用须有理由、来源且不能冒充成功。
 
 **决策记忆**：使用既有 `RESEARCH_RECORD.md` 当前快照和第5节历史，`STATE` 只存指针；简记 `H_ID | AI_RECOMMENDATION+EVIDENCE | USER_CHOICE_OR_DELEGATION+ORIGINAL_MESSAGE_REF | DEPENDENCY | SCOPE/COST | REOPEN_TRIGGER`。缺真实消息写UNKNOWN，不能由Agent代填“用户已批准”。人工科研选择与下载、安装、拟合、SEALED、费用、绘图、写稿、外传的**独立执行授权分离**；不新增第七科研活动、日志或状态机。调用细则见 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)。
 
