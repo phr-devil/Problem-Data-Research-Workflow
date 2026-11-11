@@ -80,7 +80,15 @@
         "EMPIRICAL": "D1 official metadata, credible truth/independent units and predownload science fit",
         "NON_DATA": "auditable PROOF_PATH, assumptions and resource/validation conditions"
       },
-      "notes": "H3 provisional question, H4 science resource choice, H5 final question; H4 is never download authorization."
+      "notes": "H3 provisional question, H4 science resource choice, H5 final question; H4 is never download authorization.",
+      "path_required_deliverables": {
+        "EMPIRICAL": [
+          "DATA_PORTFOLIO"
+        ],
+        "NON_DATA": [
+          "PROOF_PATH"
+        ]
+      }
     },
     "02": {
       "name": "Data acceptance and scientific observation",
@@ -131,7 +139,17 @@
         "EMPIRICAL": "data manifest and legal DEV analysis; no SEALED distributions",
         "NON_DATA": "assumptions, proof obligations, simulator/domain and independently checkable evidence"
       },
-      "notes": "DATA_ACQUIRED_VERIFIED means readable files only, not scientifically valid data; no reliable pattern is an acceptable honest finding."
+      "notes": "DATA_ACQUIRED_VERIFIED means readable files only, not scientifically valid data; no reliable pattern is an acceptable honest finding.",
+      "path_required_deliverables": {
+        "EMPIRICAL": [
+          "DATA_MANIFEST",
+          "DATA_INSIGHT_CARD"
+        ],
+        "NON_DATA": [
+          "PROOF_EVIDENCE_CARD",
+          "PROOF_OBSERVATION_CARD"
+        ]
+      }
     },
     "03": {
       "name": "Falsifiable primary Task",
