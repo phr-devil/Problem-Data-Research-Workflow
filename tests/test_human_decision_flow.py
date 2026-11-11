@@ -79,6 +79,59 @@ class HumanDecisionFlowTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             review(packet("H11"))
 
+def test_invalidated_d1_blocks_old_final_topic_and_task(self):
+        decisions = {s: user(s) for s in ("H1", "H2", "H3", "H4", "H5", "H6")}
+        p = packet("H7", decisions)
+        self.assertEqual(review(p)["result"], "DECLARED_DEPENDENCIES_PRESENT_NOT_AUTHENTICATED")
+        p["invalidated_decisions"] = ["H4"]
+        result = review(p)
+        self.assertEqual(result["result"], "REVIEW_REQUIRED")
+        self.assertEqual(result["missing_prerequisites"], ["H4", "H5", "H6"])
+        self.assertEqual(result["stale_declarations"], ["H4", "H5", "H6"])
+        self.assertEqual(result["target_blocked_by_reopening"], ["H4"])
+
+    def test_reopened_target_cannot_be_silently_reapproved(self):
+        choices = {s: user(s) for s in ("H1", "H2", "H3", "H4", "H5")}
+        p = packet("H5", choices)
+        p["invalidated_decisions"] = ["H5"]
+        r = review(p)
+        self.assertEqual(r["missing_prerequisites"], [])
+        self.assertEqual(r["result"], "REVIEW_REQUIRED")
+        self.assertEqual(r["target_blocked_by_reopening"], ["H5"])
+
+    def test_invalidated_sibling_does_not_invent_dependency(self):
+        choices = {s: user(s) for s in ("H1", "H2", "H3", "H4", "H5", "H6", "H8")}
+        p = packet("H10", choices)
+        p["invalidated_decisions"] = ["H7"]  # optional algorithm route
+        r = review(p)
+        self.assertEqual(r["missing_prerequisites"], [])
+        self.assertEqual(r["result"], "DECLARED_DEPENDENCIES_PRESENT_NOT_AUTHENTICATED")
+        self.assertEqual(r["stale_declarations"], [])
+
+    def test_reopening_metadata_must_be_valid(self):
+        for value in ("H4", ["H4", "H4"], ["H11"], [None]):
+            with self.subTest(invalidated=value):
+                p = packet("H5", {"H1": user("H1")})
+                p["invalidated_decisions"] = value
+                with self.assertRaises(ValueError):
+                    review(p)
+
+    def test_prominent_entrypoint_and_heading_namespace(self):
+        read = lambda p: (ROOT / p).read_text(encoding="utf-8")
+        for p in ("README.md", "START.md", "AGENTS.md", "WORKFLOW.md"):
+            with self.subTest(file=p):
+                self.assertIn("USER_DEEP_PARTICIPATION", read(p))
+                self.assertIn("H4", read(p))
+        homepage = read("README.md")
+        self.assertNotIn("方向确定后立即自主选库", homepage)
+        self.assertNotIn("无需再次让用户选择数据库", homepage)
+        self.assertIn("PROOF_PATH", homepage)
+        for p in ("WORKFLOW.md", "AGENTS.md", "templates/PAPER_BLUEPRINT.md"):
+            with self.subTest(namespace=p):
+                self.assertIn("REVIEW:H", read(p))
+                self.assertIn("HEADING:H", read(p))
+        self.assertIn("invalidated_decisions", read("core/README.md"))
+
     def test_documents_have_human_choice_at_each_owner(self):
         rules = {
             "WORKFLOW.md": ("USER_DEEP_PARTICIPATION", "H1", "H10", "HUMAN_REVIEW_PENDING"),

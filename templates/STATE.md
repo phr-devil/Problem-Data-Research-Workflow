@@ -18,7 +18,7 @@
 - PAPER_BLUEPRINT_REF: <论文一级/二级标题、各节要点/证据缺口的 PAPER_BLUEPRINT.md；方向未明可 NONE>
 
 - HUMAN_REVIEW_CURRENT: <可选；新项目默认 `USER_DEEP_PARTICIPATION`，当前 H1–H10 节点/已确认或明确委托及原始消息指针；未决定 `HUMAN_REVIEW_PENDING` 仅是文字注记，不是新 CLI 状态>
-- HUMAN_DECISION_REF: <对应 RESEARCH_RECORD.md 当前快照与第5节事件，记录依赖和局部重开；未经消息核实不视为批准，操作AUTH仍看原始用户指令>
+- HUMAN_DECISION_REF: <对应 RESEARCH_RECORD.md 当前快照与第5节事件，记录依赖、局部重开和待复核下游；审核节点写 REVIEW:H#，论文章节Markdown层级写 HEADING:H#，不得混用；未经消息核实不视为批准，操作AUTH仍看原始用户指令>
 
 ## 专题索引（当前涉及才添加，其他省略）
 - SEARCH_TRACE: <查询来源/日期/覆盖缺口；SEARCH_PARTIAL>

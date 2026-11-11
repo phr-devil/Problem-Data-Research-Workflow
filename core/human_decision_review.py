@@ -66,11 +66,29 @@ def review(packet: dict) -> dict:
             continue
         present.add(name)
 
+    # A previously declared choice may be obsolete after a change in upstream
+    # truth, resource, task, or protocol. Only the supplied *declarations* are
+    # checked here; an Agent must inspect real evidence to identify reopenings.
+    invalidated = packet.get("invalidated_decisions", [])
+    if (not isinstance(invalidated, list)
+            or any(step not in STEPS for step in invalidated)
+            or len(set(invalidated)) != len(invalidated)):
+        raise ValueError("invalidated_decisions must be distinct H1..H10 IDs")
+    invalidated_set = set(invalidated)
+    stale = {
+        step for step in present
+        if step in invalidated_set
+        or bool(dependencies_of(step) & invalidated_set)
+    }
+    effective_present = present - stale
     required = dependencies_of(target)
-    missing = sorted(required - present, key=STEPS.index)
+    missing = sorted(required - effective_present, key=STEPS.index)
+    blocked_by_reopened = sorted(
+        invalidated_set & (required | {target}), key=STEPS.index
+    )
     result = (
         "DECLARED_DEPENDENCIES_PRESENT_NOT_AUTHENTICATED"
-        if not (missing or malformed)
+        if not (missing or malformed or blocked_by_reopened)
         else "REVIEW_REQUIRED"
     )
     return {
@@ -80,13 +98,19 @@ def review(packet: dict) -> dict:
         "malformed_declarations": sorted(malformed, key=STEPS.index),
         "pending_steps": sorted(pending, key=STEPS.index),
         "declared_completed": sorted(present, key=STEPS.index),
+        "effective_declarations_after_reopening": sorted(effective_present, key=STEPS.index),
+        "invalidated_decisions": sorted(invalidated_set, key=STEPS.index),
+        "stale_declarations": sorted(stale, key=STEPS.index),
+        "target_blocked_by_reopening": blocked_by_reopened,
         "requires_original_user_message_review": True,
         "allows_download_training_sealed_or_writing": False,
         "note": (
             "Declarations and message refs are untrusted; verify the original user messages "
             "and scientific evidence manually. This is not execution authorization, "
             "novelty certification or automatic approval. H9 requires independent "
-            "confirmation authorization; H10 never bypasses the separate writing gate."
+            "confirmation authorization; H10 never bypasses the separate writing gate. "
+            "Reopened decisions are caller declarations, not evidence that the "
+            "actual user changed their mind or that all dependent claims were found."
         ),
     }
 

@@ -10,6 +10,8 @@
 
 **人工科学决策冷启动**：新项目默认 `USER_DEEP_PARTICIPATION`；核用户原消息与已有 `RESEARCH_RECORD/STATE` 中 H1–H10 的确认/明确委托/待选及是否有新证据需要局部重开。活动01的 H1→H2→H3→H4→H5 交织现有 `BREADTH_SCAN → DEEP_FALSIFICATION → COMPETING_CHOICE`；活动03–06 仅重要 Task、机制、Claim、确认和成果收口触发 H6–H10。合法只读研究可连续，但不得自行确定尚待用户决策的主要问题或资源；原操作授权仍独立。单一权威见 [WORKFLOW.md](WORKFLOW.md)，下一轮交互见 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)。
 
+**最小防漏检查**：给下一 Agent 指令之前，对当前改变的 H 节点核 `原用户消息/有限委托 → 当前证据与最强反例 → 有效上游选择 → 独立操作授权 → 下一个合法动作`。缺原消息、上游被新数据推翻或成本/Task/Claim变化时，不把旧决定写作有效确认；仅暂停依赖部分。标识中 `REVIEW:H1` 是人工审核，论文中的 `HEADING:H1` 是Markdown标题级别；不得把既有H1/H2论文框架当人工选择。见 [WORKFLOW.md](WORKFLOW.md) 唯一主控。
+
 ## 1. 不可跨越的边界
 
 - **授权**：下载、安装、CPU/GPU 拟合、SEALED/CONFIRMATION、付费、外传、重大 Task 改变、项目 STOP/PIVOT、投稿不能由 Agent 自授；见 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)、[CONFIRMATION.md](CONFIRMATION.md)。
