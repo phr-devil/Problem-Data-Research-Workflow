@@ -79,7 +79,7 @@ class HumanDecisionFlowTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             review(packet("H11"))
 
-def test_invalidated_d1_blocks_old_final_topic_and_task(self):
+    def test_invalidated_d1_blocks_old_final_topic_and_task(self):
         decisions = {s: user(s) for s in ("H1", "H2", "H3", "H4", "H5", "H6")}
         p = packet("H7", decisions)
         self.assertEqual(review(p)["result"], "DECLARED_DEPENDENCIES_PRESENT_NOT_AUTHENTICATED")
