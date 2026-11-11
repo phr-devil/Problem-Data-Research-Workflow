@@ -3,7 +3,7 @@
 ## 1. 本次边界：先增导航，不迁权威
 
 - 唯一 Agent 默认入口：[`AGENTS.md`](../AGENTS.md)。
-- 唯一科研决策主控：[`WORKFLOW.md`](../WORKFLOW.md)；原有三循环/六活动和授权门禁不修改。
+- 唯一科研决策主控：[`WORKFLOW.md`](../WORKFLOW.md)；原有三循环/六活动保留；H6–H8改为AI主责的科学决策，H1–H5/H9/H10用户决策及SEALED/写作等独立门禁保留。
 - [`policies/README.md`](../policies/README.md) 与 [`modules/README.md`](../modules/README.md) 及其研究、论文、绘图专题索引只是轻量**路径清单**（INDEX_ONLY），无新增规则或审批。旧路径与脚本全部保留，无双份规范。
 - 研究项目内的 `RESEARCH_RECORD.md` / `PAPER_BLUEPRINT.md`、Run/STATE 和所有原始证据位置不变；原测试仍可直接访问根目录权威文档。
 - **历史科研案例统一归属**：[LESSONS/CASE_REGISTRY.md](../LESSONS/CASE_REGISTRY.md) 是项目成功/失败/证据缺口的按需单一索引；细节与最终事实仍以用户项目原始 Run/归档为准。RWF 仅链接此索引，不复制，不纳入 AGENTS 默认预读。
@@ -17,7 +17,7 @@
 2. 用 `AGENTS.md` 的现成直接路由选一个相关权威文件；若分类仍不明确，**才**查模块索引。不得把“入口 → 索引 → 所有模块”当成必经步骤。
 3. 分清原始来源、权限、方法与样式：科学事实由真实合法 Run/Methods 支持；权限由用户实际请求和原权威文件控制；索引和主题文件不能授权操作。
 4. 仅按变更影响范围更新当前科研/论文文件并执行必要测试；图片任务始终保持明确出图许可，正式稿件保持独立写作门禁。
-5. 输出新增证据、判断、未解决项和下一合法行动；不产生第三份科研日志，不自动画图、写稿或训练。
+5. 输出新增证据、判断、未解决项和下一合法行动；不产生第三份科研日志，不自动画图或写稿；只有H5已确认、DEV合法就绪且安全非付费本地自主范围有效才可自动训练。
 
 ## 3. 后续增量维护
 
@@ -45,12 +45,14 @@
 
 | 稳定追踪 ID（仅维护定位，不增CLI状态或审批） | 规则的唯一权威与适用触发 | 反例验证重点 |
 |---|---|---|
-| `AUTH-EXEC` | [WORKFLOW.md](../WORKFLOW.md) 权限边界 + [NEXT_ACTION_POLICY.md](../NEXT_ACTION_POLICY.md) 用户原指令/下一动作；实际下载、拟合、成本、外传之前 | 未获许可时不能执行；选择课题不等于资源许可 |
+| `AUTH-EXEC` | [WORKFLOW.md](../WORKFLOW.md) 权限边界 + [NEXT_ACTION_POLICY.md](../NEXT_ACTION_POLICY.md) 用户原指令/下一动作；实际下载、拟合、成本、外传之前 | 未完成H5/DEV验收或有具体禁止时不能执行；安全非付费本地DEV训练在H5后不需逐次批准，新库/付费/危险/SEALED仍独立核 |
 | `AUTH-SEALED` | [CONFIRMATION.md](../CONFIRMATION.md)；访问/复核独立池之前 | SEALED不能替代DEV选模或自动开启 |
 | `AUTH-WRITE` | [WRITING_GATE.md](../WRITING_GATE.md)；正式标题/摘要/正文之前 | 蓝图或科研成功不自动解锁 |
 | `AUTH-FIGURE` | [FIGURE_POLICY.md](../FIGURE_POLICY.md)；生成/重绘图片之前 | 未明确要求不得主动出图 |
 | `EVIDENCE-VALIDITY` | [WORKFLOW.md](../WORKFLOW.md) 科研总控 + [EXPERIMENT_LOOP.md](../EXPERIMENT_LOOP.md) 实验有效性；形成Claim/决定下一Probe时 | INVALID/NOT_RUN不升格成成功或负科学结论 |
 | `RULE-RELOAD` | [AGENTS.md](../AGENTS.md) 入口/版本和 [DUAL_DOCUMENT_WORKFLOW.md](../DUAL_DOCUMENT_WORKFLOW.md) 恢复；会话/Task/规则变化及敏感操作前 | 不因读过一次就假设永久生效，版本/授权不明不自我许可 |
+
+**后期决策权变更**：H1–H5/H9/H10的适用用户选择由原消息决定；H6–H8由AI以可追溯的Task/机制/Claim证据作决定，当前用户已明确取消普通本地DEV算法开发的逐次授权。机器合同采用`pd-rw-human-review-v1.2`，旧v1.1声明兼容读取但不冒充真实授权；安全/实际付费/外传/SEALED/写作/绘图与跨H5项目变化仍保留原门禁。相关证明见定向测试，本段不增加第二套执行细则。
 
 **变更前核归属**：新的科研限制先标 `HARD_GATE`（必须满足）、`CONDITIONAL`（在具体场景触发）、`HEURISTIC`（可按任务调整）；每项只有一个详细定义的owner，其他文件只保留导航或最小禁令提醒。只有真正新增独立职责才新建专题。对运行工具可控的场景，应在执行层实施权限检查；Markdown和静态CI不能证明真实拦截，未验证的机制必须如实标明。
 

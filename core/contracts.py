@@ -219,7 +219,14 @@ def review_activity_handoff(packet: dict) -> dict:
         }:
             raise ContractError("invalid execution_kind")
         if execution_kind == "CONTROLLED_EXPERIMENT":
-            entry_keys += entry_checks.get("when_controlled_experiment", [])
+            # v1 legacy original permission remains valid; new work may cite
+            # H5-backed standing local DEV autonomy. Neither string is a
+            # verified credential, so an execution adapter must recheck scope.
+            required = entry_checks.get("when_controlled_experiment", [])
+            alternatives = entry_checks.get("legacy_alternative_when_controlled_experiment", [])
+            if not any(isinstance(entry_refs.get(k), str) and entry_refs[k].strip()
+                       for k in [*required, *alternatives]):
+                entry_keys += required
     if activity_id == "06":
         entry_keys += entry_checks.get(
             "when_unavailable" if has_ref("CONFIRMATION_UNAVAILABLE")
@@ -275,7 +282,9 @@ def review_activity_handoff(packet: dict) -> dict:
         if not isinstance(human_packet, dict):
             raise ContractError("human_review_packet must be an object")
         from core.human_decision_review import CONTRACT as HUMAN_CONTRACT, review as review_human
-        if human_packet.get("protocol_version") != HUMAN_CONTRACT["protocol_version"]:
+        if human_packet.get("protocol_version") not in (
+                HUMAN_CONTRACT["protocol_version"],
+                *HUMAN_CONTRACT.get("legacy_protocol_versions", ())):
             human_status = "LEGACY_OR_UNSUPPORTED_NOT_VERIFIED"
         else:
             human_missing = []

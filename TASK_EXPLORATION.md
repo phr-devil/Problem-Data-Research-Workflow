@@ -23,7 +23,7 @@
 
 **高质量科学问题合同（不是新的硬审批表）**：按[HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md) C，研究问题须在证据足够时能说清`IMPORTANT_QUESTION | NAMED_NEAREST_GAP | PRIMARY_CLAIM | STRONGEST_ALTERNATIVE | DIFFERENT_PREDICTIONS | MINIMUM_DISCRIMINATING_TEST | CONFIRMATION_PATH | GAP_TO_Q2`。若两个解释都预测相同F1，现有实验不能识别机制；优先改成有区分性的受控对照，或只主张可验证的新能力/成本—性能规律，**不伪造因果故事**。不能因为数据最容易训练，就把普通小幅性能提高当最有价值问题；也不强迫所有方向都提出物理机制。Task冻结之前检查独立单位和合法输入、已有DEV选择史；无确认能力记UNKNOWN而非自动STOP。
 
-**H6 主任务人工科学选择**：H5 已确认首选问题且本轮必需实证资产达到 `DATA_ACQUIRED_VERIFIED`（纯理论/仿真按适用证据路径），AI 先提交 1–3 个有实质科学差异的 Task 或充分说明仅有一个，逐项比较 `SCIENTIFIC_QUESTION | LABEL_AND_PREDECISION_INPUT | INDEPENDENT_GROUP | STRONGEST_ALTERNATIVE | FALSIFIER | MINIMUM_PROBE | COST/AUTH`。H6 由用户明确选择/委托**主要 Task、中心假设与重要评价条件**，只做可行性/数据画像等已授权只读诊断不需要该节点另批。H6 不能被 `TASK_CARD` 自动生成、一个容易运行的 baseline、上一项目 H5 或 AI 的 `PREFERRED` 替代。H6 之后同 Task/同评价器的已授权实现可连续；新增标签预算、任务目标、主要评价或部署前信息使科研主张变化则重开 H6，不自动改任务/SEALED 使用资格。用户已在原始消息中明确决定的，不重复提问。
+**H6 主任务AI自主科学选择**：H5 已确认首选问题且本轮必需实证资产达到 `DATA_ACQUIRED_VERIFIED`（纯理论/仿真按适用证据路径），AI 先提交 1–3 个有实质科学差异的 Task 或充分说明仅有一个，逐项比较 `SCIENTIFIC_QUESTION | LABEL_AND_PREDECISION_INPUT | INDEPENDENT_GROUP | STRONGEST_ALTERNATIVE | FALSIFIER | MINIMUM_PROBE | COST/AUTH`。H6 由AI在已确认H5项目及合法DEV证据范围内自主确定**主要 Task、中心假设与可复现评价条件**，并保留科学选择依据；不要求用户再次选择，只做可行性/数据画像等已授权只读诊断不需要该节点另批。H6 不能被 `TASK_CARD` 自动生成、一个容易运行的 baseline、上一项目 H5 或 AI 的 `PREFERRED` 替代。H6 之后同 Task/同评价器的已授权实现可连续；新增标签预算、任务目标、主要评价或部署前信息使科研主张变化则重开 H6，不自动改任务/SEALED 使用资格。用户已在原始消息中明确决定的，不重复提问。
 
 ## 1. 系统化任务机会扫描（已有一个可信机会就开展实证）
 

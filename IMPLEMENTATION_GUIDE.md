@@ -20,7 +20,7 @@ Eval:    sample_id, group_id, y_true, y_pred, mask, metric + denominator
 Run:     run_id, parent_run, data_version, protocol_id, cost, raw_paths
 ```
 
-**顺序**：核真实开发batch与ID/标签/时钟 → 合法group split、train-only预处理 → 简单基线 → 逐样本预测及评价器 → 必要创新模块。已有有效资产直接复用，数据和预处理正确不代表科学命题成功。原始血缘、holdout与评价器默认PROTECTED；确实有错才版本化修复并重算受影响Run。用户未授权时不得下载/安装/CPU Ridge拟合/tiny-set训练/GPU更新；无参数更新的检查也须遵守对应权限。
+**顺序**：核真实开发batch与ID/标签/时钟 → 合法group split、train-only预处理 → 简单基线 → 逐样本预测及评价器 → 必要创新模块。已有有效资产直接复用，数据和预处理正确不代表科学命题成功。原始血缘、holdout与评价器默认PROTECTED；确实有错才版本化修复并重算受影响Run。H5未确认或DEV未合法验收时不得拟合；完成前期确认后，安全非付费本地可信依赖安装、CPU Ridge/tiny-set/GPU更新属于持续自主研发，不需逐次许可。新数据下载、收费或不可信安装、SEALED/外传仍须独立授权。
 
 ### 可执行TaskSpec（借鉴AI-Scientist-v3的任务评价合同，按需）
 

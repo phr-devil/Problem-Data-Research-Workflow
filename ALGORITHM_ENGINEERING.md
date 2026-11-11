@@ -48,7 +48,7 @@
 4. **构建对照候选**：按决策需要比较简单修复、机制驱动方法和学习型方案；候选数量不固定，不要求全训练。每个新机制写 `WHY_SIMPLE_BASELINE_FAILS | MISSING_ALGORITHMIC_CAPABILITY | NEW_MECHANISM | STRONGEST_SAME_INFORMATION_ALTERNATIVE | DISTINCT_PREDICTION | MINIMUM_TEST | COST/AUTH`，复用既有 `PROBE_CANDIDATE`。
 5. **四重反证**：机制是否已被具名近邻实现？无该机制是否同样有效？相同输入/标注/调参/计算预算下是否公平？能否在主张要求的独立条件下成立？任何结论按真实证据强度记录，缺强基线时标 BASELINE_PENDING。
 
-复杂模型可以是必要选择，但 Transformer/注意力/对比学习等模块叠加本身不构成论文创新。算法提案必须解释它解决哪项可验证的失败前提；经授权才进入代码、拟合与真实实验。
+复杂模型可以是必要选择，但 Transformer/注意力/对比学习等模块叠加本身不构成论文创新。算法提案必须解释它解决哪项可验证的失败前提；满足有效H5和合法DEV持续研发范围后可直接进入代码、拟合与真实实验；超范围另核门禁。
 
 ### 功能互补的成熟模块组合：一种合法的机制候选生成方式（按需）
 
@@ -61,7 +61,7 @@
 5. **复用原 PROBE**：按需在已有 `PROBE_CANDIDATE` 记录 `MODULE_A_ROLE | MODULE_B_ROLE | COUPLING_RULE | NEAREST_COMBINATION | SIMPLE_COMPOSITION_COMPARATOR | COUPLING_SPECIFIC_PREDICTION | LEGAL_BUDGET | MINIMUM_TEST`，只在组合为科研主张时填写；不是新表单/状态/审批。区分 `ENGINEERING_COMBINATION`（有效工程复用）与有待实验支持的原创耦合 Claim，不能凭新结构图自行升级贡献等级。
 
 **示例（仅概念，不是已证实创新）**：在线接触状态估计决定有限触觉观测的选择，历史预测风险反馈下一时刻的预算；如果状态切换发生时耦合策略对同预算固定选择/独立风险阈值/朴素拼接没有稳定可辨增益，应修正或放弃“耦合必需”假说。真实机器人能耗节省不能仅凭离线遮挡数据宣称。
-**H7 算法机制路线人工确认（仅重大科学投入）**：在 H6 已确定科学任务后，AI 对有实质不同科学前提的 `SIMPLE_BASELINE / PRINCIPLE_DERIVED / MODULAR_COUPLING / MEASUREMENT_OR_SYSTEM` 路线提出对照，说明最强近邻、真实失败证据（不足时 `HYPOTHESIZED`）、合法信息、区别性预言、资源与失效风险；用户选择/明确委托主要研发路线及可承担的资源范围后才把其定为研究策略。**路线选择不等于新增模型训练许可**。普通已授权 Bug 修复、超参微调、同一机制内有界比较无需逐次回到 H7；确实改变主机制、真实输入/任务、预算上限、外部依赖或科研 Claim 才定向复审。无算法作为核心贡献的测量/科学发现项目可按 H6→H8 直接评估，不强制发明网络。详见 [WORKFLOW.md](WORKFLOW.md)。
+**H7 算法机制路线AI自主决策（仍须真实科学证据）**：在 H6 已确定科学任务后，AI 对有实质不同科学前提的 `SIMPLE_BASELINE / PRINCIPLE_DERIVED / MODULAR_COUPLING / MEASUREMENT_OR_SYSTEM` 路线提出对照，说明最强近邻、真实失败证据（不足时 `HYPOTHESIZED`）、合法信息、区别性预言、资源与失效风险；AI在有效H5范围内自主选择主要研发路线和非付费本地DEV资源策略，记录强替代、可证伪预言与预计成本，必要时自行实施相应验证。**该选择不授权超H5、付费、危险操作、SEALED或正式确认**。普通已授权 Bug 修复、超参微调、同一机制内有界比较无需逐次回到 H7；确实改变主机制、真实输入/任务、预算上限、外部依赖或科研 Claim 才定向复审。无算法作为核心贡献的测量/科学发现项目可按 H6→H8 直接评估，不强制发明网络。详见 [WORKFLOW.md](WORKFLOW.md)。
 
 ## 3. 代码 Agent 的连续有界执行循环
 
@@ -69,8 +69,8 @@
 
 `READ CURRENT STATE/RUN → SELECT ONE ROUTE → CODE DIFF → TARGETED TEST → AUTHORIZED DEV RUN → INDEPENDENT METRIC/FAIRNESS REVIEW → KEEP/REPAIR/DISCARD/NARROW/PAPER_EVIDENCE`
 
-- **范围**：保留受保护数据血缘、目标标签、group split、评价器、封存确认集；只修改TaskSpec允许的 `EDITABLE`。改协议/信息预算必须创建新版本，不覆盖旧Run。外部编码 Agent 在本机实际授权范围内工作；未经许可不得安装依赖、调用网络、运行CPU/GPU训练或访问封存集。
-- **代码正确性**：先针对数据形状、mask、时间窗、标签时点、梯度/损失、预测与评价ID对齐做相关测试；获训练许可后才可tiny-set拟合、真实batch冒烟、正式DEV训练。修复 Bug 时仅重跑受影响用例；科学效果以实际DEV Run判，不写“F1必须提高”的伪单测。
+- **范围**：保留受保护数据血缘、目标标签、group split、评价器、封存确认集；只修改TaskSpec允许的 `EDITABLE`。改协议/信息预算必须创建新版本，不覆盖旧Run。外部编码 Agent 在本机实际授权范围内工作；可信来源的本地非付费依赖安装及CPU/GPU训练按H5后的`AI_DEV_AUTONOMY`自主执行；不运行不可信安装脚本、不突破主机安全/组织政策、不付费或外传，SEALED仍需独立许可。
+- **代码正确性**：先针对数据形状、mask、时间窗、标签时点、梯度/损失、预测与评价ID对齐做相关测试；在合法DEV和H5自主研发范围核实后可自行tiny-set拟合、真实batch冒烟与正式DEV训练。修复 Bug 时仅重跑受影响用例；科学效果以实际DEV Run判，不写“F1必须提高”的伪单测。
 - **训练容错**：每个Run唯一目录记录命令、环境、seed、代码commit/config、数据/协议/评价版本、stdout/stderr、逐样本预测、checkpoint和CPU/GPU/Token/人工成本（可测多少记多少）。OOM、NaN、预处理失败、系统重启先定因并保留原Run为`CRASH/INVALID/PARTIAL`，从合法checkpoint恢复；无法复现明确`NOT_RUN`，不重复全库下载或静默复写历史。
 - **预算与公平**：按本轮获授权的时间/算力上限执行；有必要才比较短/长、小/大或不同nuisance超参，同条件给强简单基线合理调优。固定墙钟时间可能不等于同等优化机会，必须按Task说明比较口径；不可仅挑最佳seed/后验切片报告收益。
 - **候选管理**：默认始终保留一个最简单可信Champion和一个不同失败前提的Challenger；旧代码/逐样本结果及失败证据永不丢失。连续实验若无新可证伪预测或投稿必要证据，暂停当前机制，而非自动停止Task；允许新证据支持的横向转题。
