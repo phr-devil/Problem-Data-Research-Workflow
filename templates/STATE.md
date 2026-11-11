@@ -17,6 +17,9 @@
 - RESEARCH_RECORD_REF: <项目关键科研过程、失败与恢复路径的 RESEARCH_RECORD.md；可复用旧文档>
 - PAPER_BLUEPRINT_REF: <论文一级/二级标题、各节要点/证据缺口的 PAPER_BLUEPRINT.md；方向未明可 NONE>
 
+- HUMAN_REVIEW_CURRENT: <可选；新项目默认 `USER_DEEP_PARTICIPATION`，当前 H1–H10 节点/已确认或明确委托及原始消息指针；未决定 `HUMAN_REVIEW_PENDING` 仅是文字注记，不是新 CLI 状态>
+- HUMAN_DECISION_REF: <对应 RESEARCH_RECORD.md 当前快照与第5节事件，记录依赖和局部重开；未经消息核实不视为批准，操作AUTH仍看原始用户指令>
+
 ## 专题索引（当前涉及才添加，其他省略）
 - SEARCH_TRACE: <查询来源/日期/覆盖缺口；SEARCH_PARTIAL>
 - SEARCH_CHOICE_REVIEW: <可选SEARCH_HANDOFF/SEARCH_DECISION.json路径：覆盖与不同前提挑战/具名原文反证/首选优于对照的理由/初筛D1适配/核心UNKNOWN；仅结构检查不认证创新；已验证未变化可复用>

@@ -8,6 +8,8 @@
 2. 冷启动、来源不明或规则变化时，在可用访问权限内核**本地 Git HEAD 与远端最新 commit**；有 `.git` 不等于已同步。不一致标 `RULE_SOURCE_STALE`，优先按确定的远端 commit 只读必要规则；未经授权不覆盖本地文件或运行 pull/rebase，获同步许可且工作树干净才允许 fast-forward。不能核远端/来源时记 `RULE_VERSION_UNVERIFIED`，**不声称最新**。同一任务只用可识别版本，简记 `RULE_REPO | RULE_COMMIT | LOADED_FILES`；版本和任务未变就复用。
 3. 决策冲突：用户原始授权优先；科研流程由 WORKFLOW 主控；科研事实以实际合法原始工件为准；专业细则仅由对应权威专题负责。既有项目直接续做，不重开选题/数据/训练。
 
+**人工科学决策冷启动**：新项目默认 `USER_DEEP_PARTICIPATION`；核用户原消息与已有 `RESEARCH_RECORD/STATE` 中 H1–H10 的确认/明确委托/待选及是否有新证据需要局部重开。活动01的 H1→H2→H3→H4→H5 交织现有 `BREADTH_SCAN → DEEP_FALSIFICATION → COMPETING_CHOICE`；活动03–06 仅重要 Task、机制、Claim、确认和成果收口触发 H6–H10。合法只读研究可连续，但不得自行确定尚待用户决策的主要问题或资源；原操作授权仍独立。单一权威见 [WORKFLOW.md](WORKFLOW.md)，下一轮交互见 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)。
+
 ## 1. 不可跨越的边界
 
 - **授权**：下载、安装、CPU/GPU 拟合、SEALED/CONFIRMATION、付费、外传、重大 Task 改变、项目 STOP/PIVOT、投稿不能由 Agent 自授；见 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)、[CONFIRMATION.md](CONFIRMATION.md)。

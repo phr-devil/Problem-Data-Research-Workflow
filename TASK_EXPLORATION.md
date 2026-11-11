@@ -21,6 +21,8 @@
 
 **高质量科学问题合同（不是新的硬审批表）**：按[HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md) C，研究问题须在证据足够时能说清`IMPORTANT_QUESTION | NAMED_NEAREST_GAP | PRIMARY_CLAIM | STRONGEST_ALTERNATIVE | DIFFERENT_PREDICTIONS | MINIMUM_DISCRIMINATING_TEST | CONFIRMATION_PATH | GAP_TO_Q2`。若两个解释都预测相同F1，现有实验不能识别机制；优先改成有区分性的受控对照，或只主张可验证的新能力/成本—性能规律，**不伪造因果故事**。不能因为数据最容易训练，就把普通小幅性能提高当最有价值问题；也不强迫所有方向都提出物理机制。Task冻结之前检查独立单位和合法输入、已有DEV选择史；无确认能力记UNKNOWN而非自动STOP。
 
+**H6 主任务人工科学选择**：H5 已确认首选问题且本轮必需实证资产达到 `DATA_ACQUIRED_VERIFIED`（纯理论/仿真按适用证据路径），AI 先提交 1–3 个有实质科学差异的 Task 或充分说明仅有一个，逐项比较 `SCIENTIFIC_QUESTION | LABEL_AND_PREDECISION_INPUT | INDEPENDENT_GROUP | STRONGEST_ALTERNATIVE | FALSIFIER | MINIMUM_PROBE | COST/AUTH`。H6 由用户明确选择/委托**主要 Task、中心假设与重要评价条件**，只做可行性/数据画像等已授权只读诊断不需要该节点另批。H6 不能被 `TASK_CARD` 自动生成、一个容易运行的 baseline、上一项目 H5 或 AI 的 `PREFERRED` 替代。H6 之后同 Task/同评价器的已授权实现可连续；新增标签预算、任务目标、主要评价或部署前信息使科研主张变化则重开 H6，不自动改任务/SEALED 使用资格。用户已在原始消息中明确决定的，不重复提问。
+
 ## 1. 系统化任务机会扫描（已有一个可信机会就开展实证）
 
 **重要且可回答的科学问题优先，先找最低可信证据锚点**：先问差异是否可重复、简单合法校准能否纠正、强简单方法究竟在哪些条件下失败。优先考虑统计、规则、线性或轻量模型与同K/同可见信息参照；确实需要复杂时空表达也可直接探索，但先设计廉价可证伪判别。分开记录LEGAL_SIGNAL（输入能否辨识）、MINIMUM_RELIABLE_RESULT（可信收益/规律）和MINIMUM_INDEPENDENT_CLAIM（近邻未覆盖的新知识/能力）；未知可探索，不能凭Oracle空间或开发集高分宣布可学/创新。
@@ -93,7 +95,7 @@
 
 **不要因想象中的期刊等级提前淘汰Task**：早期只评估数据/真值、可学信号、科学差额和下一最便宜证据；S/A/B/C稿件潜力只能在有具体Claim或初步Run时暂估，且不参与硬性选题PASS/STOP。研究任务在困难L2/L3上未成功时，检查是否留下可独立复核的窄规律/局部收益/标注成本边界；若有，移交[PAPER_FIRST.md](PAPER_FIRST.md)，不要默认继续追逐复杂模型。
 
-### 将科学问题转换为可否定的任务（不新增 TASK 审批）
+### 将科学问题转换为可否定任务（H6 科学选择，非每个 Probe 审批）
 
 对当前首选问题，仅补足 `HYPOTHESIS | STRONGEST_COMPETING_EXPLANATION | REQUIRED_OBSERVABLE_FACTORS | LEGAL_PREDECISION_INPUT | INDEPENDENT_TRUTH/GROUP | FALSIFIER | MINIMUM_DISCRIMINATING_TEST`。区分“预测能力”“机制归因”“失效规律”“新基准有效性”各自需要的真值与对照；仅能观察相关性时缩窄主张，不自动宣称因果机制。实验前记录 `IF_POS/NEG/INVALID` 会改变哪个 Task/机制/Claim 决策；负Pilot只影响该前提，不自动否决方向。最小测试是控制风险的入口，不以廉价性取代科学价值；没有下载/训练许可时仅形成计划并标 AUTH_REQUIRED。复用原 `TASK_CARD` 与 `NEXT_DISCRIMINATING_PROBE`，不得提前读取 SEALED。
 
@@ -103,7 +105,7 @@
 
 **成熟度与价值分账**：`VALUE_UNVERIFIED`≠低价值；`BASELINE_PENDING`≠不可探索；“能跑通”≠“有独立论文贡献”。优先比较：评价/真值可达性、实际科学需求、下一廉价探针的信息价值、总资源成本和已有资产。跨不同任务不可直接按 F1/AUROC 排名，也不虚构发表概率。
 
-当前执行只保留`PRIMARY_TASK`，多库资产池可在`PORTFOLIO_PIVOT_MAP`记录最多2种不同失败前提的`RESERVE_TASK`（不必提前训练），明确 `NEXT_DISCRIMINATING_PROBE`；不能要求凑满三个新算法或先有显著增益。**同一ROOT_PROBLEM有不同部署信息条件时，可用 [TASK_LADDER.md](TASK_LADDER.md) 将候选组织为L0–L3，通常先锁定一个科学价值较清楚且容易验证的L2或L1，再有界尝试更严格的L3；但层级不是科研价值分数，数据不支持就不强造。**
+H6 用户选择/委托后，当前执行只保留`PRIMARY_TASK`，多库资产池可在`PORTFOLIO_PIVOT_MAP`记录最多2种不同失败前提的`RESERVE_TASK`（不必提前训练），明确 `NEXT_DISCRIMINATING_PROBE`；不能要求凑满三个新算法或先有显著增益。**同一ROOT_PROBLEM有不同部署信息条件时，可用 [TASK_LADDER.md](TASK_LADDER.md) 将候选组织为L0–L3，通常先锁定一个科学价值较清楚且容易验证的L2或L1，再有界尝试更严格的L3；但层级不是科研价值分数，数据不支持就不强造。**
 
 ## 2.5 Task Ladder 和横向备选不是一回事
 
