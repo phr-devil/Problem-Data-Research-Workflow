@@ -7,9 +7,9 @@
 1. 先核当前用户目标、`USER_SCOPE` 和**原始授权**。已有项目先核编号/研究线/数据集是否指向同一真实目录，按 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 做 `PROJECT_IDENTITY_CHECK`；再从已知路径/STATE 定位 `RESEARCH_RECORD_REF`，存在才读 `RESEARCH_RECORD.md` 的**当前快照**；论文任务按需读 `PAPER_BLUEPRINT_REF` 对应 `SEC_ID`，再核相关 Run/协议/manifest。新项目再按需读 [START.md](START.md)。
 2. 冷启动、来源不明或规则变化时，在可用访问权限内核**本地 Git HEAD 与远端最新 commit**；有 `.git` 不等于已同步。不一致标 `RULE_SOURCE_STALE`，优先按确定的远端 commit 只读必要规则；未经授权不覆盖本地文件或运行 pull/rebase，获同步许可且工作树干净才允许 fast-forward。不能核远端/来源时记 `RULE_VERSION_UNVERIFIED`，**不声称最新**。同一任务只用可识别版本，简记 `RULE_REPO | RULE_COMMIT | LOADED_FILES`；版本和任务未变就复用。
 3. 决策冲突：用户原始授权优先；科研流程由 WORKFLOW 主控；科研事实以实际合法原始工件为准；专业细则仅由对应权威专题负责。既有项目直接续做，不重开选题/数据/训练。
-4. **适用规则重核（不是全库重读）**：新会话/Agent接手或上下文压缩后，先核 `RULE_REPO | RULE_COMMIT | LOADED_FILES` 与当前任务的可恢复证据；切换项目、Task/活动、版本或受影响协议时，只重核新增适用的权威专题；下载、安装、CPU/GPU拟合、SEALED、绘图、写稿、费用、投稿等操作**执行前**再核对应规则和原始许可的对象/时效/资源范围。已知版本、任务、权限与证据未变时复用；不能确认受限操作的许可时停止该操作并定位原指示，允许无依赖只读工作。Markdown被阅读过不等于工具实际具备权限拦截或Agent会永久记忆。
+4. **适用规则重核（不是全库重读）**：新会话/Agent接手或上下文压缩后，先核 `RULE_REPO | RULE_COMMIT | LOADED_FILES` 与当前任务的可恢复证据；切换项目、Task/活动、版本或受影响协议时，只重核新增适用的权威专题；新数据下载、收费/危险安装、超范围CPU/GPU、SEALED、绘图、写稿、费用、投稿等受限操作**执行前**再核对应规则和原始许可；H5内安全非付费本地DEV安装和CPU/GPU拟合按 [WORKFLOW.md](WORKFLOW.md) 的 `AI_DEV_AUTONOMY` 自主执行，无须逐次确认。已知版本、任务、权限与证据未变时复用；不能确认受限操作的许可时停止该操作并定位原指示，允许无依赖只读工作。Markdown被阅读过不等于工具实际具备权限拦截或Agent会永久记忆。
 
-**人工科学决策冷启动**：新项目默认 `USER_DEEP_PARTICIPATION`；核用户原消息与已有 `RESEARCH_RECORD/STATE` 中 H1–H10 的确认/明确委托/待选及是否有新证据需要局部重开。活动01的 H1→H2→H3→H4→H5 交织现有 `BREADTH_SCAN → DEEP_FALSIFICATION → COMPETING_CHOICE`；活动03–06 仅重要 Task、机制、Claim、确认和成果收口触发 H6–H10。合法只读研究可连续，但不得自行确定尚待用户决策的主要问题或资源；原操作授权仍独立。单一权威见 [WORKFLOW.md](WORKFLOW.md)，下一轮交互见 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)。
+**人工科学决策冷启动**：新项目默认 `USER_DEEP_PARTICIPATION`；核用户原消息与已有 `RESEARCH_RECORD/STATE` 中 H1–H10 的确认/明确委托/待选及是否有新证据需要局部重开。活动01的 H1→H2→H3→H4→H5 交织现有 `BREADTH_SCAN → DEEP_FALSIFICATION → COMPETING_CHOICE`；活动03–05的H6–H8是证据驱动的AI自主科学决策；H9/H10才保留适用的用户节点。合法只读研究可连续，但不得自行确定尚待用户决策的主要问题或资源；原操作授权仍独立。单一权威见 [WORKFLOW.md](WORKFLOW.md)，下一轮交互见 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)。
 
 **最小防漏检查**：核当前活动、适用 H 节点、原证据和实际操作许可；按 [research_activity_protocol.v1.json](contracts/research_activity_protocol.v1.json) 将进入条件、H 决定、交接声明分别审查，禁止用 `declared_activity_ready_not_authenticated` 自授行动。H7/H9 可据证据说明不适用；`REVIEW:H1` ≠ `HEADING:H1`。
 
@@ -17,7 +17,7 @@
 
 ## 1. 不可跨越的边界
 
-- **授权**：下载、安装、CPU/GPU 拟合、SEALED/CONFIRMATION、付费、外传、重大 Task 改变、项目 STOP/PIVOT、投稿不能由 Agent 自授；见 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)、[CONFIRMATION.md](CONFIRMATION.md)。
+- **授权**：前期H1–H5完成且DEV合法就绪后，AI在H5范围内有持续的安全非付费本地算法研发自主权（H6–H8、可信依赖安装、CPU/GPU拟合、测试、机制和DEV Claim调整、分支HOLD），不逐次问；更具体的有效项目禁令优先。新库下载、付费/云资源、危险操作、外传、SEALED/正式确认、出图、写稿、投稿、超H5主要研究目标或项目整体STOP/PIVOT仍由对应独立门禁控制。见 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)、[CONFIRMATION.md](CONFIRMATION.md)。
 - **科学价值**：证据严格、构思开放、成本受控；允许科学矛盾、反向假说、跨学科原理、新机制/评价，不以更名、叠模块、DEV 刷分、检索零命中或 LLM 自评认证创新。JCR **Q2+** 是既有最低投稿潜力目标，优先 Q1；详细见 [HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md) / [Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)。**CI 仅证明规则/程序行为**，不证明真实科研能力。
 - **论文**：`RESEARCH_RECORD.md` 与 `PAPER_BLUEPRINT.md` 只做增量记录和章节规划；正式标题、摘要、正文/初稿默认 `WRITING_LOCKED`，须科研成果总结经用户审查后另行明确授权。见 [WRITING_GATE.md](WRITING_GATE.md) / [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md)。
 - **图片**：仅用户明确要求绘制或修改指定图片时出图；图件与写作授权相互独立。见 [FIGURE_POLICY.md](FIGURE_POLICY.md)。

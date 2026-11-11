@@ -19,10 +19,10 @@
   ],
   "general_rules": [
     "Stable activity responsibilities and evidence interfaces; scientific hypotheses, candidate algorithms, probes and experiments are not prescribed.",
-    "All activity evidence and user-review declarations remain separate from independently verified action authorization.",
+    "Scientific H1-H5 and H9/H10 user decisions, H6-H8 agent science decisions, activity evidence, and actual operation scope are separate; structural declarations do not authenticate access.",
     "UNKNOWN/NOT_RUN/INVALID are legitimate findings and must be reported, not filled with fake results; they cannot satisfy a critical established-evidence prerequisite.",
     "Reuse unchanged historical artifacts and user choices. Reopen only affected dependencies when provenance, truth, task, claim or protocol changes.",
-    "No automatic diagrams, figures, data downloads, CPU/GPU fitting, SEALED access, manuscript writing or submissions.",
+    "No automatic figures, new data downloads, SEALED access, manuscript writing, external transfer, paid/unsafe operations or submissions. Following actual H1-H5 project selection and safe verified DEV acceptance, in-scope local non-paid CPU/GPU fitting and code/dependency development are agent-autonomous with required science and provenance checks; explicit project holds override.",
     "Activity 05 may run alongside activity 04 as soon as meaningful valid evidence exists, not only after final algorithm optimization.",
     "The structural handoff flag alone never satisfies entry_requirements, user review, or original operation authorization. Distinguish declared entry evidence, declared H choices and actual permission source.",
     "For theoretical/simulation Claim, do not fabricate empirical Run IDs; use the bounded NON_DATA claim evidence path with independent local verification references."
@@ -175,7 +175,7 @@
       "name": "Falsifiable primary Task",
       "entry_requirements": [
         "compatible H5 scientific question and activity 02 scientific basis",
-        "H6 choice for formal primary Task"
+        "H6 agent-owned scientific Task choice within user-selected H5 project; evidence and legal-input checks still mandatory"
       ],
       "mandatory_evidence": [
         {
@@ -227,7 +227,7 @@
       "name": "Method development and valid experiments",
       "entry_requirements": [
         "H6 Task or recorded non-algorithm relevance decision",
-        "separate CPU/GPU or other resource authorization for any controlled experiment"
+        "Local non-paid, safe CPU/GPU DEV fitting follows standing algorithm autonomy after H5 and verified data; check explicit project holds, resource/host limits and protected data. High-risk/paid/out-of-scope operations require independent consent."
       ],
       "mandatory_evidence": [
         {
@@ -269,18 +269,21 @@
         "EMPIRICAL": "legal DEV Run, strong fair baseline, selection history and real cost",
         "NON_DATA": "mathematical, simulation or measurement mechanism and audit references"
       },
-      "notes": "H7 only for major mechanism/cost decision; ordinary approved debugging and optimization need no repeated review. May be declared NOT_APPLICABLE only for a justified non-method scientific claim.",
+      "notes": "H7 agent-owned major algorithm mechanism/scientific strategy decision; routine and major in-scope DEV experiments need no user reconfirmation. Justified non-method Claim can declare H7 NOT_APPLICABLE. Scientific and safety/provenance checks remain mandatory.",
       "entry_checks": {
         "all": [
           "h6_task_or_non_method_scope_ref"
         ],
         "when_controlled_experiment": [
+          "dev_execution_scope_ref"
+        ],
+        "legacy_alternative_when_controlled_experiment": [
           "original_execution_permission_ref"
         ]
       },
       "applicability_contract": {
         "NOT_APPLICABLE": "Requires not_applicable_reason and not_applicable_evidence_ref; declares scope exclusion, not research success or H7 approval.",
-        "H7_CONDITIONAL": "H7 needed only for a major mechanism/experimental strategy choice, otherwise provide a documented H7 NOT_APPLICABLE applicability reason."
+        "H7_CONDITIONAL": "H7 is an agent-owned evidence-backed decision checkpoint for major algorithm/strategy changes, not a user permission. A justified non-method Claim can declare NOT_APPLICABLE."
       }
     },
     "05": {
@@ -329,7 +332,7 @@
         "EMPIRICAL": "real DEV and group-level Run evidence with limits and negatives",
         "NON_DATA": "valid proof, mechanism or critical synthesis evidence and counterexamples"
       },
-      "notes": "Evidence harvesting and articulation are not new fitting or manuscript writing; Claim may be provisional, not CONFIRMED.",
+      "notes": "H8 agent-owned DEV Claim, narrowing, next-science-investment and branch HOLD decisions within approved H5 scope; project-level STOP/pivot outside H5 or formal independent claims still need user decision or independent evidence.",
       "entry_checks": {
         "all": [
           "credible_scientific_evidence_ref"

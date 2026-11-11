@@ -17,7 +17,8 @@ STEPS = tuple(CONTRACT["steps"])
 DEPENDENCIES = {
     step: tuple(spec["prerequisites"]) for step, spec in CONTRACT["steps"].items()
 }
-DECISIONS = {"USER_CONFIRMED", "USER_DELEGATED", "PENDING"}
+DECISIONS = {"USER_CONFIRMED", "USER_DELEGATED", "AGENT_DECIDED", "PENDING"}
+AGENT_OWNED = {"H6", "H7", "H8"}
 UNDECIDED = {"", "UNKNOWN", "UNDECIDED", "PENDING", "TBD", "N/A"}
 
 
@@ -45,9 +46,10 @@ def review(packet: dict) -> dict:
         raise ValueError("decisions must be an H-ID keyed object")
 
     protocol_version = packet.get("protocol_version")
-    if protocol_version not in (None, CONTRACT["protocol_version"]):
+    accepted = (None, CONTRACT["protocol_version"], *CONTRACT.get("legacy_protocol_versions", ()))
+    if protocol_version not in accepted:
         raise ValueError("Unsupported human review protocol version")
-    strict = protocol_version == CONTRACT["protocol_version"]
+    strict = protocol_version is not None
     present = set()
     malformed = []
     pending = set()
@@ -60,13 +62,27 @@ def review(packet: dict) -> dict:
         if entry["kind"] == "PENDING":
             pending.add(name)
             continue
-        if not isinstance(entry.get("original_user_message_ref"), str) or not entry["original_user_message_ref"].strip():
-            malformed.append(name)
-            continue
-        key = "chosen_option" if entry["kind"] == "USER_CONFIRMED" else "delegated_scope"
-        if not isinstance(entry.get(key), str) or not entry[key].strip():
-            malformed.append(name)
-            continue
+        # For H6-H8, the Agent owns technical decisions, but must retain an
+        # audit pointer, H5 source-scope pointer and supporting evidence. This
+        # validator checks declarations, not the authenticity of either pointer.
+        if entry["kind"] == "AGENT_DECIDED":
+            if (protocol_version != CONTRACT["protocol_version"]
+                    or name not in AGENT_OWNED
+                    or not isinstance(entry.get("agent_decision_ref"), str)
+                    or not entry["agent_decision_ref"].strip()
+                    or not isinstance(entry.get("h5_scope_ref"), str)
+                    or not entry["h5_scope_ref"].strip()):
+                malformed.append(name)
+                continue
+        else:
+            if (not isinstance(entry.get("original_user_message_ref"), str)
+                    or not entry["original_user_message_ref"].strip()):
+                malformed.append(name)
+                continue
+            key = "chosen_option" if entry["kind"] == "USER_CONFIRMED" else "delegated_scope"
+            if not isinstance(entry.get(key), str) or not entry[key].strip():
+                malformed.append(name)
+                continue
         if strict:
             spec = CONTRACT["steps"][name]
             dims = entry.get("dimension_decisions")
@@ -130,6 +146,12 @@ def review(packet: dict) -> dict:
             ]
     return {
         "target": target,
+        "target_decision_owner": CONTRACT["steps"][target]["decision_owner"],
+        "target_requires_user_scientific_choice": CONTRACT["steps"][target]["decision_owner"] == "USER",
+        "agent_decision_declarations": sorted(
+            (name for name in effective_present if rows[name]["kind"] == "AGENT_DECIDED"),
+            key=STEPS.index,
+        ),
         "protocol_version": protocol_version or "legacy_unverified",
         "can_present_review_declarations_only": can_present,
         "can_advance_declarations_only": can_advance,
@@ -149,9 +171,12 @@ def review(packet: dict) -> dict:
         "allows_download_training_sealed_or_writing": False,
         "note": (
             "Declarations and message refs are untrusted; verify the original user messages "
-            "and scientific evidence manually. This is not execution authorization, "
-            "novelty certification or automatic approval. H9 requires independent "
-            "confirmation authorization; H10 never bypasses the separate writing gate. "
+            "and scientific evidence manually. H6-H8 are agent-owned scientific "
+            "decisions after valid H5 scope; a complete Agent declaration is not "
+            "an authenticated user approval or real tool-access grant. In-scope "
+            "safe local DEV algorithm work is covered by standing research autonomy, "
+            "not an H6-H8 user-signoff. H9 requires independent confirmation "
+            "authorization; H10 never bypasses the separate writing gate. "
             "Reopened decisions are caller declarations, not evidence that the "
             "actual user changed their mind or that all dependent claims were found."
         ),

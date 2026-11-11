@@ -1,5 +1,5 @@
 {
-  "protocol_version": "pd-rw-human-review-v1.1",
+  "protocol_version": "pd-rw-human-review-v1.2",
   "owner": "WORKFLOW.md",
   "new_project_mode": "USER_DEEP_PARTICIPATION",
   "new_project_sequence": [
@@ -11,9 +11,10 @@
   ],
   "notes": [
     "Stable REVIEW:H1..H10 identifiers are scientific decisions, not HEADING:H1..H3 manuscript headings.",
-    "Scientific choice is separate from downloading, installation, fitting, SEALED, illustration, submission and writing authorization.",
+    "H1–H5 and H9/H10 require original-user decisions where applicable. H6–H8 are agent-owned scientific decisions after verified H5 in-scope project setup; local, non-paid, safe DEV coding/installation/CPU/GPU fitting within the selected data/task scope needs no repeated per-operation user confirmation. A declaration never authorizes actual tool access.",
     "Dimension evidence and original user messages must be checked externally; a structural PASS never authenticates user approval.",
-    "Theory/simulation projects use PROOF_PATH in H4; H7 and H9 are conditional by scientific relevance, with reasons recorded."
+    "Theory/simulation projects use PROOF_PATH in H4; H7 and H9 are conditional by scientific relevance, with reasons recorded.",
+    "New dataset acquisition, project-level target changes/STOP, sealed/independent confirmation, actual financial charges, unsafe installations, external transfer, figures, manuscript writing and submission retain their separate gates. An explicit project-level prohibition overrides default DEV autonomy."
   ],
   "vocabularies": {
     "question_sources": [
@@ -46,7 +47,8 @@
       "evidence_minimum": [
         "user_scope_and_exclusions"
       ],
-      "reopen_when": "new scope or resource constraints"
+      "reopen_when": "new scope or resource constraints",
+      "decision_owner": "USER"
     },
     "H2": {
       "activity": "01",
@@ -63,7 +65,8 @@
         "source_route_tradeoffs",
         "contribution_route_tradeoffs"
       ],
-      "reopen_when": "user changes exploration strategy or critical new evidence"
+      "reopen_when": "user changes exploration strategy or critical new evidence",
+      "decision_owner": "USER"
     },
     "H3": {
       "activity": "01",
@@ -82,7 +85,8 @@
         "named_nearest_neighbor_or_unknown",
         "competing_risks"
       ],
-      "reopen_when": "major nearest-neighbor gap or scientific question changed"
+      "reopen_when": "major nearest-neighbor gap or scientific question changed",
+      "decision_owner": "USER"
     },
     "H4": {
       "activity": "01",
@@ -99,7 +103,8 @@
         "official_metadata_or_proof_requirements",
         "source_and_feasibility_comparison"
       ],
-      "reopen_when": "data truth, grouping, access, or proof path invalidated"
+      "reopen_when": "data truth, grouping, access, or proof path invalidated",
+      "decision_owner": "USER"
     },
     "H5": {
       "activity": "01",
@@ -118,7 +123,8 @@
         "question_data_evidence_fit",
         "strongest_unknown_and_retreat"
       ],
-      "reopen_when": "topic-data-evidence contract materially changes"
+      "reopen_when": "topic-data-evidence contract materially changes",
+      "decision_owner": "USER"
     },
     "H6": {
       "activity": "03",
@@ -135,7 +141,8 @@
         "valid_dev_or_theory_basis",
         "falsifier_and_comparator"
       ],
-      "reopen_when": "Task, inputs or evaluation change"
+      "reopen_when": "Task, legal input, or evaluation change: agent re-evaluates within H5 scope; only material project scope changes reopen H3/H5 user choices",
+      "decision_owner": "AGENT"
     },
     "H7": {
       "activity": "04",
@@ -152,8 +159,9 @@
         "failure_premise_or_mechanism_hypothesis",
         "fair_comparison_plan"
       ],
-      "reopen_when": "major method or resource choice changes",
-      "applicability": "conditional_algorithm_or_major_experimental_strategy"
+      "reopen_when": "algorithm mechanism/technical strategy or local DEV resource strategy changes: agent records evidence and cost; paid/new data/unsafe operations require separate gate",
+      "applicability": "conditional_algorithm_or_major_experimental_strategy",
+      "decision_owner": "AGENT"
     },
     "H8": {
       "activity": "05",
@@ -170,7 +178,8 @@
         "valid_results",
         "strongest_alternative"
       ],
-      "reopen_when": "claim or major investment changes"
+      "reopen_when": "claim/branch disposition or DEV reinvestment changes within H5: agent updates evidence; project-level STOP or scientific direction change requires user choice",
+      "decision_owner": "AGENT"
     },
     "H9": {
       "activity": "06",
@@ -188,7 +197,8 @@
         "authorization_separate"
       ],
       "reopen_when": "confirmation protocol or access changes",
-      "applicability": "conditional_formal_confirmation"
+      "applicability": "conditional_formal_confirmation",
+      "decision_owner": "USER"
     },
     "H10": {
       "activity": "06",
@@ -205,7 +215,11 @@
         "actual_claim_evidence",
         "writing_permission_separate"
       ],
-      "reopen_when": "science summary or publication plan changes"
+      "reopen_when": "science summary or publication plan changes",
+      "decision_owner": "USER"
     }
-  }
+  },
+  "legacy_protocol_versions": [
+    "pd-rw-human-review-v1.1"
+  ]
 }

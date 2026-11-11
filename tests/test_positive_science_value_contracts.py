@@ -45,8 +45,11 @@ class PositiveScientificValueContractTests(unittest.TestCase):
 
     def test_science_upgrades_and_respects_authorization(self):
         for label in ("高价值实验的升级条件", "CLAIM_EVIDENCE_PACKAGE",
-                      "新基准或实验范式", "须按原门禁由用户批准"):
+                      "新基准或实验范式", "AI_DEV_AUTONOMY",
+                      "新增数据库下载", "付费/云资源", "SEALED仍独立许可"):
             self.assertIn(label, self.workflow)
+        self.assertIn("H6–H8 是 AI 自主科学决策", self.workflow)
+        self.assertIn("H5内DEV Task/算法/评价方案由AI版本化调整", self.workflow)
         self.assertIn("FIGURE_POLICY.md", self.workflow)
 
     def test_cross_paradigm_evidence_is_not_falsely_equated(self):
