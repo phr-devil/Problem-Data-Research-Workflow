@@ -246,8 +246,8 @@ def review_activity_handoff(packet: dict) -> dict:
     if activity_id == "04" and skip_declared:
         if not isinstance(packet.get("not_applicable_evidence_ref"), str) or not packet["not_applicable_evidence_ref"].strip():
             raise ContractError("non-method activity 04 needs an independent rationale evidence ref")
-        if execution_kind == "CONTROLLED_EXPERIMENT":
-            raise ContractError("non-method activity 04 cannot report controlled experiment")
+        if execution_kind != "NO_CONTROLLED_EXPERIMENT":
+            raise ContractError("non-method activity 04 requires NO_CONTROLLED_EXPERIMENT declaration")
     required_review = {
         "01": ["H5"], "02": ["H5"], "03": ["H6"],
         "04": ["H6"] if review_not_applicable("H7") else ["H7"],
