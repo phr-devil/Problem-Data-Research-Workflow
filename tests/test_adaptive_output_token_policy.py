@@ -37,14 +37,14 @@ class AdaptiveOutputTokenPolicyTests(unittest.TestCase):
         self.assertIn("NEXT_AGENT_INSTRUCTION", policy)
         self.assertIn("USER_DECISION_REQUIRED", policy)
         self.assertIn("NO_NEXT_ACTION", policy)
-        self.assertIn("禁止提前给依赖该选择的执行指令", policy)
+        self.assertIn("不提供依赖待决选择的执行命令", policy)
         self.assertIn("两种结果不可混淆", policy)
 
     def test_reuse_and_risk_sensitive_checks(self):
         policy = doc("NEXT_ACTION_POLICY.md")
         for marker in ("Token", "定向读取", "复用", "按风险", "多Agent",
                        "总成本", "真实Run", "全量", "返工"):
-             self.assertIn(marker, policy)
+            self.assertIn(marker, policy)
         for gate in ("CPU/GPU", "SEALED", "写稿", "绘图", "权限"):
             self.assertIn(gate, policy)
         self.assertIn("不因省Token拒绝", policy)
