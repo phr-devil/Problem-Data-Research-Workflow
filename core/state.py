@@ -149,17 +149,25 @@ def _validate_linked(root: Path, kind: str, obj: dict, events: list[dict]) -> No
         for ref in obj["artifact_refs"].values():
             _resolve(root, ref)
     if kind == "claim" and obj["status"] in {"SUPPORTED", "CONFIRMED"}:
-        runs = {e["artifact_id"]: e for e in events if e["kind"] == "run"}
-        for run_id in obj["evidence_run_ids"]:
-            if run_id not in runs or runs[run_id]["status"] != "VALID" or runs[run_id]["task_id"] != obj["task_id"]:
-                raise ContractError(f"claim references missing/invalid/mismatched Run: {run_id}")
-        for ref in obj["artifact_refs"]:
-            _resolve(root, ref)
-        if obj["status"] == "CONFIRMED":
-            for run_id in obj["confirmation_run_ids"]:
-                event = runs.get(run_id)
-                if not event or event["task_id"] != obj["task_id"] or event["split"] != "sealed" or event["status"] != "VALID":
-                    raise ContractError(f"confirmation Run not valid/sealed: {run_id}")
+        if obj.get("evidence_path", "EMPIRICAL") == "NON_DATA":
+            # Proof/simulation artifacts must be real local files and immutable
+            # as evidence; they are not converted to synthetic training Runs.
+            for ref in (obj["artifact_refs"] + obj["evidence_refs"] +
+                        [obj["assumptions_ref"]] +
+                        (obj.get("independent_validation_refs") or [])):
+                _resolve(root, ref)
+        else:
+            runs = {e["artifact_id"]: e for e in events if e["kind"] == "run"}
+            for run_id in obj["evidence_run_ids"]:
+                if run_id not in runs or runs[run_id]["status"] != "VALID" or runs[run_id]["task_id"] != obj["task_id"]:
+                    raise ContractError(f"claim references missing/invalid/mismatched Run: {run_id}")
+            for ref in obj["artifact_refs"]:
+                _resolve(root, ref)
+            if obj["status"] == "CONFIRMED":
+                for run_id in obj["confirmation_run_ids"]:
+                    event = runs.get(run_id)
+                    if not event or event["task_id"] != obj["task_id"] or event["split"] != "sealed" or event["status"] != "VALID":
+                        raise ContractError(f"confirmation Run not valid/sealed: {run_id}")
 
 def record_event(root: Path, kind: str, *, artifact: str | None = None,
                  note: str = "") -> dict:
@@ -211,7 +219,12 @@ def _record_event_locked(root: Path, kind: str, *, artifact: str | None = None,
                 linked["task_spec"] = obj["task_spec_ref"]
             event["linked_sha256"] = {p: _sha(_resolve(root, p)) for p in linked.values()}
         if kind == "claim" and obj["status"] in {"SUPPORTED", "CONFIRMED"}:
-            event["linked_sha256"] = {p: _sha(_resolve(root, p)) for p in obj["artifact_refs"]}
+            linked = list(obj["artifact_refs"])
+            if obj.get("evidence_path", "EMPIRICAL") == "NON_DATA":
+                linked += obj["evidence_refs"] + [obj["assumptions_ref"]]
+                linked += obj.get("independent_validation_refs") or []
+                event["evidence_path"] = "NON_DATA"
+            event["linked_sha256"] = {p: _sha(_resolve(root, p)) for p in linked}
     # Log-first: interruption between append and STATE save is detected by status().
     with (root / EVENTS).open("a", encoding="utf-8") as output:
         output.write(json.dumps(event, ensure_ascii=False, sort_keys=True) + "\n")

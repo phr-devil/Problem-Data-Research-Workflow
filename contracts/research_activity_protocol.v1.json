@@ -23,7 +23,9 @@
     "UNKNOWN/NOT_RUN/INVALID are legitimate findings and must be reported, not filled with fake results; they cannot satisfy a critical established-evidence prerequisite.",
     "Reuse unchanged historical artifacts and user choices. Reopen only affected dependencies when provenance, truth, task, claim or protocol changes.",
     "No automatic diagrams, figures, data downloads, CPU/GPU fitting, SEALED access, manuscript writing or submissions.",
-    "Activity 05 may run alongside activity 04 as soon as meaningful valid evidence exists, not only after final algorithm optimization."
+    "Activity 05 may run alongside activity 04 as soon as meaningful valid evidence exists, not only after final algorithm optimization.",
+    "The structural handoff flag alone never satisfies entry_requirements, user review, or original operation authorization. Distinguish declared entry evidence, declared H choices and actual permission source.",
+    "For theoretical/simulation Claim, do not fabricate empirical Run IDs; use the bounded NON_DATA claim evidence path with independent local verification references."
   ],
   "activities": {
     "01": {
@@ -88,6 +90,12 @@
         "NON_DATA": [
           "PROOF_PATH"
         ]
+      },
+      "entry_checks": {
+        "all": [
+          "research_scope_or_h1_pending_ref",
+          "rule_version_ref"
+        ]
       }
     },
     "02": {
@@ -149,6 +157,18 @@
           "PROOF_EVIDENCE_CARD",
           "PROOF_OBSERVATION_CARD"
         ]
+      },
+      "entry_checks": {
+        "all": [
+          "h5_scientific_choice_ref"
+        ],
+        "EMPIRICAL": [
+          "lawful_data_access_ref",
+          "required_files_acceptance_ref"
+        ],
+        "NON_DATA": [
+          "auditable_proof_path_ref"
+        ]
       }
     },
     "03": {
@@ -195,7 +215,13 @@
         "EMPIRICAL": "verified data assumptions, group/evaluator and legal inputs",
         "NON_DATA": "falsifiable theoretical or simulation proposition with auditable validation domain"
       },
-      "notes": "A literature-only task hypothesis before data acceptance is not a frozen empirical Task."
+      "notes": "A literature-only task hypothesis before data acceptance is not a frozen empirical Task.",
+      "entry_checks": {
+        "all": [
+          "h5_problem_fit_ref",
+          "activity02_scientific_basis_ref"
+        ]
+      }
     },
     "04": {
       "name": "Method development and valid experiments",
@@ -243,7 +269,19 @@
         "EMPIRICAL": "legal DEV Run, strong fair baseline, selection history and real cost",
         "NON_DATA": "mathematical, simulation or measurement mechanism and audit references"
       },
-      "notes": "H7 only for major mechanism/cost decision; ordinary approved debugging and optimization need no repeated review. May be declared NOT_APPLICABLE only for a justified non-method scientific claim."
+      "notes": "H7 only for major mechanism/cost decision; ordinary approved debugging and optimization need no repeated review. May be declared NOT_APPLICABLE only for a justified non-method scientific claim.",
+      "entry_checks": {
+        "all": [
+          "h6_task_or_non_method_scope_ref"
+        ],
+        "when_controlled_experiment": [
+          "original_execution_permission_ref"
+        ]
+      },
+      "applicability_contract": {
+        "NOT_APPLICABLE": "Requires not_applicable_reason and not_applicable_evidence_ref; declares scope exclusion, not research success or H7 approval.",
+        "H7_CONDITIONAL": "H7 needed only for a major mechanism/experimental strategy choice, otherwise provide a documented H7 NOT_APPLICABLE applicability reason."
+      }
     },
     "05": {
       "name": "Scientific contribution and reinvestment review",
@@ -291,7 +329,12 @@
         "EMPIRICAL": "real DEV and group-level Run evidence with limits and negatives",
         "NON_DATA": "valid proof, mechanism or critical synthesis evidence and counterexamples"
       },
-      "notes": "Evidence harvesting and articulation are not new fitting or manuscript writing; Claim may be provisional, not CONFIRMED."
+      "notes": "Evidence harvesting and articulation are not new fitting or manuscript writing; Claim may be provisional, not CONFIRMED.",
+      "entry_checks": {
+        "all": [
+          "credible_scientific_evidence_ref"
+        ]
+      }
     },
     "06": {
       "name": "Independent confirmation and research closeout",
@@ -339,7 +382,23 @@
         "EMPIRICAL": "single frozen independent assessment or honest unavailability with limited scope",
         "NON_DATA": "independent auditable proof/validation or explicitly recorded missing confirmation"
       },
-      "notes": "H9 is conditional on eligible formal confirmation; H10 science summary never bypasses the separate manuscript writing permission gate."
+      "notes": "H9 is conditional on eligible formal confirmation; H10 science summary never bypasses the separate manuscript writing permission gate.",
+      "entry_checks": {
+        "all": [
+          "frozen_h8_claim_ref"
+        ],
+        "when_confirming": [
+          "frozen_confirmation_protocol_ref",
+          "original_confirmation_access_permission_ref"
+        ],
+        "when_unavailable": [
+          "confirmation_unavailability_basis_ref"
+        ]
+      },
+      "applicability_contract": {
+        "H9_CONDITIONAL": "H9 needed for independent confirmation; absence of valid independent resources must be documented as CONFIRMATION_UNAVAILABLE, not a confirmation success.",
+        "H10": "H10 scientific review remains required for closeout; does not authorize writing."
+      }
     }
   }
 }

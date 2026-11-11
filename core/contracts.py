@@ -56,21 +56,51 @@ def validate_run(value: Any) -> dict:
     return obj
 
 def validate_claim(value: Any) -> dict:
+    """Validate a scoped Claim. Missing evidence_path is legacy EMPIRICAL.
+
+    NON_DATA is restricted to auditable theoretical/simulation claims; it is
+    NOT an alternative for empirical performance or population generalization.
+    Source authenticity and scientific correctness remain external checks.
+    """
     obj = _object(value)
     _text(obj, "claim_id", "task_id", "claim_text")
     if obj.get("status") not in CLAIM_STATUSES:
         raise ContractError("invalid claim status")
-    for key in ("evidence_run_ids", "artifact_refs", "confirmation_run_ids"):
+    evidence_path = obj.get("evidence_path", "EMPIRICAL")
+    if evidence_path not in {"EMPIRICAL", "NON_DATA"}:
+        raise ContractError("claim evidence_path must be EMPIRICAL or NON_DATA")
+    for key in ("evidence_run_ids", "artifact_refs", "confirmation_run_ids",
+                "evidence_refs", "independent_validation_refs"):
         if key in obj:
             _strings(obj, key)
-    if obj["status"] in {"SUPPORTED", "CONFIRMED"}:
-        if not obj.get("evidence_run_ids") or not obj.get("artifact_refs"):
-            raise ContractError("supported claims require Run and artifact references")
-        _text(obj, "strongest_alternative")
-    if obj["status"] == "CONFIRMED":
-        if not obj.get("confirmation_run_ids"):
-            raise ContractError("CONFIRMED requires confirmation Run IDs")
-        _text(obj, "confirmation_protocol_ref")
+    if evidence_path == "NON_DATA":
+        if obj.get("evidence_run_ids") or obj.get("confirmation_run_ids"):
+            raise ContractError("NON_DATA claims may not disguise empirical Runs; split mixed claims")
+        if obj.get("evidence_type") not in {"THEORETICAL_PROOF", "SIMULATION", "AUDITED_MECHANISM"}:
+            raise ContractError("NON_DATA requires explicit bounded evidence_type")
+        _text(obj, "claim_scope", "assumptions_ref")
+        if obj["status"] in {"SUPPORTED", "CONFIRMED"}:
+            if not obj.get("evidence_refs") or not obj.get("artifact_refs"):
+                raise ContractError("supported NON_DATA claims require local evidence and artifact references")
+            _text(obj, "strongest_alternative")
+        if obj["status"] == "CONFIRMED":
+            if not obj.get("independent_validation_refs"):
+                raise ContractError("confirmed NON_DATA claims require independent validation references")
+            _text(obj, "confirmation_protocol_ref", "confirmation_scope",
+                  "independence_limit")
+            if obj["evidence_type"] == "SIMULATION" and obj["confirmation_scope"] != "SIMULATION_DOMAIN_ONLY":
+                raise ContractError("simulation confirmation cannot assert empirical generalization")
+            if obj["evidence_type"] == "THEORETICAL_PROOF" and obj["confirmation_scope"] != "THEOREM_SCOPE_ONLY":
+                raise ContractError("proof confirmation is bounded by theorem assumptions")
+    else:
+        if obj["status"] in {"SUPPORTED", "CONFIRMED"}:
+            if not obj.get("evidence_run_ids") or not obj.get("artifact_refs"):
+                raise ContractError("supported empirical claims require Run and artifact references")
+            _text(obj, "strongest_alternative")
+        if obj["status"] == "CONFIRMED":
+            if not obj.get("confirmation_run_ids"):
+                raise ContractError("CONFIRMED empirical claims require confirmation Run IDs")
+            _text(obj, "confirmation_protocol_ref")
     return obj
 
 def validate_state(value: Any) -> dict:
