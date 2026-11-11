@@ -1,48 +1,43 @@
-# 研究机会匹配图谱｜六类问题来源 × 五类论文贡献
+# H2 研究机会图谱｜六类问题来源 × 五类论文贡献路线
 
-> **USE_IN_ACTIVITY_01_ONLY_WHEN_HELPFUL / NOT_AN_APPROVAL_GATE**：本图谱帮助AI理解如何从一个**范围有限、能合法检验、具有可投稿增量**的科学问题出发。不是题目生成公式、不是文献创新审计、不是用户H2选择或写作授权。优先公开数据、合法已有DEV/Run、小的决定性实验；绝不伪造指标、拆分重复成果或以图表包装代替真实贡献。
+> **READ_ONLY_OPTIONAL / NOT_AN_APPROVAL_GATE。** 本图谱用于教 AI 从具名文献、公开数据、合法 DEV 与历史可靠 Run 中寻找**范围有限、可证伪且有投稿潜力**的科学问题。它不是选题配额或机械的论文生成公式；论文范例不认证科学创新或期刊录用，也不替代 H1–H10 决策、下载/训练/SEALED/绘图/写稿授权。
 >
-> **两层正交轴（来自 [SEARCH_DISCOVERY.md](../SEARCH_DISCOVERY.md) 和 [HIGH_VALUE_RESEARCH_DESIGN.md](../HIGH_VALUE_RESEARCH_DESIGN.md)）**：六类 **`QUESTION_SOURCES`** = 去哪里发现问题；五类 **`CONTRIBUTION_ROUTES`** = 最终凭什么形成独立学术贡献。一个案例可以命中多类；无须六类逐条检索、五类同时实现。
+> **两个正交维度**：`QUESTION_SOURCES` 六类 = *如何发现问题*；`CONTRIBUTION_ROUTES` 五类 = *最后获得了哪种新知识、能力或可靠评价*。同一论文可能对应多项；不用每个项目都遍历六类或都达成五类。
 
-## 一、六类问题来源：优先学可负担的“论文切口”
+## 一、六类科研问题来源：每类都给可执行的论文例子
 
-| 问题来源（稳定H2语义） | AI应主动寻找的**有限且可检验**问题 | 重点论证案例 | 成本策略 |
+| H2问题来源 | 学会识别的“小而真”的问题 | 最适配的已核全文案例 | AI 在合法数据/既有Run上的最低动作 |
 |---|---|---|---|
-| **A DOMAIN_BOTTLENECK** 领域瓶颈 | 已发论文仍未解决的具体条件、资源或时间约束；先读limitations而非想象宏大应用 | [EX09](cases/EX09_NATCOMM_TACPALM.md) 触觉掌协同；[EX10](cases/EX10_NPJ_GSS_SENSOR.md) 灵敏度/线性度权衡；下方候选 **C01** | EX09/10依赖硬件与系统，**只学习问题—证据构图**；算法数据型优先C01的简明实证对比 |
-| **B PAPER_CONTRADICTION** 研究矛盾 | 同一问题不同论文结论冲突？先对齐指标、合法输入与协议，再找真正的不同预测 | [EX08](cases/EX08_JMLR_UNDERSPEC.md) 同IID表现≠同应力行为；候选 **C03** | 单个可重复的争议 + 一个合理指标/条件反证可以是有价值的研究 |
-| **C FAILURE_BOUNDARY** 失效边界 | 在什么设备/人/时间/噪声/部署信息下结果可靠或失败？ | 原有 [EX02](cases/EX02_NPJ_RPPG.md)；[EX08](cases/EX08_JMLR_UNDERSPEC.md)；[EX11](cases/EX11_ICML_WILDS.md) | 低成本先做合法分组/条件评估，避免在同一确认集上反复挑切片 |
-| **D DATA_EVALUATION_DEFECT** 数据或评测缺陷 | 真值从何而来、是否重复、是否代理标签、是否泄漏、强基线是否公平？ | [EX11](cases/EX11_ICML_WILDS.md)；候选 **C02**、**C04** | 若纠错足以**改变原结论**，可形成评价/认知修正稿；普通Bug修复不是自动创新 |
-| **E CROSS_DOMAIN_PRINCIPLE** 跨学科原理 | 某种物理/统计/信息约束能否合法转移到当前任务，并产生可区分的收益或新边界？ | [EX12](cases/EX12_NEURIPS_CONFORMAL_SHIFT.md)；[EX10](cases/EX10_NPJ_GSS_SENSOR.md) | 不强制理论推导；先核迁移前提是否成立，单纯套用旧方法通常不够 |
-| **F ANOMALY_NEGATIVE_RESULT** 异常和负结果 | 强方法不如简单法？相同分数不同失败？旧增益是否来自评价/标签？ | [EX08](cases/EX08_JMLR_UNDERSPEC.md)；候选 **C01**、**C02**、**C03** | **已有合法Run的负证据优先复用**，认真做一项判别性实验；不能把失败硬说成新规律 |
+| **A DOMAIN_BOTTLENECK** 领域瓶颈 | 哪项实际时间、设备、物理或预测能力限制还未解决？ | [EX13 DLinear](cases/EX13_AAAI_DLINEAR.md)、[EX10 物理传感](cases/EX10_NPJ_GSS_SENSOR.md)、[EX09 软手](cases/EX09_NATCOMM_TACPALM.md) | 先选一个有科学后果的瓶颈和适用指标；无需默认做大型器件/机器人系统 |
+| **B PAPER_CONTRADICTION** 论文矛盾 | 同一主张为何因模型、统计、协议或条件产生不同结论？ | [EX13 DLinear](cases/EX13_AAAI_DLINEAR.md)、[EX15 指标伪象](cases/EX15_NEURIPS_METRIC_MIRAGE.md)、[EX08 欠约束](cases/EX08_JMLR_UNDERSPEC.md) | 对齐同一合法输入/评价对象，先识别至少一种竞争解释；不同协议的分数不直接当真冲突 |
+| **C FAILURE_BOUNDARY** 失效边界 | 哪些人、设备、环境、信息预算或分布使模型收益失效？ | [EX08](cases/EX08_JMLR_UNDERSPEC.md)、[EX11 WILDS](cases/EX11_ICML_WILDS.md)、旧[EX02 rPPG](cases/EX02_NPJ_RPPG.md) | 独立组和固定条件下测量有限范围的风险；不根据独立确认集挑最有利切片 |
+| **D DATA_EVALUATION_DEFECT** 数据/评价缺陷 | 真值、重复采集、未来信息、group、选模和指标是否使旧优势失真？ | [EX14 DomainBed](cases/EX14_ICLR_DOMAINBED.md)、[EX16 泄漏复现](cases/EX16_PATTERNS_LEAKAGE.md)、[EX15](cases/EX15_NEURIPS_METRIC_MIRAGE.md)、[EX11](cases/EX11_ICML_WILDS.md) | 一个具名协议缺陷 + 公平纠正前后对比 + 报告对原主张的实质性影响；普通Bug修复不是自动论文 |
+| **E CROSS_DOMAIN_PRINCIPLE** 跨领域原理 | 哪项统计/力学/信息假设在新任务成立，能产生新的有效能力或边界？ | [EX12 Conformal](cases/EX12_NEURIPS_CONFORMAL_SHIFT.md)、[EX10](cases/EX10_NPJ_GSS_SENSOR.md)、[EX09](cases/EX09_NATCOMM_TACPALM.md) | 先列适用前提及最强近邻，比较简单替代；跨领域搬运旧方法不等于原创 |
+| **F ANOMALY_NEGATIVE_RESULT** 异常与负结果 | 简单方法强于复杂方法、虚假收益、评价翻转、类似分数但不同部署行为？ | [EX13](cases/EX13_AAAI_DLINEAR.md)、[EX14](cases/EX14_ICLR_DOMAINBED.md)、[EX15](cases/EX15_NEURIPS_METRIC_MIRAGE.md)、[EX16](cases/EX16_PATTERNS_LEAKAGE.md)、[EX08](cases/EX08_JMLR_UNDERSPEC.md) | 复用真实且合法的负结果，先排除程序错误/选择泄漏，再做一个判别性实验；不能把失败强包装为发现 |
 
-**AI要学到的主要动作**：`具名近邻/已有主张 → 未解释的实际差异 → 一个强基线/竞争解释 → 便宜且合法的判别试验 → 范围有限的科学Claim → 明示失败条件和投稿贡献类别`。不是“找一个热门大模型加上去”；也不把预算低等同于科研价值低。
+**最推荐AI记住的选题模板不是固定实验结构，而是判断链：** `已发表/普遍接受的具体主张 → 一个可能改变该主张的可观察差异 → 最强公平简单对照或竞争解释 → 最便宜的合法判别性分析 → 独立组与证据边界 → 一个真实且不重复的Claim`。
 
-## 二、五类论文贡献路线：与六来源分开判断
+## 二、五类论文贡献（与发现路线分开判断）
 
-| `CONTRIBUTION_ROUTES` | 对应范例 | 对公开数据、低算力项目的现实定位 |
+| H2贡献取向 | 最有教学价值的全文论文 | 可负担研究目标 |
 |---|---|---|
-| **MAJOR_INNOVATION** 重大创新 | [EX09](cases/EX09_NATCOMM_TACPALM.md)、[EX10](cases/EX10_NPJ_GSS_SENSOR.md)、[EX12](cases/EX12_NEURIPS_CONFORMAL_SHIFT.md) | 仅当确有新系统能力/物理机制/理论保证及证据时选择；**不是默认路线** |
-| **PERFORMANCE_BREAKTHROUGH** 性能突破 | [EX10](cases/EX10_NPJ_GSS_SENSOR.md)、旧EX03/EX07、候选 **C05** | 同合法输入与预算的强基线、公平效应量和独立单位；不能仅靠随机seed差异宣称突破 |
-| **SCIENTIFIC_DISCOVERY** 科学发现 | [EX08](cases/EX08_JMLR_UNDERSPEC.md)、旧[EX02](cases/EX02_NPJ_RPPG.md)、[EX11](cases/EX11_ICML_WILDS.md) | 适合一个真实规律/受限边界，但必须排除关键混杂 |
-| **RESEARCH_INFRASTRUCTURE** 基础设施 | [EX11](cases/EX11_ICML_WILDS.md)、候选 **C02** | 可做有独立效用的新评价协议/测量与开放可复用工具，不必做十个数据库 |
-| **COGNITIVE_CORRECTION** 认知纠正 | [EX08](cases/EX08_JMLR_UNDERSPEC.md)、候选 **C01**、**C03**、**C04** | **优先考虑**：纠正广泛使用的代理标签、泄漏、失真指标或复杂模型优势；必须真正改变科学结论 |
+| **MAJOR_INNOVATION** | [EX09](cases/EX09_NATCOMM_TACPALM.md)、[EX10](cases/EX10_NPJ_GSS_SENSOR.md)、[EX12](cases/EX12_NEURIPS_CONFORMAL_SHIFT.md) | 真有新系统能力、物理机制或证明时才采用；不是低成本项目默认 |
+| **PERFORMANCE_BREAKTHROUGH** | [EX13](cases/EX13_AAAI_DLINEAR.md)、[EX10](cases/EX10_NPJ_GSS_SENSOR.md)、旧EX03/EX07 | 与强简单基线公平比较并报告资源/方差/独立单位；不能用单一最佳seed宣称突破 |
+| **SCIENTIFIC_DISCOVERY** | [EX08](cases/EX08_JMLR_UNDERSPEC.md)、[EX15](cases/EX15_NEURIPS_METRIC_MIRAGE.md)、[EX11](cases/EX11_ICML_WILDS.md) | 找受限规律、条件异质性与真正的可解释反例；保留混杂不确定性 |
+| **RESEARCH_INFRASTRUCTURE** | [EX14](cases/EX14_ICLR_DOMAINBED.md)、[EX11](cases/EX11_ICML_WILDS.md)、[EX16](cases/EX16_PATTERNS_LEAKAGE.md) | 提供别人确实可复用的评测协议/核查清单/基准，而不必复制大型Benchmark规模 |
+| **COGNITIVE_CORRECTION** | [EX13](cases/EX13_AAAI_DLINEAR.md)、[EX14](cases/EX14_ICLR_DOMAINBED.md)、[EX15](cases/EX15_NEURIPS_METRIC_MIRAGE.md)、[EX16](cases/EX16_PATTERNS_LEAKAGE.md) | **默认重点考虑**：在可核来源和公平对照下修正“复杂模型必优、指标突变、无泄漏、泛化成立”等具体结论 |
 
-## 三、五篇论文全文卡和公开核验的低成本范例候选，必须分清
+**发表务实原则：** 更推荐用现有公开数据和强基线验证**一项有学术意义的小差额**，不是按热度复现大型顶会工程。若实证支持不了新贡献，止损并保留负证据，不能拆分同一数据/主张制造重复稿、编造创新或保证Q2录用。
 
-- **EX08–EX12**：本次从用户上传的五份PDF逐页核对了论文结构及关键Fig/Table，已有卡片与PDF页码；用户PDF**不上传GitHub**。
-- **C01–C05**：仅核对公开出版/会议资料，**未在本次生成全文策略卡**；不得记为`FULLTEXT_REVIEWED`，需要时才合法读取原文。
+## 三、来源可信状态及全文去重
 
-| 候选 | 公开论文原始来源（已核验出版信息） | 强映射 | AI应学习的可负担研究动作 |
-|---|---|---|---|
-| **C01** | [Zeng et al., *Are Transformers Effective for Time Series Forecasting?*, AAAI 2023](https://doi.org/10.1609/aaai.v37i9.26317) | A/B/F → COGNITIVE_CORRECTION | 简单线性基线挑战复杂模型；对齐多步预测协议与信息预算。不泛化为“Transformer均无效” |
-| **C02** | [Gulrajani & Lopez-Paz, *In Search of Lost Domain Generalization*, ICLR 2021](https://mlanthology.org/iclr/2021/gulrajani2021iclr-search/) | D/F → RESEARCH_INFRASTRUCTURE、COGNITIVE_CORRECTION | 统一模型选型和公平预算，检查强ERM是否已足够；原文大型DomainBed不是必需规模 |
-| **C03** | [Schaeffer et al., *Are Emergent Abilities of Large Language Models a Mirage?*, NeurIPS 2023](https://papers.neurips.cc/paper_files/paper/2023/hash/adc98a266f45005c403b8311ca7e8bd7-Abstract-Conference.html) | B/D/F → COGNITIVE_CORRECTION | 用可观察的指标形式差异区分“现象真的突变”与“评价制造突变”，有假设与反解释 |
-| **C04** | [Kapoor & Narayanan, *Leakage and the reproducibility crisis in machine-learning-based science*, Patterns 2023](https://doi.org/10.1016/j.patter.2023.100804) | D/F → COGNITIVE_CORRECTION | 沿泄漏类型与评测协议重算原结论，不能把一般数据泄漏排查自动写成独立论文 |
-| **C05** | [Geifman & El-Yaniv, *SelectiveNet*, ICML 2019](https://proceedings.mlr.press/v97/geifman19a.html) | C/E → PERFORMANCE_BREAKTHROUGH | 把拒答、覆盖率和风险曲线构成独立Task；不默认需要重训练多头网络，先与强简单置信阈值比较 |
+- **EX01–EX16**：均有已整理的原创全文策略卡；其中 **EX08–EX12** 对应本轮再次上传的5篇既有全文，**EX13–EX16** 对应4篇新上传全文。详见 [PDF SHA-256 来源清单](PDF_SOURCE_MANIFEST.md)。不在GitHub存放PDF字节。
+- **C05**： [Geifman & El-Yaniv, *SelectiveNet*, ICML 2019](https://proceedings.mlr.press/v97/geifman19a.html)，仍是 **FULLTEXT_NOT_REVIEWED** 的公开候选：属于 C/E 类失效边界和选择性预测相关方法；本轮没有相应PDF，不应假装已经审阅，也**不计入16篇**。
+- 当前案例库解决“怎么提出和论证问题”，不是当前项目的最新Related Work，必须独立检查最强具名近邻和研究新颖性。全文缺失时不伪造页码或准确数据。
 
-## 四、默认取舍策略（非固定路线）
+## 四、在工作流中的最短调用方式
 
-- **已有公开数据库+旧Run**：优先审查 **D/F/C/B** 中真正影响结论的条件性机会；用最少合法分析验证，选不与最近邻重复的1个主Claim，最多2个备选。
-- **有真正新物理条件/硬件验证**：再重视 **A/E**；没有物理真值就不能把相关性包装成已证明的新机制。
-- **有投稿目标**：优先一种能够由现有数据、强简单比较、独立组和明确局限支撑的贡献；期刊分区/审稿成功率需要另行核验，**不能承诺Q2录用**。
-- 用户选择H2来源及贡献倾向，AI可提具体推荐；文献卡只帮助研究构思和获准写作时的论证，不批准H3/H4/H5、下载、训练、SEALED、出图或撰稿。避免拆分同一数据和同一核心主张制造重复稿。
+1. **活动01/H2**：仅在需要帮助生成/区分研究方向时按问题源查 1–3 张最适配策略卡；引用示例中的**研究动作**，不是照搬具体研究题目、模型和规模。
+2. **活动01/H3–H5**：用最新相关原始文献、数据真值和真实授权验证科学主张；案例不能替用户确认 H3/H4/H5。
+3. **活动03–05**：如已有可信Run，优先做公平基线、真实负证据、条件边界和旧结论修正；仅在新科学差额值得投资时再加实验。
+4. **正式论文撰写 R1**：仅在原 `WRITING_GATE` 和人工科研审核通过后，按当前Claim匹配1–3篇全文论证卡；不强制凑数量或改既定章节。案例本身不批准下载、训练、SEALED、出图或撰稿。
