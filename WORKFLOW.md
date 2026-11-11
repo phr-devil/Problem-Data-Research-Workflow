@@ -37,7 +37,7 @@
 **决策记忆**：使用既有 `RESEARCH_RECORD.md` 当前快照和第5节历史，`STATE` 只存指针；简记 `H_ID | AI_RECOMMENDATION+EVIDENCE | USER_CHOICE_OR_DELEGATION+ORIGINAL_MESSAGE_REF | DEPENDENCY | SCOPE/COST | REOPEN_TRIGGER`。缺真实消息写UNKNOWN，不能由Agent代填“用户已批准”。人工科研选择与下载、安装、拟合、SEALED、费用、绘图、写稿、外传的**独立执行授权分离**；不新增第七科研活动、日志或状态机。调用细则见 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)。
 
 **外循环 A｜研究机会：01 搜索→02 数据观察→03 任务。**
-01 在用户范围内先 `BREADTH_SCAN → DEEP_FALSIFICATION → COMPETING_CHOICE`，不能因找到首个可行题目就停止；按 [SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md) 核真实重要性、原始近邻、反例和少量不同失败前提的选择。方向确定候选后筛选主库 D1，并按 H4 经用户选择或明确委托，基于官方元信息完成 `PRE_DOWNLOAD_SCIENCE_FIT`，提出 `PRE_DOWNLOAD_PLAN`；**选库不等于下载许可**。有授权才获取/复用必需数据、校验并隔离确认池；02 在合法 DEV 观察真实现象和混杂，03 按 [TASK_EXPLORATION.md](TASK_EXPLORATION.md) 确定可评价 Task、合法信息、独立单位、最小判别探针。只读构思可以先于数据到位；不能据此冻结未经证实的实证结论。
+01 在用户范围内先 `BREADTH_SCAN → DEEP_FALSIFICATION → COMPETING_CHOICE`，不能因找到首个可行题目就停止；按 [SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md) 核真实重要性、原始近邻、反例和少量不同失败前提的选择。方向形成候选后基于官方元信息完成 D1 的 `PRE_DOWNLOAD_SCIENCE_FIT` 并推荐，按 H4 经用户选择或明确委托，提出 `PRE_DOWNLOAD_PLAN`；**选库不等于下载许可**。有授权才获取/复用必需数据、校验并隔离确认池；02 在合法 DEV 观察真实现象和混杂，03 按 [TASK_EXPLORATION.md](TASK_EXPLORATION.md) 确定可评价 Task、合法信息、独立单位、最小判别探针。只读构思可以先于数据到位；不能据此冻结未经证实的实证结论。
 
 **内循环 B｜有效实证：04 算法与评价。**
 复用可信简单 Champion、当前 Run 和强公平参照；按 [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md) 先核误差/可学信号，再选有区别预测的机制、系统、理论或测量路线；编码迭代才读 [ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md) / [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)。简单基线不是复杂模型的准入门槛，后者应由科学问题、合法信息和预算证明必要性。保护协议、逐样本预测、分组、选择史与评价器，不通过换 seed、换名称或后验切片造增益。负 Pilot 不自动停止 Task。
