@@ -22,6 +22,8 @@
 
 **正式稿件接口**：仅在 [WRITING_GATE.md](WRITING_GATE.md) 两道用户条件满足后，按 [MANUSCRIPT_WRITING.md](MANUSCRIPT_WRITING.md) 从已批准蓝图及真实 Claim/Run 构建临时写作证据合同；`MANUSCRIPT_TEXT.md` 作为唯一正文源，引用/公式/图表待办可使用 `MANUSCRIPT_OPEN_ITEMS.md`，两者不替代这两份持续科研文档，也不授权修改已批准章节结构。
 
+**人工科学选择的事件记忆**：新科研项目按 [WORKFLOW.md](WORKFLOW.md) H1–H10 及 H6/H7/H8/H9/H10 的必要节点，在当前 `RESEARCH_RECORD.md` 快照标记当前有效选择、待决依赖及原用户消息，在第5节既有事件历史保留每次重要改变的原因和证据（不单独建立审批日志或重写旧Run）。用户曾一次批准多个节点、明确有限委托或旧项目已有实际决策，则复用其原指令，不机械追加十条事件。`STATE.md` 仅留 `HUMAN_REVIEW_CURRENT/HUMAN_DECISION_REF` 导航；`PAPER_BLUEPRINT` 只受真实科学贡献与用户已确认论文结构影响，不写成人工审批表。新证据触发的局部回退记录受影响节点和更正理由，保留历史。
+
 ## 3. 最小事件/章节合同
 
 - 一次重要尝试：EXP ID / 目的假说 / 实际实施与协议 / 数据与分组 / Run或文件指针 / 观察及负结果 / VALID、INVALID、INCONCLUSIVE 或 NOT_RUN / 原因确定性与最强替代解释 / 后续实验或重启价值。INVALID 不等于科学证伪，未知写 UNKNOWN。

@@ -14,6 +14,12 @@
 - 论文蓝图：PAPER_BLUEPRINT.md（未形成方向则 NONE）；相关 CLM/SEC_ID：
 - 证据冲突或未知（SOURCE_CONFLICT/UNKNOWN）：无则 NONE：
 
+**使用者深度参与决策快照（仅记录当前有效、相关节点，不是新表单）**
+- 参与模式：`USER_DEEP_PARTICIPATION` / 用户明确委托范围 / 已有项目原规则（原用户消息指针）：
+- 当前待决 H 节点、被暂停的依赖行动与仍可执行的合法只读工作：
+- 已确认 H1–H10 节点及原始用户选择/委托消息指针（不在此自授下载/GPU/SEALED/写稿权）：
+- 最近被新证据局部重开的节点与触发事实/受影响的下游选择：
+
 ## 1. 研究问题与协议 / 可复用资产
 - 研究意义、六类线索中的问题来源（可多选）、具名最近邻研究差额、任务定义、竞争假说与可否定预测：
 - 数据来源/版本/完整性/独立单位、DEV/VAL/SEALED 角色及合法输入：
@@ -49,6 +55,6 @@
 - **源证据**：原 Run ID、原始文件路径/版本/哈希（有则记录），指标/单位/分母/不利结果：
 - **结果与性质**：VALID / INVALID / INCONCLUSIVE / NOT_RUN；DEV_ONLY / INDEPENDENT / UNKNOWN：
 - **原因**：已证实的原因 / 推测 / UNKNOWN；不得包装失败或遗漏不利结果：
-- **决定与二次优化**：采取/放弃什么、用户决策来源、可复用资产、下一步或重启条件：
+- **决定与二次优化**：采取/放弃什么、用户决策来源、可复用资产、下一步或重启条件；若本事件属于H1–H10人工科学选择，记 `H_ID | AI_RECOMMENDATION+EVIDENCE | USER_CHOICE_OR_DELEGATION+ORIGINAL_MESSAGE_REF | DEPENDENCY | SCOPE/COST | REOPEN_TRIGGER`，保留原决定，缺原消息写UNKNOWN：
 
 > 后续仅在此节末尾追加 EXP-002 等事件。更正旧记录要说明原 EXP ID、证据和更正理由，不能抹去原来失败历史。

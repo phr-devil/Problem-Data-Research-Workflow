@@ -61,6 +61,8 @@
 5. **复用原 PROBE**：按需在已有 `PROBE_CANDIDATE` 记录 `MODULE_A_ROLE | MODULE_B_ROLE | COUPLING_RULE | NEAREST_COMBINATION | SIMPLE_COMPOSITION_COMPARATOR | COUPLING_SPECIFIC_PREDICTION | LEGAL_BUDGET | MINIMUM_TEST`，只在组合为科研主张时填写；不是新表单/状态/审批。区分 `ENGINEERING_COMBINATION`（有效工程复用）与有待实验支持的原创耦合 Claim，不能凭新结构图自行升级贡献等级。
 
 **示例（仅概念，不是已证实创新）**：在线接触状态估计决定有限触觉观测的选择，历史预测风险反馈下一时刻的预算；如果状态切换发生时耦合策略对同预算固定选择/独立风险阈值/朴素拼接没有稳定可辨增益，应修正或放弃“耦合必需”假说。真实机器人能耗节省不能仅凭离线遮挡数据宣称。
+**H7 算法机制路线人工确认（仅重大科学投入）**：在 H6 已确定科学任务后，AI 对有实质不同科学前提的 `SIMPLE_BASELINE / PRINCIPLE_DERIVED / MODULAR_COUPLING / MEASUREMENT_OR_SYSTEM` 路线提出对照，说明最强近邻、真实失败证据（不足时 `HYPOTHESIZED`）、合法信息、区别性预言、资源与失效风险；用户选择/明确委托主要研发路线及可承担的资源范围后才把其定为研究策略。**路线选择不等于新增模型训练许可**。普通已授权 Bug 修复、超参微调、同一机制内有界比较无需逐次回到 H7；确实改变主机制、真实输入/任务、预算上限、外部依赖或科研 Claim 才定向复审。无算法作为核心贡献的测量/科学发现项目可按 H6→H8 直接评估，不强制发明网络。详见 [WORKFLOW.md](WORKFLOW.md)。
+
 ## 3. 代码 Agent 的连续有界执行循环
 
 **一次授权内尽量连续完成同一可判别假设**（参考 AIDE、autoresearch 的试验–反馈思想，非直接复制训练器）：

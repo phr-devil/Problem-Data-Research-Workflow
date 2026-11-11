@@ -2,6 +2,8 @@
 
 **定位**：管理只读TaskSpec资格预检、Probe候选合同、结构化证据/工件指纹、跨会话恢复、开发Run的记录条件可比性以及显式调用的文献元数据查询；不判断选题/创新价值、不自动STOP、默认不联网、不执行拟合/训练（仅显式`literature-search`会发起元数据网络请求）、不授权解封。科研决策仍由 [WORKFLOW.md](../WORKFLOW.md) 负责。
 
+**人工科研决策依赖预检（只读、非授权）**：新项目按 [WORKFLOW.md](../WORKFLOW.md) 的 H1–H10 在用户选择/有限委托后记录原消息指针；可用 `python -m core.human_decision_review HUMAN_DECISIONS.json` 检查**声明的**依赖是否缺失、是否存在没有消息指针的自称批准。输入格式 `{"format":"pd-rw-human-review-v1","target":"H5","decisions":{"H1":{"kind":"USER_CONFIRMED","original_user_message_ref":"original-chat-ref","chosen_option":"scope"}, "H2":{"kind":"USER_DELEGATED","original_user_message_ref":"original-chat-ref","delegated_scope":"compare sources"}}}`，可补 H3/H4 等节点。输出即使为 `DECLARED_DEPENDENCIES_PRESENT_NOT_AUTHENTICATED` 也**不表示**原消息真实、创新性已核、选题已批准或获得下载/GPU/SEALED/写作许可；须由执行Agent核原用户消息与证据。不是新的 CLI 状态、科研阶段或第三份项目记录。
+
 **可选只读Q2预检与Agent输出决策**：`python -m core.q2_preflight PACKET.json` 对已有科学/期刊证据包做结构检查，**不会**证明新颖性或JCR真实性；`core.action_output.output_mode` 返回“可给Agent指令/需要用户选择”的输出限制，但其参数本身不能证明真实授权。详见 [Q2成功规则](../Q2_PUBLICATION_GOAL.md)与[下一步输出规则](../NEXT_ACTION_POLICY.md)。
 
 **高价值研究辅助（只读、非自动科学认证）**：
