@@ -1,0 +1,211 @@
+{
+  "protocol_version": "pd-rw-human-review-v1.1",
+  "owner": "WORKFLOW.md",
+  "new_project_mode": "USER_DEEP_PARTICIPATION",
+  "new_project_sequence": [
+    "H1",
+    "H2",
+    "H3",
+    "H4",
+    "H5"
+  ],
+  "notes": [
+    "Stable REVIEW:H1..H10 identifiers are scientific decisions, not HEADING:H1..H3 manuscript headings.",
+    "Scientific choice is separate from downloading, installation, fitting, SEALED, illustration, submission and writing authorization.",
+    "Dimension evidence and original user messages must be checked externally; a structural PASS never authenticates user approval.",
+    "Theory/simulation projects use PROOF_PATH in H4; H7 and H9 are conditional by scientific relevance, with reasons recorded."
+  ],
+  "vocabularies": {
+    "question_sources": [
+      "DOMAIN_BOTTLENECK",
+      "PAPER_CONTRADICTION",
+      "FAILURE_BOUNDARY",
+      "DATA_EVALUATION_DEFECT",
+      "CROSS_DOMAIN_PRINCIPLE",
+      "ANOMALY_NEGATIVE_RESULT"
+    ],
+    "contribution_routes": [
+      "MAJOR_INNOVATION",
+      "PERFORMANCE_BREAKTHROUGH",
+      "SCIENTIFIC_DISCOVERY",
+      "RESEARCH_INFRASTRUCTURE",
+      "COGNITIVE_CORRECTION"
+    ]
+  },
+  "steps": {
+    "H1": {
+      "activity": "01",
+      "name": "研究目标与范围",
+      "prerequisites": [],
+      "required_dimensions": [
+        "discipline_scope",
+        "research_goal",
+        "resources_constraints",
+        "risk_preference"
+      ],
+      "evidence_minimum": [
+        "user_scope_and_exclusions"
+      ],
+      "reopen_when": "new scope or resource constraints"
+    },
+    "H2": {
+      "activity": "01",
+      "name": "课题来源及论文贡献路线",
+      "prerequisites": [
+        "H1"
+      ],
+      "required_dimensions": [
+        "question_sources",
+        "contribution_routes",
+        "search_focus"
+      ],
+      "evidence_minimum": [
+        "source_route_tradeoffs",
+        "contribution_route_tradeoffs"
+      ],
+      "reopen_when": "user changes exploration strategy or critical new evidence"
+    },
+    "H3": {
+      "activity": "01",
+      "name": "候选科学问题选择",
+      "prerequisites": [
+        "H1",
+        "H2"
+      ],
+      "required_dimensions": [
+        "provisional_question",
+        "alternative_or_justified_single",
+        "nearest_work_and_falsifier"
+      ],
+      "evidence_minimum": [
+        "breadth_deep_competing_search",
+        "named_nearest_neighbor_or_unknown",
+        "competing_risks"
+      ],
+      "reopen_when": "major nearest-neighbor gap or scientific question changed"
+    },
+    "H4": {
+      "activity": "01",
+      "name": "主数据库或理论证据路径",
+      "prerequisites": [
+        "H3"
+      ],
+      "required_dimensions": [
+        "dataset_or_proof_path",
+        "truth_and_independence",
+        "license_and_cost"
+      ],
+      "evidence_minimum": [
+        "official_metadata_or_proof_requirements",
+        "source_and_feasibility_comparison"
+      ],
+      "reopen_when": "data truth, grouping, access, or proof path invalidated"
+    },
+    "H5": {
+      "activity": "01",
+      "name": "最终研究问题确认",
+      "prerequisites": [
+        "H3",
+        "H4"
+      ],
+      "required_dimensions": [
+        "final_question",
+        "main_and_backup",
+        "evidence_and_claim_boundary",
+        "next_step_scope"
+      ],
+      "evidence_minimum": [
+        "question_data_evidence_fit",
+        "strongest_unknown_and_retreat"
+      ],
+      "reopen_when": "topic-data-evidence contract materially changes"
+    },
+    "H6": {
+      "activity": "03",
+      "name": "核心Task与评价",
+      "prerequisites": [
+        "H5"
+      ],
+      "required_dimensions": [
+        "task_hypothesis",
+        "legal_inputs",
+        "independent_evaluation"
+      ],
+      "evidence_minimum": [
+        "valid_dev_or_theory_basis",
+        "falsifier_and_comparator"
+      ],
+      "reopen_when": "Task, inputs or evaluation change"
+    },
+    "H7": {
+      "activity": "04",
+      "name": "主要算法机制与成本",
+      "prerequisites": [
+        "H6"
+      ],
+      "required_dimensions": [
+        "mechanism_route",
+        "simple_alternative",
+        "experiment_budget"
+      ],
+      "evidence_minimum": [
+        "failure_premise_or_mechanism_hypothesis",
+        "fair_comparison_plan"
+      ],
+      "reopen_when": "major method or resource choice changes",
+      "applicability": "conditional_algorithm_or_major_experimental_strategy"
+    },
+    "H8": {
+      "activity": "05",
+      "name": "科学贡献与继续策略",
+      "prerequisites": [
+        "H6"
+      ],
+      "required_dimensions": [
+        "main_claim",
+        "positive_negative_evidence",
+        "continue_narrow_pivot_hold"
+      ],
+      "evidence_minimum": [
+        "valid_results",
+        "strongest_alternative"
+      ],
+      "reopen_when": "claim or major investment changes"
+    },
+    "H9": {
+      "activity": "06",
+      "name": "独立确认方案",
+      "prerequisites": [
+        "H8"
+      ],
+      "required_dimensions": [
+        "frozen_claim",
+        "confirmation_resource",
+        "protocol_and_permission"
+      ],
+      "evidence_minimum": [
+        "independence_and_selection_history",
+        "authorization_separate"
+      ],
+      "reopen_when": "confirmation protocol or access changes",
+      "applicability": "conditional_formal_confirmation"
+    },
+    "H10": {
+      "activity": "06",
+      "name": "科研总结审查与论文下一步",
+      "prerequisites": [
+        "H8"
+      ],
+      "required_dimensions": [
+        "results_review",
+        "limitations_and_confirmation_status",
+        "next_paper_decision"
+      ],
+      "evidence_minimum": [
+        "actual_claim_evidence",
+        "writing_permission_separate"
+      ],
+      "reopen_when": "science summary or publication plan changes"
+    }
+  }
+}

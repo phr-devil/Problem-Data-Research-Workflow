@@ -20,6 +20,12 @@
 
 **交付前必查的遗漏**：仅针对本轮受影响决策核 `当前H_ID + 原用户选择/委托范围 + 关键证据/反证 + 依赖是否失效 + 独立执行授权`；未有真实选择时给推荐而非自称用户已批准，已确认且未变化则不重复打断。若上游H节点因数据不适配/协议更改失效，下游旧用户选择**不得被自动当作对新条件的批准**；重新核对实际影响范围并只重开必要节点。 `REVIEW:H#` 与论文标题 `HEADING:H#` 不能互换。
 
+### 新项目统一审核卡片：相同节点、不同科学内容
+
+在 `USER_DEEP_PARTICIPATION` 下，人工节点定义来自 [`contracts/human_review_protocol.v1.json`](contracts/human_review_protocol.v1.json) 的 `required_dimensions`，科研语义仍归 [WORKFLOW.md](WORKFLOW.md)。每轮只有**当前需要用户决定**的H节点成为主卡片，按 `PROTOCOL_VERSION | H1–H5_PROGRESS | CURRENT_REVIEW(ID+固定名称) | AI_RECOMMENDATION+SOURCE | RISKS/UNKNOWN | OPTIONS+TRADEOFFS | REQUIRED_DIMENSIONS/CHOICE_OR_DELEGATION | NEXT_DEPENDENT_ACTION` 给出内容。选项因领域不同而不同，但H1研究目标、H2来源+贡献路线、H3问题、H4证据资源、H5最终题目永不互换定义。允许用户一条消息明确完成多个节点、逐项委托或暂缓；已决定且未变化的内容不再询问。当前节点只涉及一个合理候选也可如实说明，不凑假选项。
+
+**两种结果不可混淆**：`can_present_review_declarations_only` 表示所声明的前置审核齐备，**可以提出当前节点问题**；`can_advance_declarations_only` 才表示所声明的当前节点决策及维度齐备，可以考虑依赖工作；两者都必须先核原用户消息及真实证据，**都不是下载/拟合/SEALED/绘图/正式写作权限**。重要维度只选择部分时维持待决并仅补缺项，不能重新索要已答项。旧项目无 `protocol_version` 允许兼容读取，但不能以同名节点自动假定满足新版本。
+
 ## 2. 对用户的输出格式（互斥）
 
 ### A. 无需用户决策 → **必须直接给简洁可复制的下一步Agent指令（NEXT_AGENT_INSTRUCTION）**

@@ -22,6 +22,8 @@
 
 **防止“旧批准套新方案”**：若数据真值、独立组、用户范围、Task或协议变动，首页简记实际被推翻的 H 节点、原始来源、新证据及待复核下游；第5节保留旧决策及修订事件，不能默默替换旧确认，不能把新版 H4 的库决定当作旧 H5/H6 的继续授权。完成 H4 的重新选择后仍保留 H5/H6 等受影响节点的待复核状态；经实际复核逐步关闭，不能一键恢复全部旧批准。仅包含论文标题层级 `HEADING:H1/H2` 的蓝图不是人工 `REVIEW:H1/H2` 的决定。
 
+**统一协议当前快照（只用本记录，不设第三份用户审批表）**：`protocol_version: pd-rw-human-review-v1.1`；`current_review: REVIEW:H#`；`completed_or_delegated_dimensions: ...`；`remaining_required_dimensions: ...`；`evidence_refs: ...`；`original_user_message_refs: ...`；`dependent_action_held: ...`。只保存当前相关、受影响字段与事件指针，不为所有十节点造固定长日志。旧项目 `protocol_version=legacy_unverified` 时，核原语义后再迁移，不能凭旧H2同名自动写新版H2为完成。
+
 ## 1. 研究问题与协议 / 可复用资产
 - 研究意义、六类线索中的问题来源（可多选）、具名最近邻研究差额、任务定义、竞争假说与可否定预测：
 - 数据来源/版本/完整性/独立单位、DEV/VAL/SEALED 角色及合法输入：
