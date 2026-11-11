@@ -1,0 +1,327 @@
+{
+  "contract_version": "pd-rw-activity-handoff-v1",
+  "owner": "WORKFLOW.md",
+  "scope": "Six existing research activities; does not schedule agents or grant permissions.",
+  "reading_rule": "WORKFLOW governs scientific meaning. This is a machine-readable mirror for declared handoff completeness, not proof of science or consent.",
+  "research_flow": [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06"
+  ],
+  "allowed_parallel_pairs": [
+    [
+      "04",
+      "05"
+    ]
+  ],
+  "general_rules": [
+    "Stable activity responsibilities and evidence interfaces; scientific hypotheses, candidate algorithms, probes and experiments are not prescribed.",
+    "All activity evidence and user-review declarations remain separate from independently verified action authorization.",
+    "UNKNOWN/NOT_RUN/INVALID are legitimate findings and must be reported, not filled with fake results; they cannot satisfy a critical established-evidence prerequisite.",
+    "Reuse unchanged historical artifacts and user choices. Reopen only affected dependencies when provenance, truth, task, claim or protocol changes.",
+    "No automatic diagrams, figures, data downloads, CPU/GPU fitting, SEALED access, manuscript writing or submissions.",
+    "Activity 05 may run alongside activity 04 as soon as meaningful valid evidence exists, not only after final algorithm optimization."
+  ],
+  "activities": {
+    "01": {
+      "name": "Scientific opportunity and evidence path",
+      "entry_requirements": [
+        "USER_SCOPE or H1 pending",
+        "research-source/version identified"
+      ],
+      "mandatory_evidence": [
+        {
+          "key": "scope_and_review_choices",
+          "critical": true
+        },
+        {
+          "key": "competitive_science_search",
+          "critical": true
+        },
+        {
+          "key": "named_nearest_neighbor_and_falsifier",
+          "critical": true
+        },
+        {
+          "key": "question_resource_compatibility",
+          "critical": true
+        },
+        {
+          "key": "critical_unknowns",
+          "critical": false
+        }
+      ],
+      "required_deliverables": [
+        "SEARCH_HANDOFF",
+        "DIRECTION_CARD"
+      ],
+      "one_of_deliverables": [
+        [
+          "DATA_PORTFOLIO",
+          "PROOF_PATH"
+        ]
+      ],
+      "human_review": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5"
+      ],
+      "allowed_parallel_activities": [],
+      "reopen_triggers": [
+        "changed research scope or named nearest work",
+        "D1 or PROOF_PATH contradicts the scientific question"
+      ],
+      "alternative_evidence_paths": {
+        "EMPIRICAL": "D1 official metadata, credible truth/independent units and predownload science fit",
+        "NON_DATA": "auditable PROOF_PATH, assumptions and resource/validation conditions"
+      },
+      "notes": "H3 provisional question, H4 science resource choice, H5 final question; H4 is never download authorization."
+    },
+    "02": {
+      "name": "Data acceptance and scientific observation",
+      "entry_requirements": [
+        "H5 choice or valid inherited project decision",
+        "for empirical analysis: data access and accepted complete required files; unready projects may only prepare legally"
+      ],
+      "mandatory_evidence": [
+        {
+          "key": "source_integrity_or_proof_assumptions",
+          "critical": true
+        },
+        {
+          "key": "label_truth_or_theorem_scope",
+          "critical": true
+        },
+        {
+          "key": "independent_groups_or_validation_domain",
+          "critical": true
+        },
+        {
+          "key": "legal_observation_boundary",
+          "critical": true
+        },
+        {
+          "key": "observed_phenomenon_or_no_reliable_insight",
+          "critical": false
+        }
+      ],
+      "required_deliverables": [],
+      "one_of_deliverables": [
+        [
+          "DATA_MANIFEST",
+          "PROOF_EVIDENCE_CARD"
+        ],
+        [
+          "DATA_INSIGHT_CARD",
+          "PROOF_OBSERVATION_CARD"
+        ]
+      ],
+      "human_review": [],
+      "allowed_parallel_activities": [],
+      "reopen_triggers": [
+        "invalid truth or insufficient independent groups",
+        "unavailable, incompatible or contaminated resources"
+      ],
+      "alternative_evidence_paths": {
+        "EMPIRICAL": "data manifest and legal DEV analysis; no SEALED distributions",
+        "NON_DATA": "assumptions, proof obligations, simulator/domain and independently checkable evidence"
+      },
+      "notes": "DATA_ACQUIRED_VERIFIED means readable files only, not scientifically valid data; no reliable pattern is an acceptable honest finding."
+    },
+    "03": {
+      "name": "Falsifiable primary Task",
+      "entry_requirements": [
+        "compatible H5 scientific question and activity 02 scientific basis",
+        "H6 choice for formal primary Task"
+      ],
+      "mandatory_evidence": [
+        {
+          "key": "question_and_falsifiable_task",
+          "critical": true
+        },
+        {
+          "key": "legal_prediction_time_information",
+          "critical": true
+        },
+        {
+          "key": "independent_evaluation_contract",
+          "critical": true
+        },
+        {
+          "key": "simple_alternative_and_falsifier",
+          "critical": true
+        },
+        {
+          "key": "task_risks",
+          "critical": false
+        }
+      ],
+      "required_deliverables": [
+        "TASK_CARD",
+        "TASK_PROTOCOL"
+      ],
+      "one_of_deliverables": [],
+      "human_review": [
+        "H6"
+      ],
+      "allowed_parallel_activities": [],
+      "reopen_triggers": [
+        "changed label timing, permitted K, input, metric, split or primary Task"
+      ],
+      "alternative_evidence_paths": {
+        "EMPIRICAL": "verified data assumptions, group/evaluator and legal inputs",
+        "NON_DATA": "falsifiable theoretical or simulation proposition with auditable validation domain"
+      },
+      "notes": "A literature-only task hypothesis before data acceptance is not a frozen empirical Task."
+    },
+    "04": {
+      "name": "Method development and valid experiments",
+      "entry_requirements": [
+        "H6 Task or recorded non-algorithm relevance decision",
+        "separate CPU/GPU or other resource authorization for any controlled experiment"
+      ],
+      "mandatory_evidence": [
+        {
+          "key": "baseline_or_justified_alternative",
+          "critical": true
+        },
+        {
+          "key": "legal_information_and_fair_protocol",
+          "critical": true
+        },
+        {
+          "key": "actual_run_or_honest_not_run",
+          "critical": false
+        },
+        {
+          "key": "negative_results_and_cost",
+          "critical": false
+        },
+        {
+          "key": "next_discriminating_probe",
+          "critical": false
+        }
+      ],
+      "required_deliverables": [
+        "EXPERIMENT_HANDOFF"
+      ],
+      "one_of_deliverables": [],
+      "human_review": [
+        "H7"
+      ],
+      "allowed_parallel_activities": [
+        "05"
+      ],
+      "reopen_triggers": [
+        "major algorithm strategy or resource budget changed",
+        "new Task or evaluator and legal input changed"
+      ],
+      "alternative_evidence_paths": {
+        "EMPIRICAL": "legal DEV Run, strong fair baseline, selection history and real cost",
+        "NON_DATA": "mathematical, simulation or measurement mechanism and audit references"
+      },
+      "notes": "H7 only for major mechanism/cost decision; ordinary approved debugging and optimization need no repeated review. May be declared NOT_APPLICABLE only for a justified non-method scientific claim."
+    },
+    "05": {
+      "name": "Scientific contribution and reinvestment review",
+      "entry_requirements": [
+        "meaningful credible positive or negative evidence; may run before activity 04 has ended"
+      ],
+      "mandatory_evidence": [
+        {
+          "key": "credible_positive_and_negative_evidence",
+          "critical": true
+        },
+        {
+          "key": "named_nearest_neighbor_delta",
+          "critical": true
+        },
+        {
+          "key": "strongest_competing_explanation",
+          "critical": true
+        },
+        {
+          "key": "claim_strength_and_evidence_gaps",
+          "critical": true
+        },
+        {
+          "key": "scientific_venue_potential_or_unknown",
+          "critical": false
+        }
+      ],
+      "required_deliverables": [
+        "CLAIM_EVIDENCE_MAP",
+        "SCIENCE_DECISION"
+      ],
+      "one_of_deliverables": [],
+      "human_review": [
+        "H8"
+      ],
+      "allowed_parallel_activities": [
+        "04"
+      ],
+      "reopen_triggers": [
+        "new reliable evidence alters main Claim or nearest-neighbor gap",
+        "major additional investment, pivot or project stop"
+      ],
+      "alternative_evidence_paths": {
+        "EMPIRICAL": "real DEV and group-level Run evidence with limits and negatives",
+        "NON_DATA": "valid proof, mechanism or critical synthesis evidence and counterexamples"
+      },
+      "notes": "Evidence harvesting and articulation are not new fitting or manuscript writing; Claim may be provisional, not CONFIRMED."
+    },
+    "06": {
+      "name": "Independent confirmation and research closeout",
+      "entry_requirements": [
+        "frozen eligible H8 Claim",
+        "H9 protocol choice when confirmatory path applicable; separate actual resource access authorization"
+      ],
+      "mandatory_evidence": [
+        {
+          "key": "frozen_claim_and_selection_history",
+          "critical": true
+        },
+        {
+          "key": "independence_or_confirmation_unavailable",
+          "critical": true
+        },
+        {
+          "key": "confirmed_result_or_explicit_gap",
+          "critical": true
+        },
+        {
+          "key": "honest_research_summary_and_limitations",
+          "critical": true
+        }
+      ],
+      "required_deliverables": [
+        "SCIENCE_SUMMARY"
+      ],
+      "one_of_deliverables": [
+        [
+          "INDEPENDENT_CONFIRM",
+          "CONFIRMATION_UNAVAILABLE"
+        ]
+      ],
+      "human_review": [
+        "H9",
+        "H10"
+      ],
+      "allowed_parallel_activities": [],
+      "reopen_triggers": [
+        "new Claim or protocol changes",
+        "selection contamination, confirmation failure or permission revoked"
+      ],
+      "alternative_evidence_paths": {
+        "EMPIRICAL": "single frozen independent assessment or honest unavailability with limited scope",
+        "NON_DATA": "independent auditable proof/validation or explicitly recorded missing confirmation"
+      },
+      "notes": "H9 is conditional on eligible formal confirmation; H10 science summary never bypasses the separate manuscript writing permission gate."
+    }
+  }
+}

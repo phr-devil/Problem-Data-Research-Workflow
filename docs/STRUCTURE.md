@@ -25,6 +25,8 @@
 - 迁移权威文件（若日后确有需要）应单独授权/评估，先更新全部引用和调用方，保留兼容层，通过 Linux/Windows CI 和旧项目回归测试后再考虑删除旧路径；**本轮不做迁移**。
 - 每次结构变动运行 `python -m unittest discover -s tests -v`；新增的 `tests/test_structure_routing.py` 只做本地路径/入口/权威存在性检查，不下载、不训练、不渲染图像，也不能证明 AI Token 已下降。
 
+**六活动合同的权威边界**：`WORKFLOW.md` 决定研发活动/权限的科研语义，`contracts/research_activity_protocol.v1.json` 只提供可测试的交接结构；`contracts/human_review_protocol.v1.json` 另管 H1–H10。任何更新须同步唯一 owner/结构镜像与定向回归，不能在专题另造“活动07”、自动审批器、第二科研日志或固定研究方法。
+
 ## 4. 规则演进：优先替换，不累积指令（维护任务才读）
 
 - **单一权威**：`AGENTS.md` 只承载冷启动、版本核验、最小权限和专题路由；`WORKFLOW.md` 只承载科研决策循环、状态/止损、跨专题边界；技术/科研细则归现有专题；`modules/` 与 `policies/` 索引只存链接，不复制条款。RWF 只负责实现与证据复核，不复制 PD-RW 科研政策。

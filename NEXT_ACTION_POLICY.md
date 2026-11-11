@@ -6,6 +6,8 @@
 
 > **优先级**：对所有PD-RW阶段、WorkBuddy/Codex任务交接、科研收口和Q2评估生效；不改变真实用户授权、[WRITING_GATE.md](WRITING_GATE.md)或[Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)。用于**给用户的下一步输出**，不是授权Agent自动执行尚未批准的动作。
 
+**六活动交接**：按 [research_activity_protocol.v1.json](contracts/research_activity_protocol.v1.json) 核当前活动的必要证据、真实 UNKNOWN、受影响 H 节点及下个合法动作；不重新审查未变化的证据。活动05可与04并行，交接完成不代表用户授权或科学确认。
+
 ## 1. 先判断下一动作是谁能决定
 
 - `AGENT_DECIDABLE`：已在用户真实授权、研究范围及预算内的**技术实现选择**，例如定位并修复普通Bug、复用已有Run、选最有信息量的只读诊断、重跑已授权且协议不变的受影响测试、补写非论文的科学证据摘要。Agent可自行选出**一项最佳后续动作**。

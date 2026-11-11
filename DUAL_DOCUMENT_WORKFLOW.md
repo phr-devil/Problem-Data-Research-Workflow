@@ -26,6 +26,8 @@
 
 **不同 H 标识必须分开**：`REVIEW:H1–H10` 仅用于人工科研选择与可核原消息，`HEADING:H1/H2/H3` 仅表示论文蓝图 Markdown 标题层级，不能以论文大纲 H2 代替人工 H2 来源/贡献路线的真实选择。上游决策因数据、合法输入或主张改变而失效时，在研究记录标明下游待复核的依赖并保留旧决定；蓝图仅同步真正受影响的章节/Claim 指针。
 
+**活动交接不新增科研档案**：统一 [research_activity_protocol.v1.json](contracts/research_activity_protocol.v1.json) 的六活动证据指针仅写到既有 RESEARCH_RECORD 快照/受影响第5节事件；STATE 只保留 `CURRENT_ACTIVITY_HANDOFF` 路径。论文蓝图只在实际中心主张/章节证据变化时增量更新，不把活动04的普通调参复制成长期论文故事；活动05允许并行复盘，不改变写作锁或图件许可。
+
 ## 3. 最小事件/章节合同
 
 - 一次重要尝试：EXP ID / 目的假说 / 实际实施与协议 / 数据与分组 / Run或文件指针 / 观察及负结果 / VALID、INVALID、INCONCLUSIVE 或 NOT_RUN / 原因确定性与最强替代解释 / 后续实验或重启价值。INVALID 不等于科学证伪，未知写 UNKNOWN。

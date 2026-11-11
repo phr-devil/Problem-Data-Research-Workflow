@@ -42,17 +42,17 @@
 
 **局部回退（不得保留失效的下游批准）**：D1/真值/许可与研究要求冲突→重开H4；科学问题变动→H3/H5；Task或预测前合法输入/评价变动→H6；主要机制变化→H7；主Claim/增投/STOP→H8；独立确认协议/资格变化→H9。若H4失效，原依赖该D1的H5及后续Task/机制/Claim/确认**暂停沿用**，须先用新证据核相容性，不能只把H4改成新的库而默默复用全部下游批准；同理，上游决定变更后所有依赖结果先标待复核，而非全部机械重新搜索。保留原始用户选择、影响链、旧Run及不依赖该变化的合法只读工作。**上游重新确认后也不能一次清空下游待复核项**：例如新H4已选，但旧H5/H6仍依赖旧D1时，至少将H5继续标记待复核；只有用新来源逐项重新确认实际相容性，才能恢复对应下游选择。
 
-**每次重要交接前的防漏核对（只问当前受影响节点）**：①当前问题与最新 `USER_SCOPE`/H节点是否匹配；②用户原消息中选择或委托的**具体对象、期限和资源范围**是否可核；③关键原始证据/近邻/真值及竞争解释是否支持当前建议；④数据/Task/算法/Claim/确认之间是否有失效依赖；⑤下一动作的操作权限和实际费用是否另行获准；⑥输出是否明确 `DECISION+EVIDENCE | UNKNOWN/CONFLICT | NEXT_LEGAL_ACTION_OR_USER_CHOICE`。无变化只核指针不重读全部材料；缺信息只停止依赖该信息的动作，不阻止无依赖只读查证。
+**六活动交接**：固定的进入、证据、交付及回退关系见 [research_activity_protocol.v1.json](contracts/research_activity_protocol.v1.json)；科学判断、权限仍以本文件及原始证据为准。只核本轮受影响节点、真实用户选择、重要反证与合法权限。合同 PASS 不认证科学、人工授权或实际执行。
 
 **决策记忆**：使用既有 `RESEARCH_RECORD.md` 当前快照和第5节历史，`STATE` 只存指针；简记 `H_ID | AI_RECOMMENDATION+EVIDENCE | USER_CHOICE_OR_DELEGATION+ORIGINAL_MESSAGE_REF | DEPENDENCY | SCOPE/COST | REOPEN_TRIGGER`。缺真实消息写UNKNOWN，不能由Agent代填“用户已批准”。人工科研选择与下载、安装、拟合、SEALED、费用、绘图、写稿、外传的**独立执行授权分离**；不新增第七科研活动、日志或状态机。调用细则见 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)。
 
-**外循环 A｜研究机会：01 搜索→02 数据观察→03 任务。**
+**外循环 A｜研究机会：01 搜索→02 数据观察→03 任务。** 六活动是默认研发组织方式，不是额外六道审批，按事实局部回退。
 01 在用户范围内先 `BREADTH_SCAN → DEEP_FALSIFICATION → COMPETING_CHOICE`，不能因找到首个可行题目就停止；按 [SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md) 核真实重要性、原始近邻、反例和少量不同失败前提的选择。方向形成候选后基于官方元信息完成 D1 的 `PRE_DOWNLOAD_SCIENCE_FIT` 并推荐，按 H4 经用户选择或明确委托，提出 `PRE_DOWNLOAD_PLAN`；**选库不等于下载许可**。有授权才获取/复用必需数据、校验并隔离确认池；02 在合法 DEV 观察真实现象和混杂，03 按 [TASK_EXPLORATION.md](TASK_EXPLORATION.md) 确定可评价 Task、合法信息、独立单位、最小判别探针。只读构思可以先于数据到位；不能据此冻结未经证实的实证结论。
 
-**内循环 B｜有效实证：04 算法与评价。**
+**内循环 B｜有效实证：04 算法与评价（机制按需）。**
 复用可信简单 Champion、当前 Run 和强公平参照；按 [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md) 先核误差/可学信号，再选有区别预测的机制、系统、理论或测量路线；编码迭代才读 [ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md) / [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)。简单基线不是复杂模型的准入门槛，后者应由科学问题、合法信息和预算证明必要性。保护协议、逐样本预测、分组、选择史与评价器，不通过换 seed、换名称或后验切片造增益。负 Pilot 不自动停止 Task。
 
-**外循环 C｜科研价值：05 主张→06 独立确认。**
+**外循环 C｜科研价值：05 主张↔04 研发→06 独立确认。**
 05 并行核 `CLAIM_EVIDENCE_MAP`：能力/性能、机制、规律/边界、测量或资源权衡，必须与最近邻的真实差额和证据相匹配。首个有效 Run 或重要负结果按需读 [SCIENCE_RESULT_HARVEST.md](SCIENCE_RESULT_HARVEST.md)；区分 `ARTICULATION_GAP` 与 `EVIDENCE_GAP`，优先补重要且可判别的证据，而非自动加模型。可 `UP / DOWN / NARROW / LATERAL / HOLD`，但必须核合法信息和权限；06 只在 Claim、方法、评价协议与选择史冻结，且有独立授权时按 [CONFIRMATION.md](CONFIRMATION.md) 确认。
 
 **机会→算法→科学贡献的最短闭环**：活动01从领域瓶颈、论文矛盾、失效边界、数据/评价缺陷、跨领域原理及可信负面/异常六类线索按需发现问题，先核重要性、具名近邻和最危险未知；活动02–03核真实变量与可反证任务；活动04从**合法实测失败→竞争原因→缺失能力→不同机制预言→最小公平试验**推导算法，而非先叠模块；活动05–06按重大创新、性能突破、科学发现、基础设施、认知纠正五类论文路线对应真实证据，**不新增 Claim 状态或阶段**。详则只由对应专题维护，结果与科研假设允许迭代但保持 EX_ANTE/EX_POST 和独立确认边界。
@@ -94,7 +94,7 @@
 | TASK / 信息条件 | `UP / DOWN / NARROW / LATERAL`，协议与证据独立更新 |
 | AREA_DATA / 项目 | 提出保留、暂停或转向选项；重大决策由用户批准 |
 
-**每次最小交接**：`CURRENT_EVIDENCE + SOURCE | BLOCKER/UNKNOWN | NEXT_DISCRIMINATING_ACTION | IF_POS/NEG/INVALID | AUTH/COST`。无新增信息不复写长报告、不重复审阅全部论文/源码。
+**每次最小交接**：`ACTIVITY | EVIDENCE_REF/UNKNOWN | NEXT_PROBE | H_REVIEW_REF | ACTION_AUTH`。复用旧 Run，活动05与04可并行；理论和无算法任务按适用证据路径推进。
 
 ## 4. 不可覆盖的边界与项目资产
 
