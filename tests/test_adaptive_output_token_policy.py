@@ -25,7 +25,7 @@ class AdaptiveOutputTokenPolicyTests(unittest.TestCase):
     def test_adaptive_levels_are_not_word_limits_or_required_templates(self):
         policy = doc("NEXT_ACTION_POLICY.md")
         for marker in ("\u0060L1\u0060", "\u0060L2\u0060", "\u0060L3\u0060",
-                       "不统一版式", "不是新", "不强制"):
+                       "不统一版式", "不是固定标题", "只是指导"):
             self.assertIn(marker, policy)
         self.assertIn("不是固定标题", policy)
         self.assertIn("跨阶段自适应", policy)
@@ -43,11 +43,8 @@ class AdaptiveOutputTokenPolicyTests(unittest.TestCase):
     def test_reuse_and_risk_sensitive_checks(self):
         policy = doc("NEXT_ACTION_POLICY.md")
         for marker in ("Token", "定向读取", "复用", "按风险", "多Agent",
-                       "总成本", "真实Run", "重试", "全量", "返工"):
-            # Not all scenarios require identical wording across variants.
-            if marker == "重试":
-                continue
-            self.assertIn(marker, policy)
+                       "总成本", "真实Run", "全量", "返工"):
+             self.assertIn(marker, policy)
         for gate in ("CPU/GPU", "SEALED", "写稿", "绘图", "权限"):
             self.assertIn(gate, policy)
         self.assertIn("不因省Token拒绝", policy)
@@ -69,7 +66,7 @@ class AdaptiveOutputTokenPolicyTests(unittest.TestCase):
             self.assertIn(marker, agent)
         self.assertIn("USER_DECISION_REQUIRED", policy)
         self.assertIn("下载", policy)
-        self.assertIn("正式写作权限", policy)
+        self.assertIn("WRITING_LOCKED", policy)
 
 
 if __name__ == "__main__":
