@@ -22,7 +22,7 @@
 | `A10` | A:L23 | `MANUSCRIPT_WRITING.md` | `正文生成阶段的图片位置` | `MOVED` | 图片后置及Fig.标题留在写作专题 |
 | `A11` | A:L24 | `MANUSCRIPT_WRITING.md` | `Introduction（` | `MOVED` | 引言段落连贯不机械分小标题 |
 | `A12` | A:L25 | `MANUSCRIPT_WRITING.md` | `括号` | `MOVED` | 正式正文避免清单和括号堆砌 |
-| `A13` | A:L26 | `MANUSCRIPT_WRITING.md` | `HARD / MAJOR / STYLE` | `MOVED` | 反模板风格按严重性审查 |
+| `A13` | A:L26 | `MANUSCRIPT_WRITING.md` | `反模板化学术表达分级合同` | `MOVED` | 反模板风格按严重性审查 |
 | `A14` | A:L27 | `MANUSCRIPT_QA.md` | `R1 独立审稿` | `MOVED` | 稿件审查与原写作许可分开 |
 | `A15` | A:L28 | `MANUSCRIPT_QA.md` | `Q3` | `MOVED` | 语义与真实独立证据复核 |
 | `A16` | A:L30 | `MANUSCRIPT_QA.md` | `Q9` | `MOVED` | Q5/Q7/Q9归属于稿件QA |
