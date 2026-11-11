@@ -5,9 +5,11 @@
 仅在用户明确选择PD-RW时启用。**默认科研目标是形成可信、可发表的科学证据，而不是直接撰写论文。** **禁止自动绘图：只有用户明确要求实际绘制或修改图片才可出图**；否则仅可文字建议，见[FIGURE_POLICY.md](FIGURE_POLICY.md)。本轮研究范围以当前用户指令为准；[WORKFLOW.md](WORKFLOW.md) 是科研决策与权限的唯一总控，**无需预读所有专题**。
 
 1. **已有项目**：先通过项目内已有 STATE/索引确定 RESEARCH_RECORD.md 和 PAPER_BLUEPRINT.md 的实际路径，读当前快照与相关章节，再核真实 STATE/Run、manifest 和用户授权；若两文件不存在，按旧项目继续使用真实工件，不假定有记录。若使用 `STATE.json/EVENTS.jsonl`，先查事件一致性；缺工件不冒充有效结果。仅按当前阻碍读对应专题。
-2. **新课题**：在`USER_SCOPE`内按[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md)进行**BREADTH_SCAN（广度覆盖）→DEEP_FALSIFICATION（最强近邻/反证）→COMPETING_CHOICE（不同失败前提的竞争机会）**三项可连续完成的科学证据审查（不等于一次性替代 H1–H5 人工选择）；按公开官方元信息先查`PRE_DOWNLOAD_SCIENCE_FIT`，不因第一个可行方向就停搜。在 H3 候选决定后按官方来源比较 D1/必要外部库，深度参与模式经 H4 用户选择或可核委托，再在 H5 确定最终问题→核官方版本/必要文件/许可/容量→**优先下载并核验数据**。已有完整副本直接复用；有下载授权的Agent连续完成获取，不再为选库/下载反复请示；无下载授权仅提供已核实的官方来源、文件清单、容量与推荐/授权选项，**不提供下载Agent执行指令或PowerShell命令**，标 `WAITING_FOR_DOWNLOAD_AUTH`，不进入数据实证。详见 [DATA_DISCOVERY.md](DATA_DISCOVERY.md)。
+2. **新课题**：在`USER_SCOPE`内按[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md)进行**BREADTH_SCAN（广度覆盖）→DEEP_FALSIFICATION（最强近邻/反证）→COMPETING_CHOICE（不同失败前提的竞争机会）**三项可连续完成的科学证据审查（不等于一次性替代 H1–H5 人工选择）；按公开官方元信息先查`PRE_DOWNLOAD_SCIENCE_FIT`，不因第一个可行方向就停搜。在 H3 候选决定后按官方来源比较 D1/必要外部库，深度参与模式经 H4 用户选择或可核委托，再在 H5 确定最终问题→核官方版本/必要文件/许可/容量→**仅在 H4/H5 满足且另有明确数据获取授权后才下载并核验数据**。已有完整副本直接复用；有覆盖当前D1的下载授权的Agent连续完成获取，不再为选库/下载反复请示；无下载授权仅提供已核实的官方来源、文件清单、容量与推荐/授权选项，**不提供下载Agent执行指令或PowerShell命令**，标 `WAITING_FOR_DOWNLOAD_AUTH`，不进入数据实证。详见 [DATA_DISCOVERY.md](DATA_DISCOVERY.md)。
 3. **数据就绪后**：必须先有 `DATA_MANIFEST` 中本轮必需库的 `DATA_ACQUIRED_VERIFIED`（文件完整与可读，不代表科学有效）；否则只做下载/恢复与非实证准备。就绪后按 [DATA_INSIGHT.md](DATA_INSIGHT.md) 观察真实现象，再到 [TASK_EXPLORATION.md](TASK_EXPLORATION.md) 选任务；Task Ladder按需读。理论/仿真按明确证据路径例外处理。
 4. **已有任务/运行**：按 [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md) 获取有效Run、诊断负Pilot；**需要设计新算法或连续编码/GPU实验**时，按需读 [ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md) 的误差→杠杆→廉价正控→有界执行闭环，实际接口和保护规则读 [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)。机制失败先分辨可用信息/公平基线/欠训练，再决定转向或补论文。论文贡献读 [PAPER_FIRST.md](PAPER_FIRST.md)，正式独立确认读 [CONFIRMATION.md](CONFIRMATION.md)。
+
+**选择不等于证据认证**：H4若是理论/形式证明或无需静态数据库的仿真，确认可审计的 `PROOF_PATH`，不虚构D1；必须记录 H3/H4/H5 对同一科研问题的科学适配，不允许因数据方便替换用户选题。记录人工节点用 `REVIEW:H#`，论文蓝图Markdown标题的 H1/H2/H3 用 `HEADING:H#` 区分；上游决定或真值被新证据推翻时，依赖下游须重新核有效性。
 
 **新项目默认 `USER_DEEP_PARTICIPATION`**：按 [WORKFLOW.md](WORKFLOW.md) H1–H5 逐步完成研究范围、六类问题来源与五类贡献路线、候选科学问题、D1数据资源、最终课题及下一步计划的**真实用户选择或明确委托**。AI 在每轮先做足合法只读核查与备选比较；用户可一条消息决定多个已披露事项，已有项目复用旧选择而不强制重审。`PREFERRED`、下载计划或 AI 自选库均不能冒充用户批准；选库、下载、拟合、SEALED 和写稿权限严格分开。待决期间可继续不依赖该节点的合法只读研究，不中断普通技术任务。
 

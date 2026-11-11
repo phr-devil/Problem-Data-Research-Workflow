@@ -16,7 +16,7 @@
 
 **Q2证据结构预检（可选，不认证成功）**：`python -m core.q2_preflight PACKET.json` 只检查引用字段是否齐全，示例见[Q2_EVIDENCE_PACKET.example.json](Q2_EVIDENCE_PACKET.example.json)；实际科学贡献、JCR分区与Q2潜力仍由证据审查决定。
 
-**下一步Agent指令 / 用户选择分流**：[NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)。已授权且可自行决定或明确值得执行的技术工作，直接给简短可执行Agent指令；需用户判断或新增授权时，先给推荐和选项，不提前给Agent指令。
+**下一步Agent指令 / 用户选择分流**：[NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)。新项目先核当前H节点原始用户选择/明确委托及其依赖是否仍有效，**并另外核对应操作授权**；技术任务在既定授权内可连续实施，未确认的科研选择只给推荐/权衡/待用户决定项，不提前下达其依赖的执行指令。
 
 **双文档持续整理**：[DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md)。每个实际项目维护 `RESEARCH_RECORD.md`（做过什么、哪些尝试及失败、下一步、恢复与二次探索）和 `PAPER_BLUEPRINT.md`（论文一级/二级标题、逐节拟写内容及证据/缺口），在重要科研事件时增量更新。**算法论文蓝图以六章式为默认；特殊结构调整先说明理由并取得用户确认后执行**。见 [研究记录模板](templates/RESEARCH_RECORD.md) / [论文蓝图模板](templates/PAPER_BLUEPRINT.md)。
 
@@ -30,11 +30,13 @@
 
 **完成算法后的科学增值（可选）**：[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)。复用原始Run、错误结构及具名近邻，按新证据及现有授权做一项或一组有界且有价值的证伪；无新意则保留成果并总结，写作锁继续生效。
 
-**高价值科研决策的统一优先级**：重要知识差额/可辨识证据优先于训练难易与小论文完成性；Q2+潜力是项目成功标准，期刊录用不是必要条件。科学问题选择由PD-RW决定，RWF只建议实验动作，不反向以低成本排序覆盖选题。
+**高价值科研决策的统一优先级**：重要知识差额/可辨识证据优先于训练难易与小论文完成性；Q2+潜力是项目成功标准，期刊录用不是必要条件。科学问题的重大取舍由用户明确选择或有限委托，PD-RW提供证据和执行建议，RWF只建议实验动作，不反向以低成本排序覆盖选题。
 
 **高价值科学问题设计（按需）**：[HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md) 支持多视角问题搜索、数据库科学辨识力、竞争假设与有界机制探索，保留阶段/授权/写作锁。
 
-**活动01防过早选题**：按[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md)用`BREADTH_SCAN→DEEP_FALSIFICATION→COMPETING_CHOICE`在同一ChatGPT回复或2–3轮内部进行不同前提的竞争性选题；不能因为首先找到可行问题就停搜。基于官方元信息做`PRE_DOWNLOAD_SCIENCE_FIT`后选D1，数据反证初始假设时回看备选。可选只读核查`core.search_choice_review`不评分、不认证Q2也不授予下载权限。
+**活动01防跳步与防过早选题**：新项目默认 `USER_DEEP_PARTICIPATION`，H1范围→H2六类来源/五类贡献偏好→AI做`BREADTH_SCAN→DEEP_FALSIFICATION→COMPETING_CHOICE`→H3暂定问题→官方数据元信息核验→H4选择D1/理论证明路径→H5最终问题。AI可连续进行不依赖待决决定的合法只读研究，但不能一次性代替用户的选择；允许一条用户消息明确批准多项或按范围委托。数据反证时只重开受影响节点。可选`core.human_decision_review`与`core.search_choice_review`均仅做声明结构检查，不认证用户授权、科学新颖性或Q2潜力。
+
+**同名标识防混淆**：`H1–H10` / `H_ID` 是**人工科学决策节点**；`PAPER_BLUEPRINT.md` 中 Markdown `H1/H2/H3` 则是**论文章节标题层级**，不是批准记录。交接时分别写 `REVIEW:H4` 与 `HEADING:H2`，不能依据章节存在推定用户已经审核。
 
 ## 唯一入口与最短路径
 
@@ -43,7 +45,7 @@
 **维护与组织**：现有权威规则文件位置不变；新增的 [模块导航](modules/README.md) 仅供按需定位，仓库分层/兼容方案见 [结构说明](docs/STRUCTURE.md)，并不要求每次 Agent 任务预读。
 
 - **AI 首次进入**：从唯一默认入口 [AGENTS.md](AGENTS.md) 开始；新项目或需回顾研究路线时按需读 [START.md](START.md) 与 [WORKFLOW.md](WORKFLOW.md) 对应活动。已有项目先用已有 STATE 的 `RESEARCH_RECORD_REF` / `PAPER_BLUEPRINT_REF` 或明确项目路径**定位**两文件，再读当前快照、相关 SEC_ID、必要原始 Run/协议及权限；文档缺失则回退 STATE/原始工件，不能当作已完成或无证据。**不强制预读所有专题、旧 Prompt 或完整日志**。
-- **每次用户会指定研究方向**（如视觉、NLP、机器人、传感器或明确「方向不限」）：AI仅在本轮范围内筛1–3个问题—资源组合；**优先核实可评价主库D1，再按科学主张与成本扩展外部复现/备用数据库**（可多库联合开发，但不凑数量），标明标签/分组兼容性与来源。**方向确定后立即自主选库并进入数据获取：有真实下载授权即由Agent连续下载及验收；无授权则给官方来源、成本与授权方案（**不提前给下载Agent执行指令**）并停在等待数据状态，不先进入实证任务/算法开发**。无需再次让用户选择数据库，也不要求先证明增益。
+- **新项目**：先让用户决定或明确委托 H1–H5；AI在本轮 `USER_SCOPE` 内比较科学问题与官方数据元信息，提供首选及不同失败前提的备选，H3先选暂定问题、H4选D1/适用的`PROOF_PATH`、H5才确定最终题目。**不能自行定稿选库，也不能把选库/用户委托当作下载许可**。有覆盖已确认范围的真实下载授权才获取、校验；否则仅给官方来源、成本、选项并标`WAITING_FOR_DOWNLOAD_AUTH`，不发下载执行指令。旧项目有实际选择则沿用，不因新版工作流重选库。
 - **用户已有具体研究机制或旧项目**：可以直接进入对应活动（通常03/04），复用真实 STATE 和 Run；不强制重新选题，不未经确认迁移旧项目。
 
 ## 六项研究活动（可跳跃，不是六道审批门）
