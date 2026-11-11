@@ -10,7 +10,7 @@
 
 **人工科学决策冷启动**：新项目默认 `USER_DEEP_PARTICIPATION`；核用户原消息与已有 `RESEARCH_RECORD/STATE` 中 H1–H10 的确认/明确委托/待选及是否有新证据需要局部重开。活动01的 H1→H2→H3→H4→H5 交织现有 `BREADTH_SCAN → DEEP_FALSIFICATION → COMPETING_CHOICE`；活动03–06 仅重要 Task、机制、Claim、确认和成果收口触发 H6–H10。合法只读研究可连续，但不得自行确定尚待用户决策的主要问题或资源；原操作授权仍独立。单一权威见 [WORKFLOW.md](WORKFLOW.md)，下一轮交互见 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)。
 
-**最小防漏检查**：交接前核当前活动、H 节点、真实授权，用 [research_activity_protocol.v1.json](contracts/research_activity_protocol.v1.json) 只核当前活动必要证据及输出；既有证据无变化则复用。用户决定≠科研证据完成≠实际下载/拟合/SEALED/出图/写稿授权；`REVIEW:H1` ≠ 论文 `HEADING:H1`。
+**最小防漏检查**：核当前活动、适用 H 节点、原证据和实际操作许可；按 [research_activity_protocol.v1.json](contracts/research_activity_protocol.v1.json) 将进入条件、H 决定、交接声明分别审查，禁止用 `declared_activity_ready_not_authenticated` 自授行动。H7/H9 可据证据说明不适用；`REVIEW:H1` ≠ `HEADING:H1`。
 
 **统一人工审核启动合同**：新项目定位 [`contracts/human_review_protocol.v1.json`](contracts/human_review_protocol.v1.json)（唯一科研语义仍在 [WORKFLOW.md](WORKFLOW.md)），按其 `new_project_sequence=H1,H2,H3,H4,H5` 与 `required_dimensions` 判断**下一个有依赖、未明确选择/委托的节点**。先复用用户原消息中有效选择，不能换节点名义、忽略H2贡献路线、只因AI做完搜索就声称H3/H4用户已定。向用户展示统一 `CURRENT_REVIEW + PROGRESS + RECOMMENDATION/EVIDENCE/TRADEOFFS + REQUIRED_CHOICE`，不机械问卷；原权限与 SEALED/稿件门禁独立。工具返回的 `can_advance_declarations_only` 不是用户授权或实际科学真实性。
 

@@ -12,6 +12,8 @@
 
 **最小真实 Agent 对照验收（独立于合成结构 CI）**：优先复用已有冻结历史与正确权限，先选少量具有不同难点的可回放节点（高价值方向但初期指标平、有效规律无模型赢家、需新基准/系统能力、需要跨范式证据、容易虚报论文新颖性），无需一次构造大规模新数据集。至少比较 `BASELINE_NO_PDRW` 与 `PDRW_CURRENT`；若要衡量本次升级的实际增益，在同模型/同输入快照/同公开检索时点/同权限与总预算下另比 `PDRW_PREVIOUS`，并在专家看不到方案标签的条件下评估科学重要性排序、重要近邻遗漏、下一 Probe 判别力、Claim 证据匹配、错误 STOP/错误论文出口与真实 Token/GPU/人工成本。仅凭 Agent 文本选择无法证明算法性能改善，真实资源执行必须有独立授权；无可回放历史则记 `NOT_REPLAYABLE`，未实际执行则 `NOT_MEASURED`。结果直接附原 `REPLAY_PROTOCOL` 的配对记录，不要求新常设状态机或每次研究都全量回放。**任何静态测试、合成反例、CI PASS 均不得写成真实 Agent 科研能力已提升。**
 
+**新回归补充（非实测）**：检查理论/仿真 `NON_DATA` Claim 真实本地工件指纹、独立确认范围不可扩大，以及经验 Run/SEALED 不被伪造替代；检查活动进入声明与 H 选择缺失时即使交付结构完整也不得报告进入审核齐备；验证 H7 机制不适用/H9 确认资源缺失都要留来源、不能伪造训练或确认成功。真实用户消息、权限与证据适配仍按工作流审查，静态检查不证明这些事实。
+
 **六活动固定流程/开放研究的行为验收（尚未真实运行）**：使用 [research_activity_protocol.v1.json](contracts/research_activity_protocol.v1.json) 的 01–06 责任与交付定义，分别在柔性传感、生理信号、机器人、纯理论与旧项目恢复任务中冻结用户输入/工具/版本/预算。检查 ①六活动无漏掉真值、合法输入、重要负证据、独立确认；②不强制相同模型、数据集、实验数量与 Task Ladder；③活动05可与04并行；④H4/H6/H8科学选择及下载/训练/SEALED/绘图/写作许可严格分开；⑤数据/Task变动仅局部回退；⑥原项目有效记录不重复搜索/拟合。记录 `ACTIVITY_HANDOFF_COVERAGE | SCIENCE_ROUTE_DIVERSITY | UNNECESSARY_REASK | AUTH_VIOLATIONS | TOKEN_COST`。仅有 CI/模拟合同、没有真实 Agent 轨迹时全部标 `NOT_MEASURED`，不得声称研究成功率或Token节省已提高。
 
 **跨领域统一审核序列验证（静态案例+真实回放分离）**：`evals/cases/human_review_sequences.json` 包含柔性传感、生理传感、机器人具身智能、理论证明和旧项目/失效回退的**合成结构性用例**。CI 检查三领域都使用相同 H1–H5 顺序及必审维度，H2仅有课题来源但缺贡献路线不算完成，H4无证据资源不可跳过，用户选择/委托不构成下载许可。它**不是**真实对话实测。真实验收应在同版本、同工具、同用户指令的不同科研方向启动中捕获实际助手提问与用户选择，分别统计 `H_SEQUENCE_CONSISTENCY | MISSING_REQUIRED_DIMENSIONS | FALSE_APPROVAL | UNNECESSARY_REASK | HUMAN_TURNS/TOKENS | AUTH_VIOLATIONS`；无真实捕获标 `NOT_MEASURED`，不得根据静态场景宣称 Agent 执行稳定。
