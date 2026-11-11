@@ -27,6 +27,8 @@ def _strings(obj: dict, key: str) -> None:
 
 def validate_run(value: Any) -> dict:
     obj = _object(value)
+    if obj.get("evidence_path", "EMPIRICAL") != "EMPIRICAL":
+        raise ContractError("Run records are empirical; use NON_DATA Claim for proof/simulation")
     _text(obj, "run_id", "task_id", "protocol_id", "dataset_version",
           "evaluator_version", "group_split", "sample_ids_hash")
     if obj.get("status") not in RUN_STATUSES or obj.get("split") not in SPLITS:
@@ -78,20 +80,27 @@ def validate_claim(value: Any) -> dict:
             raise ContractError("NON_DATA claims may not disguise empirical Runs; split mixed claims")
         if obj.get("evidence_type") not in {"THEORETICAL_PROOF", "SIMULATION", "AUDITED_MECHANISM"}:
             raise ContractError("NON_DATA requires explicit bounded evidence_type")
-        _text(obj, "claim_scope", "assumptions_ref")
+        _text(obj, "claim_scope")
         if obj["status"] in {"SUPPORTED", "CONFIRMED"}:
+            _text(obj, "assumptions_ref")
             if not obj.get("evidence_refs") or not obj.get("artifact_refs"):
                 raise ContractError("supported NON_DATA claims require local evidence and artifact references")
             _text(obj, "strongest_alternative")
         if obj["status"] == "CONFIRMED":
             if not obj.get("independent_validation_refs"):
                 raise ContractError("confirmed NON_DATA claims require independent validation references")
+            # A review of the very same file does not create independent evidence.
+            original = set(obj["evidence_refs"] + obj["artifact_refs"] + [obj["assumptions_ref"]])
+            if original.intersection(obj["independent_validation_refs"]):
+                raise ContractError("independent validation must reference a separate artifact")
             _text(obj, "confirmation_protocol_ref", "confirmation_scope",
                   "independence_limit")
             if obj["evidence_type"] == "SIMULATION" and obj["confirmation_scope"] != "SIMULATION_DOMAIN_ONLY":
                 raise ContractError("simulation confirmation cannot assert empirical generalization")
             if obj["evidence_type"] == "THEORETICAL_PROOF" and obj["confirmation_scope"] != "THEOREM_SCOPE_ONLY":
                 raise ContractError("proof confirmation is bounded by theorem assumptions")
+            if obj["evidence_type"] == "AUDITED_MECHANISM" and obj["confirmation_scope"] != "MECHANISM_SCOPE_ONLY":
+                raise ContractError("mechanism audit cannot assert empirical generalization")
     else:
         if obj["status"] in {"SUPPORTED", "CONFIRMED"}:
             if not obj.get("evidence_run_ids") or not obj.get("artifact_refs"):
