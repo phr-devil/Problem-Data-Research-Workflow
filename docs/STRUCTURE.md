@@ -3,7 +3,7 @@
 ## 1. 本次边界：先增导航，不迁权威
 
 - 唯一 Agent 默认入口：[`AGENTS.md`](../AGENTS.md)。
-- 唯一科研决策主控：[`WORKFLOW.md`](../WORKFLOW.md)；原有三循环/六活动保留；H6–H8改为AI主责的科学决策，H1–H5/H9/H10用户决策及SEALED/写作等独立门禁保留。
+- 唯一科研决策主控：[`WORKFLOW.md`](../WORKFLOW.md)；原有三循环/六活动保留；H6核心Task与H8核心Claim/重大升级由作者选择或明确委托，H7与已批准范围内DEV技术开发由AI自主；H1–H5及适用H9/H10维持原作者决策和SEALED/写作等独立门禁。
 - [`policies/README.md`](../policies/README.md) 与 [`modules/README.md`](../modules/README.md) 及其研究、论文、绘图专题索引只是轻量**路径清单**（INDEX_ONLY），无新增规则或审批。旧路径与脚本全部保留，无双份规范。
 - 研究项目内的 `RESEARCH_RECORD.md` / `PAPER_BLUEPRINT.md`、Run/STATE 和所有原始证据位置不变；原测试仍可直接访问根目录权威文档。
 - **历史科研案例统一归属**：[LESSONS/CASE_REGISTRY.md](../LESSONS/CASE_REGISTRY.md) 是项目成功/失败/证据缺口的按需单一索引；细节与最终事实仍以用户项目原始 Run/归档为准。RWF 仅链接此索引，不复制，不纳入 AGENTS 默认预读。
@@ -52,7 +52,7 @@
 | `EVIDENCE-VALIDITY` | [WORKFLOW.md](../WORKFLOW.md) 科研总控 + [EXPERIMENT_LOOP.md](../EXPERIMENT_LOOP.md) 实验有效性；形成Claim/决定下一Probe时 | INVALID/NOT_RUN不升格成成功或负科学结论 |
 | `RULE-RELOAD` | [AGENTS.md](../AGENTS.md) 入口/版本和 [DUAL_DOCUMENT_WORKFLOW.md](../DUAL_DOCUMENT_WORKFLOW.md) 恢复；会话/Task/规则变化及敏感操作前 | 不因读过一次就假设永久生效，版本/授权不明不自我许可 |
 
-**后期决策权变更**：H1–H5/H9/H10的适用用户选择由原消息决定；H6–H8由AI以可追溯的Task/机制/Claim证据作决定，当前用户已明确取消普通本地DEV算法开发的逐次授权。机器合同采用`pd-rw-human-review-v1.2`，旧v1.1声明兼容读取但不冒充真实授权；安全/实际付费/外传/SEALED/写作/绘图与跨H5项目变化仍保留原门禁。相关证明见定向测试，本段不增加第二套执行细则。
+**现行决策责任（v1.13 / `pd-rw-human-review-v1.3`）**：H1–H6与H8及适用H9/H10由作者选择或明确限域委托，其中H6选核心Task/科研策略，H8选主Claim/实质性升级；H7技术方案及已批准范围内安全非付费DEV由AI自主，不逐次申请。v1.1/v1.2历史声明仅按真实原始选择和旧范围兼容读取，不伪装为v1.3作者批准；新库、付费、危险行为、SEALED、写作、绘图、投稿及超H5变化依然独立核许可。详情以 [WORKFLOW.md](../WORKFLOW.md) 和 [AUTHOR_STRATEGY_REVIEW.md](../AUTHOR_STRATEGY_REVIEW.md) 为准，此处不定义第二套权限。
 
 **变更前核归属**：新的科研限制先标 `HARD_GATE`（必须满足）、`CONDITIONAL`（在具体场景触发）、`HEURISTIC`（可按任务调整）；每项只有一个详细定义的owner，其他文件只保留导航或最小禁令提醒。只有真正新增独立职责才新建专题。对运行工具可控的场景，应在执行层实施权限检查；Markdown和静态CI不能证明真实拦截，未验证的机制必须如实标明。
 
