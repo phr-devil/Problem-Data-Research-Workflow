@@ -32,7 +32,7 @@
 
 **H6/H8 作者科研策略选择（重点升级）**：[AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md) 规定H6在AI给出首选科研组合及备选后由作者选择核心Task/研究路线，H8在重大成果或路线升级时由AI比较KEEP/UPGRADE/REFRAME等方案并由作者选择核心Claim；H7和已选范围DEV算法/训练/修复仍由AI自主，不逐次请示。新协议v1.3保留旧项目记录，实际作者消息与操作授权各自独立。
 
-**规则执行保障
+**规则执行保障（离线检查与权限边界）**：[EXECUTION_ASSURANCE.md](EXECUTION_ASSURANCE.md) 与 `core.execution_preflight` 检查H6/H8作者战略选项与选择声明、重要Run/负结果证据及DEV范围。未经真实作者选择或有效旧项目范围，不得声称新的核心Task/Claim已获批准；已选范围内H7算法及安全DEV自主执行。**仓库仍未部署可信工具拦截器、SEALED操作系统隔离或真实Agent盲回放**，静态CI不证明实际授权/科学正确性。
 
 **研究贡献分类（按需指南）**：[12类原创贡献×6条研究路线](CONTRIBUTION_TAXONOMY.md)。H2旧五类取向兼容保留；H6策略由AI推荐、作者选择，H8核心Claim与重大升级由作者选择，H7负责自主技术实施。**高价值科研决策的统一优先级**：知识重要性、近邻差额与可辨别证据优先于训练难度/论文完成速度，Q2+需要真实独立证据，不以组合标签推定成功。
 
