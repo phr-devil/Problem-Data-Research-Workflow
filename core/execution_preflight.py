@@ -198,8 +198,9 @@ def science_checkpoint(packet: dict) -> dict:
                                              "SUPPORTED", "CONFIRMED"}:
             missing.append("claim_status")
         if packet.get("claim_status") in {"SUPPORTED", "CONFIRMED"}:
-            if (not _present(packet.get("actual_evidence_ref_or_not_run")) or
-                    packet.get("actual_evidence_ref_or_not_run") == "NOT_RUN"):
+            actual_ref = packet.get("actual_evidence_ref_or_not_run")
+            if (not _present(actual_ref) or actual_ref.strip().upper() in {
+                    "NOT_RUN", "UNKNOWN", "NONE", "N/A", "UNAVAILABLE", "INVALID"}):
                 missing.append("real_evidence_for_supported_claim")
             # Only a *frozen primary* research strategy requires H8 author
             # choice. Valid secondary DEV findings may be supported without
@@ -216,7 +217,7 @@ def science_checkpoint(packet: dict) -> dict:
         if (packet.get("claim_status") == "CONFIRMED"
                 and isinstance(independent_ref, str)
                 and independent_ref.strip().upper() in {
-                    "UNAVAILABLE", "UNKNOWN", "NOT_RUN", "NONE"}):
+                    "UNAVAILABLE", "UNKNOWN", "NOT_RUN", "NONE", "N/A", "INVALID"}):
             missing.append("confirmed_needs_real_independent_evidence")
     author = author_strategy_review(packet) if trigger in AUTHOR_NODES else None
     if author and author["result"] == "BLOCK_HANDOFF":
