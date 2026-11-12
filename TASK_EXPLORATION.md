@@ -23,7 +23,7 @@
 
 **高质量科学问题合同（不是新的硬审批表）**：按[HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md) C，研究问题须在证据足够时能说清`IMPORTANT_QUESTION | NAMED_NEAREST_GAP | PRIMARY_CLAIM | STRONGEST_ALTERNATIVE | DIFFERENT_PREDICTIONS | MINIMUM_DISCRIMINATING_TEST | CONFIRMATION_PATH | GAP_TO_Q2`。若两个解释都预测相同F1，现有实验不能识别机制；优先改成有区分性的受控对照，或只主张可验证的新能力/成本—性能规律，**不伪造因果故事**。不能因为数据最容易训练，就把普通小幅性能提高当最有价值问题；也不强迫所有方向都提出物理机制。Task冻结之前检查独立单位和合法输入、已有DEV选择史；无确认能力记UNKNOWN而非自动STOP。
 
-**H6 主任务AI自主科学选择**：H5 已确认首选问题且本轮必需实证资产达到 `DATA_ACQUIRED_VERIFIED`（纯理论/仿真按适用证据路径），AI 先提交 1–3 个有实质科学差异的 Task 或充分说明仅有一个，逐项比较 `SCIENTIFIC_QUESTION | LABEL_AND_PREDECISION_INPUT | INDEPENDENT_GROUP | STRONGEST_ALTERNATIVE | FALSIFIER | MINIMUM_PROBE | COST/AUTH`。H6 由AI在已确认H5项目及合法DEV证据范围内自主确定**主要 Task、中心假设与可复现评价条件**，并保留科学选择依据；不要求用户再次选择，只做可行性/数据画像等已授权只读诊断不需要该节点另批。H6 不能被 `TASK_CARD` 自动生成、一个容易运行的 baseline、上一项目 H5 或 AI 的 `PREFERRED` 替代。H6 之后同 Task/同评价器的已授权实现可连续；新增标签预算、任务目标、主要评价或部署前信息使科研主张变化则重开 H6，不自动改任务/SEALED 使用资格。用户已在原始消息中明确决定的，不重复提问。
+**H6 作者选择核心Task与科研策略（AI先推荐）**：在H5有效且必需DEV数据已合法验收（理论项目用PROOF_PATH）后，AI按 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md) 提出明确首选+通常1–2个不同失败前提备选，逐一比较 `Task/主要贡献C01–C12/路线R1–R6/竞争力P1–P5/具名近邻差额/真值和独立单位/最小可证伪试验/成本和速度/风险`。推荐不只看简单F1或训练成本；作者选择、组合选择或限定委托后才冻结PRIMARY_TASK和主要科学路线。缺作者选择时保持H6待决，允许只读分析、文献反证及已有合法非依赖工作，不得把AI首选当已批准Task。**H7主要机制、普通DEV算法和同已选Task下的调参/修复归AI自主，不逐次向作者请求批准**。真正换核心Task/重要评价/合法信息且超出作者选择范围才重新提交H6；已有项目有效选择保持兼容。
 
 ## 1. 系统化任务机会扫描（已有一个可信机会就开展实证）
 
@@ -97,7 +97,7 @@
 
 **不要因想象中的期刊等级提前淘汰Task**：早期只评估数据/真值、可学信号、科学差额和下一最便宜证据；S/A/B/C稿件潜力只能在有具体Claim或初步Run时暂估，且不参与硬性选题PASS/STOP。研究任务在困难L2/L3上未成功时，检查是否留下可独立复核的窄规律/局部收益/标注成本边界；若有，移交[PAPER_FIRST.md](PAPER_FIRST.md)，不要默认继续追逐复杂模型。
 
-### 将科学问题转换为可否定任务（H6 科学选择，非每个 Probe 审批）
+### 将科学问题转换为可否定任务（H6 作者策略选择，非每个 Probe 审批）
 
 对当前首选问题，仅补足 `HYPOTHESIS | STRONGEST_COMPETING_EXPLANATION | REQUIRED_OBSERVABLE_FACTORS | LEGAL_PREDECISION_INPUT | INDEPENDENT_TRUTH/GROUP | FALSIFIER | MINIMUM_DISCRIMINATING_TEST`。区分“预测能力”“机制归因”“失效规律”“新基准有效性”各自需要的真值与对照；仅能观察相关性时缩窄主张，不自动宣称因果机制。实验前记录 `IF_POS/NEG/INVALID` 会改变哪个 Task/机制/Claim 决策；负Pilot只影响该前提，不自动否决方向。最小测试是控制风险的入口，不以廉价性取代科学价值；没有下载/训练许可时仅形成计划并标 AUTH_REQUIRED。复用原 `TASK_CARD` 与 `NEXT_DISCRIMINATING_PROBE`，不得提前读取 SEALED。
 
