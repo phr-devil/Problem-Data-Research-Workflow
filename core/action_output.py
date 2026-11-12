@@ -10,13 +10,14 @@ def output_mode(*, authorized: bool, user_choice_required: bool = False,
                 major_task_change: bool = False, project_stop: bool = False,
                 manuscript_work: bool = False, summary_reviewed: bool = False,
                 explicit_writing_permission: bool = False,
-                has_next_action: bool = True) -> dict:
+                has_next_action: bool = True, information_only: bool = False) -> dict:
     fields = locals()
     if any(type(value) is not bool for value in fields.values()):
         raise TypeError("All output-mode conditions must be explicit booleans")
-    if not has_next_action:
+    if information_only or not has_next_action:
         return {"mode": "NO_NEXT_ACTION", "agent_instruction_allowed": False,
-                "note": "No next step is actually needed"}
+                "note": ("Informational request: answer directly without an invented Agent task"
+                         if information_only else "No next step is actually needed")}
     reasons = []
     if not authorized:
         reasons.append("ORIGINAL_USER_AUTHORIZATION_MISSING_OR_UNVERIFIED")
