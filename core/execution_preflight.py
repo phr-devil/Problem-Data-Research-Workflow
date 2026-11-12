@@ -149,11 +149,25 @@ def author_strategy_review(packet: dict) -> dict:
     if not _present(selection.get("original_user_message_ref")):
         missing.append("original_user_message_ref")
     if selection.get("kind") == "USER_CONFIRMED":
-        if selection.get("chosen_option_id") not in ids:
+        primary = selection.get("chosen_option_id")
+        if primary not in ids:
             missing.append("chosen_option_id")
+        secondary = selection.get("secondary_option_ids", [])
+        if (not isinstance(secondary, list)
+                or any(not isinstance(v, str) or v not in ids for v in secondary)
+                or len(set(v for v in secondary if isinstance(v, str))) != len(secondary)
+                or primary in secondary):
+            missing.append("valid_secondary_option_ids")
+        if secondary and not _present(selection.get("combination_scope")):
+            missing.append("combination_scope")
     else:
         if not _present(selection.get("delegated_scope")):
             missing.append("delegated_scope")
+        allowed = selection.get("allowed_option_ids")
+        if (not isinstance(allowed, list) or not allowed
+                or any(not isinstance(v, str) or v not in ids for v in allowed)
+                or len(set(v for v in allowed if isinstance(v, str))) != len(allowed)):
+            missing.append("valid_delegated_allowed_option_ids")
     if missing:
         return {"result": "BLOCK_HANDOFF", "missing": missing,
                 "author_approval_authenticated": False}
