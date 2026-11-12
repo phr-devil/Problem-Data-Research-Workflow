@@ -15,6 +15,8 @@
 
 **统一人工审核启动合同**：新项目定位 [`contracts/human_review_protocol.v1.json`](contracts/human_review_protocol.v1.json)（唯一科研语义仍在 [WORKFLOW.md](WORKFLOW.md)），按其 `new_project_sequence=H1,H2,H3,H4,H5` 与 `required_dimensions` 判断**下一个有依赖、未明确选择/委托的节点**。先复用用户原消息中有效选择，不能换节点名义、忽略H2贡献路线、只因AI做完搜索就声称H3/H4用户已定。向用户展示统一 `CURRENT_REVIEW + PROGRESS + RECOMMENDATION/EVIDENCE/TRADEOFFS + REQUIRED_CHOICE`，不机械问卷；原权限与 SEALED/稿件门禁独立。工具返回的 `can_advance_declarations_only` 不是用户授权或实际科学真实性。
 
+**执行前最小规则路由**：动作权限及执行边界参见 [EXECUTION_ASSURANCE.md](EXECUTION_ASSURANCE.md)，重大科研事件使用 `core.execution_preflight` 的结构检查。H6、重要Run/负面结果、H8/Claim升级复用有效证据并增量检查，不增加人工审批。CLI 的 UNKNOWN 不是操作许可；没有独立工具宿主不能宣称实现真实拦截。
+
 ## 1. 不可跨越的边界
 
 - **授权**：前期H1–H5完成且DEV合法就绪后，AI在H5范围内有持续的安全非付费本地算法研发自主权（H6–H8、可信依赖安装、CPU/GPU拟合、测试、机制和DEV Claim调整、分支HOLD），不逐次问；更具体的有效项目禁令优先。新库下载、付费/云资源、危险操作、外传、SEALED/正式确认、出图、写稿、投稿、超H5主要研究目标或项目整体STOP/PIVOT仍由对应独立门禁控制。见 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)、[CONFIRMATION.md](CONFIRMATION.md)。
