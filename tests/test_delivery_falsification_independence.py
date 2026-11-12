@@ -20,7 +20,7 @@ class ThreeIssueRoutingTests(unittest.TestCase):
             self.assertIn(level, policy)
         for required in (
             "DELIVERY_CHECK", "唯一首选最终成果", "实际存在",
-            "SEALED", "NOT_RUN", "多文件整体交付", "不是第三本科研日志",
+            "SEALED", "NOT_RUN", "多文件整体交付", "而非第三本科研日志",
         ):
             with self.subTest(required=required):
                 self.assertIn(required, policy)
