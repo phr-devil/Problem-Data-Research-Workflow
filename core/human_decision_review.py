@@ -126,7 +126,7 @@ def review(packet: dict) -> dict:
     # checked here; an Agent must inspect real evidence to identify reopenings.
     invalidated = packet.get("invalidated_decisions", [])
     if (not isinstance(invalidated, list)
-            or any(step not in STEPS for step in invalidated)
+            or any(not isinstance(step, str) or step not in STEPS for step in invalidated)
             or len(set(invalidated)) != len(invalidated)):
         raise ValueError("invalidated_decisions must be distinct H1..H10 IDs")
     invalidated_set = set(invalidated)
@@ -164,6 +164,9 @@ def review(packet: dict) -> dict:
         "target": target,
         "target_decision_owner": CONTRACT["steps"][target]["decision_owner"],
         "target_requires_user_scientific_choice": CONTRACT["steps"][target]["decision_owner"] == "USER",
+        "target_decision_owner_under_source_protocol": (
+            "AGENT_LEGACY" if protocol_version == "pd-rw-human-review-v1.2"
+            and target in AUTHOR_STRATEGY_NODES else CONTRACT["steps"][target]["decision_owner"]),
         "author_strategy_review_node": target in AUTHOR_STRATEGY_NODES,
         "author_choice_pending": (target in AUTHOR_STRATEGY_NODES
                                   and protocol_version == CONTRACT["protocol_version"]
