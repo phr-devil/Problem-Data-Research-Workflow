@@ -48,4 +48,4 @@ AI先汇总本阶段**全部实质有效的正负Run/理论证据、主张候选
 
 ## 5. 按需测试
 
-`core.human_decision_review` 检查 H6/H8作者选择/委托的**声明完整性**，`core.execution_preflight` 检查 H6_TASK/H8_CLAIM 科学候选与策略引用是否齐全；离线测试应覆盖AI自决伪冒、缺推荐、缺备选反证、已有限委托、普通DEV不重问、H8实质性升级复核、旧项目兼容。实际Agent是否遵守、工具是否真正受约束仍须独立轨迹审查，不以CI通过冒充真实行为已验证。
+`core.human_decision_review` 检查 H6/H8作者选择/委托的**声明完整性**，`core.execution_preflight` 检查 H6_TASK/H8_CLAIM 科学候选与策略引用是否齐全；`core.contracts.review_activity_handoff` 将二者在活动03/05交接时联动：现行v1.3必须同一消息引用、同一选择及对应C/R方案，否则不能宣称交接就绪。离线测试应覆盖AI自决伪冒、缺推荐、缺备选反证、已有限委托、普通DEV不重问、H8实质性升级复核、旧项目兼容。实际Agent是否遵守、工具是否真正受约束仍须独立轨迹审查，不以CI通过冒充真实行为已验证。
