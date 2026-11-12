@@ -227,7 +227,7 @@ def inspect_text(record: str | None, blueprint: str | None) -> list[dict]:
     if blueprint is not None:
         bp_lines = _lines(blueprint)
         title = next((s for _, s in bp_lines if s.startswith("# ")), "")
-        if "PAPER_BLUEPRINT" in title:
+        if re.match(r"^# PAPER_BLUEPRINT(?:\s|[｜:])", title):
             headings = [(int(m.group(1)), m.group(2).strip())
                         for _, s in bp_lines if
                         (m := re.match(r"^## (\d+)\. (.+)$", s))]
