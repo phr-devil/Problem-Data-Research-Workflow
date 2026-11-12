@@ -18,7 +18,16 @@ DEPENDENCIES = {
     step: tuple(spec["prerequisites"]) for step, spec in CONTRACT["steps"].items()
 }
 DECISIONS = {"USER_CONFIRMED", "USER_DELEGATED", "AGENT_DECIDED", "PENDING"}
-AGENT_OWNED = {"H6", "H7", "H8"}
+AGENT_OWNED = {"H7"}
+LEGACY_AGENT_OWNED = {"H6", "H7", "H8"}
+AUTHOR_STRATEGY_NODES = {"H6", "H8"}
+LEGACY_STRATEGY_DIMS = {
+    "H6": (["task_hypothesis", "legal_inputs", "independent_evaluation"],
+           ["valid_dev_or_theory_basis", "falsifier_and_comparator"]),
+    "H8": (["main_claim", "positive_negative_evidence", "continue_narrow_pivot_hold"],
+           ["valid_results", "strongest_alternative"]),
+}
+
 UNDECIDED = {"", "UNKNOWN", "UNDECIDED", "PENDING", "TBD", "N/A"}
 
 
@@ -62,12 +71,12 @@ def review(packet: dict) -> dict:
         if entry["kind"] == "PENDING":
             pending.add(name)
             continue
-        # For H6-H8, the Agent owns technical decisions, but must retain an
-        # audit pointer, H5 source-scope pointer and supporting evidence. This
-        # validator checks declarations, not the authenticity of either pointer.
+        # Only H7 is agent-owned in the current protocol. Legacy H6/H8 agent
+        # declarations remain readable, but never become new author approval.
         if entry["kind"] == "AGENT_DECIDED":
-            if (protocol_version != CONTRACT["protocol_version"]
-                    or name not in AGENT_OWNED
+            allowed_agent = (AGENT_OWNED if protocol_version == CONTRACT["protocol_version"]
+                             else LEGACY_AGENT_OWNED)
+            if (name not in allowed_agent
                     or not isinstance(entry.get("agent_decision_ref"), str)
                     or not entry["agent_decision_ref"].strip()
                     or not isinstance(entry.get("h5_scope_ref"), str)
@@ -75,6 +84,9 @@ def review(packet: dict) -> dict:
                 malformed.append(name)
                 continue
         else:
+            if (name in AGENT_OWNED and protocol_version == CONTRACT["protocol_version"]):
+                malformed.append(name)
+                continue
             if (not isinstance(entry.get("original_user_message_ref"), str)
                     or not entry["original_user_message_ref"].strip()):
                 malformed.append(name)
@@ -89,12 +101,16 @@ def review(packet: dict) -> dict:
             refs = entry.get("evidence_refs")
             dims = dims if isinstance(dims, dict) else {}
             refs = refs if isinstance(refs, dict) else {}
+            dimensions = spec["required_dimensions"]
+            minimum = spec["evidence_minimum"]
+            if protocol_version != CONTRACT["protocol_version"] and name in LEGACY_STRATEGY_DIMS:
+                dimensions, minimum = LEGACY_STRATEGY_DIMS[name]
             missing_d = [
-                dim for dim in spec["required_dimensions"]
+                dim for dim in dimensions
                 if not isinstance(dims.get(dim), str) or dims[dim].strip().upper() in UNDECIDED
             ]
             missing_e = [
-                evidence for evidence in spec["evidence_minimum"]
+                evidence for evidence in minimum
                 if not isinstance(refs.get(evidence), str) or not refs[evidence].strip()
             ]
             if missing_d:
@@ -148,6 +164,13 @@ def review(packet: dict) -> dict:
         "target": target,
         "target_decision_owner": CONTRACT["steps"][target]["decision_owner"],
         "target_requires_user_scientific_choice": CONTRACT["steps"][target]["decision_owner"] == "USER",
+        "author_strategy_review_node": target in AUTHOR_STRATEGY_NODES,
+        "author_choice_pending": (target in AUTHOR_STRATEGY_NODES
+                                  and protocol_version == CONTRACT["protocol_version"]
+                                  and target not in effective_present),
+        "legacy_agent_strategy_not_author_approved": sorted(
+            (name for name in effective_present if name in AUTHOR_STRATEGY_NODES
+             and rows[name]["kind"] == "AGENT_DECIDED"), key=STEPS.index),
         "agent_decision_declarations": sorted(
             (name for name in effective_present if rows[name]["kind"] == "AGENT_DECIDED"),
             key=STEPS.index,
@@ -171,11 +194,12 @@ def review(packet: dict) -> dict:
         "allows_download_training_sealed_or_writing": False,
         "note": (
             "Declarations and message refs are untrusted; verify the original user messages "
-            "and scientific evidence manually. H6-H8 are agent-owned scientific "
-            "decisions after valid H5 scope; a complete Agent declaration is not "
-            "an authenticated user approval or real tool-access grant. In-scope "
-            "safe local DEV algorithm work is covered by standing research autonomy, "
-            "not an H6-H8 user-signoff. H9 requires independent confirmation "
+            "and scientific evidence manually. In the current protocol H6/H8 "
+            "require author strategy/claim choice or explicit scoped delegation; "
+            "H7 and ordinary in-scope safe DEV work remain agent-owned. A complete "
+            "Agent declaration is not authenticated user approval or tool permission. "
+            "Old agent-owned H6/H8 records remain legacy, not new author signoff. "
+            "H9 requires independent confirmation 
             "authorization; H10 never bypasses the separate writing gate. "
             "Reopened decisions are caller declarations, not evidence that the "
             "actual user changed their mind or that all dependent claims were found."
