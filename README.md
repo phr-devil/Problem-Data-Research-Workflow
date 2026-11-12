@@ -24,13 +24,13 @@
 
 **获授权后的论文写作执行规范**：[MANUSCRIPT_WRITING.md](MANUSCRIPT_WRITING.md)。证据/主张→论文论证→方法与结果配对起草→占位/原文核验→科学审查→证据约束下的自然强表达；6个功能模块压缩为4轮自主任务，不新建科研阶段、强制Agent数量或审批门禁。
 
-**写作范例案例库**：[paper_exemplars/README.md](paper_exemplars/README.md)；**六类问题发现×五类贡献的可选研究案例**：[图谱](paper_exemplars/RESEARCH_OPPORTUNITY_MAP.md)。已从16篇用户提供的全文PDF提炼可复用的结构和学术表达策略；正文写作R1按研究类型匹配1–3篇，R2–R4按章节使用。仅收录原创策略卡与DOI/页码，不公开上传受版权限制的PDF或复制原文，也不覆盖用户已经批准的章节结构。
+**写作范例案例库**：[paper_exemplars/README.md](paper_exemplars/README.md)；**六类问题发现×五类传统贡献的可选研究案例**：[图谱](paper_exemplars/RESEARCH_OPPORTUNITY_MAP.md)。已从16篇用户提供的全文PDF提炼可复用的结构和学术表达策略；正文写作R1按研究类型匹配1–3篇，R2–R4按章节使用。仅收录原创策略卡与DOI/页码，不公开上传受版权限制的PDF或复制原文，也不覆盖用户已经批准的章节结构。
 
 **已有科学价值主动挖掘与贡献充分提炼**：[SCIENCE_RESULT_HARVEST.md](SCIENCE_RESULT_HARVEST.md)。重要Run/负结果/拟HOLD/科研总结前复用现有预测、组级差异和实际成本寻找未发现的科学规律线索；比较不同贡献再选最有价值的主张。区分`ARTICULATION_GAP`（已存在可信证据但科学说明不充分）与`EVIDENCE_GAP`（关键实验还缺），避免反复GPU训练或用漂亮修辞替代验证。可选只读`python -m core.result_harvest --packet DEV_EVIDENCE.json`仅做探索性组级描述，不证明Q2/因果/独立确认；默认写作锁不变。
 
 **完成算法后的科学增值（可选）**：[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)。复用原始Run、错误结构及具名近邻，按新证据及现有授权做一项或一组有界且有价值的证伪；无新意则保留成果并总结，写作锁继续生效。
 
-**高价值科研决策的统一优先级**：重要知识差额/可辨识证据优先于训练难易与小论文完成性；Q2+潜力是项目成功标准，期刊录用不是必要条件。科学问题的重大取舍由用户明确选择或有限委托，PD-RW提供证据和执行建议，RWF只建议实验动作，不反向以低成本排序覆盖选题。
+**研究贡献分类（新增按需指南）**：[12类原创贡献×6条研究路线](CONTRIBUTION_TAXONOMY.md)。区分贡献、方法和论文体裁；新项目H2仍沿用六类问题来源/五类兼容枚举，AI在H6–H8据证据判断主贡献，不默认必须开发新算法，也不新增确认节点。\n\n**高价值科研决策的统一优先级**：重要知识差额/可辨识证据优先于训练难易与小论文完成性；Q2+潜力是项目成功标准，期刊录用不是必要条件。科学问题的重大取舍由用户明确选择或有限委托，PD-RW提供证据和执行建议，RWF只建议实验动作，不反向以低成本排序覆盖选题。
 
 **高价值科学问题设计（按需）**：[HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md) 支持多视角问题搜索、数据库科学辨识力、竞争假设与有界机制探索，保留阶段/授权/写作锁。
 
