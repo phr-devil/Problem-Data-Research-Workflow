@@ -22,7 +22,7 @@
 
 **Token 优化是全任务成本目标，而不是单次回复最短**：
 1. **定向读取、重用有效上下文**：先按当前任务、实际项目路径、规则 commit、STATE、`RESEARCH_RECORD` 快照定位直接相关部分；仅在必要时深入原始工件/专题。任务、版本、协议和证据未变，复用既有合法文献核查、数据验收、哈希、Run、测试和真实用户选择；不重复检索/运行/全库扫描。
-2. **授权范围内连续自主处理**：有明确依赖的审查→修复→必要验证/科学探针可合并成合理规模的连续任务，不机械分批、反复规划、要求普通实施选择的用户确认。H5完成且DEV合法就绪后，安全非付费的本地CPU/GPU拟合、可信依赖安装及H6–H8研发选择适用持续自主研发策略；新库下载、付费/云资源、危险操作、SEALED、绘图、写稿、超H5项目变化或投稿仍受独立门禁。
+2. **授权范围内连续自主处理**：H6主要Task/策略由作者选定或有效委托、数据与权限就绪后，AI可连续完成H7算法开发与安全非付费本地DEV实验、诊断、调参、消融、证据补齐，无须逐次用户确认。H8只在核心Claim及重大研究升级/路线变动时触发作者选择；负面结果审查、普通Run或同策略分支变动不等于重新申请。新库下载、付费、危险安装、SEALED、绘图、写稿、超H5及投稿仍单独审批。复用既有可信Run与检查，减少反复规划。
 3. **按风险验证**：优先检查实际受影响模块，重要的科学真值、独立性、泄漏、可复现性、权限/封存和主张改变则保留必要反证与回归；已有有效结果不重复训练，确需全量验证时不因省Token拒绝。不能以“节省Token”为理由跳过关键门禁。
 4. **少日志、少文件、少Agent**：保留真实Run/日志/代码/哈希/失败原因的可核指针，最终只交付有决策价值的变化，不倾倒中间日志、重复原文或全文代码。默认单Agent连续完成；只有独立专业审查/可验证并行收益才启用多Agent。
 5. **总成本与证据优先**：避免过度压缩造成返工，必要时主动加深分析；没有实测对照不得宣称已节省多少Token或提升科研成功率。
@@ -35,11 +35,11 @@
 
 - `AGENT_DECIDABLE`：已在用户真实授权、研究范围及预算内的**技术实现选择**，例如定位并修复普通Bug、复用已有Run、选最有信息量的只读诊断、重跑已授权且协议不变的受影响测试、补写非论文的科学证据摘要。Agent可自行选出**一项最佳后续动作**。
 - `STRONG_RECOMMENDATION`：关键证据充分、下一技术方案明显优于备选且**无需新的用户授权或价值判断**；直接给最优执行方案，不为常规技术分歧反复要求确认。强烈建议**不覆盖权限**。
-- `USER_DECISION_REQUIRED`：**前期H1–H5或H9/H10适用用户节点缺真实选择/明确委托**；超H5研究目标/项目整体STOP/PIVOT、新数据库下载、收费/云算力或危险安装、封存集开启、隐私数据外传、投稿、实际绘图，以及**论文成果总结审查与正式写作许可**。H6–H8的Task、算法、DEV Claim及H5内实验/资源选择由AI自主决定；安全非付费本地CPU/GPU拟合不属于逐次用户确认。授权范围不清、选项有无法由科学证据代替的价值取舍时也属于此类。Agent不得用自己“强烈建议”绕过用户。
+- `USER_DECISION_REQUIRED`：H1–H5、**H6初始核心Task与研究策略、H8实质核心Claim/重大升级选择**、适用H9/H10，需要真实作者选择或限定委托；此外超H5科学目标、项目整体STOP/PIVOT、新数据下载、付费/云资源、危险工具、SEALED、外传、实际绘图、正式写作和投稿仍属现有用户门禁。普通H7算法、同H6/H8已选范围内的DEV代码/训练/修复及增量证据归AI自主；不得因每个Run/小模型修改重复要人类确认。AI推荐不是用户决定。
 
 ### 深度参与模式中的用户科学决策（复用已有 USER_DECISION_REQUIRED）
 
-新 PD-RW 课题默认 `USER_DEEP_PARTICIPATION`，按 [WORKFLOW.md](WORKFLOW.md) 的H1–H5检查前期用户选择，H6–H8由AI记录有证据的科学决定，H9/H10适用时仍由用户负责。用户可一次明确批准多个节点或将具体节点有限委托AI；原用户消息必须可核，Agent 自评、选库表、状态字段/布尔值均非批准。旧项目已有真实选择不重新问；新证据仅重开直接受影响的节点。技术性查证、普通Bug、已有授权实验不进入新审批循环。
+新 PD-RW 课题默认 `USER_DEEP_PARTICIPATION`：H1–H5完成后，AI在H6提供**推荐的Task+科研组合(C/R/P)及可比较备选**让作者选择或明确委托；关键成果需要冻结主Claim/重大升级时，H8提供**保留、升级、收窄/重构**等可行路线和首选供作者决定；H7保持AI自主。卡片标准与重新触发规则见 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md)。真实原作者选择、选项范围与证据引用缺一不可；旧项目已有真实选择不重问；新证据只重开确有影响的战略节点。技术Bug和普通实验不进入确认循环。
 
 **待用户决策时**输出 `DECISION_ID | RECOMMENDATION+SOURCE | OPTIONS(通常2–3项)+TRADEOFFS | REQUIRED_USER_CHOICE | DEPENDENT_ACTION_HELD`。未确认节点只暂停**依赖该决定**的定稿/资源动作，仍可在既有授权范围内进行独立合法只读核查。明确委托的选题决策不授予`DOWNLOAD/TRAIN/SEALED/WRITING`权限；项目与主张事实不能由用户偏好升级成 VERIFIED。用户决定已在本轮给出时直接引用，不机械增加一次对话。
 
@@ -49,7 +49,7 @@
 
 **可辨别实验的结果分支（仅在涉及实际 Probe 时）**：保留 `IF_POS/NEG/INVALID` 对应的下一决定与 `AUTH/COST`，具体定义及 `INCONCLUSIVE` 归因只由 [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md) 主责；本文件负责将该结果反馈给用户/Agent，不复制算法决策逻辑。无试验、无算法或纯理论任务使用适合其证据类型的条件，不虚构 Run 或实验三分支。
 
-### 新项目统一审核卡片：相同节点、不同科学内容
+### 新项目及H6/H8作者战略卡片：明确推荐、作者选择\n\nH6与H8须使用 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md) 的精简推荐卡：`H_ID | BEST_RECOMMENDATION + SCIENCE_REASON | OPTIONS(通常2–3) | C/R/P | NEAREST_PRIOR_GAP | DECISIVE_EVIDENCE | COST/SPEED | MAIN_RISK/UNKNOWN | USER_CHOICE_OR_DELEGATION`。缺推荐/比较/作者回应时不能宣称节点完成；允许一个确有理由的单一选项，不凑假选项。作者选择范围内自动执行H7/普通DEV，重大科学战略改变才重新审H6/H8。\n\n### 新项目统一审核卡片
 
 在 `USER_DEEP_PARTICIPATION` 下，人工节点定义来自 [`contracts/human_review_protocol.v1.json`](contracts/human_review_protocol.v1.json) 的 `required_dimensions`，科研语义仍归 [WORKFLOW.md](WORKFLOW.md)。每轮只有**当前需要用户决定**的H节点成为主卡片，按 `PROTOCOL_VERSION | H1–H5_PROGRESS | CURRENT_REVIEW(ID+固定名称) | AI_RECOMMENDATION+SOURCE | RISKS/UNKNOWN | OPTIONS+TRADEOFFS | REQUIRED_DIMENSIONS/CHOICE_OR_DELEGATION | NEXT_DEPENDENT_ACTION` 给出内容。选项因领域不同而不同，但H1研究目标、H2来源+贡献路线、H3问题、H4证据资源、H5最终题目永不互换定义。允许用户一条消息明确完成多个节点、逐项委托或暂缓；已决定且未变化的内容不再询问。当前节点只涉及一个合理候选也可如实说明，不凑假选项。
 
