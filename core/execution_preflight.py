@@ -40,6 +40,8 @@ def action_preflight(packet: dict, *, independently_authorized: bool = False) ->
         return {"decision": "BLOCK", "reason": "UNKNOWN_ACTION"}
     if packet.get("explicit_prohibition") is True:
         return {"decision": "BLOCK", "reason": "EXPLICIT_PROHIBITION"}
+    if packet.get("effect_forbidden") is True:
+        return {"decision": "BLOCK", "reason": "EFFECT_FORBIDDEN"}
     if action in SAFE:
         return {"decision": "ALLOW", "reason": "NO_RESTRICTED_EFFECT_REQUESTED",
                 "enforcement": "ADVISORY_NOT_TOOL_SANDBOX"}
@@ -67,8 +69,6 @@ def action_preflight(packet: dict, *, independently_authorized: bool = False) ->
         return {"decision": "ALLOW", "reason": "HOST_ATTESTED_DEV_SCOPE",
                 "enforcement": "HOST_MUST_STILL_ENFORCE"}
     # A user grant for one effect never grants another effect.
-    if packet.get("effect_forbidden") is True:
-        return {"decision": "BLOCK", "reason": "EFFECT_FORBIDDEN"}
     if not independently_authorized:
         return {"decision": "UNKNOWN", "reason": "INDEPENDENT_EFFECT_AUTH_REQUIRED",
                 "enforcement": "ADVISORY_ONLY"}
@@ -200,11 +200,21 @@ def science_checkpoint(packet: dict) -> dict:
             if (not _present(packet.get("actual_evidence_ref_or_not_run")) or
                     packet.get("actual_evidence_ref_or_not_run") == "NOT_RUN"):
                 missing.append("real_evidence_for_supported_claim")
-            if not (_present(packet.get("h8_author_choice_ref"))
-                    or _present(packet.get("legacy_unchanged_claim_ref"))):
+            # Only a *frozen primary* research strategy requires H8 author
+            # choice. Valid secondary DEV findings may be supported without
+            # repeatedly requesting an author decision. Missing role retains
+            # the stricter legacy primary-claim interpretation.
+            role = packet.get("claim_role", "PRIMARY_FROZEN")
+            if role not in {"PRIMARY_FROZEN", "SECONDARY_DEV"}:
+                missing.append("valid_claim_role")
+            if (role == "PRIMARY_FROZEN" and
+                    not (_present(packet.get("h8_author_choice_ref"))
+                         or _present(packet.get("legacy_unchanged_claim_ref")))):
                 missing.append("author_selected_main_claim_or_unchanged_legacy")
+        independent_ref = packet.get("independent_validation_ref_or_unavailable")
         if (packet.get("claim_status") == "CONFIRMED"
-                and packet.get("independent_validation_ref_or_unavailable") in {
+                and isinstance(independent_ref, str)
+                and independent_ref.strip().upper() in {
                     "UNAVAILABLE", "UNKNOWN", "NOT_RUN", "NONE"}):
             missing.append("confirmed_needs_real_independent_evidence")
     author = author_strategy_review(packet) if trigger in AUTHOR_NODES else None
