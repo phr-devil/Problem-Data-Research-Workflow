@@ -72,6 +72,7 @@ class ScienceTests(unittest.TestCase):
                   "recommendation_rationale": "Valid independent groups",
                   "key_unknown": "Sensor axis not fully checked"}
         if trigger == "H8_CLAIM":
+            option["h8_action"] = "KEEP"
             review.update(positive_negative_evidence_ref="runs/R12",
                           strongest_objection="Session confounding",
                           publication_potential_or_unknown="UNKNOWN",
@@ -143,6 +144,23 @@ class ScienceTests(unittest.TestCase):
         self.assertIn("negative_evidence_or_none", science_checkpoint(p)["missing"])
         p["negative_evidence_or_none"] = "R1 has no gain"
         self.assertEqual(science_checkpoint(p)["result"], "READY_FOR_SCIENTIFIC_REVIEW")
+
+    def test_claim_promotion_requires_author_claim_for_support(self):
+        p = {"trigger": "CLAIM_PROMOTION", "route": "R5", "primary_type": "C09",
+             "claim_or_question": "metric bias", "nearest_neighbor_or_unknown": "paper/a",
+             "actual_evidence_ref_or_not_run": "runs/R2",
+             "negative_evidence_or_none": "none",
+             "strongest_alternative_or_unknown": "dataset issue",
+             "next_decisive_step": "independent confirmation",
+             "independent_validation_ref_or_unavailable": "UNAVAILABLE",
+             "claim_status": "SUPPORTED"}
+        self.assertIn("author_selected_main_claim_or_unchanged_legacy",
+                      science_checkpoint(p)["missing"])
+        p["h8_author_choice_ref"] = "user/original-H8-choice"
+        self.assertEqual(science_checkpoint(p)["result"], "READY_FOR_SCIENTIFIC_REVIEW")
+        p["claim_status"] = "CONFIRMED"
+        self.assertIn("confirmed_needs_real_independent_evidence",
+                      science_checkpoint(p)["missing"])
 
     def test_no_fake_supported_claim(self):
         p = {"trigger": "CLAIM_PROMOTION", "route": "R5", "primary_type": "C09",
