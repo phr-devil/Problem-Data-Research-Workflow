@@ -63,8 +63,79 @@ def action_preflight(packet: dict, *, independently_authorized: bool = False) ->
             "enforcement": "HOST_MUST_STILL_ENFORCE"}
 
 
+AUTHOR_NODES = {"H6_TASK", "H8_CLAIM"}
+P_ORIENTATIONS = {"P1", "P2", "P3", "P4", "P5"}
+
+
+def author_strategy_review(packet: dict) -> dict:
+    """Check proposal/decision *declarations*, never authenticate user messages."""
+    trigger = packet.get("trigger")
+    if trigger not in AUTHOR_NODES:
+        return {"result": "BLOCK_HANDOFF", "missing": ["author_review_trigger"]}
+    review = packet.get("author_review", {})
+    review = review if isinstance(review, dict) else {}
+    missing = []
+    options = review.get("options")
+    if not isinstance(options, list) or not (1 <= len(options) <= 3):
+        options = []
+        missing.append("one_to_three_ranked_options")
+    ids = []
+    for i, option in enumerate(options):
+        if not isinstance(option, dict):
+            missing.append(f"options[{i}]_object")
+            continue
+        for key in ("id", "claim_or_task", "primary_type", "route", "p_orientation",
+                    "independent_knowledge", "prior_gap", "decisive_evidence",
+                    "science_value", "cost_and_speed", "failure_premise"):
+            if not _present(option.get(key)):
+                missing.append(f"options[{i}].{key}")
+        if option.get("primary_type") not in TYPES:
+            missing.append(f"options[{i}].valid_C_type")
+        if option.get("route") not in ROUTES:
+            missing.append(f"options[{i}].valid_R_route")
+        if option.get("p_orientation") not in P_ORIENTATIONS:
+            missing.append(f"options[{i}].valid_P_orientation")
+        ids.append(option.get("id"))
+    if len(ids) != len(set(ids)):
+        missing.append("unique_option_ids")
+    if len(options) == 1 and not _present(review.get("single_option_reason")):
+        missing.append("single_option_reason")
+    recommended = review.get("recommended_option_id")
+    if recommended not in ids or not _present(review.get("recommendation_rationale")):
+        missing.append("grounded_recommendation")
+    if not _present(review.get("key_unknown")):
+        missing.append("key_unknown")
+    if trigger == "H8_CLAIM":
+        for key in ("positive_negative_evidence_ref", "strongest_objection",
+                    "publication_potential_or_unknown", "confirmation_gap"):
+            if not _present(review.get(key)):
+                missing.append(key)
+    if missing:
+        return {"result": "BLOCK_HANDOFF", "missing": missing,
+                "author_approval_authenticated": False}
+    selection = review.get("selection", {})
+    if not isinstance(selection, dict) or selection.get("kind") not in {
+            "USER_CONFIRMED", "USER_DELEGATED"}:
+        return {"result": "AUTHOR_CHOICE_REQUIRED", "missing": ["author_choice_or_delegation"],
+                "recommended_option_id": recommended, "author_approval_authenticated": False}
+    if not _present(selection.get("original_user_message_ref")):
+        missing.append("original_user_message_ref")
+    if selection.get("kind") == "USER_CONFIRMED":
+        if selection.get("chosen_option_id") not in ids:
+            missing.append("chosen_option_id")
+    else:
+        if not _present(selection.get("delegated_scope")):
+            missing.append("delegated_scope")
+    if missing:
+        return {"result": "BLOCK_HANDOFF", "missing": missing,
+                "author_approval_authenticated": False}
+    return {"result": "DECLARED_AUTHOR_CHOICE_PRESENT_NOT_AUTHENTICATED",
+            "missing": [], "recommended_option_id": recommended,
+            "author_approval_authenticated": False, "tool_permission_granted": False}
+
+
 def science_checkpoint(packet: dict) -> dict:
-    """Validate completeness only: original paper, Runs, and truth not checked."""
+    """Validate completion fields only; real author messages and science need audit."""
     trigger = packet.get("trigger")
     if trigger not in TRIGGERS:
         return {"result": "BLOCK_HANDOFF", "missing": ["valid_trigger"],
@@ -80,29 +151,38 @@ def science_checkpoint(packet: dict) -> dict:
         if not _present(packet.get("nearest_neighbor_or_unknown")):
             missing.append("nearest_neighbor_or_unknown")
     if trigger == "NEW_ALGORITHM":
-        for k in ("observed_bottleneck_or_hypothesis", "simple_alternative",
-                  "distinguishing_prediction"):
-            if not _present(packet.get(k)):
-                missing.append(k)
+        for key in ("observed_bottleneck_or_hypothesis", "simple_alternative",
+                    "distinguishing_prediction"):
+            if not _present(packet.get(key)):
+                missing.append(key)
     if trigger in NEEDS_RESULTS:
-        for k in ("actual_evidence_ref_or_not_run", "negative_evidence_or_none",
-                  "strongest_alternative_or_unknown", "next_decisive_step"):
-            if not _present(packet.get(k)):
-                missing.append(k)
+        for key in ("actual_evidence_ref_or_not_run", "negative_evidence_or_none",
+                    "strongest_alternative_or_unknown", "next_decisive_step"):
+            if not _present(packet.get(key)):
+                missing.append(key)
     if trigger == "CLAIM_PROMOTION":
         if not _present(packet.get("independent_validation_ref_or_unavailable")):
             missing.append("independent_validation_ref_or_unavailable")
         if packet.get("claim_status") not in {"HYPOTHESIZED", "EVIDENCE_CANDIDATE",
-                                               "SUPPORTED", "CONFIRMED"}:
+                                             "SUPPORTED", "CONFIRMED"}:
             missing.append("claim_status")
         if packet.get("claim_status") in {"SUPPORTED", "CONFIRMED"} and (
                 not _present(packet.get("actual_evidence_ref_or_not_run")) or
                 packet.get("actual_evidence_ref_or_not_run") == "NOT_RUN"):
             missing.append("real_evidence_for_supported_claim")
-    return {"result": "READY_FOR_SCIENTIFIC_REVIEW" if not missing else "BLOCK_HANDOFF",
-            "missing": missing, "scientific_truth_verified": False,
-            "next": "review real source artifacts and scope; no permission implied"}
-
+    author = author_strategy_review(packet) if trigger in AUTHOR_NODES else None
+    if author and author["result"] == "BLOCK_HANDOFF":
+        missing.extend("author_review." + v for v in author["missing"])
+    if missing:
+        result = "BLOCK_HANDOFF"
+    elif author and author["result"] == "AUTHOR_CHOICE_REQUIRED":
+        result = "AUTHOR_CHOICE_REQUIRED"
+    else:
+        result = "READY_FOR_SCIENTIFIC_REVIEW"
+    return {"result": result, "missing": missing, "scientific_truth_verified": False,
+            "author_approval_authenticated": False,
+            "author_review_result": author["result"] if author else "NOT_APPLICABLE",
+            "next": "Check original author message and science; no tool permission implied"}
 
 def _present(x):
     return isinstance(x, str) and bool(x.strip())
