@@ -2,6 +2,8 @@
 
 > **仅导航和权限摘要，不是第二套科研流程。** 用户选择 PD-RW 时才启用；[WORKFLOW.md](WORKFLOW.md) 是科研决策唯一主控。规则按实际阻碍加载，不读全库。
 
+**三个执行时点（加载本入口后即适用，详细规则只在触发时按需读取）**：①**接收用户新建议时**：先分清开放性想法、明确合法执行指令或H6/H8战略选择；无新事实不因用户倾向改变科学判断。具体比较只按需读 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md) / [ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)。②**决定下一项证伪/实验前**：先比较对核心决定的影响、合法性、新信息与成本；关键真值/泄漏/SEALED/权限风险优先，非关键同前提重复证伪应有界退出，细则见 [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md)。③**交付或结束任务前**：按 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md) 原L1/L2/L3做 `DELIVERY_CHECK`，核唯一主成果、真实路径、验证边界、未完成项和下一合法行动；多文件无入口才建立一次性索引。**三个时点是同一任务内的处理动作，不新增H节点、人工确认或常驻文件，也不等于宿主已强制拦截。**
+
 ## 0. 冷启动与版本
 
 1. 先核当前用户目标、`USER_SCOPE` 和**原始授权**。已有项目先核编号/研究线/数据集是否指向同一真实目录，按 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 做 `PROJECT_IDENTITY_CHECK`；再从已知路径/STATE 定位 `RESEARCH_RECORD_REF`，存在才读 `RESEARCH_RECORD.md` 的**当前快照**；论文任务按需读 `PAPER_BLUEPRINT_REF` 对应 `SEC_ID`，再核相关 Run/协议/manifest。新项目再按需读 [START.md](START.md)。
@@ -42,4 +44,4 @@
 
 ## 3. 任务交接与后续扩展
 
-结果按 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md) 自适应 L1/L2/L3；**最终交付前**对本轮实际产物做一次`DELIVERY_CHECK`（唯一主结果、路径存在/可访问、必要证据及权限、完成与未完成、下一合法动作），多文件无入口才复用现有目录增加简短索引，必要且获授权才打包；普通L1不创建文件。证伪分支动态停止见 [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md)，用户新科研建议独立评价见 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md) / [ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)；都不增加人工确认、未验证结果不得声称完成。重要科研变化才按 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 增量记载；按 [docs/STRUCTURE.md](docs/STRUCTURE.md) 单一权威、最小回归原则修规则，不新增审批。
+任务交接沿用开头三个执行时点：结果按 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md) 自适应 L1/L2/L3，不倾倒中间文件、不虚报验证；重要科研变化才按 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 增量记载。工作流规则维护按 [docs/STRUCTURE.md](docs/STRUCTURE.md) 单一权威、最小回归原则执行。
