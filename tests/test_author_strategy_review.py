@@ -80,6 +80,20 @@ class AuthorH6H8ContractTests(unittest.TestCase):
         self.assertFalse(r["can_advance_declarations_only"])
         self.assertIn("ranked_options_and_ai_recommendation", r["missing_evidence_refs"]["H6"])
 
+    def test_malformed_reopen_list_is_rejected_cleanly(self):
+        p = packet("H8")
+        p["invalidated_decisions"] = [{"malformed": True}]
+        with self.assertRaises(ValueError):
+            review(p)
+
+    def test_legacy_ownership_is_not_current_author_approval(self):
+        p = packet("H6", protocol="pd-rw-human-review-v1.2")
+        p["decisions"]["H6"] = declared_step(
+            "H6", kind="AGENT_DECIDED", protocol="pd-rw-human-review-v1.2")
+        r = review(p)
+        self.assertEqual(r["target_decision_owner_under_source_protocol"], "AGENT_LEGACY")
+        self.assertIn("H6", r["legacy_agent_strategy_not_author_approved"])
+
     def test_technical_h7_remains_agent_owned(self):
         p = packet("H7")
         r = review(p)
