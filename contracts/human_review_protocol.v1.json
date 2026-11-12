@@ -1,5 +1,5 @@
 {
-  "protocol_version": "pd-rw-human-review-v1.2",
+  "protocol_version": "pd-rw-human-review-v1.3",
   "owner": "WORKFLOW.md",
   "new_project_mode": "USER_DEEP_PARTICIPATION",
   "new_project_sequence": [
@@ -11,10 +11,11 @@
   ],
   "notes": [
     "Stable REVIEW:H1..H10 identifiers are scientific decisions, not HEADING:H1..H3 manuscript headings.",
-    "H1–H5 and H9/H10 require original-user decisions where applicable. H6–H8 are agent-owned scientific decisions after verified H5 in-scope project setup; local, non-paid, safe DEV coding/installation/CPU/GPU fitting within the selected data/task scope needs no repeated per-operation user confirmation. A declaration never authorizes actual tool access.",
+    "H1–H6, strategic H8, and H9/H10 require original-user choice or explicit scoped delegation where applicable. H7 and routine in-scope DEV technology remain agent-owned; user choice of research strategy is not per-run execution permission. Declarations never authenticate actual permissions.",
     "Dimension evidence and original user messages must be checked externally; a structural PASS never authenticates user approval.",
     "Theory/simulation projects use PROOF_PATH in H4; H7 and H9 are conditional by scientific relevance, with reasons recorded.",
-    "New dataset acquisition, project-level target changes/STOP, sealed/independent confirmation, actual financial charges, unsafe installations, external transfer, figures, manuscript writing and submission retain their separate gates. An explicit project-level prohibition overrides default DEV autonomy."
+    "New dataset acquisition, project-level target changes/STOP, sealed/independent confirmation, actual financial charges, unsafe installations, external transfer, figures, manuscript writing and submission retain their separate gates. An explicit project-level prohibition overrides default DEV autonomy.",
+    "H6 author chooses recommended research strategy and Task; H8 author chooses core scientific Claim and substantive science upgrade/reframe strategy. Technical H7, ordinary DEV experiments and within-delegation work remain autonomous. Old v1.2 H6/H8 agent decisions are not silently promoted to new author confirmations."
   ],
   "vocabularies": {
     "question_sources": [
@@ -31,6 +32,33 @@
       "SCIENTIFIC_DISCOVERY",
       "RESEARCH_INFRASTRUCTURE",
       "COGNITIVE_CORRECTION"
+    ],
+    "science_routes": [
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "R5",
+      "R6"
+    ],
+    "contribution_types": [
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "C05",
+      "C06",
+      "C07",
+      "C08",
+      "C09",
+      "C10",
+      "C11",
+      "C12"
+    ],
+    "author_strategy_choices": [
+      "USER_CONFIRMED",
+      "USER_DELEGATED",
+      "PENDING"
     ]
   },
   "steps": {
@@ -128,21 +156,27 @@
     },
     "H6": {
       "activity": "03",
-      "name": "核心Task与评价",
+      "name": "作者研究策略与核心Task选择",
       "prerequisites": [
         "H5"
       ],
       "required_dimensions": [
-        "task_hypothesis",
-        "legal_inputs",
-        "independent_evaluation"
+        "selected_strategy_option",
+        "primary_task_and_evaluation",
+        "main_contribution_type_and_route",
+        "scientific_value_and_efficiency_tradeoff",
+        "dev_autonomy_envelope"
       ],
       "evidence_minimum": [
-        "valid_dev_or_theory_basis",
-        "falsifier_and_comparator"
+        "ranked_options_and_ai_recommendation",
+        "named_nearest_neighbor_and_falsifier",
+        "dev_or_theory_feasibility",
+        "alternative_failure_premise_or_single_reason"
       ],
-      "reopen_when": "Task, legal input, or evaluation change: agent re-evaluates within H5 scope; only material project scope changes reopen H3/H5 user choices",
-      "decision_owner": "AGENT"
+      "reopen_when": "material Task, legal information, core evaluation or selected research strategy changes beyond original author choice/delegation; ordinary algorithm/DEV changes do not reopen",
+      "decision_owner": "USER",
+      "decision_style": "AUTHOR_STRATEGY_SELECTION",
+      "review_guidance_ref": "AUTHOR_STRATEGY_REVIEW.md"
     },
     "H7": {
       "activity": "04",
@@ -159,27 +193,33 @@
         "failure_premise_or_mechanism_hypothesis",
         "fair_comparison_plan"
       ],
-      "reopen_when": "algorithm mechanism/technical strategy or local DEV resource strategy changes: agent records evidence and cost; paid/new data/unsafe operations require separate gate",
+      "reopen_when": "technical mechanisms and local DEV experiments remain agent decisions within author-selected H6/H8 strategy and H5; changing strategic goals requires the appropriate author decision",
       "applicability": "conditional_algorithm_or_major_experimental_strategy",
       "decision_owner": "AGENT"
     },
     "H8": {
       "activity": "05",
-      "name": "科学贡献与继续策略",
+      "name": "作者核心科学贡献与重大升级选择",
       "prerequisites": [
         "H6"
       ],
       "required_dimensions": [
-        "main_claim",
-        "positive_negative_evidence",
-        "continue_narrow_pivot_hold"
+        "selected_main_claim",
+        "selected_contribution_route",
+        "keep_upgrade_reframe_or_hold",
+        "claim_boundary_and_confirmation_gap",
+        "continuation_scope_and_cost"
       ],
       "evidence_minimum": [
-        "valid_results",
-        "strongest_alternative"
+        "actual_positive_and_negative_evidence",
+        "named_nearest_neighbor_gap_and_strongest_objection",
+        "ranked_claim_options_and_ai_recommendation",
+        "publication_potential_or_explicit_unknown"
       ],
-      "reopen_when": "claim/branch disposition or DEV reinvestment changes within H5: agent updates evidence; project-level STOP or scientific direction change requires user choice",
-      "decision_owner": "AGENT"
+      "reopen_when": "material change of primary Claim, contribution route, large science upgrade, project strategy or prior evidence invalidation; ordinary in-scope experiments do not reopen",
+      "decision_owner": "USER",
+      "decision_style": "AUTHOR_CONTRIBUTION_SELECTION",
+      "review_guidance_ref": "AUTHOR_STRATEGY_REVIEW.md"
     },
     "H9": {
       "activity": "06",
@@ -220,6 +260,11 @@
     }
   },
   "legacy_protocol_versions": [
-    "pd-rw-human-review-v1.1"
+    "pd-rw-human-review-v1.1",
+    "pd-rw-human-review-v1.2"
+  ],
+  "new_project_strategy_reviews": [
+    "H6",
+    "H8"
   ]
 }
