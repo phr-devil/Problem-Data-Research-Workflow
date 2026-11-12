@@ -26,11 +26,30 @@ class ActionTests(unittest.TestCase):
     def test_dev_has_no_per_run_human_approval_but_scope_check(self):
         p = {"action": "DEV_TRAIN", "h5_scope_confirmed": True,
              "dev_inputs_verified": True, "within_h5_scope": True,
+             "within_author_selected_strategy": True,
+             "h6_author_strategy_confirmed": True,
              "safe_local_nonpaid": True, "no_project_specific_prohibition": True}
         self.assertEqual(action_preflight(p)["decision"], "UNKNOWN")
         self.assertEqual(action_preflight(p, independently_authorized=True)["decision"], "ALLOW")
         p["within_h5_scope"] = False
         self.assertEqual(action_preflight(p, independently_authorized=True)["decision"], "BLOCK")
+
+    def test_dev_missing_author_strategy_is_not_implicitly_approved(self):
+        p = {"action": "DEV_TRAIN", "h5_scope_confirmed": True,
+             "dev_inputs_verified": True, "within_h5_scope": True,
+             "within_author_selected_strategy": True,
+             "safe_local_nonpaid": True, "no_project_specific_prohibition": True}
+        self.assertEqual(action_preflight(p, independently_authorized=True)["decision"], "UNKNOWN")
+        p["h6_strategy_pending"] = True
+        self.assertEqual(action_preflight(p, independently_authorized=True)["decision"], "BLOCK")
+
+    def test_unchanged_legacy_strategy_does_not_require_reapproval(self):
+        p = {"action": "DEV_TRAIN", "h5_scope_confirmed": True,
+             "dev_inputs_verified": True, "within_h5_scope": True,
+             "within_author_selected_strategy": True,
+             "legacy_unchanged_scope_confirmed": True,
+             "safe_local_nonpaid": True, "no_project_specific_prohibition": True}
+        self.assertEqual(action_preflight(p, independently_authorized=True)["decision"], "ALLOW")
 
     def test_protected_action_requires_host_attestation(self):
         self.assertEqual(action_preflight({"action": "READ_SEALED"},
