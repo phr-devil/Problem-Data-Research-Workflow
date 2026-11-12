@@ -51,7 +51,7 @@ class PositiveScientificValueContractTests(unittest.TestCase):
         self.assertIn("H6由作者选择", self.workflow)
         self.assertIn("H8由作者选择", self.workflow)
         self.assertIn("H7属于AI自主技术决策", self.workflow)
-        self.assertIn("H5内DEV Task/算法/评价方案由AI版本化调整", self.workflow)
+        self.assertIn("已获H6作者选择/限定委托的DEV Task与评价", self.workflow)
         self.assertIn("FIGURE_POLICY.md", self.workflow)
 
     def test_cross_paradigm_evidence_is_not_falsely_equated(self):
