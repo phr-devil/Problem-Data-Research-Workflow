@@ -37,8 +37,8 @@ class PolicyIntegrityTests(unittest.TestCase):
         for label in ("independently_authorized", "READ_SEALED", "WRITE_MANUSCRIPT",
                       "AUTHOR_CHOICE_REQUIRED", "legacy_unchanged_scope_confirmed"):
             self.assertIn(label, code)
-        self.assertIn("real tool", read("EXECUTION_ASSURANCE.md").lower()
-                      .replace("实际工具", "real tool"))
+        self.assertIn("宿主", read("EXECUTION_ASSURANCE.md"))
+        self.assertIn("尚未", read("EXECUTION_ASSURANCE.md"))
 
     def test_h7_is_not_a_per_run_human_gate(self):
         for filename in ("WORKFLOW.md", "AGENTS.md", "AUTHOR_STRATEGY_REVIEW.md",
