@@ -48,7 +48,9 @@ class PositiveScientificValueContractTests(unittest.TestCase):
                       "新基准或实验范式", "AI_DEV_AUTONOMY",
                       "新增数据库下载", "付费/云资源", "SEALED仍独立许可"):
             self.assertIn(label, self.workflow)
-        self.assertIn("H6–H8 是 AI 自主科学决策", self.workflow)
+        self.assertIn("H6由作者选择", self.workflow)
+        self.assertIn("H8由作者选择", self.workflow)
+        self.assertIn("H7属于AI自主技术决策", self.workflow)
         self.assertIn("H5内DEV Task/算法/评价方案由AI版本化调整", self.workflow)
         self.assertIn("FIGURE_POLICY.md", self.workflow)
 
