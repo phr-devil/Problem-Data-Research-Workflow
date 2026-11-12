@@ -42,4 +42,4 @@
 
 ## 3. 任务交接与后续扩展
 
-结果按 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md) 自适应 L1/L2/L3，简报结果、证据及合法下一步；无价值的重复读取、长报告不做。重要科研变化才按 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 增量记载；按 [docs/STRUCTURE.md](docs/STRUCTURE.md) 单一权威、最小回归原则修规则，不新增审批。
+结果按 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md) 自适应 L1/L2/L3；**最终交付前**对本轮实际产物做一次`DELIVERY_CHECK`（唯一主结果、路径存在/可访问、必要证据及权限、完成与未完成、下一合法动作），多文件无入口才复用现有目录增加简短索引，必要且获授权才打包；普通L1不创建文件。证伪分支动态停止见 [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md)，用户新科研建议独立评价见 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md) / [ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)；都不增加人工确认、未验证结果不得声称完成。重要科研变化才按 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 增量记载；按 [docs/STRUCTURE.md](docs/STRUCTURE.md) 单一权威、最小回归原则修规则，不新增审批。
