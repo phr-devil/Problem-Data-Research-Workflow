@@ -106,6 +106,40 @@ class AuthorH6H8ContractTests(unittest.TestCase):
         self.assertTrue(r["requires_original_user_message_review"])
 
 
+def strategy_packet(activity, *, kind="USER_CONFIRMED"):
+    trigger = "H6_TASK" if activity == "03" else "H8_CLAIM"
+    option = {
+        "id": "A", "claim_or_task": "Boundary under contact changes",
+        "primary_type": "C11", "route": "R4", "p_orientation": "P3",
+        "independent_knowledge": "Measured failure boundary",
+        "prior_gap": "Prior unknown", "decisive_evidence": "DEV grouped falsifier",
+        "science_value": "Risk recognition", "cost_and_speed": "existing DEV",
+        "failure_premise": "label axis invalid"
+    }
+    if trigger == "H8_CLAIM":
+        option["h8_action"] = "KEEP"
+    review = {
+        "options": [option], "single_option_reason": "Only feasible evidence source",
+        "recommended_option_id": "A", "recommendation_rationale": "Closest valid prior",
+        "key_unknown": "UNKNOWN",
+        "selection": {"kind": kind, "original_user_message_ref": "original/user/message",
+                      "chosen_option_id": "A", "delegated_scope": "AI within H5 scoped R4"}
+    }
+    p = {"trigger": trigger, "primary_type": "C11", "route": "R4",
+         "claim_or_question": "Contact boundary", "nearest_neighbor_or_unknown": "UNKNOWN",
+         "author_review": review}
+    if trigger == "H8_CLAIM":
+        review.update(positive_negative_evidence_ref="runs/dev1",
+                      strongest_objection="Confounding",
+                      publication_potential_or_unknown="UNKNOWN",
+                      confirmation_gap="SEALED not yet authorized")
+        p.update(actual_evidence_ref_or_not_run="runs/dev1",
+                 negative_evidence_or_none="No method gain",
+                 strongest_alternative_or_unknown="Confounding",
+                 next_decisive_step="Grouped comparison")
+    return p
+
+
 def activity_packet(activity, human):
     path = Path(__file__).resolve().parents[1] / "contracts" / "research_activity_protocol.v1.json"
     contract = json.loads(path.read_text(encoding="utf-8"))
@@ -125,9 +159,44 @@ def activity_packet(activity, human):
 class AuthorActivityHandoffTests(unittest.TestCase):
     def test_current_author_h6_03_is_declared_complete(self):
         p = activity_packet("03", packet("H6"))
+        p["strategy_checkpoint_packet"] = strategy_packet("03")
         r = review_activity_handoff(p)
         self.assertTrue(r["declared_activity_ready_not_authenticated"])
         self.assertFalse(r["authorizes_download_fitting_sealed_figures_or_writing"])
+
+    def test_strategy_packet_required_for_current_h6(self):
+        p = activity_packet("03", packet("H6"))
+        self.assertFalse(review_activity_handoff(p)["declared_activity_ready_not_authenticated"])
+        self.assertEqual(review_activity_handoff(p)["strategy_review_status"],
+                         "MISSING_STRATEGY_CHECKPOINT")
+        p["strategy_checkpoint_packet"] = strategy_packet("03")
+        self.assertTrue(review_activity_handoff(p)["declared_activity_ready_not_authenticated"])
+
+    def test_strategy_packet_required_for_current_h8(self):
+        p = activity_packet("05", packet("H8"))
+        self.assertFalse(review_activity_handoff(p)["declared_activity_ready_not_authenticated"])
+        p["strategy_checkpoint_packet"] = strategy_packet("05")
+        r = review_activity_handoff(p)
+        self.assertTrue(r["declared_activity_ready_not_authenticated"])
+        self.assertFalse(r["scientific_truth_verified"])
+
+    def test_mismatched_author_selection_is_blocked(self):
+        p = activity_packet("03", packet("H6"))
+        s = strategy_packet("03")
+        s["author_review"]["selection"]["original_user_message_ref"] = "other/original"
+        p["strategy_checkpoint_packet"] = s
+        r = review_activity_handoff(p)
+        self.assertFalse(r["declared_activity_ready_not_authenticated"])
+        self.assertEqual(r["strategy_review_status"], "STRATEGY_DECISION_MISMATCH")
+
+    def test_author_delegation_scope_must_match(self):
+        human = packet("H8")
+        human["decisions"]["H8"] = declared_step("H8", kind="USER_DELEGATED")
+        p = activity_packet("05", human)
+        p["strategy_checkpoint_packet"] = strategy_packet("05", kind="USER_DELEGATED")
+        self.assertTrue(review_activity_handoff(p)["declared_activity_ready_not_authenticated"])
+        p["strategy_checkpoint_packet"]["author_review"]["selection"]["delegated_scope"] = "different"
+        self.assertFalse(review_activity_handoff(p)["declared_activity_ready_not_authenticated"])
 
     def test_legacy_agent_h6_requires_scope_continuity(self):
         legacy = packet("H6", protocol="pd-rw-human-review-v1.2")
