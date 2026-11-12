@@ -28,9 +28,9 @@
 
 **高水平期刊的科研设计反推（既有 Q2 证据审查内执行，不是选刊打分器）**：仅当当前 Claim 的投稿要求/证据缺口仍不清楚时，按需复用 [SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md) 已核的近期 1–3 篇**同类专业 Q1/Q2 原始论文**，逐篇提取其解决的重要问题、具名近邻差额、必须证明的对照/失效边界/机制或能力、数据独立性与真实部署条件。将**与本 Claim 直接相关的**一项缺失证据转为 `REQUIRED_DECISIVE_TEST`；不同领域的机理实验、跨库数、样本规模或网络复杂度不机械移植。比较论文的 DOI/版本与实际全文未核时记 `VENUE_ANALOGS_UNKNOWN`。不能靠 JCR 分区、表格数量或参考文献篇数自动判断科学潜力；现实不足仍可执行一项低成本证据诊断，数据/训练/确认授权不变。
 
-**H8 科学贡献与DEV投入由AI自主决策，项目整体边界仍由用户决定**：AI 汇总最强有效 Run、所有相关负证据、具名最近邻差额、核心 Claim 及可区分的补证实验，提出 `KEEP/NARROW/UPGRADE/HOLD/PIVOT/STOP` 与收益、代价和剩余确认缺口。AI依据有效证据自主确定DEV主Claim、补证据与本地非付费投入、收窄或HOLD具体机制分支，并记入项目记录；不以单次DEV F1、S/A/B/C或`Q2_POTENTIAL_SUPPORTED`自称独立确认或正式论文就绪。**改变H5批准的科研主目标、决定整个项目STOP或增加付费/不安全资源时仍交用户**，但不妨碍继续范围内合法算法工作。没有新算法的科研发现也可进入 H8；无需将 H7 变成必经阶段。科学假说不成立时只更新证据，不因用户选择改写历史 Run。H8 是科研价值决策而非独立确认或写作授权，后者另见 [CONFIRMATION.md](CONFIRMATION.md) 与 [WRITING_GATE.md](WRITING_GATE.md)。
+**H8 作者选择核心科学贡献与重大升级策略**：AI先汇总可信正负Run、科学发现/失效边界、最强具名近邻差额与反解释，识别主张候选的`ARTICULATION_GAP`与`EVIDENCE_GAP`，并依 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md) 提交**明确首选+KEEP证据完善/UPGRADE有界提升/NARROW-REFRAME-HOLD风险控制**等真实可行方案。每项注明C/R/P贡献组合、核心Claim、必要验证与成本、最快决定性证据、Q2+潜力证据或UNKNOWN、确认缺口与失败条件；作者选择或有限委托后方可宣布主Claim及重大科学升级路线已定。**普通DEV增量补证、模型修复、负Pilot分析和同战略内技术调整仍由AI自主，不每个Run都向作者请求确认。** 目标超H5、项目整体STOP、SEALED、正式写稿/投稿等原权限独立；H8并不证明科研成功或解除WRITING_LOCKED。旧项目已完成的成果/Run保留，旧AGENT_DECIDED主张不自动作为新作者审查证据；实质变化时才重新提交。
 
-**主张升级事件检查**：可信Run、重要负结果、H8科研收口和Claim升级时，按需参考 [EXECUTION_ASSURANCE.md](EXECUTION_ASSURANCE.md) 的 SIGNIFICANT_RUN/NEGATIVE_RESULT/H8_CLAIM/CLAIM_PROMOTION 检查，绑定主贡献、近邻、反解释、原始证据与独立确认条件；无新算法也可形成科研候选。结构检查不能把UNKNOWN或NOT_RUN提升为科研成功，相同证据指纹已有有效检查可复用。
+**主张升级事件检查（H8只管实质战略取舍）**：重大可信Run/负面结果自动回收主张、反证与独立性，但不自动要求作者重新确认。准备冻结主Claim、改变主贡献类型/显著提升科研投入或整体重构时，按 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md) 提供推荐与备选，复用 [EXECUTION_ASSURANCE.md](EXECUTION_ASSURANCE.md) 的 `H8_CLAIM` 检查；无真实选择/委托时只允许继续已获许可的旧战略DEV和只读分析，不得冒称H8已批准。CLAIM_PROMOTION仍需证据有效性与独立确认，不以字段PASS或论文潜力推定成功。
 
 ## 1. 四种证据状态（不是顺序强制门槛）
 
