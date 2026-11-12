@@ -137,7 +137,8 @@ def strategy_packet(activity, *, kind="USER_CONFIRMED"):
         "recommended_option_id": "A", "recommendation_rationale": "Closest valid prior",
         "key_unknown": "UNKNOWN",
         "selection": {"kind": kind, "original_user_message_ref": "original/user/message",
-                      "chosen_option_id": "A", "delegated_scope": "AI within H5 scoped R4"}
+                      "chosen_option_id": "A", "delegated_scope": "AI within H5 scoped R4",
+                      "allowed_option_ids": ["A"]}
     }
     p = {"trigger": trigger, "primary_type": "C11", "route": "R4",
          "claim_or_question": "Contact boundary", "nearest_neighbor_or_unknown": "UNKNOWN",
