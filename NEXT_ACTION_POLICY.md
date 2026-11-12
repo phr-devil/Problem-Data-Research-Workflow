@@ -29,6 +29,8 @@
 
 **文件边界**：重大科学事实、失败、任务/决策变化增量更新已有 `RESEARCH_RECORD.md`；中心论点、章节和 Claim–Evidence 改变才更新 `PAPER_BLUEPRINT.md` 受影响部分。普通技术变动留真实代码/日志与聊天简报；独立 `.md` 报告仅用户要求或重要独立验收/交付确有需要时创建，不制造第三份长期台账。执行细节见 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md)，`WRITING_LOCKED` 和绘图许可不变。
 
+**事件触发执行检查**：受限操作需实际宿主核原用户授权及执行范围，不能使用Agent自填 APPROVED；H5内安全非付费DEV实验无需逐次批准。关键科研交接复用 [EXECUTION_ASSURANCE.md](EXECUTION_ASSURANCE.md) 的结构预检，缺项只阻断完成交接/科研贡献认证，不阻碍合法自主研究。权限未知则停止相应受限动作，继续合法只读工作。
+
 ## 1. 先判断下一动作是谁能决定
 
 - `AGENT_DECIDABLE`：已在用户真实授权、研究范围及预算内的**技术实现选择**，例如定位并修复普通Bug、复用已有Run、选最有信息量的只读诊断、重跑已授权且协议不变的受影响测试、补写非论文的科学证据摘要。Agent可自行选出**一项最佳后续动作**。
