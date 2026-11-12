@@ -59,3 +59,27 @@
 **每个涉及规则的PR描述最短覆盖**：`OLD_REQUIREMENT+COMMIT/PR → PRESERVED/MOVED/MERGED/REPLACED/RETIRED(+WHY) → OWNER+TRIGGER → AFFECTED_CALLERS → NEGATIVE_CASES/TESTS → UNMEASURED_RISKS`。仅分析受影响的要求，不强制全仓长篇审计；更新机器可读镜像时检查与文字owner一致，旧路径/调用方保持兼容。一次重要规则修改若丢失原要求或未解除相互矛盾，不因CI绿灯直接合并。
 
 **取消机械字符上限**：`AGENTS.md`、`WORKFLOW.md` 及索引均不因字符数超过阈值而测试失败；以导航职责、完整引用、实际加载路径和关键条件覆盖检查为准。必要内容可以变长，重复或未用内容应删除/移至其owner，但保留可追溯的旧要求映射。Token下降、Agent真实理解与门禁合规必须由 [REPLAY_PROTOCOL.md](../REPLAY_PROTOCOL.md) 的同条件捕获验证，未测记 `NOT_MEASURED`。
+
+## 6. 增量规则变更的结构合同（维护时使用，非科研新门禁）
+
+**更新顺序固定为：分类 → 唯一 owner → 局部替换 → 同步引用/机器镜像 → 反例验证。** 不通过在所有命中关键词的文件后面追加相同指令来实现规则强化。变更不涉及某类执行者时不读其专题文件。
+
+| 规则领域 | 唯一主要 owner | 其他文件允许的内容 |
+|---|---|---|
+| 六活动、H1–H10责任、科研状态与跨阶段依赖 | `WORKFLOW.md` | `AGENTS.md` 最短路由；`contracts/` 可测试的语义镜像；专题仅引用 |
+| H6/H8作者战略推荐卡与重新触发细节 | `AUTHOR_STRATEGY_REVIEW.md`（受 WORKFLOW 总控） | `WORKFLOW.md` 保留决策原则；`AGENTS.md` 一句话导航 |
+| 操作授权与下一行动分流 | `WORKFLOW.md` + 对应 `NEXT_ACTION_POLICY.md` 执行细节 | `EXECUTION_ASSURANCE.md` 只描述检查能力和不能保证之处 |
+| SEALED / 独立确认、正式写作、绘图 | 分别为 `CONFIRMATION.md`、`WRITING_GATE.md`、`FIGURE_POLICY.md` | 入口只能强调禁止越权与路由 |
+| 算法实验有效性与科学贡献分类 | 分别为 `EXPERIMENT_LOOP.md`、`CONTRIBUTION_TAXONOMY.md` | 其他专题通过链接引用，不重新枚举全套要求 |
+| 项目事实和稿件蓝图 | 项目原始 Run/协议及 `RESEARCH_RECORD.md` / `PAPER_BLUEPRINT.md` | `LESSONS/CASE_REGISTRY.md` 仅作历史索引，不自动覆盖原记录 |
+| 工作流质量评价 | `evals/EVALUATION_POLICY.md` 与 `REPLAY_PROTOCOL.md` | 结构 CI 不得冒充真实 Agent 行为和科研成效 |
+
+**每次变更的最短核对清单：**
+
+1. **变更原因：** 记录具体失败证据；先判断是否为未加载、旧版本、误用、规则冲突或确有能力缺失。普通科研假设失败不自动生成新规则。
+2. **唯一 owner：** 将规则标记为 `HARD_GATE`、`CONDITIONAL` 或 `HEURISTIC`；在 owner 内替换/合并原条款，其余文件仅修改必要导航、摘要或机器镜像。
+3. **显式退役：** 同步扫描所有**已知引用方**和历史兼容说明，避免新旧 H 节点责任、协议版本、案例数量、许可范围并存为两个“当前规定”。历史条款若需保留，标注适用版本和非现行性质。
+4. **定向测试：** 测试同义表述与行为边界，至少覆盖新规则对应的反例及原有正例；旧项目有效 H 决策、SEALED、写作锁与授权不得退化。
+5. **验证级别：** CI/文档一致性通过只代表结构检查；实际 Agent 遵循、Token 改善与创新提升需要可信轨迹及同预算盲回放，未测即 `NOT_MEASURED`。
+
+新增/移动文件仅在具有稳定、独立 owner 时采用；不复制整套流程，不强制既有项目迁移，也不新增研究活动、用户确认或长期第三份项目日志。
