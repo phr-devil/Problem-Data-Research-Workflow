@@ -106,9 +106,21 @@ def author_strategy_review(packet: dict) -> dict:
             missing.append(f"options[{i}].valid_R_route")
         if option.get("p_orientation") not in P_ORIENTATIONS:
             missing.append(f"options[{i}].valid_P_orientation")
+        if trigger == "H8_CLAIM" and option.get("h8_action") not in {
+                "KEEP", "UPGRADE", "NARROW", "REFRAME", "HOLD"}:
+            missing.append(f"options[{i}].valid_h8_action")
         ids.append(option.get("id") if _present(option.get("id")) else None)
     if len(ids) != len(set(ids)):
         missing.append("unique_option_ids")
+    if len(options) > 1:
+        distinct = {
+            (o.get("claim_or_task"), o.get("failure_premise"))
+            for o in options if isinstance(o, dict)
+            and isinstance(o.get("claim_or_task"), str)
+            and isinstance(o.get("failure_premise"), str)
+        }
+        if len(distinct) < 2:
+            missing.append("genuinely_distinct_alternatives")
     if len(options) == 1 and not _present(review.get("single_option_reason")):
         missing.append("single_option_reason")
     recommended = review.get("recommended_option_id")
@@ -177,10 +189,17 @@ def science_checkpoint(packet: dict) -> dict:
         if packet.get("claim_status") not in {"HYPOTHESIZED", "EVIDENCE_CANDIDATE",
                                              "SUPPORTED", "CONFIRMED"}:
             missing.append("claim_status")
-        if packet.get("claim_status") in {"SUPPORTED", "CONFIRMED"} and (
-                not _present(packet.get("actual_evidence_ref_or_not_run")) or
-                packet.get("actual_evidence_ref_or_not_run") == "NOT_RUN"):
-            missing.append("real_evidence_for_supported_claim")
+        if packet.get("claim_status") in {"SUPPORTED", "CONFIRMED"}:
+            if (not _present(packet.get("actual_evidence_ref_or_not_run")) or
+                    packet.get("actual_evidence_ref_or_not_run") == "NOT_RUN"):
+                missing.append("real_evidence_for_supported_claim")
+            if not (_present(packet.get("h8_author_choice_ref"))
+                    or _present(packet.get("legacy_unchanged_claim_ref"))):
+                missing.append("author_selected_main_claim_or_unchanged_legacy")
+        if (packet.get("claim_status") == "CONFIRMED"
+                and packet.get("independent_validation_ref_or_unavailable") in {
+                    "UNAVAILABLE", "UNKNOWN", "NOT_RUN", "NONE"}):
+            missing.append("confirmed_needs_real_independent_evidence")
     author = author_strategy_review(packet) if trigger in AUTHOR_NODES else None
     if author and author["result"] == "BLOCK_HANDOFF":
         missing.extend("author_review." + v for v in author["missing"])
