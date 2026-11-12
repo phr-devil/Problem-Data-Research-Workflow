@@ -19,10 +19,10 @@
   ],
   "general_rules": [
     "Stable activity responsibilities and evidence interfaces; scientific hypotheses, candidate algorithms, probes and experiments are not prescribed.",
-    "Scientific H1-H5 and H9/H10 user decisions, H6-H8 agent science decisions, activity evidence, and actual operation scope are separate; structural declarations do not authenticate access.",
+    "Scientific H1-H6 and substantive H8/H9/H10 are author-owned science choices; H7 and technical/local safe DEV work are agent-owned within selected scope. All evidence/permission must be independently checked; a declarative PASS cannot authenticate authorization.",
     "UNKNOWN/NOT_RUN/INVALID are legitimate findings and must be reported, not filled with fake results; they cannot satisfy a critical established-evidence prerequisite.",
     "Reuse unchanged historical artifacts and user choices. Reopen only affected dependencies when provenance, truth, task, claim or protocol changes.",
-    "No automatic figures, new data downloads, SEALED access, manuscript writing, external transfer, paid/unsafe operations or submissions. Following actual H1-H5 project selection and safe verified DEV acceptance, in-scope local non-paid CPU/GPU fitting and code/dependency development are agent-autonomous with required science and provenance checks; explicit project holds override.",
+    "No automatic figures, new data downloads, SEALED access, writing, external transfer, paid/unsafe operations or submissions. After original H5/H6 choices and legal DEV acceptance, H7 safe local non-paid CPU/GPU/code operations remain autonomous within author-selected strategy; H8 major science reframe requires author choice while ordinary experiments never require per-run confirmation.",
     "Activity 05 may run alongside activity 04 as soon as meaningful valid evidence exists, not only after final algorithm optimization.",
     "The structural handoff flag alone never satisfies entry_requirements, user review, or original operation authorization. Distinguish declared entry evidence, declared H choices and actual permission source.",
     "For theoretical/simulation Claim, do not fabricate empirical Run IDs; use the bounded NON_DATA claim evidence path with independent local verification references."
@@ -215,13 +215,14 @@
         "EMPIRICAL": "verified data assumptions, group/evaluator and legal inputs",
         "NON_DATA": "falsifiable theoretical or simulation proposition with auditable validation domain"
       },
-      "notes": "A literature-only task hypothesis before data acceptance is not a frozen empirical Task.",
+      "notes": "H6 is an AUTHOR decision on the recommended primary Task plus C01–C12/R1–R6/P1–P5 strategy (option ranking, scientific value vs cost, falsifier and feasible backup). H5 plus legal DEV or theory basis required. H6 declaration is not an operational grant; no frozen new Task before real author choice or explicit delegation. Existing unchanged legacy H6 may continue with recorded limitations.",
       "entry_checks": {
         "all": [
           "h5_problem_fit_ref",
           "activity02_scientific_basis_ref"
         ]
-      }
+      },
+      "author_strategy_review_ref": "AUTHOR_STRATEGY_REVIEW.md#2-h6-必须向作者展示的推荐卡片不是长篇研究报告"
     },
     "04": {
       "name": "Method development and valid experiments",
@@ -269,7 +270,7 @@
         "EMPIRICAL": "legal DEV Run, strong fair baseline, selection history and real cost",
         "NON_DATA": "mathematical, simulation or measurement mechanism and audit references"
       },
-      "notes": "H7 agent-owned major algorithm mechanism/scientific strategy decision; routine and major in-scope DEV experiments need no user reconfirmation. Justified non-method Claim can declare H7 NOT_APPLICABLE. Scientific and safety/provenance checks remain mandatory.",
+      "notes": "H7 remains AGENT-owned: algorithm, model, strategy implementation, in-scope safe local nonpaid DEV trials and fixes need no per-run author approval once H6 strategy and actual tool scope are valid. A non-method project may declare H7 NOT_APPLICABLE. A major H6 strategic change needs author selection, not a routine H7 trial.",
       "entry_checks": {
         "all": [
           "h6_task_or_non_method_scope_ref"
@@ -332,12 +333,13 @@
         "EMPIRICAL": "real DEV and group-level Run evidence with limits and negatives",
         "NON_DATA": "valid proof, mechanism or critical synthesis evidence and counterexamples"
       },
-      "notes": "H8 agent-owned DEV Claim, narrowing, next-science-investment and branch HOLD decisions within approved H5 scope; project-level STOP/pivot outside H5 or formal independent claims still need user decision or independent evidence.",
+      "notes": "H8 is AUTHOR-owned only for selecting/freezing a substantive primary scientific Claim or KEEP/UPGRADE/NARROW/REFRAME/HOLD strategy after AI ranked recommendations and credible positive/negative evidence. Routine DEV analyses, bug fixes, within-selected-strategy additional probes and evidence harvesting remain agent-autonomous, not repeated H8 reviews. H8 does not authorize SEALED, writing, submitting or whole-project STOP.",
       "entry_checks": {
         "all": [
           "credible_scientific_evidence_ref"
         ]
-      }
+      },
+      "author_strategy_review_ref": "AUTHOR_STRATEGY_REVIEW.md#3-h8-必须向作者展示的贡献升级卡片"
     },
     "06": {
       "name": "Independent confirmation and research closeout",
