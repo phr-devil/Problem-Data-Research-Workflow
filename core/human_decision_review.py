@@ -74,8 +74,20 @@ def review(packet: dict) -> dict:
         # Only H7 is agent-owned in the current protocol. Legacy H6/H8 agent
         # declarations remain readable, but never become new author approval.
         if entry["kind"] == "AGENT_DECIDED":
-            allowed_agent = (LEGACY_AGENT_OWNED if protocol_version == "pd-rw-human-review-v1.2"
-                             else AGENT_OWNED)
+            # Existing projects can carry forward a real v1.2 H6/H8
+            # decision without pretending it is a new author confirmation.
+            # The source/ref are untrusted declarations: inspect original
+            # records and verify strategy continuity outside this function.
+            legacy_continuation = (
+                protocol_version == CONTRACT["protocol_version"]
+                and name in AUTHOR_STRATEGY_NODES
+                and entry.get("legacy_source_protocol") == "pd-rw-human-review-v1.2"
+                and isinstance(entry.get("legacy_unchanged_scope_ref"), str)
+                and bool(entry["legacy_unchanged_scope_ref"].strip())
+            )
+            allowed_agent = (LEGACY_AGENT_OWNED if (
+                protocol_version == "pd-rw-human-review-v1.2" or legacy_continuation
+            ) else AGENT_OWNED)
             if (name not in allowed_agent
                     or not isinstance(entry.get("agent_decision_ref"), str)
                     or not entry["agent_decision_ref"].strip()
@@ -103,7 +115,12 @@ def review(packet: dict) -> dict:
             refs = refs if isinstance(refs, dict) else {}
             dimensions = spec["required_dimensions"]
             minimum = spec["evidence_minimum"]
-            if protocol_version != CONTRACT["protocol_version"] and name in LEGACY_STRATEGY_DIMS:
+            is_legacy_step = (name in LEGACY_STRATEGY_DIMS
+                              and entry["kind"] == "AGENT_DECIDED"
+                              and (protocol_version == "pd-rw-human-review-v1.2"
+                                   or entry.get("legacy_source_protocol")
+                                   == "pd-rw-human-review-v1.2"))
+            if is_legacy_step:
                 dimensions, minimum = LEGACY_STRATEGY_DIMS[name]
             missing_d = [
                 dim for dim in dimensions
@@ -171,6 +188,9 @@ def review(packet: dict) -> dict:
         "author_choice_pending": (target in AUTHOR_STRATEGY_NODES
                                   and protocol_version == CONTRACT["protocol_version"]
                                   and target not in effective_present),
+        "target_legacy_continuation_not_new_author_approval": (
+            target in AUTHOR_STRATEGY_NODES and target in effective_present
+            and rows[target]["kind"] == "AGENT_DECIDED"),
         "legacy_agent_strategy_not_author_approved": sorted(
             (name for name in effective_present if name in AUTHOR_STRATEGY_NODES
              and rows[name]["kind"] == "AGENT_DECIDED"), key=STEPS.index),
