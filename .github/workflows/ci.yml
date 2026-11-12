@@ -15,6 +15,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - run: python -m compileall -q core evals tests  # fail fast on syntax errors
+      - run: python -m json.tool contracts/human_review_protocol.v1.json > /dev/null
+      - run: python -m json.tool contracts/research_activity_protocol.v1.json > /dev/null
+      - run: python -m unittest discover -s tests -p 'test_author_strategy_review.py' -v  # joined H6/H8 handoff checks
       - run: python -m evals.benchmark validate  # synthetic cases only; no model, web, data or image output
       - run: python -m py_compile chapter10_replay.py
       - run: python -m json.tool SCENARIOS.json > /dev/null
