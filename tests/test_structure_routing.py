@@ -2,6 +2,7 @@
 
 No image generation, code execution of research workflows, network or state changes.
 """
+import json
 import re
 import unittest
 from pathlib import Path
@@ -83,6 +84,46 @@ class RoutingStructureTests(unittest.TestCase):
         self.assertFalse((ROOT / "modules/WORKFLOW.md").exists())
         self.assertFalse((ROOT / "policies/WORKFLOW.md").exists())
         self.assertIn("原有三循环/六活动", (ROOT / "docs/STRUCTURE.md").read_text(encoding="utf-8"))
+
+
+    def test_current_strategy_authority_and_protocol_mirror(self):
+        """Catch stale responsibility/version prose, not just present files."""
+        workflow = (ROOT / "WORKFLOW.md").read_text(encoding="utf-8")
+        structure = (ROOT / "docs/STRUCTURE.md").read_text(encoding="utf-8")
+        inheritance = (ROOT / "docs/RULE_INHERITANCE_AUDIT.md").read_text(encoding="utf-8")
+        agent = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        review = (ROOT / "AUTHOR_STRATEGY_REVIEW.md").read_text(encoding="utf-8")
+        protocol = json.loads(
+            (ROOT / "contracts/human_review_protocol.v1.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(protocol["protocol_version"], "pd-rw-human-review-v1.3")
+        for document in (workflow, structure, agent, review):
+            with self.subTest(document=document[:45]):
+                self.assertIn("H6", document)
+                self.assertIn("H8", document)
+                self.assertIn("作者", document)
+        self.assertIn("H7", workflow)
+        self.assertIn("H7", structure)
+        self.assertIn("pd-rw-human-review-v1.3", structure)
+        self.assertIn("pd-rw-human-review-v1.3", inheritance)
+        for obsolete in ("H6–H8改为AI主责", "H6–H8由AI", "H6–H8 AI自主开发",
+                         "机器合同采用`pd-rw-human-review-v1.2`"):
+            with self.subTest(obsolete=obsolete):
+                self.assertNotIn(obsolete, structure)
+                self.assertNotIn(obsolete, inheritance)
+
+    def test_documented_synthetic_scenario_count_matches_json(self):
+        cases = json.loads((ROOT / "SCENARIOS.json").read_text(encoding="utf-8"))["cases"]
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn(f"{len(cases)}个PD-RW专属的**合成**反例/风险场景", readme)
+        self.assertEqual(len({case["id"] for case in cases}), len(cases))
+
+    def test_rule_change_owner_map_and_scope(self):
+        structure = (ROOT / "docs/STRUCTURE.md").read_text(encoding="utf-8")
+        for marker in ("增量规则变更的结构合同", "唯一 owner", "显式退役",
+                       "定向测试", "NOT_MEASURED"):
+            self.assertIn(marker, structure)
+
 
 
 if __name__ == "__main__":
