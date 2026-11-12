@@ -58,7 +58,7 @@
 - **防止对话/提纲格式进入 Word 成稿**：在正式投稿稿件导出时核对叙述性正文没有以 `Challenge:`、`Solution:`、`Key Insight:`、`Our Advantages:` 等冒充段内标题；没有纯装饰性粗体、Markdown 残留或带 `TODO/[REF]/[EQ]/[FIG]` 的未消解占位。蓝图 Word 审阅版不同于投稿正文，可保留规划标签与待补证据标记；真实算法伪代码、正式定理、方程、图题、引用和期刊规定的声明保留原有格式，不能因正文风格规则误删。
 - 使用 Word 的**真实标题样式与多级列表**生成 `1.` / `3.2` / `3.2.1`；源 Markdown 若自带 `1.` / `3.2` 等编号，导出前剥离显示编号，禁止出现 `1. 1. Introduction`。保留原 `SEC_ID`/Claim–Evidence 映射，不把 ID 当打印标题。
 - Markdown H1/H2/H3 与 Word Title/Heading 1/Heading 2 **并非同级直映**；导出流程必须显式转换，不能只用默认的 Pandoc heading 映射并宣称准确。
-- Word 蓝图是现有 `PAPER_BLUEPRINT.md` 的**按需可再生导出件**，不是新增第三份长期科研记忆；无用户明确 Word 导出请求不自动输出 `.docx`。纯框架审阅版仅含提纲/规划字段，不产生投稿式标题、摘要或正文。
+- Word 详细论文框架审阅版必须忠实呈现现有 `PAPER_BLUEPRINT.md` 的科学叙事、逐节具体论证、结果与边界（详见 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) §1A）；不得把详细内容压缩为机械字段清单。它是现有 `PAPER_BLUEPRINT.md` 的**按需可再生导出件**，不是新增第三份长期科研记忆；无用户明确 Word 导出请求不自动输出 `.docx`。纯框架审阅版仅含提纲/规划字段，不产生投稿式标题、摘要或正文。
 
 ## 4. 图片、表格、公式和引用
 
