@@ -13,6 +13,8 @@
 - `MECHANISM_TEST`：需要机制归因时才写竞争解释、不同预测或正控；无归因需求不强迫 A/B。
 - `CONFIRMATORY`：只在冻结 Claim/协议并获授权后转 [CONFIRMATION.md](CONFIRMATION.md)；不在探索内循环反复打开封存集。
 
+**NEXT_PROBE选择前的决策筛选（本活动的实际选择顺序，不是执行后补录）**：先复用合法原Run/已知负证据并区分`HARD_VALIDITY_BLOCKER`（泄漏、非法真值/预测时点、SEALED污染、权限或评价错误，必须隔离受影响科学结论并定向核验）与`DECISION_RELEVANT`（可能改变本轮核心Task/Claim、可靠性或下一重大动作）及`BOUNDED_UNKNOWN`（对当前结论仅有可界定局部影响、已回答或同前提重复无新信息）。仅在前两类或确有新判别信息时推进相应的合法验证；其余暂停当前细节分支、说明边界，转向最有价值的授权内任务。针对实际候选复用现有`PROBE_CANDIDATE`/`NEXT_PROBE`，比较`RISK_TO_DECISION | IF_POS/NEG/INVALID | NEW_INFORMATION | COST | STOP_OR_CONTINUE`，**先选择/停止、后运行、再更新证据**；不为合格外观先选择实验再补填理由。没有可改变决定的实验可给`NO_DECISIVE_PROBE`并推进科学总结/已授权其他工作，不强制继续细节证伪。未知不是已证伪，新的可能翻转核心结论的证据可以重开；不设固定失败次数，不自动STOP项目、不自动触发每轮H8确认。
+
 **高价值机制实验选择**：按[HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md) D，`RELIABLE_TRACK`保护可信简单Champion，`NOVELTY_TRACK`最多生成3个**不同科研杠杆**的候选、默认只执行一个最具区分力且已授权的实验。按`BASELINE_FAILURE | NEW_LEVER | COMPETING_ALTERNATIVE | DISTINCT_PREDICTION | CHEAP_POSITIVE_CONTROL | FAIR_DEV_TEST | COST/IF_POS_NEG_INVALID`选择，而非每遇负Pilot就换网络。真实跨条件/时序结构可能需要复杂方法；不能因最小模型没有增益就过早排除合理高潜力机制。负结果保留，不能后验反复挑seed/组别或打开封存集择法；Q2/Q1收益与追加实验成本相称才扩展。
 
 ## 1.5 双轨算法开发：稳妥结果 × 创新探索（按证据分配，而非双模型硬并行）
@@ -66,8 +68,6 @@ ChatGPT 只传已核实的问题—数据、TASK、最大 UNKNOWN、证据指针
 - **执行前一句话**：`HYPOTHESIS | WHAT_CHANGES_ONLY | EXPECTED_OBSERVATION | DECISION_IF_POS/NEG/INVALID | COST_CAP`。少量参数共同调整可以属于同一机制假设，不要求一次只改一行代码；但关键因果解释必须能排除简单竞争因素。
 - **执行后证据**：配对group差异/合理不确定性、完整训练收敛或必要正控、代码与配置版本、真实独立单位数、额外标签/算力成本、失败结果及可重现原始路径。小收益不能靠挑最优seed升级为论文主张；负Pilot不自动判全部机制不可学。
 - **不同状态有不同动作**：`INVALID`（数据/评价失效）只隔离并定向修复；`NOT_COMPARABLE`先明确预算/输入差别；`INCONCLUSIVE`按是否存在廉价辨别选择继续或HOLD；`COMPARABLE_POS/NEG`仅更新当前机制证据，若触发不同科学任务的研究则交 [TASK_LADDER.md](TASK_LADDER.md)。
-**证伪分支的决策价值与动态停止（覆盖已有Probe成本/信息原则，不新增研究关卡）**：对拟深入的疑点，仅在本轮受影响的原`PROBE_CANDIDATE`/`NEXT_PROBE`中简记`RISK_TO_DECISION | IF_POS/NEG/INVALID | NEW_INFORMATION | COST | STOP_OR_CONTINUE`；优先判定它是否会改变核心Task/Claim、可用真值、独立性、公平基线或下一重大决定。若存在数据泄漏、非法标签/预测时点、SEALED污染、权限或关键评价错误，必须隔离受影响结论并核实，不能以省Token/算力绕过。其他疑点若对当前主张只有可界定的局部影响、结果已足以界定边界，或连续同前提检查未增加信息，则写明`BOUNDED_UNKNOWN`及适用范围，暂停**当前细节分支**并转向更有决策价值的已批准任务；UNKNOWN不等于科学证伪、也不自动解除有约束力的证据缺口。未穷尽假说不构成继续投入的充分理由；发现新且可能翻转主结论的证据时允许重开该分支。不得设置固定失败次数，不得以此自行STOP整个项目或触发每轮H8人工审核。
-
 - **预算策略**：不强制每个任务短/长和多seed；当欠收敛、容量或数据尺度可能改变科学结论时才成对扩容。升级实验需要说明“若结果A/B出现，将改变哪个决定”；连续试验无新信息时停止**本分支**，保留有价值的开发观察与失败证据。
 
 ### 公平调参与计算投入的触发条件（按需）
