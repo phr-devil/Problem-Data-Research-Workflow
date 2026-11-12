@@ -59,7 +59,7 @@
 
 **科研策略RSS与贡献升级SCU（H6/H8作者真正做选择）**：问题来源六类、贡献C01–C12、路线R1–R6及五类竞争力P1–P5是不同轴，不枚举360种组合。H6 AI应提出优先候选：评价纠错(C09+C12)、机制/失效(C08+C11)、问题与评价(C05+C09)、机制驱动新算法(C08+C02)、高价值突破(C05+C02+C11)，以及领域更适合的理论/系统/基准路线；根据真实数据与论文近邻挑选，不按组合预设质量等级。作者选择主Task与科研策略/有限委托。H8 AI先回收重要正负证据、比较至少一条确有不同失败前提的战略选项，向作者推荐KEEP/UPGRADE/NARROW/REFRAME/HOLD及主Claim；作者决定重大科学方向，AI在所选范围内连续执行。**不要求所有研究开发新网络，也不能把算法复杂度视为必然升级**。具体卡片与例外只维护 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md)，权威分类见 [CONTRIBUTION_TAXONOMY.md](CONTRIBUTION_TAXONOMY.md)。
 
-**高价值实验的升级条件**：真实重要的部署失效、不同科学预测、**新基准或实验范式**、系统级能力、理论/物理约束都可触发研究设计，不强制新网络。按科学主张规划有界 `CLAIM_EVIDENCE_PACKAGE`（公平强对照、关键消融、条件边界、必要部署证据），不是要求所有项目全跑。新增数据库下载、付费/云资源、超H5研究目标及独立确认协议变更须用户决定；H5内DEV Task/算法/评价方案由AI版本化调整并重核科学有效性，SEALED仍独立许可；不要把最便宜的 Probe 当作唯一科学目标。
+**高价值实验的升级条件**：真实重要的部署失效、不同科学预测、**新基准或实验范式**、系统级能力、理论/物理约束都可触发研究设计，不强制新网络。按科学主张规划有界 `CLAIM_EVIDENCE_PACKAGE`（公平强对照、关键消融、条件边界、必要部署证据），不是要求所有项目全跑。新增数据库下载、付费/云资源、超H5研究目标及独立确认协议变更须用户决定；已获H6作者选择/限定委托的DEV Task与评价在该范围内由AI版本化调整、复核科学有效性；超出H6已选核心Task/主要评价则重新提交作者选择，SEALED仍独立许可；不要把最便宜的 Probe 当作唯一科学目标。
 
 **数据先行是实证执行依赖，不是思想淘汰门槛**：必需数据没有完整验收时只能做文献、公开元信息、理论假说与下载计划，不得拟合、冻结实证 Task 或基于未获得的数据宣称结果；无授权为 `WAITING_FOR_DOWNLOAD_AUTH`，资源不可用记 `WAITING_FOR_DATA`，`DATA_ACQUIRED_VERIFIED` 仅代表文件验收，不代表科学可辨识性。理论证明和无需静态数据的研究按适用方法处理；详见 [DATA_DISCOVERY.md](DATA_DISCOVERY.md)。
 
@@ -102,7 +102,7 @@
 
 ## 4. 不可覆盖的边界与项目资产
 
-- **权限唯一来源**：用户真实原始指示；H5项目批准且本轮DEV数据合法验收后，安全、非付费、符合主机规定的本地CPU/GPU拟合与可信依赖安装按持续AI自主研发权限执行；单纯H4选库/H5选择不授权新数据下载、SEALED、真实付费/外传、跨H5项目PIVOT、投稿或写稿。只有超持续DEV自主范围的操作才先交推荐、选项和必要资源，不先给越权执行命令；见 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)。无执行证据记 `NOT_RUN`。
+- **权限唯一来源**：用户真实原始指示；H5与H6科研策略有效且本轮DEV数据合法验收后，安全、非付费、符合主机规定的本地CPU/GPU拟合与可信依赖安装按持续AI自主研发权限执行；单纯H4选库/H5选择不授权新数据下载、SEALED、真实付费/外传、跨H5项目PIVOT、投稿或写稿。只有超持续DEV自主范围的操作才先交推荐、选项和必要资源，不先给越权执行命令；见 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md)。无执行证据记 `NOT_RUN`。
 - **科学可复核**：保持原始数据血缘、train-only 预处理、分组独立性、时序因果、真值可靠性、冻结协议和 holdout 隔离。新 Task 不自动继承旧确认资格；DEV/VAL/CONFIRMATION 不混用。工具哈希/JSON/Agent 判断不能替代真实来源。
 - **项目记忆**：按 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 增量维护 `RESEARCH_RECORD.md` 当前状态/重大失败/下一步，论文内容规划更新 `PAPER_BLUEPRINT.md` 的 H1/H2 与对应 `SEC_ID`；保留 STATE、Run 和原始工件，不新建第三份科研日志。早期规划不是正式文章。
 - **写作锁**：科研成果总结经用户审查并独立授权前 `WRITING_LOCKED`，不能自动写投稿标题、摘要、正式正文/初稿。见 [WRITING_GATE.md](WRITING_GATE.md)；既有稿件写作/审核才按需读 [MANUSCRIPT_WRITING.md](MANUSCRIPT_WRITING.md) / [MANUSCRIPT_QA.md](MANUSCRIPT_QA.md)；Word 排版见 [PAPER_WORD_STYLE.md](PAPER_WORD_STYLE.md)。
