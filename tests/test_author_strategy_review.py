@@ -1,0 +1,107 @@
+"""Offline H6/H8 author-choice contract regression; no user messages authenticated."""
+import copy
+import unittest
+
+from core.human_decision_review import CONTRACT, review
+
+
+def declared_step(name, *, kind=None, protocol=None):
+    spec = CONTRACT["steps"][name]
+    if kind is None:
+        kind = "AGENT_DECIDED" if name == "H7" else "USER_CONFIRMED"
+    step = {"kind": kind}
+    if kind == "AGENT_DECIDED":
+        step.update(agent_decision_ref="agent/technical/H7", h5_scope_ref="H5/message")
+    else:
+        step.update(original_user_message_ref="original/user/message",
+                    chosen_option="A", delegated_scope="AI within H5 scoped R4")
+    step["dimension_decisions"] = {x: "EXPLICIT_SCOPE" for x in spec["required_dimensions"]}
+    step["evidence_refs"] = {x: "source/artifact" for x in spec["evidence_minimum"]}
+    if protocol == "pd-rw-human-review-v1.2":
+        legacy = {
+            "H6": (["task_hypothesis", "legal_inputs", "independent_evaluation"],
+                   ["valid_dev_or_theory_basis", "falsifier_and_comparator"]),
+            "H8": (["main_claim", "positive_negative_evidence", "continue_narrow_pivot_hold"],
+                   ["valid_results", "strongest_alternative"])
+        }
+        if name in legacy:
+            dims, refs = legacy[name]
+            step["dimension_decisions"] = {x: "EXPLICIT_SCOPE" for x in dims}
+            step["evidence_refs"] = {x: "source/artifact" for x in refs}
+    return step
+
+
+def packet(target, *, protocol=None):
+    protocol = protocol or CONTRACT["protocol_version"]
+    decisions = {}
+    for h in ("H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8"):
+        decisions[h] = declared_step(h, protocol=protocol)
+    return {"format": "pd-rw-human-review-v1",
+            "protocol_version": protocol, "target": target,
+            "decisions": decisions, "invalidated_decisions": []}
+
+
+class AuthorH6H8ContractTests(unittest.TestCase):
+    def test_current_protocol_requires_h6_h8_author(self):
+        self.assertEqual(CONTRACT["steps"]["H6"]["decision_owner"], "USER")
+        self.assertEqual(CONTRACT["steps"]["H8"]["decision_owner"], "USER")
+        self.assertEqual(CONTRACT["steps"]["H7"]["decision_owner"], "AGENT")
+        for h in ("H6", "H8"):
+            p = packet(h)
+            r = review(p)
+            self.assertTrue(r["can_advance_declarations_only"])
+            self.assertTrue(r["target_requires_user_scientific_choice"])
+            self.assertFalse(r["allows_download_training_sealed_or_writing"])
+
+    def test_agent_cannot_fake_h6_h8_decision(self):
+        for h in ("H6", "H8"):
+            p = packet(h)
+            p["decisions"][h] = declared_step(h, kind="AGENT_DECIDED")
+            r = review(p)
+            self.assertFalse(r["can_advance_declarations_only"])
+            self.assertIn(h, r["malformed_declarations"])
+            self.assertTrue(r["author_choice_pending"])
+
+    def test_author_delegation_is_recognized_without_becoming_access_grant(self):
+        p = packet("H8")
+        p["decisions"]["H8"] = declared_step("H8", kind="USER_DELEGATED")
+        r = review(p)
+        self.assertTrue(r["can_advance_declarations_only"])
+        self.assertTrue(r["requires_original_user_message_review"])
+        self.assertFalse(r["allows_download_training_sealed_or_writing"])
+
+    def test_required_author_recommendation_evidence_cannot_be_empty(self):
+        p = packet("H6")
+        del p["decisions"]["H6"]["evidence_refs"]["ranked_options_and_ai_recommendation"]
+        r = review(p)
+        self.assertFalse(r["can_advance_declarations_only"])
+        self.assertIn("ranked_options_and_ai_recommendation", r["missing_evidence_refs"]["H6"])
+
+    def test_technical_h7_remains_agent_owned(self):
+        p = packet("H7")
+        r = review(p)
+        self.assertTrue(r["can_advance_declarations_only"])
+        self.assertFalse(r["target_requires_user_scientific_choice"])
+
+    def test_h6_reopening_invalidates_h8_not_h5(self):
+        p = packet("H8")
+        p["invalidated_decisions"] = ["H6"]
+        r = review(p)
+        self.assertFalse(r["can_advance_declarations_only"])
+        self.assertIn("H8", r["stale_declarations"])
+        self.assertNotIn("H5", r["stale_declarations"])
+
+    def test_legacy_agent_strategy_readable_but_never_author_approved(self):
+        p = packet("H6", protocol="pd-rw-human-review-v1.2")
+        p["decisions"]["H6"] = declared_step(
+            "H6", kind="AGENT_DECIDED", protocol="pd-rw-human-review-v1.2")
+        p["decisions"]["H8"] = declared_step(
+            "H8", kind="AGENT_DECIDED", protocol="pd-rw-human-review-v1.2")
+        r = review(p)
+        self.assertTrue(r["can_advance_declarations_only"])
+        self.assertIn("H6", r["legacy_agent_strategy_not_author_approved"])
+        self.assertTrue(r["requires_original_user_message_review"])
+
+
+if __name__ == "__main__":
+    unittest.main()
