@@ -288,6 +288,7 @@ def review_activity_handoff(packet: dict) -> dict:
             human_status = "LEGACY_OR_UNSUPPORTED_NOT_VERIFIED"
         else:
             human_missing = []
+            legacy_agent_strategy = False
             for name in required_review:
                 candidate = dict(human_packet)
                 candidate["target"] = name
@@ -297,8 +298,22 @@ def review_activity_handoff(packet: dict) -> dict:
                     raise ContractError(f"invalid human_review_packet: {exc}") from exc
                 if not decision["can_advance_declarations_only"]:
                     human_missing.append(name)
+                # A legacy agent-supplied H6/H8 record cannot represent a new
+                # author choice; permit unchanged historical research only when
+                # a separately recorded scope continuity ref is declared.
+                if name in {"H6", "H8"} and decision.get(
+                        "legacy_agent_strategy_not_author_approved"):
+                    legacy_agent_strategy = True
+            if legacy_agent_strategy and not (
+                    isinstance(packet.get("legacy_unchanged_scope_ref"), str)
+                    and packet["legacy_unchanged_scope_ref"].strip()):
+                human_missing.extend(
+                    name for name in required_review if name in {"H6", "H8"}
+                    and name not in human_missing)
             human_status = ("DECLARED_COMPLETE_NOT_AUTHENTICATED"
-                            if not human_missing else "DECLARED_INCOMPLETE")
+                            if not human_missing else
+                            "LEGACY_SCOPE_CONTINUITY_REQUIRED" if legacy_agent_strategy
+                            else "DECLARED_INCOMPLETE")
     human_declared_complete = human_status == "DECLARED_COMPLETE_NOT_AUTHENTICATED"
     declared_complete = not (
         missing or unresolved_critical or malformed or missing_outputs
