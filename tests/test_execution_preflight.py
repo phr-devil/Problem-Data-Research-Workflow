@@ -38,11 +38,83 @@ class ActionTests(unittest.TestCase):
 
 
 class ScienceTests(unittest.TestCase):
-    def test_new_task_needs_contribution_route_not_only_algorithm(self):
-        p = {"trigger": "H6_TASK", "claim_or_question": "When can contact fail?",
-             "nearest_neighbor_or_unknown": "UNKNOWN"}
+    @staticmethod
+    def sample_author_packet(trigger="H6_TASK"):
+        option = {"id": "A", "claim_or_task": "Trustworthy contact",
+                  "primary_type": "C11", "route": "R4", "p_orientation": "P3",
+                  "independent_knowledge": "Boundary by contact state",
+                  "prior_gap": "Unknown on measured data",
+                  "decisive_evidence": "Cross-session contrast",
+                  "science_value": "Broad failure criterion",
+                  "cost_and_speed": "Reuses DEV runs",
+                  "failure_premise": "Wrong labels"}
+        review = {"options": [option], "single_option_reason": "Only feasible data",
+                  "recommended_option_id": "A",
+                  "recommendation_rationale": "Valid independent groups",
+                  "key_unknown": "Sensor axis not fully checked"}
+        if trigger == "H8_CLAIM":
+            review.update(positive_negative_evidence_ref="runs/R12",
+                          strongest_objection="Session confounding",
+                          publication_potential_or_unknown="UNKNOWN",
+                          confirmation_gap="SEALED not yet authorized")
+        packet = {"trigger": trigger,
+                  "claim_or_question": "When can contact fail?",
+                  "nearest_neighbor_or_unknown": "UNKNOWN",
+                  "primary_type": "C11", "route": "R4",
+                  "author_review": review}
+        if trigger == "H8_CLAIM":
+            packet.update(actual_evidence_ref_or_not_run="runs/R12",
+                          negative_evidence_or_none="No overall gain",
+                          strongest_alternative_or_unknown="Session confounding",
+                          next_decisive_step="DEV group comparison")
+        return packet
+
+    def test_h6_proposal_needs_author_selection(self):
+        p = self.sample_author_packet()
+        self.assertEqual(science_checkpoint(p)["result"], "AUTHOR_CHOICE_REQUIRED")
+        p["author_review"]["selection"] = {
+            "kind": "USER_CONFIRMED",
+            "chosen_option_id": "A",
+            "original_user_message_ref": "user-message-2026-11-12"}
+        self.assertEqual(science_checkpoint(p)["result"], "READY_FOR_SCIENTIFIC_REVIEW")
+        self.assertFalse(science_checkpoint(p)["author_approval_authenticated"])
+
+    def test_fake_author_approval_is_not_a_selection(self):
+        p = self.sample_author_packet()
+        p["author_review"]["user_approved"] = True
+        p["author_review"]["selection"] = {"kind": "AGENT_DECIDED",
+                                            "original_user_message_ref": "agent"}
+        self.assertEqual(science_checkpoint(p)["result"], "AUTHOR_CHOICE_REQUIRED")
+
+    def test_author_scope_delegation_is_acceptable_declaration(self):
+        p = self.sample_author_packet()
+        p["author_review"]["selection"] = {
+            "kind": "USER_DELEGATED", "delegated_scope": "R4 within H5; no SEALED",
+            "original_user_message_ref": "user-message"}
+        self.assertEqual(science_checkpoint(p)["result"], "READY_FOR_SCIENTIFIC_REVIEW")
+
+    def test_h8_requires_author_upgrade_choice(self):
+        p = self.sample_author_packet("H8_CLAIM")
+        self.assertEqual(science_checkpoint(p)["result"], "AUTHOR_CHOICE_REQUIRED")
+        p["author_review"]["selection"] = {
+            "kind": "USER_CONFIRMED", "chosen_option_id": "A",
+            "original_user_message_ref": "author-choice"}
+        self.assertEqual(science_checkpoint(p)["result"], "READY_FOR_SCIENTIFIC_REVIEW")
+
+    def test_missing_recommendation_or_fallback_cannot_pass(self):
+        p = self.sample_author_packet()
+        del p["author_review"]["recommendation_rationale"]
+        del p["author_review"]["single_option_reason"]
+        p["author_review"]["selection"] = {"kind": "USER_CONFIRMED",
+                                            "chosen_option_id": "A",
+                                            "original_user_message_ref": "author"}
         self.assertEqual(science_checkpoint(p)["result"], "BLOCK_HANDOFF")
-        p.update(route="R4", primary_type="C11")
+
+    def test_non_author_checkpoint_remains_autonomous(self):
+        p = {"trigger": "NEW_ALGORITHM",
+             "observed_bottleneck_or_hypothesis": "Weak contact boundary",
+             "simple_alternative": "threshold baseline",
+             "distinguishing_prediction": "failures vanish with state awareness"}
         self.assertEqual(science_checkpoint(p)["result"], "READY_FOR_SCIENTIFIC_REVIEW")
 
     def test_negative_results_are_not_dropped(self):
