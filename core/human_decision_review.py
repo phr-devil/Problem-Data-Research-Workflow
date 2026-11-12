@@ -74,8 +74,8 @@ def review(packet: dict) -> dict:
         # Only H7 is agent-owned in the current protocol. Legacy H6/H8 agent
         # declarations remain readable, but never become new author approval.
         if entry["kind"] == "AGENT_DECIDED":
-            allowed_agent = (AGENT_OWNED if protocol_version == CONTRACT["protocol_version"]
-                             else LEGACY_AGENT_OWNED)
+            allowed_agent = (LEGACY_AGENT_OWNED if protocol_version == "pd-rw-human-review-v1.2"
+                             else AGENT_OWNED)
             if (name not in allowed_agent
                     or not isinstance(entry.get("agent_decision_ref"), str)
                     or not entry["agent_decision_ref"].strip()
