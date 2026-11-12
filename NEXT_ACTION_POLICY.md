@@ -49,7 +49,11 @@
 
 **可辨别实验的结果分支（仅在涉及实际 Probe 时）**：保留 `IF_POS/NEG/INVALID` 对应的下一决定与 `AUTH/COST`，具体定义及 `INCONCLUSIVE` 归因只由 [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md) 主责；本文件负责将该结果反馈给用户/Agent，不复制算法决策逻辑。无试验、无算法或纯理论任务使用适合其证据类型的条件，不虚构 Run 或实验三分支。
 
-### 新项目及H6/H8作者战略卡片：明确推荐、作者选择\n\nH6与H8须使用 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md) 的精简推荐卡：`H_ID | BEST_RECOMMENDATION + SCIENCE_REASON | OPTIONS(通常2–3) | C/R/P | NEAREST_PRIOR_GAP | DECISIVE_EVIDENCE | COST/SPEED | MAIN_RISK/UNKNOWN | USER_CHOICE_OR_DELEGATION`。缺推荐/比较/作者回应时不能宣称节点完成；允许一个确有理由的单一选项，不凑假选项。作者选择范围内自动执行H7/普通DEV，重大科学战略改变才重新审H6/H8。\n\n### 新项目统一审核卡片
+### 新项目及H6/H8作者战略卡片：明确推荐、作者选择
+
+H6与H8须使用 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md) 的精简推荐卡：`H_ID | BEST_RECOMMENDATION + SCIENCE_REASON | OPTIONS(通常2–3) | C/R/P | NEAREST_PRIOR_GAP | DECISIVE_EVIDENCE | COST/SPEED | MAIN_RISK/UNKNOWN | USER_CHOICE_OR_DELEGATION`。缺推荐/比较/作者回应时不能宣称节点完成；允许一个确有理由的单一选项，不凑假选项。作者选择范围内自动执行H7/普通DEV，重大科学战略改变才重新审H6/H8。
+
+### 新项目统一审核卡片
 
 在 `USER_DEEP_PARTICIPATION` 下，人工节点定义来自 [`contracts/human_review_protocol.v1.json`](contracts/human_review_protocol.v1.json) 的 `required_dimensions`，科研语义仍归 [WORKFLOW.md](WORKFLOW.md)。每轮只有**当前需要用户决定**的H节点成为主卡片，按 `PROTOCOL_VERSION | H1–H5_PROGRESS | CURRENT_REVIEW(ID+固定名称) | AI_RECOMMENDATION+SOURCE | RISKS/UNKNOWN | OPTIONS+TRADEOFFS | REQUIRED_DIMENSIONS/CHOICE_OR_DELEGATION | NEXT_DEPENDENT_ACTION` 给出内容。选项因领域不同而不同，但H1研究目标、H2来源+贡献路线、H3问题、H4证据资源、H5最终题目永不互换定义。允许用户一条消息明确完成多个节点、逐项委托或暂缓；已决定且未变化的内容不再询问。当前节点只涉及一个合理候选也可如实说明，不凑假选项。
 
