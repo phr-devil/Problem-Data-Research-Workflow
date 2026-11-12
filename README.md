@@ -10,7 +10,7 @@
 
 **Q2科研证据优先（非自动写稿）**：默认成果是有具名近邻和独立证据支持、具有真实JCR Q2+投稿潜力的科学主张，Q1更好；小而可靠的成果先保护，但不能因普通期刊可发直接算成功。得到可信Run后先核Q2新知识/证据缺口，再决定补证据还是有界科学升级；写作依然须成果总结审查及独立用户授权。见 [PAPER_FIRST.md](PAPER_FIRST.md) 与 [VENUE_STRATEGY.md](VENUE_STRATEGY.md)。
 
-**v1.12 可信算法工程闭环**：活动04需要新算法/复杂训练时才按需读[ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)：真实误差→预测前合法杠杆→强简单替代→一项可证伪预言/低成本正控→获授权的Agent连续实现和DEV实验→公平比较及Run保留→必要时直接转论文补证据。保留单一科研主控，不新增自动训练框架或无上限候选树；参考AIDE/autoresearch/RD-Agent/mini-swe-agent的思想，不复制其整套执行器。
+**延续v1.12 可信算法工程闭环**：活动04需要新算法/复杂训练时才按需读[ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md)：真实误差→预测前合法杠杆→强简单替代→一项可证伪预言/低成本正控→获授权的Agent连续实现和DEV实验→公平比较及Run保留→必要时直接转论文补证据。保留单一科研主控，不新增自动训练框架或无上限候选树；参考AIDE/autoresearch/RD-Agent/mini-swe-agent的思想，不复制其整套执行器。
 
 **最低成功标准：可信JCR Q2+投稿潜力，优先Q1**；真实科学证据、具名最近邻与相关期刊近期同类发表先例共同支持，不要求实际录用。普通专业期刊/B-C自定义档不自动算成功。见[Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)。
 
