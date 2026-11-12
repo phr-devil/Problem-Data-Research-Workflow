@@ -7,7 +7,7 @@
 1. 先核当前用户目标、`USER_SCOPE` 和**原始授权**。已有项目先核编号/研究线/数据集是否指向同一真实目录，按 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 做 `PROJECT_IDENTITY_CHECK`；再从已知路径/STATE 定位 `RESEARCH_RECORD_REF`，存在才读 `RESEARCH_RECORD.md` 的**当前快照**；论文任务按需读 `PAPER_BLUEPRINT_REF` 对应 `SEC_ID`，再核相关 Run/协议/manifest。新项目再按需读 [START.md](START.md)。
 2. 冷启动、来源不明或规则变化时，在可用访问权限内核**本地 Git HEAD 与远端最新 commit**；有 `.git` 不等于已同步。不一致标 `RULE_SOURCE_STALE`，优先按确定的远端 commit 只读必要规则；未经授权不覆盖本地文件或运行 pull/rebase，获同步许可且工作树干净才允许 fast-forward。不能核远端/来源时记 `RULE_VERSION_UNVERIFIED`，**不声称最新**。同一任务只用可识别版本，简记 `RULE_REPO | RULE_COMMIT | LOADED_FILES`；版本和任务未变就复用。
 3. 决策冲突：用户原始授权优先；科研流程由 WORKFLOW 主控；科研事实以实际合法原始工件为准；专业细则仅由对应权威专题负责。既有项目直接续做，不重开选题/数据/训练。
-4. **适用规则重核（不是全库重读）**：新会话/Agent接手或上下文压缩后，先核 `RULE_REPO | RULE_COMMIT | LOADED_FILES` 与当前任务的可恢复证据；切换项目、Task/活动、版本或受影响协议时，只重核新增适用的权威专题；新数据下载、收费/危险安装、超范围CPU/GPU、SEALED、绘图、写稿、费用、投稿等受限操作**执行前**再核对应规则和原始许可；H5内安全非付费本地DEV安装和CPU/GPU拟合按 [WORKFLOW.md](WORKFLOW.md) 的 `AI_DEV_AUTONOMY` 自主执行，无须逐次确认。已知版本、任务、权限与证据未变时复用；不能确认受限操作的许可时停止该操作并定位原指示，允许无依赖只读工作。Markdown被阅读过不等于工具实际具备权限拦截或Agent会永久记忆。
+4. **适用规则重核（不是全库重读）**：新会话/Agent接手或上下文压缩后，先核 `RULE_REPO | RULE_COMMIT | LOADED_FILES` 与当前任务的可恢复证据；切换项目、Task/活动、版本或受影响协议时，只重核新增适用的权威专题；新数据下载、收费/危险安装、超范围CPU/GPU、SEALED、绘图、写稿、费用、投稿等受限操作**执行前**再核对应规则和原始许可；H5/H6已选定或原旧项目范围有效时的安全非付费本地DEV安装和CPU/GPU拟合按 [WORKFLOW.md](WORKFLOW.md) 的 `AI_DEV_AUTONOMY` 自主执行，无须逐次确认。已知版本、任务、权限与证据未变时复用；不能确认受限操作的许可时停止该操作并定位原指示，允许无依赖只读工作。Markdown被阅读过不等于工具实际具备权限拦截或Agent会永久记忆。
 
 **人工科学决策冷启动**：新项目H1–H5沿用原选择流程；**H6核心Task/研究组合与H8核心Claim/重大升级需先由AI给带依据的首选和可行备选，再由作者选择或明确范围委托**。H7技术方案、既定策略内DEV算法/训练/修复仍由AI自主，不逐次询问。旧项目H6/H8原记录保留但旧AGENT_DECIDED不能伪装为新作者确认，只有实质战略变动时按新版审核。详见 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md)、[WORKFLOW.md](WORKFLOW.md)；原H9/H10、SEALED与写稿门禁不变。
 
