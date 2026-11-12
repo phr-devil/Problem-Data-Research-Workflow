@@ -43,11 +43,22 @@ def action_preflight(packet: dict, *, independently_authorized: bool = False) ->
                 "enforcement": "ADVISORY_NOT_TOOL_SANDBOX"}
     if action in DEV:
         conditions = ("h5_scope_confirmed", "dev_inputs_verified", "within_h5_scope",
-                      "safe_local_nonpaid", "no_project_specific_prohibition")
+                      "safe_local_nonpaid", "no_project_specific_prohibition",
+                      "within_author_selected_strategy")
+        if packet.get("h6_strategy_pending") is True:
+            return {"decision": "BLOCK", "reason": "H6_AUTHOR_STRATEGY_PENDING"}
         if any(packet.get(k) is False for k in conditions):
-            return {"decision": "BLOCK", "reason": "DEV_PREREQUISITE_DENIED"}
+            return {"decision": "BLOCK", "reason": "DEV_PREREQUISITE_OR_STRATEGY_DENIED"}
         if any(packet.get(k) is not True for k in conditions):
             return {"decision": "UNKNOWN", "reason": "DEV_PREREQUISITE_NOT_AUTHENTICATED"}
+        # Existing unchanged legacy research does not need a retroactive H6
+        # signoff. These are only caller declarations; the host must verify.
+        current = packet.get("h6_author_strategy_confirmed")
+        legacy = packet.get("legacy_unchanged_scope_confirmed")
+        if current is not True and legacy is not True:
+            if current is False and legacy is False:
+                return {"decision": "BLOCK", "reason": "NO_VALID_H6_OR_LEGACY_SCOPE"}
+            return {"decision": "UNKNOWN", "reason": "H6_AUTHOR_STRATEGY_NOT_VERIFIED"}
         if not independently_authorized:
             return {"decision": "UNKNOWN", "reason": "HOST_MUST_VERIFY_ORIGINAL_SCOPE",
                     "enforcement": "ADVISORY_ONLY"}
@@ -95,7 +106,7 @@ def author_strategy_review(packet: dict) -> dict:
             missing.append(f"options[{i}].valid_R_route")
         if option.get("p_orientation") not in P_ORIENTATIONS:
             missing.append(f"options[{i}].valid_P_orientation")
-        ids.append(option.get("id"))
+        ids.append(option.get("id") if _present(option.get("id")) else None)
     if len(ids) != len(set(ids)):
         missing.append("unique_option_ids")
     if len(options) == 1 and not _present(review.get("single_option_reason")):
