@@ -179,6 +179,7 @@ class ScienceTests(unittest.TestCase):
         p = self.sample_author_packet()
         p["author_review"]["selection"] = {
             "kind": "USER_DELEGATED", "delegated_scope": "R4 within H5; no SEALED",
+            "allowed_option_ids": ["A"],
             "original_user_message_ref": "user-message"}
         self.assertEqual(science_checkpoint(p)["result"], "READY_FOR_SCIENTIFIC_REVIEW")
 
