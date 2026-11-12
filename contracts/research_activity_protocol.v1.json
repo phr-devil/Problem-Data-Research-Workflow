@@ -26,7 +26,7 @@
     "Activity 05 may run alongside activity 04 as soon as meaningful valid evidence exists, not only after final algorithm optimization.",
     "The structural handoff flag alone never satisfies entry_requirements, user review, or original operation authorization. Distinguish declared entry evidence, declared H choices and actual permission source.",
     "For theoretical/simulation Claim, do not fabricate empirical Run IDs; use the bounded NON_DATA claim evidence path with independent local verification references.",
-    "For current v1.3 author decisions, activity03/05 declared readiness requires a matching ranked strategy_checkpoint_packet; legacy v1.2 unchanged-scope handling remains advisory and cannot be turned into a new author approval."
+    "For current v1.3 author decisions, activity03/05 declared readiness requires a matching ranked strategy_checkpoint_packet; a mixed v1.3 review may carry source-tagged v1.2 H6/H8 legacy entries with matching unchanged scope refs. Legacy continuation is not a new author approval and remains advisory."
   ],
   "activities": {
     "01": {
