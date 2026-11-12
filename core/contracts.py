@@ -314,6 +314,63 @@ def review_activity_handoff(packet: dict) -> dict:
                             if not human_missing else
                             "LEGACY_SCOPE_CONTINUITY_REQUIRED" if legacy_agent_strategy
                             else "DECLARED_INCOMPLETE")
+    # A complete H6/H8 author *declaration* is not necessarily accompanied
+    # by the required ranked scientific choices. Join the two independent
+    # preflights at the actual 03/05 handoff, and verify their declared choices
+    # describe the same user message and option. Neither check authenticates it.
+    strategy_review_status = "NOT_APPLICABLE"
+    strategy_review_missing = []
+    strategy_review_ready = True
+    if activity_id in {"03", "05"} and isinstance(human_packet, dict) and (
+            human_packet.get("protocol_version") == "pd-rw-human-review-v1.3"):
+        strategy_review_ready = False
+        strategy = packet.get("strategy_checkpoint_packet")
+        expected = "H6_TASK" if activity_id == "03" else "H8_CLAIM"
+        decision_id = "H6" if activity_id == "03" else "H8"
+        if not isinstance(strategy, dict):
+            strategy_review_status = "MISSING_STRATEGY_CHECKPOINT"
+            strategy_review_missing = ["strategy_checkpoint_packet"]
+        elif strategy.get("trigger") != expected:
+            strategy_review_status = "STRATEGY_TRIGGER_MISMATCH"
+            strategy_review_missing = [f"expected_{expected}"]
+        else:
+            from core.execution_preflight import science_checkpoint
+            strategy_result = science_checkpoint(strategy)
+            strategy_review_missing = list(strategy_result["missing"])
+            if strategy_result["result"] != "READY_FOR_SCIENTIFIC_REVIEW":
+                strategy_review_status = strategy_result["result"]
+            else:
+                row = human_packet.get("decisions", {}).get(decision_id, {})
+                selection = strategy.get("author_review", {}).get("selection", {})
+                if not isinstance(row, dict) or not isinstance(selection, dict):
+                    strategy_review_missing.append("matching_author_decision")
+                else:
+                    match = (
+                        row.get("kind") == selection.get("kind")
+                        and row.get("original_user_message_ref")
+                        == selection.get("original_user_message_ref")
+                    )
+                    if row.get("kind") == "USER_CONFIRMED":
+                        match = match and row.get("chosen_option") == selection.get("chosen_option_id")
+                        choices = strategy["author_review"]["options"]
+                        chosen = next((o for o in choices if isinstance(o, dict)
+                                       and o.get("id") == row.get("chosen_option")), None)
+                        match = (match and chosen is not None
+                                 and chosen.get("primary_type") == strategy.get("primary_type")
+                                 and chosen.get("route") == strategy.get("route"))
+                    elif row.get("kind") == "USER_DELEGATED":
+                        match = match and row.get("delegated_scope") == selection.get("delegated_scope")
+                    if not match:
+                        strategy_review_missing.append("author_strategy_selection_mismatch")
+                strategy_review_ready = not strategy_review_missing
+                strategy_review_status = (
+                    "DECLARED_MATCH_NOT_AUTHENTICATED" if strategy_review_ready
+                    else "STRATEGY_DECISION_MISMATCH"
+                )
+    elif activity_id in {"03", "05"} and not isinstance(human_packet, dict):
+        strategy_review_ready = False
+        strategy_review_status = "HUMAN_DECISION_PACKET_MISSING"
+
     human_declared_complete = human_status == "DECLARED_COMPLETE_NOT_AUTHENTICATED"
     declared_complete = not (
         missing or unresolved_critical or malformed or missing_outputs
@@ -326,10 +383,11 @@ def review_activity_handoff(packet: dict) -> dict:
     non_method_scope_ready = (
         skip_declared and review_not_applicable("H7")
         and entry_declarations_complete and human_declared_complete
+        and strategy_review_ready
     )
     full_scope_ready = (
         declared_complete and entry_declarations_complete
-        and human_declared_complete and not skip_declared
+        and human_declared_complete and strategy_review_ready and not skip_declared
         and (activity_id != "04" or execution_kind != "UNSPECIFIED")
     )
     return {
@@ -348,6 +406,9 @@ def review_activity_handoff(packet: dict) -> dict:
         "required_human_review_declarations": required_review,
         "human_review_declarations_status": human_status,
         "human_review_declarations_missing": human_missing,
+        "strategy_review_status": strategy_review_status,
+        "strategy_review_missing": strategy_review_missing,
+        "strategy_review_ready_declarations_only": strategy_review_ready,
         "missing_entry_evidence_declarations": missing_entry,
         "entry_declarations_complete_not_authenticated": entry_declarations_complete,
         "declared_activity_ready_not_authenticated": full_scope_ready,
