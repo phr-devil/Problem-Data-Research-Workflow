@@ -51,6 +51,17 @@ class ActionTests(unittest.TestCase):
              "safe_local_nonpaid": True, "no_project_specific_prohibition": True}
         self.assertEqual(action_preflight(p, independently_authorized=True)["decision"], "ALLOW")
 
+    def test_legacy_scope_survives_new_h6_pending_flag(self):
+        p = {"action": "DEV_TRAIN", "h5_scope_confirmed": True,
+             "dev_inputs_verified": True, "within_h5_scope": True,
+             "within_author_selected_strategy": True,
+             "legacy_unchanged_scope_confirmed": True,
+             "h6_strategy_pending": True,
+             "safe_local_nonpaid": True,
+             "no_project_specific_prohibition": True}
+        self.assertEqual(action_preflight(p, independently_authorized=True)["decision"], "ALLOW")
+        self.assertEqual(action_preflight(p)["decision"], "UNKNOWN")
+
     def test_protected_action_requires_host_attestation(self):
         self.assertEqual(action_preflight({"action": "READ_SEALED"},
                                           independently_authorized=True)["decision"], "ALLOW")
