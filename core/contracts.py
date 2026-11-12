@@ -327,7 +327,20 @@ def review_activity_handoff(packet: dict) -> dict:
         strategy = packet.get("strategy_checkpoint_packet")
         expected = "H6_TASK" if activity_id == "03" else "H8_CLAIM"
         decision_id = "H6" if activity_id == "03" else "H8"
-        if not isinstance(strategy, dict):
+        row = human_packet.get("decisions", {}).get(decision_id, {})
+        legacy_continuation = (
+            isinstance(row, dict) and row.get("kind") == "AGENT_DECIDED"
+            and row.get("legacy_source_protocol") == "pd-rw-human-review-v1.2"
+            and isinstance(row.get("legacy_unchanged_scope_ref"), str)
+            and bool(row["legacy_unchanged_scope_ref"].strip())
+            and isinstance(packet.get("legacy_unchanged_scope_ref"), str)
+            and packet["legacy_unchanged_scope_ref"].strip()
+            == row["legacy_unchanged_scope_ref"].strip()
+        )
+        if legacy_continuation:
+            strategy_review_ready = True
+            strategy_review_status = "LEGACY_CONTINUITY_DECLARED_NOT_NEW_APPROVAL"
+        elif not isinstance(strategy, dict):
             strategy_review_status = "MISSING_STRATEGY_CHECKPOINT"
             strategy_review_missing = ["strategy_checkpoint_packet"]
         elif strategy.get("trigger") != expected:
