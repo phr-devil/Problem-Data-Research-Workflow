@@ -15,9 +15,9 @@
 
 Action接受 READ_PUBLIC、ANALYZE_EXISTING_METADATA、REVIEW_RULES；DEV_CODE/DEV_TRAIN/DEV_EVALUATE/DEV_FIX；以及 DOWNLOAD/READ_SEALED/RUN_CONFIRMATION/DRAW_IMAGE/WRITE_MANUSCRIPT/SUBMIT/PAY/EXTERNAL_UPLOAD/UNSAFE_INSTALL/PROJECT_SCOPE_CHANGE/PROJECT_STOP。
 
-Action结果为 ALLOW/BLOCK/UNKNOWN。没有受限副作用的公开只读操作可返回ALLOW；DEV需已确认H5、DEV合法、H5范围内、安全非付费、无项目特别禁令；任何受限操作的JSON自填授权都不会构成真实授权，CLI默认UNKNOWN。宿主必须独立认证授权、调用 action_preflight(packet, independently_authorized=True)，并在动作入口独立实施工具/文件权限控制。此参数不是密码，必须由不受Agent控制的宿主代码传递；Agent能够自行调用Python时不能把该返回值当成可信许可。**没有运行时宿主接入时标 ENFORCEMENT_NOT_CONNECTED，不得声称硬性拦截已实现。**
+Action结果为 ALLOW/BLOCK/UNKNOWN。没有受限副作用的公开只读操作可返回ALLOW；DEV需已确认H5及作者选定/委托的H6战略（或证据证明旧项目范围不变），DEV合法、在作者所选策略范围内、安全非付费且无项目特别禁令；任何受限操作的JSON自填授权都不会构成真实授权，CLI默认UNKNOWN。宿主必须独立认证授权、调用 action_preflight(packet, independently_authorized=True)，并在动作入口独立实施工具/文件权限控制。此参数不是密码，必须由不受Agent控制的宿主代码传递；Agent能够自行调用Python时不能把该返回值当成可信许可。**没有运行时宿主接入时标 ENFORCEMENT_NOT_CONNECTED，不得声称硬性拦截已实现。**
 
-Science触发器：H6_TASK与H8_CLAIM需要 `author_review`：包含1–3条科学可行方案及推荐ID/理由、C01–C12、R1–R6、P1–P5、差额、证据、风险与成本；作者尚未选时为 `AUTHOR_CHOICE_REQUIRED`，只有声明了原消息引用与选择/有限委托后才可能 `READY_FOR_SCIENTIFIC_REVIEW`，但仍不认证作者真实性。NEW_ALGORITHM/重要Run/NEGATIVE_RESULT/CLAIM_PROMOTION沿用原结构检查；H7/普通实验不要求作者选择。规范见 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md)。
+Science触发器：H6_TASK与H8_CLAIM需要 `author_review`：包含1–3条科学可行方案及推荐ID/理由、C01–C12、R1–R6、P1–P5、差额、证据、风险与成本；作者尚未选时为 `AUTHOR_CHOICE_REQUIRED`，只有声明了原消息引用与选择/有限委托后才可能 `READY_FOR_SCIENTIFIC_REVIEW`，但仍不认证作者真实性。H8选项还需标KEEP/UPGRADE/NARROW/REFRAME/HOLD行动；CLAIM_PROMOTION在SUPPORTED/CONFIRMED时还需原H8作者选择引用（或旧项目未变更范围），CONFIRMED不能将UNAVAILABLE/UNKNOWN冒充独立验证；NEW_ALGORITHM/重要Run/NEGATIVE_RESULT仍只检查科学证据，不触发作者逐次确认；H7/普通实验不要求作者选择。规范见 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md)。
 
 ## 与研究主张相结合
 
