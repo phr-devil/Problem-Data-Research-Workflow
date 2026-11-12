@@ -16,7 +16,7 @@ AI应从科学问题、具名最近邻、数据真值/独立单位、强替代�
 
 `OPTION_ID | SCIENTIFIC_QUESTION/TASK | C01-C12主贡献 | R1-R6路线 | P1-P5期望竞争力 | NEW_KNOWLEDGE | BEST_PRIOR_GAP | DISCRIMINATING_TEST | EVIDENCE_FEASIBILITY | SPEED/COST | MAIN_FAILURE | FALLBACK`
 
-在选项之前明确写 `RECOMMENDED_OPTION | WHY (科学价值、独立差额、证据可行性、成本) | KEY_UNKNOWN`，选项之后写 `AUTHOR_CHOICE: A / B / C / 委托AI选择(限定范围) / 暂缓`。不要求用户另行选择12类和6路线的每个标签，也不要求三个备选必须同时开发。可以提议“快速证据主线+突破性备选”但必须只冻结作者实际选择的主线及允许的替代范围。
+在选项之前明确写 `RECOMMENDED_OPTION | WHY (科学价值、独立差额、证据可行性、成本) | KEY_UNKNOWN`，选项之后写 `AUTHOR_CHOICE: A / B / C / 委托AI选择(限定范围) / 暂缓`。不要求用户另行选择12类和6路线的每个标签，也不要求三个备选必须同时开发。可以提议“快速证据主线+突破性备选”但必须只冻结作者实际选择的主线及允许的替代范围。**组合选择**须区分唯一主方案与有界辅助方案（`chosen_option_id + secondary_option_ids + combination_scope`）；**有限委托**须对应当前卡片允许的选项集合（`allowed_option_ids + delegated_scope`）。这些机器字段由Agent根据作者真实原话整理，不是要求作者逐字段填写，更不能凭Agent自填字段伪造授权。
 
 **比较顺序**：科学重要性与近邻独立差额、关键可否证证据及有效真值先于效率；单列获得有效判断的时间与资源成本，不用一个虚假的总分取代科学判断。研究范式不是排行榜：评价纠错/机制边界、问题重定义、算法、理论、系统、数据基准在不同问题上可分别成为最优。AI必须解释为什么不默认新神经网络，以及何时有必要进入R1。
 
