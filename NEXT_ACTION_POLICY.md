@@ -1,4 +1,5 @@
 # Next Action / User Decision｜Agent下一步输出规则
+**重要科研交接防漏**：方向确定、重要Run/关键负结果、核心Claim/路线变更、阶段/项目交接，交付前须核 `RESEARCH_RECORD.md` 事件中的 `BLUEPRINT_CHECK`、受影响SEC_ID、原始证据及理由，并按需更新原 `PAPER_BLUEPRINT.md`；普通Debug不触发。无新报告、用户审批或自动写作授权。
 
 **双文件维护不是论文写作许可**：真实授权科研中，按 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 对关键任务/Run/失败/决策及时增量更新 `RESEARCH_RECORD.md`，仅在章目或 Claim–Evidence 发生变化时增量更新 `PAPER_BLUEPRINT.md`。普通重复调试不生成固定长篇总结，旧项目不强制迁移；正式稿件继续执行 [WRITING_GATE.md](WRITING_GATE.md)。
 

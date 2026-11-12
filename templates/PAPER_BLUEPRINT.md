@@ -25,6 +25,7 @@
 | Claim ID | Section ID（稳定） | 原 EXP/Run/文献来源 | 支持状态 | 反证/局限/下一实验 |
 |---|---|---|---|---|
 | C01 (TENTATIVE) | SEC-INTRO-02 | NOT_RUN | UNKNOWN | UNKNOWN |
+> **证据索引硬要求**：每个核心Claim连接有效SEC_ID、真实来源与证据状态；尚未验证写NOT_RUN/UNKNOWN，不得将无真实原始证据的主张列为SUPPORTED/CONFIRMED。重大事件的 `BLUEPRINT_CHECK` 留在已有 `RESEARCH_RECORD.md`，此处只更新受影响的章节内容和Claim–Evidence，不因规划产生论文正文。
 
 ## 1. Introduction
 - **投稿正文呈现**：只有一个 `Introduction` 一级标题，其下是衔接自然的连续英文段落；**不输出 1.1/1.2 小节标题，也不把以下内部要点逐项复制为正文 bullet/numbered list**。段落数量与长度依论证需要决定，不套统一配额。

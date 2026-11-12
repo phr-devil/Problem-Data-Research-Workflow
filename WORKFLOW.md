@@ -44,6 +44,7 @@
 
 **局部回退（重大科学变化才要求作者重新选择）**：数据真值/许可不适配→H4及依赖的H5/H6；核心Task、预测前可用信息、主要评价或研究组合超出已选范围→H6作者复核；普通实现/模型/消融/同策略DEV评估纠错→H7 AI自主；更换核心科学结论、主贡献路线、重大升级/投入超出作者选择→H8作者复核；项目整体STOP、H5外转向、正式确认等原门禁不变。证据变化先判断是否实际影响已选战略，**无影响不重问**；保留可复核原消息、旧Run、选择史与未污染证据。上游选择无效时下游声明不能偷偷继续沿用，须逐项确认依赖是否仍成立。
 
+**论文框架强制事件检查**：01方向或03具体Task明确后建立 `PAPER_BLUEPRINT.md`；04重要有效Run/关键负结果、05核心Claim及路线变化、06科研总结与任一阶段/项目交接，在原 `RESEARCH_RECORD.md` 重要事件记录 `EVENT_KIND | BLUEPRINT_CHECK: UPDATED/NO_CHANGE_NEEDED | BLUEPRINT_SECTIONS | BLUEPRINT_EVIDENCE | BLUEPRINT_REASON`。Agent从合法原始证据检查逐节拟写内容、Claim–Evidence、反证和适用范围，确需变化则只更新受影响章节，否则给出有证据的 `NO_CHANGE_NEEDED`。普通调参/重复测试/无实质Debug不触发。交接前复核真实检查结果与SEC_ID；`core.doc_integrity` 仅验证结构，不授科研正确、结构变更、正式写作或图片许可。详见 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md)。
 **六活动交接**：科研义务见 [research_activity_protocol.v1.json](contracts/research_activity_protocol.v1.json)。交接字段、活动进入证据、H 节点选择与**实际操作授权**分开；仅声明齐备不等于合法推进。理论/仿真 Claim 使用有界 `NON_DATA` 证据与独立核验，不伪造 Run/SEALED；实证 Run 规则不放宽。H7/H9 的不适用须有理由、来源且不能冒充成功。
 
 **决策记忆（不新增第三份项目账本）**：继续使用 `RESEARCH_RECORD.md` 与原STATE指针；H6/H8重要事件记录 `H_ID | AI_RECOMMENDED_OPTION | ALTERNATIVES_REF | USER_CHOICE_OR_DELEGATION_REF | C/R/P | PRIMARY_TASK_OR_CLAIM | EVIDENCE | SCIENCE_VALUE_VS_COST | APPROVED_SCOPE | REOPEN_TRIGGER`；H7技术动作记录AGENT_DECISION_REF即可。缺作者原消息写UNKNOWN，不得把推荐/Agent自述变成作者选择。H6策略确定后的安全非付费本地DEV技术工作持续自主，不逐次请求用户；新数据、付费、外传、SEALED、绘图、写稿、投稿独立门禁照旧。

@@ -1,4 +1,5 @@
 # 活动 04｜可运行实验、信息驱动迭代与自动恢复
+> **重要Run/负结果→蓝图闭环**：完成真实科学证据回收时依 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 检查 `BLUEPRINT_CHECK: UPDATED/NO_CHANGE_NEEDED`、SEC_ID及Claim–Evidence，并在既有科研记录事件留痕；普通调参、重复测试、无实质Debug不用触发，不自动写稿/出图。
 
 **执行前提**：新实证项目必须先有本轮必需数据的 `DATA_ACQUIRED_VERIFIED` 和可用开发数据，才可进入`DISCOVERY/BASELINE/IMPROVE/MECHANISM_TEST`；未完成时仅允许 `ENABLEMENT` 中的下载、文件校验和解析冒烟，不训练也不报告全库结论。理论/仿真按已声明证据路径执行。**本文件只负责怎样获得可信 Run**；“研究什么”见 [TASK_EXPLORATION.md](TASK_EXPLORATION.md)，KEEP/HOLD/PIVOT 的科研范围和授权由 [WORKFLOW.md](WORKFLOW.md) 唯一控制。首次探索不需证明新网络超过强基线或补完全部消融。优先可信`PERFORMANCE_FLOOR`与最低`PAPER_PATH_CANDIDATE`，再渐进增强科学性，见 [PAPER_FIRST.md](PAPER_FIRST.md)。具体接口、行为测试与训练故障诊断按需读 [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)，不是每轮都必须加载。
 

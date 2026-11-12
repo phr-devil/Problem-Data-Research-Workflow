@@ -31,6 +31,13 @@
 5. **暂停/失败/转向/交接**：科研记录突出当前最佳合法 Run、已证实无效/失败路线、未验证替代、可复用资产、恢复条件和下一项区别性 Probe；论文蓝图标记应撤回/更正的主张。项目级STOP/超H5 PIVOT、付费/云资源、新数据获取及SEALED仍需用户决策；合法本地DEV算法计算/机制选择无须逐次问。
 6. **正式写作阶段**：两道用户条件满足后才以蓝图为基础生成稿件，按新证据有界回填、审稿与修订。正式投稿/外传/付费、图片生成分别需要自己的许可。
 
+### 蓝图事件检查合同（复用既有两份MD）
+
+**时点**：科研方向/Task明确后建立默认六章 `PAPER_BLUEPRINT.md`，未有证据时用TENTATIVE/UNKNOWN。重要有效Run、科学上有信息的负结果、核心Claim升降/撤回、研究路线变化、H8/H10与阶段/项目交接都需检查；相关连续实验可合并一个重要事件。普通调参、重复测试及无实质影响Debug不触发，也不因检查请求新增审批。
+
+**原事件中记录**：复用 `RESEARCH_RECORD.md` 第5节原EXP事件，追加五行：`EVENT_KIND: DIRECTION_SET | IMPORTANT_RUN | NEGATIVE_RESULT | CLAIM_CHANGE | ROUTE_CHANGE | HANDOFF`（选一）；`BLUEPRINT_CHECK: UPDATED | NO_CHANGE_NEEDED`；`BLUEPRINT_SECTIONS: SEC-...[, SEC-...] | NONE`；`BLUEPRINT_EVIDENCE: 实际可定位的原Run/协议/报告/原文来源`；`BLUEPRINT_REASON: 该证据改变什么、或为何现有章节与Claim已经覆盖`。`UPDATED`必须实际更新原蓝图且列出有效SEC_ID，不得NONE；`NO_CHANGE_NEEDED`需写实质理由及证据，受影响章节可NONE。新普通事件可标 `EVENT_KIND: ROUTINE` 不填写其余字段，旧事件无需追溯迁移。检查之前不得把未核实Run写为正证据。
+
+**验证边界**：`python -m core.doc_integrity --project PROJECT_DIR` 只读校验声明字段、SEC_ID、默认六章和标准Claim–Evidence索引，无法判断未标注的重要事件、真实科学重要性、原始来源可信度、是否实际修改过蓝图、例外的作者消息是否真实；**这些必须由Agent依据原Run/协议和用户原始指令人工语义核查**。不得用空泛状态标记或静态PASS冒充科学验证。已获批准的重大结构变更仍经用户原授权检查，不能让机器文本声明自动通过。蓝图更新属于规划，不生成正式论文标题、摘要、正文、图注或图片；`WRITING_LOCKED` 和 `FIGURE_DRAWING_LOCKED` 不变。
 **更新粒度**：关键事件发生当轮及时整理，同一证据没有变化则复用；两文档均是轻量人机可读的索引，不新增第三本项目日志、不替代原 STATE 或任何真实 Run。
 
 **输出与持久化的分工**：以 [NEXT_ACTION_POLICY.md](NEXT_ACTION_POLICY.md) 的自适应 L1/L2/L3 汇报任务结果：**聊天简报=这次取得的结果/必要证据/合法下一步；已有MD=重要科研事实和可恢复记忆**，并非每轮必须同时产出两份完整报告。只有 Task/协议、可信Run、重要负结果、科研选择和恢复风险发生实质变化才增量修改 `RESEARCH_RECORD.md`；只有中心科学主张、论文结构或 Claim–Evidence 发生变化才修改 `PAPER_BLUEPRINT.md`。无影响的普通Debug或重复测试无需新建结果MD。用户要求独立交付，或大型验收/跨团队复核确有独立归档需求时才单独生成报告，只在科研记录中保存引用，**不新增第三份常设台账**。

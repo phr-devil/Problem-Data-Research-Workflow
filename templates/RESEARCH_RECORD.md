@@ -64,5 +64,13 @@
 - **结果与性质**：VALID / INVALID / INCONCLUSIVE / NOT_RUN；DEV_ONLY / INDEPENDENT / UNKNOWN：
 - **原因**：已证实的原因 / 推测 / UNKNOWN；不得包装失败或遗漏不利结果：
 - **决定与二次优化**：采取/放弃什么、用户决策来源、可复用资产、下一步或重启条件；若本事件属于H1–H10人工科学选择，记 `H_ID | AI_RECOMMENDATION+EVIDENCE | USER_CHOICE_OR_DELEGATION+ORIGINAL_MESSAGE_REF | DEPENDENCY | SCOPE/COST | REOPEN_TRIGGER`，保留原决定，缺原消息写UNKNOWN：
+- EVENT_KIND: ROUTINE
+
+> 新重要事件将 `ROUTINE` 改为 `DIRECTION_SET / IMPORTANT_RUN / NEGATIVE_RESULT / CLAIM_CHANGE / ROUTE_CHANGE / HANDOFF` 中的一种，并在该事件实际追加（示意，须填真实值）：
+> `- BLUEPRINT_CHECK: UPDATED | NO_CHANGE_NEEDED`
+> `- BLUEPRINT_SECTIONS: SEC-...[, SEC-...] | NONE`
+> `- BLUEPRINT_EVIDENCE: 原Run/协议/报告路径与版本`
+> `- BLUEPRINT_REASON: 为何相应章节需改或无需改`
+> `UPDATED`须先实际同步更新原 `PAPER_BLUEPRINT.md`；老事件不追溯，普通调参/重复测试/无实质Debug不触发；文本字段及静态校验均不能证明科学真实性。
 
 > 后续仅在此节末尾追加 EXP-002 等事件。更正旧记录要说明原 EXP ID、证据和更正理由，不能抹去原来失败历史。

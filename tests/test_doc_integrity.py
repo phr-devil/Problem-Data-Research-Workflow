@@ -67,5 +67,62 @@ class DocIntegrityTests(unittest.TestCase):
                 check_project(Path(temp), "/tmp/other.md")
 
 
+    def test_material_events_need_traceable_blueprint_check(self):
+        pap = "# Paper\n## 4. Experiments\n### 4.1 Results\n- SEC_ID: SEC-RESULT-01\n"
+        for kind in ("DIRECTION_SET", "IMPORTANT_RUN", "NEGATIVE_RESULT",
+                     "CLAIM_CHANGE", "ROUTE_CHANGE", "HANDOFF"):
+            with self.subTest(kind=kind):
+                rec = "# Record\n## 0. Now\n## 5. History\n### EXP-2｜event\n- EVENT_KIND: " + kind
+                codes = {v["code"] for v in inspect_text(rec, pap)}
+                for code in ("BLUEPRINT_CHECK_MISSING_OR_INVALID",
+                             "BLUEPRINT_AFFECTED_SECTIONS_MISSING",
+                             "BLUEPRINT_EVIDENCE_MISSING", "BLUEPRINT_REASON_MISSING"):
+                    self.assertIn(code, codes)
+
+    def test_update_and_no_change_in_events(self):
+        pap = "# Paper\n## 4. Experiments\n### 4.1 Results\n- SEC_ID: SEC-RESULT-01\n"
+        for status, sec in (("UPDATED", "SEC-RESULT-01"),
+                            ("NO_CHANGE_NEEDED", "NONE"),
+                            ("NO_CHANGE_NEEDED", "SEC-RESULT-01")):
+            with self.subTest(status=status, sec=sec):
+                rec = ("# Record\n## 0. Now\n## 5. History\n### EXP-2｜event\n"
+                       "- EVENT_KIND: NEGATIVE_RESULT\n"
+                       f"- BLUEPRINT_CHECK: {status}\n- BLUEPRINT_SECTIONS: {sec}\n"
+                       "- BLUEPRINT_EVIDENCE: results/run-2.json#table3\n"
+                       "- BLUEPRINT_REASON: This result is already handled in the existing plan.\n")
+                self.assertFalse([v for v in inspect_text(rec, pap) if v["level"] == "ERROR"])
+
+    def test_routine_and_legacy_events_do_not_trigger(self):
+        for meta in ("- EVENT_KIND: ROUTINE", "- outcome: unchanged"):
+            rec = "# Record\n## 0. Now\n## 5. History\n### EXP-2｜debug\n" + meta
+            self.assertNotIn("BLUEPRINT_CHECK_MISSING_OR_INVALID",
+                             {v["code"] for v in inspect_text(rec, None)})
+
+    def test_missing_blueprint_and_invalid_section(self):
+        rec = ("# Record\n## 0. Now\n## 5. History\n### EXP-2｜event\n"
+               "- EVENT_KIND: DIRECTION_SET\n- BLUEPRINT_CHECK: UPDATED\n"
+               "- BLUEPRINT_SECTIONS: SEC-MISSING\n- BLUEPRINT_EVIDENCE: UNKNOWN\n"
+               "- BLUEPRINT_REASON: Material change requires an identified section.\n")
+        pap = "# Paper\n## 3. Method\n### 3.1 Task\n- SEC_ID: SEC-METHOD-01\n"
+        self.assertIn("BLUEPRINT_AFFECTED_SECTION_UNKNOWN",
+                      {v["code"] for v in inspect_text(rec, pap)})
+        self.assertIn("BLUEPRINT_EVIDENCE_MISSING",
+                      {v["code"] for v in inspect_text(rec, pap)})
+        self.assertIn("BLUEPRINT_REQUIRED_FOR_EVENT",
+                      {v["code"] for v in inspect_text(rec, None)})
+
+    def test_default_chapters_and_missing_claim_source(self):
+        pap = ("# PAPER_BLUEPRINT\n## Claim–Evidence–Section Index\n"
+               "| Claim ID | Section ID | Evidence | Status |\n"
+               "| --- | --- | --- | --- |\n"
+               "| C01 | SEC-NOT-PRESENT | NOT_RUN | SUPPORTED |\n"
+               "## 1. Introduction\n### 1.1 Invalid\n- SEC_ID: SEC-INTRO-01\n")
+        codes = {v["code"] for v in inspect_text(None, pap)}
+        for code in ("BLUEPRINT_SIX_CHAPTER_DEVIATION",
+                     "BLUEPRINT_INTRO_CONCLUSION_SUBSECTION",
+                     "CLAIM_SECTION_MAPPING_UNKNOWN", "SUPPORTED_CLAIM_WITHOUT_EVIDENCE"):
+            self.assertIn(code, codes)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -93,5 +93,16 @@ class DualDocumentTests(unittest.TestCase):
             self.assertIn(word, policy)
 
 
+    def test_material_blueprint_audit_is_wired_to_existing_workflow(self):
+        for path in ("AGENTS.md", "WORKFLOW.md", "DUAL_DOCUMENT_WORKFLOW.md",
+                     "NEXT_ACTION_POLICY.md", "EXPERIMENT_LOOP.md",
+                     "SCIENCE_RESULT_HARVEST.md", "templates/RESEARCH_RECORD.md"):
+            self.assertIn("BLUEPRINT_CHECK", doc(path), path)
+        for term in ("UPDATED", "NO_CHANGE_NEEDED", "BLUEPRINT_SECTIONS",
+                     "BLUEPRINT_EVIDENCE", "BLUEPRINT_REASON", "ROUTINE"):
+            self.assertIn(term, doc("DUAL_DOCUMENT_WORKFLOW.md"))
+        self.assertIn("WRITING_LOCKED", doc("WRITING_GATE.md"))
+
+
 if __name__ == "__main__":
     unittest.main()

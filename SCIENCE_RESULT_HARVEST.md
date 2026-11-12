@@ -1,4 +1,5 @@
 # Science Result Harvest & Contribution Amplification｜现有成果的科学信息挖掘与贡献充分提炼
+> **成果回收→蓝图闭环**：重要正负证据、Claim升级/撤回、H8/H10或阶段交接，按 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 在原科研记录写 `BLUEPRINT_CHECK: UPDATED/NO_CHANGE_NEEDED`、受影响SEC_ID、原证据及理由，只改蓝图中真正变化的部分，不构成正式写作许可。
 
 > **现有活动04↔05及活动06/科研成果总结的按需动作，不增加阶段、权限门禁或稿件写作流程。** 目标是避免已经获得可信Run却只报告总体指标，以及已有真实创新却因未形成明确、可验证的科学主张而被低估。用户未审查科研成果总结并另行授权写稿时，保持[WRITING_GATE.md](WRITING_GATE.md)的`WRITING_LOCKED`；本文的输出是**科研证据记录**，可将真实 Claim/Run 同步到 PAPER_BLUEPRINT.md 的章节规划，但不产出论文故事、稿件正文、摘要、投稿包装或期刊录用保证。Q2+潜力按[Q2_PUBLICATION_GOAL.md](Q2_PUBLICATION_GOAL.md)另评。
 
