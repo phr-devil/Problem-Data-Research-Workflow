@@ -30,7 +30,9 @@
 
 **完成算法后的科学增值（可选）**：[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)。复用原始Run、错误结构及具名近邻，按新证据及现有授权做一项或一组有界且有价值的证伪；无新意则保留成果并总结，写作锁继续生效。
 
-**H6/H8 作者科研策略选择（重点升级）**：[AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md) 规定H6在AI给出首选科研组合及备选后由作者选择核心Task/研究路线，H8在重大成果或路线升级时由AI比较KEEP/UPGRADE/REFRAME等方案并由作者选择核心Claim；H7和已选范围DEV算法/训练/修复仍由AI自主，不逐次请示。新协议v1.3保留旧项目记录，实际作者消息与操作授权各自独立。\n\n**规则执行保障
+**H6/H8 作者科研策略选择（重点升级）**：[AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md) 规定H6在AI给出首选科研组合及备选后由作者选择核心Task/研究路线，H8在重大成果或路线升级时由AI比较KEEP/UPGRADE/REFRAME等方案并由作者选择核心Claim；H7和已选范围DEV算法/训练/修复仍由AI自主，不逐次请示。新协议v1.3保留旧项目记录，实际作者消息与操作授权各自独立。
+
+**规则执行保障
 
 **研究贡献分类（按需指南）**：[12类原创贡献×6条研究路线](CONTRIBUTION_TAXONOMY.md)。H2旧五类取向兼容保留；H6策略由AI推荐、作者选择，H8核心Claim与重大升级由作者选择，H7负责自主技术实施。**高价值科研决策的统一优先级**：知识重要性、近邻差额与可辨别证据优先于训练难度/论文完成速度，Q2+需要真实独立证据，不以组合标签推定成功。
 
