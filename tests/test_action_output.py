@@ -31,6 +31,15 @@ class ActionOutputTests(unittest.TestCase):
                         summary_reviewed=True, explicit_writing_permission=True)
         self.assertTrue(x["agent_instruction_allowed"])
 
+    def test_information_only_answers_do_not_invent_agent_instructions(self):
+        x = output_mode(authorized=True, information_only=True)
+        self.assertEqual(x["mode"], "NO_NEXT_ACTION")
+        self.assertFalse(x["agent_instruction_allowed"])
+        self.assertIn("Informational request", x["note"])
+        # Informational response must never imply that absent authorization exists.
+        x = output_mode(authorized=False, information_only=True)
+        self.assertFalse(x["agent_instruction_allowed"])
+
     def test_no_next_action_and_invalid_flags(self):
         self.assertEqual(output_mode(authorized=True, has_next_action=False)["mode"],
                          "NO_NEXT_ACTION")
