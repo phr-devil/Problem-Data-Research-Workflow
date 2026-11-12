@@ -3,6 +3,9 @@ import copy
 import unittest
 
 from core.human_decision_review import CONTRACT, review
+from core.contracts import review_activity_handoff
+import json
+from pathlib import Path
 
 
 def declared_step(name, *, kind=None, protocol=None):
@@ -101,6 +104,50 @@ class AuthorH6H8ContractTests(unittest.TestCase):
         self.assertTrue(r["can_advance_declarations_only"])
         self.assertIn("H6", r["legacy_agent_strategy_not_author_approved"])
         self.assertTrue(r["requires_original_user_message_review"])
+
+
+def activity_packet(activity, human):
+    path = Path(__file__).resolve().parents[1] / "contracts" / "research_activity_protocol.v1.json"
+    contract = json.loads(path.read_text(encoding="utf-8"))
+    spec = contract["activities"][activity]
+    return {
+        "format": "pd-rw-activity-handoff-v1",
+        "contract_version": contract["contract_version"],
+        "activity_id": activity, "evidence_path": "EMPIRICAL",
+        "evidence": {item["key"]: {"status": "VERIFIED", "ref": "dev/evidence"}
+                     for item in spec["mandatory_evidence"]},
+        "deliverable_refs": {key: "project/artifact" for key in spec["required_deliverables"]},
+        "entry_evidence_refs": {key: "project/evidence" for key in spec["entry_checks"]["all"]},
+        "human_review_packet": human,
+    }
+
+
+class AuthorActivityHandoffTests(unittest.TestCase):
+    def test_current_author_h6_03_is_declared_complete(self):
+        p = activity_packet("03", packet("H6"))
+        r = review_activity_handoff(p)
+        self.assertTrue(r["declared_activity_ready_not_authenticated"])
+        self.assertFalse(r["authorizes_download_fitting_sealed_figures_or_writing"])
+
+    def test_legacy_agent_h6_requires_scope_continuity(self):
+        legacy = packet("H6", protocol="pd-rw-human-review-v1.2")
+        legacy["decisions"]["H6"] = declared_step(
+            "H6", kind="AGENT_DECIDED", protocol="pd-rw-human-review-v1.2")
+        p = activity_packet("03", legacy)
+        r = review_activity_handoff(p)
+        self.assertFalse(r["declared_activity_ready_not_authenticated"])
+        self.assertEqual(r["human_review_declarations_status"],
+                         "LEGACY_SCOPE_CONTINUITY_REQUIRED")
+        p["legacy_unchanged_scope_ref"] = "project/unchanged-old-task"
+        self.assertTrue(review_activity_handoff(p)["declared_activity_ready_not_authenticated"])
+
+    def test_new_h8_agent_decision_is_not_accepted(self):
+        human = packet("H8")
+        human["decisions"]["H8"] = declared_step("H8", kind="AGENT_DECIDED")
+        p = activity_packet("05", human)
+        r = review_activity_handoff(p)
+        self.assertFalse(r["declared_activity_ready_not_authenticated"])
+        self.assertIn("H8", r["human_review_declarations_missing"])
 
 
 if __name__ == "__main__":
