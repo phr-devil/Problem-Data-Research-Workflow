@@ -205,7 +205,7 @@ def science_checkpoint(packet: dict) -> dict:
             # repeatedly requesting an author decision. Missing role retains
             # the stricter legacy primary-claim interpretation.
             role = packet.get("claim_role", "PRIMARY_FROZEN")
-            if role not in {"PRIMARY_FROZEN", "SECONDARY_DEV"}:
+            if not isinstance(role, str) or role not in {"PRIMARY_FROZEN", "SECONDARY_DEV"}:
                 missing.append("valid_claim_role")
             if (role == "PRIMARY_FROZEN" and
                     not (_present(packet.get("h8_author_choice_ref"))
