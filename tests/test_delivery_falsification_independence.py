@@ -86,7 +86,7 @@ class ThreeIssueRoutingTests(unittest.TestCase):
 
     def test_agent_document_routes_are_real_table_rows(self):
         agent = text("AGENTS.md")
-        self.assertNotIn(r"\\n|", agent)
+        self.assertNotIn(r"\n|", agent)
         lines = agent.splitlines()
         blueprint = [i for i, line in enumerate(lines) if line.startswith(
             "| **按工作流生成/更新论文框架")]
