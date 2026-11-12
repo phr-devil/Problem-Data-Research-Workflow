@@ -49,7 +49,8 @@ def action_preflight(packet: dict, *, independently_authorized: bool = False) ->
         conditions = ("h5_scope_confirmed", "dev_inputs_verified", "within_h5_scope",
                       "safe_local_nonpaid", "no_project_specific_prohibition",
                       "within_author_selected_strategy")
-        if packet.get("h6_strategy_pending") is True:
+        if (packet.get("h6_strategy_pending") is True
+                and packet.get("legacy_unchanged_scope_confirmed") is not True):
             return {"decision": "BLOCK", "reason": "H6_AUTHOR_STRATEGY_PENDING"}
         if any(packet.get(k) is False for k in conditions):
             return {"decision": "BLOCK", "reason": "DEV_PREREQUISITE_OR_STRATEGY_DENIED"}
