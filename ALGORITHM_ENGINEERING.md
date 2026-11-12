@@ -71,8 +71,8 @@
 
 `READ CURRENT STATE/RUN → SELECT ONE ROUTE → CODE DIFF → TARGETED TEST → AUTHORIZED DEV RUN → INDEPENDENT METRIC/FAIRNESS REVIEW → KEEP/REPAIR/DISCARD/NARROW/PAPER_EVIDENCE`
 
-- **范围**：保留受保护数据血缘、目标标签、group split、评价器、封存确认集；只修改TaskSpec允许的 `EDITABLE`。改协议/信息预算必须创建新版本，不覆盖旧Run。外部编码 Agent 在本机实际授权范围内工作；可信来源的本地非付费依赖安装及CPU/GPU训练按H5后的`AI_DEV_AUTONOMY`自主执行；不运行不可信安装脚本、不突破主机安全/组织政策、不付费或外传，SEALED仍需独立许可。
-- **代码正确性**：先针对数据形状、mask、时间窗、标签时点、梯度/损失、预测与评价ID对齐做相关测试；在合法DEV和H5自主研发范围核实后可自行tiny-set拟合、真实batch冒烟与正式DEV训练。修复 Bug 时仅重跑受影响用例；科学效果以实际DEV Run判，不写“F1必须提高”的伪单测。
+- **范围**：保留受保护数据血缘、目标标签、group split、评价器、封存确认集；只修改TaskSpec允许的 `EDITABLE`。改协议/信息预算必须创建新版本，不覆盖旧Run。外部编码 Agent 在本机实际授权范围内工作；可信来源的本地非付费依赖安装及CPU/GPU训练仅在有效H5、作者已选/委托H6策略（或可核的旧项目原范围）、合法DEV与真实本地许可齐全时按`AI_DEV_AUTONOMY`自主执行；不运行不可信安装脚本、不突破主机安全/组织政策、不付费或外传，SEALED仍需独立许可。
+- **代码正确性**：先针对数据形状、mask、时间窗、标签时点、梯度/损失、预测与评价ID对齐做相关测试；在合法DEV、H5与H6/有效旧项目范围及本地操作许可核实后可自行tiny-set拟合、真实batch冒烟与正式DEV训练。修复 Bug 时仅重跑受影响用例；科学效果以实际DEV Run判，不写“F1必须提高”的伪单测。
 - **训练容错**：每个Run唯一目录记录命令、环境、seed、代码commit/config、数据/协议/评价版本、stdout/stderr、逐样本预测、checkpoint和CPU/GPU/Token/人工成本（可测多少记多少）。OOM、NaN、预处理失败、系统重启先定因并保留原Run为`CRASH/INVALID/PARTIAL`，从合法checkpoint恢复；无法复现明确`NOT_RUN`，不重复全库下载或静默复写历史。
 - **预算与公平**：按本轮获授权的时间/算力上限执行；有必要才比较短/长、小/大或不同nuisance超参，同条件给强简单基线合理调优。固定墙钟时间可能不等于同等优化机会，必须按Task说明比较口径；不可仅挑最佳seed/后验切片报告收益。
 - **候选管理**：默认始终保留一个最简单可信Champion和一个不同失败前提的Challenger；旧代码/逐样本结果及失败证据永不丢失。连续实验若无新可证伪预测或投稿必要证据，暂停当前机制，而非自动停止Task；允许新证据支持的横向转题。
