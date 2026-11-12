@@ -26,7 +26,7 @@ class ThreeIssueRoutingTests(unittest.TestCase):
                 self.assertIn(required, policy)
         self.assertIn("DELIVERY_CHECK", agent)
         self.assertIn("NEXT_ACTION_POLICY.md", agent)
-        self.assertIn("普通L1不创建文件", agent)
+        self.assertIn("原L1/L2/L3做", agent)
 
     def test_falsification_stops_only_low_value_branch(self):
         loop = text("EXPERIMENT_LOOP.md")
