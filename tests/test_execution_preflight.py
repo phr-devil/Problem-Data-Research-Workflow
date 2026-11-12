@@ -56,6 +56,52 @@ class ActionTests(unittest.TestCase):
                                           independently_authorized=True)["decision"], "ALLOW")
 
 
+class MalformedPacketTests(unittest.TestCase):
+    def test_malformed_action_is_blocked_not_exception(self):
+        for p in (None, [], {"action": []}, {"action": {"wrong": "type"}}):
+            self.assertEqual(action_preflight(p)["decision"], "BLOCK")
+
+    def test_forbidden_read_and_dev_are_not_allowed(self):
+        self.assertEqual(action_preflight({
+            "action": "READ_PUBLIC", "effect_forbidden": True
+        })["decision"], "BLOCK")
+
+    def test_malformed_science_and_option_fields_are_blocked(self):
+        from core.execution_preflight import author_strategy_review
+        for p in (None, [], {"trigger": []}):
+            self.assertEqual(science_checkpoint(p)["result"], "BLOCK_HANDOFF")
+        p = {"trigger": "H6_TASK",
+             "author_review": {"options": [{
+                 "id": "A", "primary_type": {}, "route": [],
+                 "p_orientation": {"bad": True}
+             }]}}
+        self.assertEqual(author_strategy_review(p)["result"], "BLOCK_HANDOFF")
+        self.assertEqual(science_checkpoint({"trigger": "CLAIM_PROMOTION",
+                                            "claim_status": []})["result"], "BLOCK_HANDOFF")
+
+    def test_secondary_dev_supported_does_not_trigger_author_strategy(self):
+        p = {"trigger": "CLAIM_PROMOTION", "route": "R5", "primary_type": "C09",
+             "claim_or_question": "Metric error", "nearest_neighbor_or_unknown": "paper",
+             "actual_evidence_ref_or_not_run": "runs/123", "negative_evidence_or_none": "NONE",
+             "strongest_alternative_or_unknown": "confound", "next_decisive_step": "probe",
+             "independent_validation_ref_or_unavailable": "UNAVAILABLE",
+             "claim_status": "SUPPORTED", "claim_role": "SECONDARY_DEV"}
+        self.assertEqual(science_checkpoint(p)["result"], "READY_FOR_SCIENTIFIC_REVIEW")
+        p["claim_role"] = "PRIMARY_FROZEN"
+        self.assertIn("author_selected_main_claim_or_unchanged_legacy",
+                      science_checkpoint(p)["missing"])
+
+    def test_whitespace_unavailable_not_independent_confirmation(self):
+        p = {"trigger": "CLAIM_PROMOTION", "route": "R5", "primary_type": "C09",
+             "claim_or_question": "Metric error", "nearest_neighbor_or_unknown": "paper",
+             "actual_evidence_ref_or_not_run": "runs/123", "negative_evidence_or_none": "NONE",
+             "strongest_alternative_or_unknown": "confound", "next_decisive_step": "probe",
+             "independent_validation_ref_or_unavailable": " UNAVAILABLE ",
+             "claim_status": "CONFIRMED", "claim_role": "SECONDARY_DEV"}
+        self.assertIn("confirmed_needs_real_independent_evidence",
+                      science_checkpoint(p)["missing"])
+
+
 class ScienceTests(unittest.TestCase):
     @staticmethod
     def sample_author_packet(trigger="H6_TASK"):
