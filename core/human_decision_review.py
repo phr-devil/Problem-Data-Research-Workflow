@@ -199,8 +199,8 @@ def review(packet: dict) -> dict:
             "H7 and ordinary in-scope safe DEV work remain agent-owned. A complete "
             "Agent declaration is not authenticated user approval or tool permission. "
             "Old agent-owned H6/H8 records remain legacy, not new author signoff. "
-            "H9 requires independent confirmation 
-            "authorization; H10 never bypasses the separate writing gate. "
+            "H9 requires independent confirmation authorization; H10 never bypasses "
+            "the separate writing gate. "
             "Reopened decisions are caller declarations, not evidence that the "
             "actual user changed their mind or that all dependent claims were found."
         ),
