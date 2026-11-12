@@ -108,6 +108,28 @@ class AuthorH6H8ContractTests(unittest.TestCase):
         self.assertIn("H8", r["stale_declarations"])
         self.assertNotIn("H5", r["stale_declarations"])
 
+    def test_current_h8_can_follow_unchanged_legacy_h6(self):
+        p = packet("H8")
+        old_h6 = declared_step("H6", kind="AGENT_DECIDED",
+                                protocol="pd-rw-human-review-v1.2")
+        old_h6.update(legacy_source_protocol="pd-rw-human-review-v1.2",
+                      legacy_unchanged_scope_ref="legacy/scope/validated")
+        p["decisions"]["H6"] = old_h6
+        r = review(p)
+        self.assertTrue(r["can_advance_declarations_only"])
+        self.assertIn("H6", r["legacy_agent_strategy_not_author_approved"])
+        self.assertFalse(r["target_legacy_continuation_not_new_author_approval"])
+
+    def test_mixed_legacy_requires_exact_source_and_scope(self):
+        p = packet("H8")
+        old_h6 = declared_step("H6", kind="AGENT_DECIDED",
+                                protocol="pd-rw-human-review-v1.2")
+        old_h6["legacy_source_protocol"] = "pd-rw-human-review-v1.2"
+        p["decisions"]["H6"] = old_h6
+        self.assertFalse(review(p)["can_advance_declarations_only"])
+        old_h6["legacy_unchanged_scope_ref"] = "legacy/provenance"
+        self.assertTrue(review(p)["can_advance_declarations_only"])
+
     def test_legacy_agent_strategy_readable_but_never_author_approved(self):
         p = packet("H6", protocol="pd-rw-human-review-v1.2")
         p["decisions"]["H6"] = declared_step(
@@ -212,6 +234,35 @@ class AuthorActivityHandoffTests(unittest.TestCase):
         self.assertTrue(review_activity_handoff(p)["declared_activity_ready_not_authenticated"])
         p["strategy_checkpoint_packet"]["author_review"]["selection"]["delegated_scope"] = "different"
         self.assertFalse(review_activity_handoff(p)["declared_activity_ready_not_authenticated"])
+
+    def test_new_h8_handoff_with_unchanged_legacy_h6(self):
+        human = packet("H8")
+        old_h6 = declared_step("H6", kind="AGENT_DECIDED",
+                                protocol="pd-rw-human-review-v1.2")
+        old_h6.update(legacy_source_protocol="pd-rw-human-review-v1.2",
+                      legacy_unchanged_scope_ref="legacy/scope/validated")
+        human["decisions"]["H6"] = old_h6
+        p = activity_packet("05", human)
+        p["strategy_checkpoint_packet"] = strategy_packet("05")
+        self.assertFalse(review_activity_handoff(p)["declared_activity_ready_not_authenticated"])
+        p["legacy_unchanged_scope_ref"] = "legacy/scope/validated"
+        r = review_activity_handoff(p)
+        self.assertTrue(r["declared_activity_ready_not_authenticated"])
+        self.assertEqual(r["strategy_review_status"], "DECLARED_MATCH_NOT_AUTHENTICATED")
+
+    def test_old_h6_does_not_need_a_new_recommendation_packet(self):
+        human = packet("H6")
+        old_h6 = declared_step("H6", kind="AGENT_DECIDED",
+                                protocol="pd-rw-human-review-v1.2")
+        old_h6.update(legacy_source_protocol="pd-rw-human-review-v1.2",
+                      legacy_unchanged_scope_ref="legacy/scope/validated")
+        human["decisions"]["H6"] = old_h6
+        p = activity_packet("03", human)
+        p["legacy_unchanged_scope_ref"] = "legacy/scope/validated"
+        r = review_activity_handoff(p)
+        self.assertTrue(r["declared_activity_ready_not_authenticated"])
+        self.assertEqual(r["strategy_review_status"],
+                         "LEGACY_CONTINUITY_DECLARED_NOT_NEW_APPROVAL")
 
     def test_legacy_agent_h6_requires_scope_continuity(self):
         legacy = packet("H6", protocol="pd-rw-human-review-v1.2")
