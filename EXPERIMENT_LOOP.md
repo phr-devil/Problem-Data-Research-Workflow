@@ -1,13 +1,13 @@
 # 活动 04｜可运行实验、信息驱动迭代与自动恢复
 > **重要Run/负结果→蓝图闭环**：完成真实科学证据回收时依 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md) 检查 `BLUEPRINT_CHECK: UPDATED/NO_CHANGE_NEEDED`、SEC_ID及Claim–Evidence，并在既有科研记录事件留痕；普通调参、重复测试、无实质Debug不用触发，不自动写稿/出图。
 
-**执行前提**：新实证项目必须先有本轮必需数据的 `DATA_ACQUIRED_VERIFIED` 和可用开发数据，才可进入`DISCOVERY/BASELINE/IMPROVE/MECHANISM_TEST`；未完成时仅允许 `ENABLEMENT` 中的下载、文件校验和解析冒烟，不训练也不报告全库结论。理论/仿真按已声明证据路径执行。**本文件只负责怎样获得可信 Run**；“研究什么”见 [TASK_EXPLORATION.md](TASK_EXPLORATION.md)，KEEP/HOLD/PIVOT 的科研范围和授权由 [WORKFLOW.md](WORKFLOW.md) 唯一控制。首次探索不需证明新网络超过强基线或补完全部消融。优先可信`PERFORMANCE_FLOOR`与最低`PAPER_PATH_CANDIDATE`，再渐进增强科学性，见 [PAPER_FIRST.md](PAPER_FIRST.md)。具体接口、行为测试与训练故障诊断按需读 [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)，不是每轮都必须加载。
+**执行前提**：新实证项目必须先有本轮必需数据的 `DATA_ACQUIRED_VERIFIED` 和可用开发数据，才可进入`DISCOVERY/BASELINE/IMPROVE/MECHANISM_TEST`；未完成时仅可在**独立取得对应下载许可**后进行 `ENABLEMENT` 数据获取；未获下载许可时限于合法只读元信息调查、下载计划，已有合法资产可做文件级校验与不拟合的解析检查，均不得训练或报告全库结论。理论/仿真按已声明证据路径执行。**本文件只负责怎样获得可信 Run**；“研究什么”见 [TASK_EXPLORATION.md](TASK_EXPLORATION.md)，KEEP/HOLD/PIVOT 的科研范围和授权由 [WORKFLOW.md](WORKFLOW.md) 唯一控制。首次探索不需证明新网络超过强基线或补完全部消融。优先可信`PERFORMANCE_FLOOR`与最低`PAPER_PATH_CANDIDATE`，再渐进增强科学性，见 [PAPER_FIRST.md](PAPER_FIRST.md)。具体接口、行为测试与训练故障诊断按需读 [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)，不是每轮都必须加载。
 
-**活动04固定交接（[研究活动合同](contracts/research_activity_protocol.v1.json)）**：方法和探针随科学证据自适应，不规定模型数量或固定训练轮数；重要实验需保留真实 Run/合法信息/公平参照/负结果/选择史/成本及唯一下一项辨别性工作，未执行必须写 `NOT_RUN`。活动05在出现可信正或负证据时可以并行开始，不等所有网络调优完成；若本研究无需算法核心工作，只说明不适用及相应证据路径，不伪造训练。H7是重大机制/策略的AI决策记录，H5已确认且DEV合法就绪时本地安全非付费CPU/GPU拟合适用持续自主研发；收费、SEALED与超H5仍独立核。
+**活动04固定交接（[研究活动合同](contracts/research_activity_protocol.v1.json)）**：方法和探针随科学证据自适应，不规定模型数量或固定训练轮数；重要实验需保留真实 Run/合法信息/公平参照/负结果/选择史/成本及唯一下一项辨别性工作，未执行必须写 `NOT_RUN`。活动05在出现可信正或负证据时可以并行开始，不等所有网络调优完成；若本研究无需算法核心工作，只说明不适用及相应证据路径，不伪造训练。H7是技术决策记录；本地安全非付费DEV拟合必须同时具备有效H5范围、作者已选/委托H6策略（或有原消息证据的旧项目未变范围）、合法DEV数据与真实本地操作许可，不逐次申请；新库、付费、危险操作、SEALED与超H5仍独立核。
 
 ## 1. 按当前问题选择模式，而不是逐一闯关
 
-- `DISCOVERY`：合法开发数据的真实观察、残差、时间/物理/组别检查；尚未满足H5与合法DEV自主范围或存在明确项目禁令时，不可进行CPU Ridge、tiny-set、聚类模型或GPU参数更新；满足时无须逐次请求。
+- `DISCOVERY`：合法开发数据的真实观察、残差、时间/物理/组别检查；尚未满足H5、有效H6或旧项目未变范围与合法DEV自主许可，或存在明确项目禁令时，不可进行CPU Ridge、tiny-set、聚类模型或GPU参数更新；满足时无须逐次请求。
 - `ENABLEMENT`：修数据读取、时钟/单位/同步、标签、评价器、训练稳定性；工程能力恢复可以独立验收，不用虚构增益。
 - `BASELINE/IMPROVE`：准备做性能比较，先获得简单可信基线与合理调优，确保同任务、合法输入、分组、评价分母和公平资源。
 - `MECHANISM_TEST`：需要机制归因时才写竞争解释、不同预测或正控；无归因需求不强迫 A/B。
