@@ -33,8 +33,10 @@ def action_preflight(packet: dict, *, independently_authorized: bool = False) ->
     A host must independently authenticate the original grant and its scope;
     this function cannot do it. The CLI never passes True.
     """
+    if not isinstance(packet, dict):
+        return {"decision": "BLOCK", "reason": "MALFORMED_ACTION_PACKET"}
     action = packet.get("action")
-    if action not in ALL_ACTIONS:
+    if not isinstance(action, str) or action not in ALL_ACTIONS:
         return {"decision": "BLOCK", "reason": "UNKNOWN_ACTION"}
     if packet.get("explicit_prohibition") is True:
         return {"decision": "BLOCK", "reason": "EXPLICIT_PROHIBITION"}
@@ -80,8 +82,10 @@ P_ORIENTATIONS = {"P1", "P2", "P3", "P4", "P5"}
 
 def author_strategy_review(packet: dict) -> dict:
     """Check proposal/decision *declarations*, never authenticate user messages."""
+    if not isinstance(packet, dict):
+        return {"result": "BLOCK_HANDOFF", "missing": ["author_review_packet_object"]}
     trigger = packet.get("trigger")
-    if trigger not in AUTHOR_NODES:
+    if not isinstance(trigger, str) or trigger not in AUTHOR_NODES:
         return {"result": "BLOCK_HANDOFF", "missing": ["author_review_trigger"]}
     review = packet.get("author_review", {})
     review = review if isinstance(review, dict) else {}
@@ -100,14 +104,14 @@ def author_strategy_review(packet: dict) -> dict:
                     "science_value", "cost_and_speed", "failure_premise"):
             if not _present(option.get(key)):
                 missing.append(f"options[{i}].{key}")
-        if option.get("primary_type") not in TYPES:
+        if not isinstance(option.get("primary_type"), str) or option["primary_type"] not in TYPES:
             missing.append(f"options[{i}].valid_C_type")
-        if option.get("route") not in ROUTES:
+        if not isinstance(option.get("route"), str) or option["route"] not in ROUTES:
             missing.append(f"options[{i}].valid_R_route")
-        if option.get("p_orientation") not in P_ORIENTATIONS:
+        if not isinstance(option.get("p_orientation"), str) or option["p_orientation"] not in P_ORIENTATIONS:
             missing.append(f"options[{i}].valid_P_orientation")
-        if trigger == "H8_CLAIM" and option.get("h8_action") not in {
-                "KEEP", "UPGRADE", "NARROW", "REFRAME", "HOLD"}:
+        if trigger == "H8_CLAIM" and (not isinstance(option.get("h8_action"), str) or option.get("h8_action") not in {
+                "KEEP", "UPGRADE", "NARROW", "REFRAME", "HOLD"}):
             missing.append(f"options[{i}].valid_h8_action")
         ids.append(option.get("id") if _present(option.get("id")) else None)
     if len(ids) != len(set(ids)):
@@ -137,7 +141,7 @@ def author_strategy_review(packet: dict) -> dict:
         return {"result": "BLOCK_HANDOFF", "missing": missing,
                 "author_approval_authenticated": False}
     selection = review.get("selection", {})
-    if not isinstance(selection, dict) or selection.get("kind") not in {
+    if not isinstance(selection, dict) or not isinstance(selection.get("kind"), str) or selection.get("kind") not in {
             "USER_CONFIRMED", "USER_DELEGATED"}:
         return {"result": "AUTHOR_CHOICE_REQUIRED", "missing": ["author_choice_or_delegation"],
                 "recommended_option_id": recommended, "author_approval_authenticated": False}
@@ -159,15 +163,18 @@ def author_strategy_review(packet: dict) -> dict:
 
 def science_checkpoint(packet: dict) -> dict:
     """Validate completion fields only; real author messages and science need audit."""
+    if not isinstance(packet, dict):
+        return {"result": "BLOCK_HANDOFF", "missing": ["science_packet_object"],
+                "scientific_truth_verified": False, "author_approval_authenticated": False}
     trigger = packet.get("trigger")
-    if trigger not in TRIGGERS:
+    if not isinstance(trigger, str) or trigger not in TRIGGERS:
         return {"result": "BLOCK_HANDOFF", "missing": ["valid_trigger"],
                 "scientific_truth_verified": False}
     missing = []
     if trigger in NEEDS_CONTRIBUTION:
-        if packet.get("primary_type") not in TYPES:
+        if not isinstance(packet.get("primary_type"), str) or packet["primary_type"] not in TYPES:
             missing.append("primary_type_C01_C12")
-        if packet.get("route") not in ROUTES:
+        if not isinstance(packet.get("route"), str) or packet["route"] not in ROUTES:
             missing.append("route_R1_R6")
         if not _present(packet.get("claim_or_question")):
             missing.append("claim_or_question")
@@ -186,7 +193,7 @@ def science_checkpoint(packet: dict) -> dict:
     if trigger == "CLAIM_PROMOTION":
         if not _present(packet.get("independent_validation_ref_or_unavailable")):
             missing.append("independent_validation_ref_or_unavailable")
-        if packet.get("claim_status") not in {"HYPOTHESIZED", "EVIDENCE_CANDIDATE",
+        if not isinstance(packet.get("claim_status"), str) or packet.get("claim_status") not in {"HYPOTHESIZED", "EVIDENCE_CANDIDATE",
                                              "SUPPORTED", "CONFIRMED"}:
             missing.append("claim_status")
         if packet.get("claim_status") in {"SUPPORTED", "CONFIRMED"}:
