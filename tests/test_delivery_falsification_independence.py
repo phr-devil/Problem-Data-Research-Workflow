@@ -77,6 +77,32 @@ class ThreeIssueRoutingTests(unittest.TestCase):
         self.assertLess(policy.index("返回结果前的实际检查顺序"), policy.index("**已执行结果与后续行动分开**"))
         self.assertIn("core.delivery_check", policy)
 
+    def test_multifile_delivery_does_not_depend_on_l3_label(self):
+        policy = text("NEXT_ACTION_POLICY.md")
+        self.assertIn("L1/L2/L3仅决定回复深度", policy)
+        self.assertIn("任何等级只要存在多个独立最终交付物", policy)
+        self.assertNotIn("L3出现多个独立最终产物且没有清晰入口时才", policy)
+        self.assertIn("多文件", text("AGENTS.md"))
+
+    def test_agent_document_routes_are_real_table_rows(self):
+        agent = text("AGENTS.md")
+        self.assertNotIn(r"\\n|", agent)
+        lines = agent.splitlines()
+        blueprint = [i for i, line in enumerate(lines) if line.startswith(
+            "| **按工作流生成/更新论文框架")]
+        self.assertEqual(len(blueprint), 1)
+        self.assertTrue(lines[blueprint[0]+1].startswith(
+            "| 正文撰写/已有稿审核/Word |"))
+        self.assertIn("WRITING_LOCKED", agent)
+
+    def test_dev_entry_requires_strategy_and_separate_download_permission(self):
+        loop = text("EXPERIMENT_LOOP.md")
+        engineering = text("ALGORITHM_ENGINEERING.md")
+        self.assertIn("作者已选/委托H6策略", loop)
+        self.assertIn("独立取得对应下载许可", loop)
+        self.assertIn("有效H5、作者已选/委托H6策略", engineering)
+        self.assertNotIn("H5后的`AI_DEV_AUTONOMY`", engineering)
+
     def test_replay_spec_contains_positive_and_negative_controls(self):
         replay = text("REPLAY_PROTOCOL.md")
         for case in ("L1普通修复", "L3多文件任务", "非关键的重复疑点",
