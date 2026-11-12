@@ -25,7 +25,8 @@
     "No automatic figures, new data downloads, SEALED access, writing, external transfer, paid/unsafe operations or submissions. After original H5/H6 choices and legal DEV acceptance, H7 safe local non-paid CPU/GPU/code operations remain autonomous within author-selected strategy; H8 major science reframe requires author choice while ordinary experiments never require per-run confirmation.",
     "Activity 05 may run alongside activity 04 as soon as meaningful valid evidence exists, not only after final algorithm optimization.",
     "The structural handoff flag alone never satisfies entry_requirements, user review, or original operation authorization. Distinguish declared entry evidence, declared H choices and actual permission source.",
-    "For theoretical/simulation Claim, do not fabricate empirical Run IDs; use the bounded NON_DATA claim evidence path with independent local verification references."
+    "For theoretical/simulation Claim, do not fabricate empirical Run IDs; use the bounded NON_DATA claim evidence path with independent local verification references.",
+    "For current v1.3 author decisions, activity03/05 declared readiness requires a matching ranked strategy_checkpoint_packet; legacy v1.2 unchanged-scope handling remains advisory and cannot be turned into a new author approval."
   ],
   "activities": {
     "01": {
@@ -222,7 +223,14 @@
           "activity02_scientific_basis_ref"
         ]
       },
-      "author_strategy_review_ref": "AUTHOR_STRATEGY_REVIEW.md#2-h6-必须向作者展示的推荐卡片不是长篇研究报告"
+      "author_strategy_review_ref": "AUTHOR_STRATEGY_REVIEW.md#2-h6-必须向作者展示的推荐卡片不是长篇研究报告",
+      "strategy_checkpoint": {
+        "required_when": "human_review_packet protocol v1.3",
+        "packet_key": "strategy_checkpoint_packet",
+        "trigger": "H6_TASK",
+        "selection_must_match": "human_review_packet.decisions.H6 (kind, original_user_message_ref, chosen_option or delegated_scope)",
+        "note": "Structure only; no original-author authentication or new DEV permission."
+      }
     },
     "04": {
       "name": "Method development and valid experiments",
@@ -339,7 +347,14 @@
           "credible_scientific_evidence_ref"
         ]
       },
-      "author_strategy_review_ref": "AUTHOR_STRATEGY_REVIEW.md#3-h8-必须向作者展示的贡献升级卡片"
+      "author_strategy_review_ref": "AUTHOR_STRATEGY_REVIEW.md#3-h8-必须向作者展示的贡献升级卡片",
+      "strategy_checkpoint": {
+        "required_when": "human_review_packet protocol v1.3",
+        "packet_key": "strategy_checkpoint_packet",
+        "trigger": "H8_CLAIM",
+        "selection_must_match": "human_review_packet.decisions.H8 (kind, original_user_message_ref, chosen_option or delegated_scope)",
+        "note": "Do not run for every Run; only formal primary-Claim / major upgrade handoff."
+      }
     },
     "06": {
       "name": "Independent confirmation and research closeout",
