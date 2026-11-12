@@ -183,6 +183,30 @@ class ScienceTests(unittest.TestCase):
             "original_user_message_ref": "user-message"}
         self.assertEqual(science_checkpoint(p)["result"], "READY_FOR_SCIENTIFIC_REVIEW")
 
+    def test_author_can_choose_primary_plus_bounded_secondary(self):
+        import copy
+        p = self.sample_author_packet()
+        second = copy.deepcopy(p["author_review"]["options"][0])
+        second.update(id="B", claim_or_task="Evaluator failure", route="R5",
+                      primary_type="C09", failure_premise="timestamp leakage")
+        p["author_review"]["options"].append(second)
+        p["author_review"].pop("single_option_reason", None)
+        p["author_review"]["selection"] = {
+            "kind": "USER_CONFIRMED", "chosen_option_id": "A",
+            "secondary_option_ids": ["B"], "combination_scope": "B as audit only",
+            "original_user_message_ref": "user/scoped-choice"}
+        self.assertEqual(science_checkpoint(p)["result"], "READY_FOR_SCIENTIFIC_REVIEW")
+        del p["author_review"]["selection"]["combination_scope"]
+        self.assertEqual(science_checkpoint(p)["result"], "BLOCK_HANDOFF")
+
+    def test_unbounded_delegation_does_not_pass(self):
+        p = self.sample_author_packet()
+        p["author_review"]["selection"] = {
+            "kind": "USER_DELEGATED", "delegated_scope": "all future experiments",
+            "original_user_message_ref": "user/message"}
+        self.assertIn("author_review.valid_delegated_allowed_option_ids",
+                      science_checkpoint(p)["missing"])
+
     def test_h8_requires_author_upgrade_choice(self):
         p = self.sample_author_packet("H8_CLAIM")
         self.assertEqual(science_checkpoint(p)["result"], "AUTHOR_CHOICE_REQUIRED")
