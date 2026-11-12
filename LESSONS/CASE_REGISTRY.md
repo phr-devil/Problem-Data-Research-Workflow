@@ -1,8 +1,10 @@
-# 近期科研项目案例台账（2026-10 至 2026-11-09）
+# 近期科研项目案例台账（2026-10 至 2026-11-12）
 
 > **CASE_INDEX_ONLY / HISTORICAL_EVIDENCE**：这是案例记录与核查缺口，不是科研主控、自动成功评定、可直接投稿结论或额外审批。只在复盘、选题对照、工作流回放、跨项目查重时按需加载；普通科研任务不预读。**SAFE-Gait/APACE 的完整案例仍以 [SAFE_GAIT_APACE.md](SAFE_GAIT_APACE.md) 为唯一详细说明**，本表不复制造成两个权威版本。
 >
-> **来源与时点**：以用户在 2026-10-24～11-09 的项目执行回报、2026-11-05 的论文/项目交接文档，以及 2026-11-09 的 `NOVELTY_REFRAMING_REVIEW(1).md` v2 为线索。本仓库**没有挂载用户 Windows 的项目原始 Run/SEALED/归档**；报告声称 `VERIFIED` 只表示其作者当时核对过本机工件，并非本仓库独立复算。任何数字都应结合原始工件版本与真实独立单位复核。未在本台账发现的案例，**不等于不存在**。
+> **更新说明（2026-11-12）**：本次增量补充 P32/P33/P35/P36/P37、修订P19/P25/P31，并复核P23/P24原有证据边界；P23/P24尚无可取代原记录的独立新Run，因此保留其原条目，不人为填充结果。新项来自对话/交接快照，**并非本仓库对用户Windows本机数据的独立审查**。尤其不能把P31/P32误记为明确算法失败或已正式关闭。
+>
+> **来源与时点**：以用户在 2026-10-24～11-12 的项目执行回报、2026-11-05 的论文/项目交接文档，以及 2026-11-09 的 `NOVELTY_REFRAMING_REVIEW(1).md` v2 为线索。本仓库**没有挂载用户 Windows 的项目原始 Run/SEALED/归档**；报告声称 `VERIFIED` 只表示其作者当时核对过本机工件，并非本仓库独立复算。任何数字都应结合原始工件版本与真实独立单位复核。未在本台账发现的案例，**不等于不存在**。
 
 ## 0. 身份、状态与证据的共同口径
 
@@ -30,7 +32,7 @@
 | `SRCS-IMU-P13`（项目13） | 30 人、17 佩戴位置；单 IMU/位置迁移及稀疏校准实验的结果存在不同版本，已见开发集正向分支但未建立独立泛化定论 | `DEV_FINDINGS_PRESENT`；项目13于 11-04 标记 `ARCHIVE`；不可与21/25串号 | `S19` §0、`CHAT` |
 | `SINGLE-IMU-P18`（项目18） | 17位置跨人 HAR，部分位置迁移有正向结果，机制 M1/M2 未充分证明额外收益 | `SCOPED_RESULT_CANDIDATE` / `MECHANISM_UNVERIFIED`；不能与23的 GalaxyPPG 受试者接触史等同于同任务 | `CHAT` |
 | `CRFW-P19`（项目19早期） | REASSEMBLE 上约3s提前失败预测，最强方案未提供稳定时间建模增益；随后另立低层技能任务 | 原 Task `MECHANISM_NOT_SUPPORTED`；**成功转向 ≠ 原 Task 复活** | `CHAT` |
-| **`CRPS-P19`（项目19）** | 预测父动作后验+本体/力觉低层技能识别，主对象折 `SF=0.6717`、`GRUctx=0.7135`，segF1 **+0.0418**；算法轮 GRUctx `0.7091` 为另一构造，不能拼表 | **`ALGO_DEV_POSITIVE` / `PAPER_IN_PROGRESS`**；全 Episode 边界 F1 未改善；37 条 SEALED 跨录制确认 `NOT_RUN`，不能称部署/独立泛化成功 | `S19` §1–3，`S19P` |
+| **`CRPS-P19`（项目19，后期H9）** | REASSEMBLE 9类低层技能；官方111 DEV/37 test Episode；单次官方 test 比较共享编码器读出 A=0.7001、P=0.7477，Δ=**+4.76 pt**，95% Episode CI **[+3.47,+5.99] pt**，35/37 Episode 正向；3 seed 增益 +8.85/+1.47/+3.95 pt。**预注册CI宽度阈值≤0.020，实测宽度≈0.0252：锁定代码判CONFIRMED，但若宽度条款为否决门槛则INCONCLUSIVE；不能事后统一改为无条件CONFIRMED**。早期层级上下文机制的增量仍未获支持；读出增益也不单独证明类别平衡、优化器或早停的因果贡献 | `ALGO_EFFECT_POSITIVE_SCOPED` / `OFFICIAL_TEST_ONE_SHOT` / `RULE_CONFLICT` / `PAPER_PATH_CANDIDATE`；同一17物体、5录制日；不证明新物体/跨日/跨机器人泛化；本仓库未独立复算H9原始Run | `DOCUMENT_HANDOFF`：PROJECT19_COMPLETE_HANDOFF.md、PROJECT19_PAPER_BLUEPRINT_REBUILT.docx（2026-11-12，H9原始工件未在此复核） |
 | `TACTILE-DATA-P20`（项目20） | FeelingOfSuccess 与 GraspStability 数据获取和 CRC 验收报告；尚无在该项目成立的独立算法胜负结论 | `DATA_ACQUIRED`，算法 `UNKNOWN` | `CHAT` |
 | **`PRELIFT-F3-P20`（项目20后期算法）** | 2026-11-08 报告的 pre-lift 四指时间中心化空间动态8维触觉特征 F3；同设备未见物体独立 SEALED（9物体/339试次）：物体均值 AURC **0.279983** vs F3-base **0.516129**（Δ−0.236145，95% CI [−0.354329,−0.118586]；8/9物体有利，p≈0.01172）；pooled AUC **0.749707** vs **0.536927** | **`ALGO_DEV_POSITIVE` / `CONFIRMATION_DONE_SCOPED` / `SCIENTIFIC_RESULT_SUPPORTED`**；排序有效不等于概率校准/Brier/ECE 有效，亦非跨设备、多中心或在线部署确认；本仓库尚未独立读取 F3 原始 Run | `CHAT`（2026-11-08本机报告，原始 Run 待导入） |
 | **`DUAL-IMU-P21`（项目21）** | HARTH/HAR70+/MHEALTH/PAMAP2 线；both6 macro-F1 `0.9728`、micro `0.9880`；oracle-OR `0.9854`，净 79 窗但一人占 +92；容量置换对照 `NOT_RUN` | **`BASELINE_POSITIVE`**、协同/因果解释 `WITHDRAWN`；`AREA_DATA_PIVOT / CURRENT_PROJECT_ARCHIVED`（最新 manifest 76 文件），非 SRCS-IMU 原始线 | `S19` §0、§4–6 |
@@ -38,13 +40,18 @@
 | `CATS-PD-TACQUAD-EARLY`（项目24相关早期线） | 2026-10-03 TacQuad 输入/弱序列配对 pilot：112 records / 1,896 files；B Test MRR≈0.750，shuffled 同≈0.750；sensor probe 100%、effective rank≈1.1–1.4，物理不变表征受外观 shortcut 与低秩阻断 | **`EARLY_MECHANISM_NOT_SUPPORTED`** / `FULL_LOSO_NOT_RUN`；是早期 CATS-PD 阶段，不得用它覆盖后来 MV-Uncertainty-RealData-Launch 的独立结果或用户成功判断；后续同一命题身份尚需项目原件复核 | `S24E` |
 | **`MV-UNCERTAINTY-P24`（用户确认的项目24）** | `MV-Uncertainty-RealData-Launch`，已报告 17 幅图、34 份 PNG/SVG 和图件审计 PASS；用户明确认为该项目成功 | **`USER_ASSERTED_SUCCESS` / `ALGO_FINAL_METRICS_UNKNOWN`**；图件 PASS 不是算法效果或论文证据验证，待读取项目真实 RESULT/Run/冻结表 | `CHAT`（2026-11-05、11-09）；原始结果待补 |
 | `PMSM-THERMAL`（曾被称“项目24”的**冲突别名**） | 电机温度线：简单 B2 OOF MAE≈4.010°C；双时间尺度/观测器候选 E2≈4.825°C（历史报告），未优于简单方案 | `MECHANISM_NOT_SUPPORTED`；**不覆盖**正式项目24 MV 的身份；项目号 `IDENTITY_CONFLICT` | `CHAT` |
-| `LR-IMU-P25`（项目25） | SRCS-IMU 数据上的窗口级 HAR 因果平滑；frame/window 增益大部分可由平滑解释，历史前沿 F1≈0.8040、延迟≈1.80s（对应特定条件） | `SCOPED_MEASUREMENT_RESULT` / `NARROW`；**不同于项目21**，不能拼其 ρ、F1、归档状态 | `S19` §0、`CHAT` |
+| `LR-IMU-P25`（项目25） | SRCS-IMU 上窗口级 HAR 平滑诊断：历史前沿 F1≈0.8040、延迟≈1.80s（特定协议）；后续用户回报 frame-F1 增益中约 **91.2%** 可由段序置换对照复现，T-CTL≈**+0.0042**、block_exact≈**+0.21**（具体指标定义、分母和原始Run须核） | `SCOPED_MEASUREMENT_RESULT` / `NARROW`；时间平滑或标签段结构可解释大量收益，不能把总体F1提升直接视作新机制；与项目21严格分离 | `CHAT`（2026-11-12 近期结果回报，未独立复算） |
 | `BATTERY-TRIAGE-P26`（项目26） | Severson LFP 电池早期 QC：协议/批次泄漏风险、前 N 周期 Task 已设计；无经证实算法结果 | `WAITING_FOR_DOWNLOAD_AUTH` / `NOT_RUN` | `CHAT` |
 | `TACVERSE-Q0-P28`（项目28 或 TacVerse 独立线） | 力标签物理语义 D1/Q0 审计后，证据不足以支持原跨传感器绝对力的科学命题；数据资产可保留，最终任务 `NOT_READY` | `SCIENTIFIC_HYPOTHESIS_CLOSED` / `DATA_ASSET_PRESERVED`；**不是项目24 MV 成败**，原始 TacVerse 数据下载状态随 11-04/11-05 已发生变化，不能用早期 WAITING_FOR_DATA 覆盖后期审计 | `STAC`、`CHAT` |
 | `RCT-IDEA-P29`（项目29） | RCT 材料/触觉新问题只读选题；早期官方元信息：122 材料、1,832 序列、3 DIGIT；首选后调整 | `DESIGN_ONLY`，不是算法成功或失败 | `SNEW`、`CHAT` |
 | `RCT-CONTACT-P30`（项目30） | RCT 数据后续 DEV 验收与分组，所报98材料、979 DEV 序列、2个传感器；独立确认隔离；R1 未通过题目价值验证 | `DATA_READY_DEV` / `HOLDOUT_SEALED` / `RESEARCH_PIVOT`，未证算法效果 | `CHAT` |
 | `SENSOR-A01-P31`（项目31早期） | 创新方向 W1 与直接原文近邻或数据可辨识性不匹配，活动01 未确认首选 | `DISCOVERY_PARTIAL` / `NO_SELECTED_TASK`，**不等于 PTLG 失败** | `CHAT` |
-| `PTLG-P31`（项目31后续 RCT 方向） | 视觉—触觉—语言物理证据约束、冲突时材料属性推断和证据不足时选择性预测；复用已有 RCT 数据资产的只读科学适配/创新审查 | `QUESTION_CANDIDATE` / `REFRAME`；没有合规的新训练/SEALED/论文级算法结果，不把 E0/E1 方案当已执行 | `CHAT`（2026-11-09） |
+| `PTLG-P31`（项目31后续 RCT 方向） | 视觉—触觉—语言可信材料推断。后续候选 C1/C2/C3 被报告 `REJECTED_AT_GATE`，P1/P2/D1 `DROP`，无候选进入 Pilot、0 GPU-h；2026-11-10 记录为 `HOLD` / `NO_ELIGIBLE_CANDIDATE`，存在正式结束当前探索的建议，但无充分依据将整项目记作已正式关闭 | `RESEARCH_CANDIDATE_REJECTED` / `HOLD` / `ALGO_NOT_RUN`；多模态标签和物理可辨识性不足时先止于证据门槛，不能称为训练后失败 | `CHAT`（11-10 用户转述执行报告与后续建议；关闭决定待核原件） |
+| `PD-TACTILE-P32`（项目32） | TouchScale 接触状态约束下的可靠低预算触觉感知；近邻 Economy of Touch、Tactile Genesis、DERMIS 等使简单稀疏 taxel/动态选择的独立新颖性不足。已选择只读小规模数据验收方案，但 HF gated 认证/访问阻碍；截至已知快照未完成实际下载、结构验收、训练或正式确认 | `WAITING_FOR_DATA_ACCESS` / `NO_ALGO_RUN` / `SCIENTIFIC_CLAIM_PROVISIONAL`；**不是已关闭的算法失败**。离线读取预算不等于真实硬件节能，也不能从同源指标外推机器人操作成功率 | `CHAT`（2026-11-09～10 用户选择与方案A执行回报，未复核本地工件） |
+| `RH20T-FAILBENCH-P33`（项目33） | RH20T／FailBench 失败预测方向：H4 数据选择、H5 修订、H6 策略A已选择；只读讨论报告的筛选样本为11,633 success、838 failure、154无法二值判定，涉及149 task ID/7配置；力觉通道、配置差异、历史输入因果性与独立确认仍待验收 | `CONDITIONAL_GO_READ_ONLY` / `DATA_FIT_UNVERIFIED` / `ALGO_NOT_RUN`；FailBench已有相关先例，候选新意应限于严格历史输入、较早结局预测和F/T增量价值；**不得在数据适配通过前冻结实证Task** | `CHAT`（2026-11-12 H4/H5/H6与只读审查回报，未核原始标签） |
+| `HERCULES-P35`（项目35，身份待原件核实） | 近期交接称 HeRCULES 数据获取未完成，出现“479必需文件中223已验收/256待获取”的报告；本仓库尚无manifest或逐文件哈希可重验该数，也无该研究线合规算法比较 | `WAITING_FOR_DATA` / `ALGO_NOT_RUN_OR_UNKNOWN` / `SOURCE_REPORTED`；部分数据下载不能视为完整研究数据验收，必须核同步、真值和独立单位；计数待本机核实 | `CHAT`（近期历史汇总，原始下载清单未在仓库可见） |
+| `REASSEMBLE-P36`（项目36，新线/身份需区分P19） | 近期汇报包含 README/splits/poses/data 下载尝试，但没有足以证明全部原始文件获取、CRC/哈希和 Task-ready 的完整证据；另有2026-11-11只读预审称该数据与项目19已有接触史，不能自动当作未见独立确认库 | `DATA_ACQUISITION_IN_PROGRESS_OR_UNVERIFIED` / `ALGO_NOT_RUN` / `IDENTITY_CHECK_REQUIRED`；同一数据源新Task须独立记录Claim、合法切分和既往测试接触，不得重新制造未见SEALED | `CHAT` + 近期只读侦察材料（原始manifest待核） |
+| `FEELANYFORCE-P37`（项目37，TaskSpec/H7准备） | 已见只读 TaskSpec/H7准备及 TacForce_test_set.csv 保护要求；近期复盘指出 train/val 约1,122共同键（键定义和实际泄漏程度待核），尚无合规DEV新算法Run或正式SEALED验证 | `TASKSPEC_PREP_ONLY` / `ALGO_NOT_RUN` / `SPLIT_INDEPENDENCE_RISK`；表面train/val文件命名与共同键均不足以独立证明真实分组合法或实际泄漏，须核轨迹/批次/时间和评价单位 | `CHAT`（2026-11-12 TaskSpec只读交接，未读取受保护test或本地原始表） |
 | `MCS-HEMO-AURICLE`（未锁定编号） | Auricle 头部20通道心电/血流采集数据；后续报告 56 DEV / 14 SEALED、文件完整性检查、重复记录与噪声发现 | `DATA_QA_DONE_REPORTED`，算法 `NOT_RUN/UNKNOWN`；初期“未下载”的早期快照已不是最新状态 | `CHAT` |
 | `OPENPACK-RELATED`（历史比较） | 动态策略的输入可辨识性和简单参照饱和曾被讨论；缺本机当前完整 Task/Run/分组索引 | `EVIDENCE_INCOMPLETE`，不能凭提及就判算法失败 | `CHAT` |
 | `REALDISP-SHIFTSYM-BEAM`（历史线索） | REALDISP / ShiftSym-HAR / BEAM-HAR 只见讨论名称，缺逐项目最新工件与终判 | `IDENTITY_OR_EVIDENCE_UNKNOWN`，**仅登记线索** | `CHAT` |
@@ -63,19 +70,24 @@
 | 项目24 MV / TacVerse / PMSM | 编号相似或被历史误用时，必须用任务+目录+原始 Run 锁定身份；图件通过、标签审计、拟合结果是不同对象 | 混合三个项目的成功、失败、数据或封存状态 |
 | 项目13 / 18 / 21 / 25 | SRCS-IMU 是数据集名，双IMU-HARTH和窗口平滑是不同 Task/冻结切分；独立单位通常是人而非窗口 | 将不同项目的数值、受试者ID、结论拼成一个“最新性能” |
 | 项目20 数据准备 → F3 独立确认 | F3 在固定同设备/未见物体范围给出可重复的排序改进，必须保留确认指标和校准未完成的界限 | 将较早数据验收快照当成项目最终结论，或从 AURC/AUC 直接宣称 Brier/ECE、跨设备可靠性 |\n| TacVerse / RCT / Auricle / Battery | 数据验收或理论可行性是科研资产，尚未建立算法胜负 | 下载 CRC PASS、合成测试 PASS 或论文路线图即算法成功 |
+| 项目19 H9官方一次性检验 | 共享encoder读出增益可正向，但预注册CI宽度条款仍冲突，3-seed异质性不能隐藏 | 把“锁定代码CONFIRMED”当成无条件满足全部预注册条件，或事后重定义门槛 |
+| P25平滑与段序对照 | 时间平滑/标签结构足以解释大部分表观frame-F1增益；科学效应需扣除强替代解释 | 仅凭窗口平滑提升宣称方法创新或实时泛化 |
+| P31/P32科研预审与受限数据访问 | 候选科学性门槛或访问阻碍可以停止当前动作，但属于未运行算法、待证实的状态 | 把HOLD/WAITING_FOR_DATA写成算法经实验失败、或无依据宣称项目正式关闭 |
+| P33/P35/P36/P37数据与协议预审 | 历史输入合法性、已有接触史、独立单位、完整数据和时间同步是评价前提 | 由表面分组文件、部分验收或任务命名推断合规独立确认 |
 | 旧负结果重释 | 事后重要问题可以生成新假说，但应保留强反解释、真实最近邻和缺少的判别证据 | 将 `EX_POST_REFRAMING` 误写成事前假设或已确认原创新 |
 
 ## 3. 实际缺口清单（按价值排序，原始文件不在仓库时不得造值）
 
 1. **P20-F3 确认补录**：取 11-08 一次性 SEALED 对应真实评价协议、9物体/339试次结果表、F3-base/F0 参照、代码及选择史；核对独立单位。Brier/ECE 尚未确认，**不能仍把整个项目20记为只完成数据下载**。
 2. **P24-MV 最紧缺**：核项目实际 `PROJECT_SPEC/STATE`、最新算法 Run/冻结协议、最强基线配对指标、原始科研成果总结及确认结果、论文状态。用户成功认定保留 `USER_ASSERTED_SUCCESS`；不能由17图 PASS 推断算法胜利，也不能因缺证据判失败。早期 CATS-PD/TacQuad 负结果单独保存，是否同一最终 Task 待核。
-3. **P19-CRPS**：对象折父动作预测精度未持久化；readout 保留帧特征对照 `NOT_RUN`；37 SEALED 跨录制确认 `NOT_RUN`；v2/旧日志不同 Run 不能混数。其合法 DEV 算法成功保持有效，不自动开展推理/训练。
+3. **P19-CRPS/H9 最新校正**：37官方test Episode 的一次性读出对照**已执行**，不能继续写 `NOT_RUN`；保留CI宽度规则冲突和3-seed异质性。要补核真实H9锁定SPEC/原始Run、评价器与训练行指纹；旧GRUctx、对象折及新readout不能混为同一实验，也不能把官方同物体同日期test写成跨录制/跨物体确认。
 4. **P23-Galaxy**：强预测在线增益未被证实；已成立的窄测量结果与5人同源确认单列；图/稿件是否完成以本机最新版本为准，不宣称外部多中心验证；正式写作权限仍须独立核实。
 5. **P21-HARTH**：容量匹配置换对照 `NOT_RUN`；未拟合的 `N2dc/N2dp` 不得视作负结果；归档只读；缺历史源码不可冒充全部实验可复现。采用 `S19` v2 的76文件而非早期74文件。
 6. **项目身份冲突**：P24 MV vs PMSM/TacVerse；13/18/21/25；项目31 W1 vs PTLG；必须由真实 `PROJECT_PATH/Task/PRIMARY_DATA/ARCHIVE_MANIFEST` 唯一定位。
-7. **早期案例及未完成选题**：CARE、PhysTok、CC-DRA、RISC、CRIA、ACRF、CAR-IMU、RevGraph、P18/P25/P26/P28/P29/P30/P31/Auricle 尚缺跨版本 Run ledger 或本仓库可独立验证的终判；只保留真实可追溯快照，不造结果。
-8. **仅有名称的候选**：不能拿来算项目总量、总成功率或“所有算法失败”；因项目多 Task 与编号复用，**全时期真正独立项目总数 UNKNOWN**。
-9. **GitHub 无法补齐的原始信息**：用户 Windows 私有项目工件未全部同步。本仓库只能记录来源和缺口；将来能访问本机且获相应授权时，优先只读核对，不进行拟合、SEALED 或归档修改。
+7. **2026-11-12 新近项目**：P31=`HOLD/NO_ELIGIBLE_CANDIDATE`（不得无证据写正式关闭），P32=受限数据访问/未训练，P33=只读条件性GO，P35/P36=待数据验收，P37=TaskSpec预备及划分独立性风险；项目34身份/原始记录尚未可靠定位。只可按具体任务、数据、来源和用户授权继续。
+8. **早期案例及未完成选题**：CARE、PhysTok、CC-DRA、RISC、CRIA、ACRF、CAR-IMU、RevGraph、P18/P25/P26/P28/P29/P30/P31/Auricle 尚缺跨版本 Run ledger 或本仓库可独立验证的终判；只保留真实可追溯快照，不造结果。
+9. **仅有名称的候选**：不能拿来算项目总量、总成功率或“所有算法失败”；因项目多 Task 与编号复用，**全时期真正独立项目总数 UNKNOWN**。
+10. **GitHub 无法补齐的原始信息**：用户 Windows 私有项目工件未全部同步。本仓库只能记录来源和缺口；将来能访问本机且获相应授权时，优先只读核对，不进行拟合、SEALED 或归档修改。
 
 ## 4. 轻量维护、使用与验证
 
