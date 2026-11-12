@@ -102,6 +102,18 @@ class MalformedPacketTests(unittest.TestCase):
         self.assertIn("author_selected_main_claim_or_unchanged_legacy",
                       science_checkpoint(p)["missing"])
 
+    def test_supported_claim_cannot_use_spaced_not_run(self):
+        p = {"trigger": "CLAIM_PROMOTION", "route": "R5", "primary_type": "C09",
+             "claim_or_question": "metric bias", "nearest_neighbor_or_unknown": "paper",
+             "actual_evidence_ref_or_not_run": "  NOT_RUN  ",
+             "negative_evidence_or_none": "NONE",
+             "strongest_alternative_or_unknown": "artifact",
+             "next_decisive_step": "check proof",
+             "independent_validation_ref_or_unavailable": "UNAVAILABLE",
+             "claim_status": "SUPPORTED", "claim_role": "SECONDARY_DEV"}
+        self.assertIn("real_evidence_for_supported_claim",
+                      science_checkpoint(p)["missing"])
+
     def test_whitespace_unavailable_not_independent_confirmation(self):
         p = {"trigger": "CLAIM_PROMOTION", "route": "R5", "primary_type": "C09",
              "claim_or_question": "Metric error", "nearest_neighbor_or_unknown": "paper",
