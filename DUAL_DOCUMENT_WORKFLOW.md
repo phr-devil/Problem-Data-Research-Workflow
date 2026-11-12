@@ -26,7 +26,7 @@
 
 **正式稿件接口**：仅在 [WRITING_GATE.md](WRITING_GATE.md) 两道用户条件满足后，按 [MANUSCRIPT_WRITING.md](MANUSCRIPT_WRITING.md) 从已批准蓝图及真实 Claim/Run 构建临时写作证据合同；`MANUSCRIPT_TEXT.md` 作为唯一正文源，引用/公式/图表待办可使用 `MANUSCRIPT_OPEN_ITEMS.md`，两者不替代这两份持续科研文档，也不授权修改已批准章节结构。
 
-**前期用户选择与后期AI科学决定的事件记忆**：新科研项目按 [WORKFLOW.md](WORKFLOW.md) H1–H10 及 H6/H7/H8的AI自主科学决定及H9/H10适用的用户节点，在当前 `RESEARCH_RECORD.md` 快照区分USER的H1–H5/H9/H10原消息与AGENT的H6–H8决定证据、当前有效选择及待决依赖，在第5节既有事件历史保留每次重要改变的原因和证据（不单独建立审批日志或重写旧Run）。用户曾一次批准多个节点、明确有限委托或旧项目已有实际决策，则复用其原指令，不机械追加十条事件。`STATE.md` 仅留 `HUMAN_REVIEW_CURRENT/HUMAN_DECISION_REF` 导航；`PAPER_BLUEPRINT` 只受真实科学贡献与用户已确认论文结构影响，不写成人工审批表。新证据触发的局部回退记录受影响节点和更正理由，保留历史。
+**作者战略选择与AI技术执行的事件记忆**：在当前RESEARCH_RECORD的现有事件历史中，H1–H6、战略性H8和适用H9/H10存原作者选择或明确有限委托及来源；H7存AI技术决定，普通DEV实验只存必要真实Run/负证据，不逐次生成作者确认记录。H6记录AI首选/备选及作者选定的Task、C/R/P组合和范围；H8记录AI推荐的核心Claim/KEEP-UPGRADE-NARROW等方案、作者选择和确认缺口。新协议不自动改写旧v1.2 H6/H8 AGENT_DECIDED为用户批准，旧证据不丢；仅在实际重大科研战略变动时按新版作者审核。STATE只存指针，正式论文写作锁不变，详见 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md)。
 
 **不同 H 标识必须分开**：`REVIEW:H1–H10` 仅用于人工科研选择与可核原消息，`HEADING:H1/H2/H3` 仅表示论文蓝图 Markdown 标题层级，不能以论文大纲 H2 代替人工 H2 来源/贡献路线的真实选择。上游决策因数据、合法输入或主张改变而失效时，在研究记录标明下游待复核的依赖并保留旧决定；蓝图仅同步真正受影响的章节/Claim 指针。
 
