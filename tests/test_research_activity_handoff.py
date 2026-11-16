@@ -192,9 +192,11 @@ def _human_packet(*nodes):
         "target": nodes[-1],
         "decisions": {
             step: {
-                "kind": "USER_CONFIRMED",
-                "original_user_message_ref": f"synthetic/original/{step}",
-                "chosen_option": f"synthetic choice {step}",
+                "kind": "AGENT_DECIDED" if step == "H7" else "USER_CONFIRMED",
+                **({"agent_decision_ref": "synthetic/agent/H7",
+                    "h5_scope_ref": "synthetic/original/H5"} if step == "H7" else {
+                    "original_user_message_ref": f"synthetic/original/{step}",
+                    "chosen_option": f"synthetic choice {step}"}),
                 "dimension_decisions": {
                     key: "synthetic scoped decision"
                     for key in H_CONTRACT["steps"][step]["required_dimensions"]
