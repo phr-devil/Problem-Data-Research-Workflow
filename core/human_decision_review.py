@@ -138,6 +138,24 @@ def review(packet: dict) -> dict:
                 continue
         present.add(name)
 
+    # Opt-in new-project H6 bundle consistency. H3-H5 may be drafted by AI,
+    # but after the single concrete H6 reply their *author* decision records
+    # must cite the SAME original user message. Never infer approval from the
+    # flag or a string pointer; only a trusted host can authenticate messages.
+    if packet.get("new_project_h6_bundle") is True and target in {
+            "H6", "H7", "H8", "H9", "H10"}:
+        h6 = rows.get("H6")
+        original = h6.get("original_user_message_ref") if isinstance(h6, dict) else None
+        if not isinstance(original, str) or not original.strip():
+            malformed.append("H6")
+        for step in ("H3", "H4", "H5"):
+            entry = rows.get(step)
+            if (not isinstance(entry, dict) or
+                    entry.get("kind") not in {"USER_CONFIRMED", "USER_DELEGATED"} or
+                    entry.get("original_user_message_ref") != original):
+                malformed.append(step)
+        present.difference_update(malformed)
+
     # A previously declared choice may be obsolete after a change in upstream
     # truth, resource, task, or protocol. Only the supplied *declarations* are
     # checked here; an Agent must inspect real evidence to identify reopenings.
