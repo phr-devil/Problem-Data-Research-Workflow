@@ -35,7 +35,7 @@ class CaseRegistryContracts(unittest.TestCase):
                 self.assertIn("来源简称", self.case)
             else:
                 self.assertIn(required, self.case)
-        self.assertIn("37 条 SEALED", self.case)
+        self.assertIn("37 test Episode", self.case)  # official test Episodes are not automatically independent SEALED
         self.assertIn("5 人同数据源确认", self.case)
         self.assertIn("待", self.case)
 
