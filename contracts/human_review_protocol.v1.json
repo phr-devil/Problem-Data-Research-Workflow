@@ -15,7 +15,8 @@
     "Dimension evidence and original user messages must be checked externally; a structural PASS never authenticates user approval.",
     "Theory/simulation projects use PROOF_PATH in H4; H7 and H9 are conditional by scientific relevance, with reasons recorded.",
     "New dataset acquisition, project-level target changes/STOP, sealed/independent confirmation, actual financial charges, unsafe installations, external transfer, figures, manuscript writing and submission retain their separate gates. An explicit project-level prohibition overrides default DEV autonomy.",
-    "H6 author chooses recommended research strategy and Task; H8 author chooses core scientific Claim and substantive science upgrade/reframe strategy. Technical H7, ordinary DEV experiments and within-delegation work remain autonomous. Old v1.2 H6/H8 agent decisions are not silently promoted to new author confirmations."
+    "H6 author chooses recommended research strategy and Task; H8 author chooses core scientific Claim and substantive science upgrade/reframe strategy. Technical H7, ordinary DEV experiments and within-delegation work remain autonomous. Old v1.2 H6/H8 agent decisions are not silently promoted to new author confirmations.",
+    "New-project interaction: H1/H2 reuse the explicit startup configuration; H3/H4/H5 are Agent-prepared PROPOSED candidates until the author sees the concrete H6 plan card. ONE specific post-card author message selects the bundled H3-H6 option; record the same original message ref across the selected nodes, never infer consent from a generic continue or Agent approval. Existing IDs, dependencies, independent permissions and legacy decisions remain unchanged."
   ],
   "vocabularies": {
     "question_sources": [
@@ -266,5 +267,24 @@
   "new_project_strategy_reviews": [
     "H6",
     "H8"
-  ]
+  ],
+  "new_project_interaction": {
+    "startup_input": [
+      "H1",
+      "H2"
+    ],
+    "agent_candidate_preparation": [
+      "H3",
+      "H4",
+      "H5"
+    ],
+    "single_author_card": "H6",
+    "bundled_choice_evidence": [
+      "H3",
+      "H4",
+      "H5",
+      "H6"
+    ],
+    "generic_continue_is_choice": false
+  }
 }
