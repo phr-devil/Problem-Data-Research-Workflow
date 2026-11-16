@@ -33,8 +33,8 @@ class PolicyIntegrityTests(unittest.TestCase):
                     "original_user_message_ref": ref, "chosen_option": "A"}
 
         entries = {"H1": user("launch"), "H2": user("launch")}
-        entries.update({node: user("h6-reply") for node in
-                        ("H3", "H4", "H5", "H6")})
+        entries.update({node: {**user("h6-reply"), "plan_sha256": "a" * 64}
+                        for node in ("H3", "H4", "H5", "H6")})
         packet = {"format": "pd-rw-human-review-v1",
                   "target": "H6", "decisions": entries,
                   "new_project_h6_bundle": True}
@@ -45,6 +45,57 @@ class PolicyIntegrityTests(unittest.TestCase):
         bad = review(packet)
         self.assertFalse(bad["can_advance_declarations_only"])
         self.assertIn("H4", bad["malformed_declarations"])
+
+    def test_canonical_new_project_h6_entry_cannot_be_skipped_by_packet_omission(self):
+        from core.human_decision_review import CONTRACT, review_new_project_h6
+
+        def declared(node, reply):
+            spec = CONTRACT["steps"][node]
+            row = {"kind": "USER_CONFIRMED", "original_user_message_ref": reply,
+                   "chosen_option": "A",
+                   "dimension_decisions": {x: "CHOICE_A" for x in spec["required_dimensions"]},
+                   "evidence_refs": {x: "source/a" for x in spec["evidence_minimum"]}}
+            if node in {"H3", "H4", "H5", "H6"}:
+                row["plan_sha256"] = "f" * 64
+            return row
+
+        rows = {node: declared(node, "launch" if node in {"H1", "H2"} else "reply")
+                for node in ("H1", "H2", "H3", "H4", "H5", "H6")}
+        packet = {"format": "pd-rw-human-review-v1",
+                  "protocol_version": CONTRACT["protocol_version"],
+                  "target": "H6", "decisions": rows}
+        valid = review_new_project_h6(packet)
+        self.assertTrue(valid["can_advance_declarations_only"])
+        self.assertIsNone(valid["next_user_interaction"])
+        self.assertFalse(valid["allows_download_training_sealed_or_writing"])
+
+        for change in ("missing_h6", "wrong_option", "wrong_hash", "wrong_reply"):
+            altered = json.loads(json.dumps(packet))
+            if change == "missing_h6":
+                del altered["decisions"]["H6"]
+            elif change == "wrong_option":
+                altered["decisions"]["H4"]["chosen_option"] = "B"
+            elif change == "wrong_hash":
+                altered["decisions"]["H5"]["plan_sha256"] = "b" * 64
+            else:
+                altered["decisions"]["H3"]["original_user_message_ref"] = "different"
+            reviewed = review_new_project_h6(altered)
+            self.assertFalse(reviewed["can_advance_declarations_only"], change)
+            self.assertEqual(reviewed["next_user_interaction"], "H6")
+
+    def test_new_project_dev_preflight_cannot_use_legacy_scope_as_h6(self):
+        from core.execution_preflight import action_preflight
+        packet = {"action": "DEV_TRAIN",
+                  "h5_scope_confirmed": True, "dev_inputs_verified": True,
+                  "within_h5_scope": True, "safe_local_nonpaid": True,
+                  "no_project_specific_prohibition": True,
+                  "within_author_selected_strategy": True,
+                  "legacy_unchanged_scope_confirmed": True,
+                  "h6_author_strategy_confirmed": False}
+        new = action_preflight(packet, independently_authorized=True, new_project=True)
+        self.assertEqual(new["reason"], "NEW_PROJECT_H6_CHOICE_REQUIRED")
+        old = action_preflight(packet, independently_authorized=True, new_project=False)
+        self.assertEqual(old["decision"], "ALLOW")
 
     def test_six_activities_preserved_and_joined_review_declared(self):
         activities = json.loads(read("contracts/research_activity_protocol.v1.json"))
