@@ -282,7 +282,7 @@ def review_new_project_h6(packet: dict) -> dict:
     return review(scoped)
 
 
-def main() -> None:
+def main() -> int:
     parser = argparse.ArgumentParser(description="Read-only declared human decision dependency check")
     parser.add_argument("packet", type=Path)
     parser.add_argument("--new-project-h6", action="store_true",
@@ -291,7 +291,10 @@ def main() -> None:
     packet = json.loads(args.packet.read_text(encoding="utf-8"))
     result = (review_new_project_h6(packet) if args.new_project_h6 else review(packet))
     print(json.dumps(result, ensure_ascii=False, indent=2))
+    # A new-project H6 declaration alone is never a trusted execution grant.
+    # Fail closed for automation that only inspects the process exit code.
+    return 3 if args.new_project_h6 else 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
