@@ -124,8 +124,13 @@ def validate_state(value: Any) -> dict:
 
 # Existing six activities: declared evidence-handoff check, not a permission gate.
 # Scientific scope belongs to WORKFLOW.md; the JSON is a tested structural mirror.
-def review_activity_handoff(packet: dict) -> dict:
-    """Review caller-supplied handoff metadata without opening source artifacts."""
+def review_activity_handoff(packet: dict, *, new_project: bool = False) -> dict:
+    """Review handoff declarations. Trusted caller supplies new-project identity.
+
+    Pass new_project=True for a newly initiated line; this requires the H6
+    bundled source/choice check at the activity-03 boundary. The boolean is
+    not authenticated here; WorkBuddy host identity enforcement remains external.
+    """
     import json
     from pathlib import Path
 
@@ -281,7 +286,10 @@ def review_activity_handoff(packet: dict) -> dict:
     if human_packet is not None:
         if not isinstance(human_packet, dict):
             raise ContractError("human_review_packet must be an object")
-        from core.human_decision_review import CONTRACT as HUMAN_CONTRACT, review as review_human
+        from core.human_decision_review import (
+            CONTRACT as HUMAN_CONTRACT, review as review_human,
+            review_new_project_h6,
+        )
         if human_packet.get("protocol_version") not in (
                 HUMAN_CONTRACT["protocol_version"],
                 *HUMAN_CONTRACT.get("legacy_protocol_versions", ())):
@@ -293,7 +301,9 @@ def review_activity_handoff(packet: dict) -> dict:
                 candidate = dict(human_packet)
                 candidate["target"] = name
                 try:
-                    decision = review_human(candidate)
+                    decision = (review_new_project_h6(candidate)
+                                if new_project and activity_id == "03" and name == "H6"
+                                else review_human(candidate))
                 except ValueError as exc:
                     raise ContractError(f"invalid human_review_packet: {exc}") from exc
                 if not decision["can_advance_declarations_only"]:
@@ -405,6 +415,7 @@ def review_activity_handoff(packet: dict) -> dict:
     )
     return {
         "activity_id": activity_id,
+        "new_project_h6_bundle_checked": bool(new_project and activity_id == "03"),
         "contract_version": contract["contract_version"],
         "evidence_path": evidence_path,
         "missing_evidence_declarations": missing,
