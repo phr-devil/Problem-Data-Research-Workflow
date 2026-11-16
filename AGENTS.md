@@ -13,7 +13,7 @@
 
 **H6 可信入口提示**：新项目 H3–H6 一次用户选择的声明检查调用 `review_new_project_h6`，活动03交接使用 `review_activity_handoff(..., new_project=True)`；这两个接口本身并不认证原始聊天消息，未连接宿主可信身份时不能声称不可绕过。Agent 看到真实当前对话的具体 H6 回复后不重复询问，继续已获合法 DEV 范围内的工作。
 
-**新项目决策模式**：`USER_DEEP_PARTICIPATION` 的实际人工交互是启动配置（已提供的不重复问）与 H6 一次方案选择，不等于 H3/H4/H5 分别触发三次审批。
+**新项目决策模式**：H1–H10 保留科研语义，`USER_DEEP_PARTICIPATION` 的实际人工交互是启动配置（已提供的不重复问）与 H6 一次方案选择，不等于 H3/H4/H5 分别触发三次审批。
 
 **人工科学决策冷启动**：新项目 H1/H2 直接复用已有启动配置、H3–H5 由 Agent 先作未批准的候选分析，只在 H6 提交一张具体科研方案卡供作者一次选择（同时确定 H3–H6）；**H6核心Task/研究组合与H8核心Claim/重大升级需先由AI给带依据的首选和可行备选，再由作者选择或明确范围委托**。H7技术方案、既定策略内DEV算法/训练/修复仍由AI自主，不逐次询问。旧项目H6/H8原记录保留但旧AGENT_DECIDED不能伪装为新作者确认，只有实质战略变动时按新版审核。详见 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md)、[WORKFLOW.md](WORKFLOW.md)；原H9/H10、SEALED与写稿门禁不变。
 
