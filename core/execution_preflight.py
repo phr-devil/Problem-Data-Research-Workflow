@@ -27,11 +27,14 @@ NEEDS_CONTRIBUTION = {"H6_TASK", "H8_CLAIM", "CLAIM_PROMOTION"}
 NEEDS_RESULTS = {"SIGNIFICANT_RUN", "NEGATIVE_RESULT", "H8_CLAIM", "CLAIM_PROMOTION"}
 
 
-def action_preflight(packet: dict, *, independently_authorized: bool = False) -> dict:
+def action_preflight(packet: dict, *, independently_authorized: bool = False,
+                     new_project: bool = False) -> dict:
     """independently_authorized is a host-only kwarg, not a packet field.
 
     A host must independently authenticate the original grant and its scope;
-    this function cannot do it. The CLI never passes True.
+    this function cannot do it. The CLI never passes True. A trusted host may
+    pass new_project=True to reject legacy-scope substitutes for new projects;
+    user/Agent packet declarations cannot determine that project identity.
     """
     if not isinstance(packet, dict):
         return {"decision": "BLOCK", "reason": "MALFORMED_ACTION_PACKET"}
@@ -46,6 +49,10 @@ def action_preflight(packet: dict, *, independently_authorized: bool = False) ->
         return {"decision": "ALLOW", "reason": "NO_RESTRICTED_EFFECT_REQUESTED",
                 "enforcement": "ADVISORY_NOT_TOOL_SANDBOX"}
     if action in DEV:
+        # New-project identity must be supplied by a trusted host/router, never
+        # inferred from an Agent-controlled JSON flag or a legacy scope claim.
+        if new_project and packet.get("h6_author_strategy_confirmed") is not True:
+            return {"decision": "BLOCK", "reason": "NEW_PROJECT_H6_CHOICE_REQUIRED"}
         conditions = ("h5_scope_confirmed", "dev_inputs_verified", "within_h5_scope",
                       "safe_local_nonpaid", "no_project_specific_prohibition",
                       "within_author_selected_strategy")
