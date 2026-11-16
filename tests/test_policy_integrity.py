@@ -20,6 +20,10 @@ class PolicyIntegrityTests(unittest.TestCase):
         self.assertEqual(review["steps"]["H7"]["decision_owner"], "AGENT")
         self.assertIn("pd-rw-human-review-v1.2", review["legacy_protocol_versions"])
         self.assertIn("AUTHOR_STRATEGY_REVIEW.md", read("WORKFLOW.md"))
+        self.assertEqual(review["new_project_interaction"]["single_author_card"], "H6")
+        self.assertEqual(review["new_project_interaction"]["agent_candidate_preparation"], ["H3", "H4", "H5"])
+        self.assertFalse(review["new_project_interaction"]["generic_continue_is_choice"])
+        self.assertIn("单次方案选择", read("WORKFLOW.md"))
 
     def test_six_activities_preserved_and_joined_review_declared(self):
         activities = json.loads(read("contracts/research_activity_protocol.v1.json"))
