@@ -146,7 +146,8 @@ def review(packet: dict) -> dict:
     is_new_h6 = packet.get("new_project_h6_bundle") is True
     if is_new_h6 and target in {"H6", "H7", "H8", "H9", "H10"}:
         h6 = rows.get("H6")
-        original = h6.get("original_user_message_ref") if isinstance(h6, dict) else None
+        h6 = h6 if isinstance(h6, dict) else {}
+        original = h6.get("original_user_message_ref")
         digest = h6.get("plan_sha256") if isinstance(h6, dict) else None
         if (not isinstance(original, str) or not original.strip()
                 or not isinstance(digest, str)
