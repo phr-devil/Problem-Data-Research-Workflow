@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 # A machine-readable mirror of the scientific review definitions in WORKFLOW.md.
@@ -138,21 +139,30 @@ def review(packet: dict) -> dict:
                 continue
         present.add(name)
 
-    # Opt-in new-project H6 bundle consistency. H3-H5 may be drafted by AI,
+    # Explicit new-project H6 bundle consistency. H3-H5 may be drafted by AI,
     # but after the single concrete H6 reply their *author* decision records
     # must cite the SAME original user message. Never infer approval from the
     # flag or a string pointer; only a trusted host can authenticate messages.
-    if packet.get("new_project_h6_bundle") is True and target in {
-            "H6", "H7", "H8", "H9", "H10"}:
+    is_new_h6 = packet.get("new_project_h6_bundle") is True
+    if is_new_h6 and target in {"H6", "H7", "H8", "H9", "H10"}:
         h6 = rows.get("H6")
         original = h6.get("original_user_message_ref") if isinstance(h6, dict) else None
-        if not isinstance(original, str) or not original.strip():
+        digest = h6.get("plan_sha256") if isinstance(h6, dict) else None
+        if (not isinstance(original, str) or not original.strip()
+                or not isinstance(digest, str)
+                or re.fullmatch(r"[0-9a-f]{64}", digest) is None
+                or h6.get("kind") not in {"USER_CONFIRMED", "USER_DELEGATED"}):
             malformed.append("H6")
         for step in ("H3", "H4", "H5"):
             entry = rows.get(step)
             if (not isinstance(entry, dict) or
-                    entry.get("kind") not in {"USER_CONFIRMED", "USER_DELEGATED"} or
-                    entry.get("original_user_message_ref") != original):
+                    entry.get("kind") != h6.get("kind")
+                    or entry.get("original_user_message_ref") != original
+                    or entry.get("plan_sha256") != digest
+                    or (h6.get("kind") == "USER_CONFIRMED"
+                        and entry.get("chosen_option") != h6.get("chosen_option"))
+                    or (h6.get("kind") == "USER_DELEGATED"
+                        and entry.get("delegated_scope") != h6.get("delegated_scope"))):
                 malformed.append(step)
         present.difference_update(malformed)
 
@@ -195,7 +205,17 @@ def review(packet: dict) -> dict:
             next_review = CONTRACT["new_project_sequence"][
                 CONTRACT["new_project_sequence"].index(target) + 1
             ]
+    if is_new_h6 and target in {"H6", "H7", "H8", "H9", "H10"}:
+        # Scientific H1-H5 dependencies stay intact. User-facing next action
+        # is a single H6 choice, not five separate author questionnaires.
+        if "H6" not in effective_present:
+            next_review = "H6"
     return {
+        "next_user_interaction": (
+            "H6" if is_new_h6 and target in {"H6", "H7", "H8", "H9", "H10"}
+            and "H6" not in effective_present else None
+        ),
+        "new_project_h6_bundle_checked": is_new_h6,
         "target": target,
         "target_decision_owner": CONTRACT["steps"][target]["decision_owner"],
         "target_requires_user_scientific_choice": CONTRACT["steps"][target]["decision_owner"] == "USER",
@@ -247,12 +267,28 @@ def review(packet: dict) -> dict:
         ),
     }
 
+def review_new_project_h6(packet: dict) -> dict:
+    """Canonical new-project entry; caller cannot skip H6 bundle verification.
+
+    Caller MUST be a trusted project-router/host for new-line applicability.
+    Returned review remains advisory and NEVER authenticates the source message.
+    """
+    if not isinstance(packet, dict) or packet.get("protocol_version") != CONTRACT["protocol_version"]:
+        raise ValueError("New-project H6 requires current PD-RW protocol")
+    if packet.get("target") not in {"H6", "H7", "H8", "H9", "H10"}:
+        raise ValueError("New-project H6 entry requires H6 or a dependent target")
+    scoped = {**packet, "new_project_h6_bundle": True}
+    return review(scoped)
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Read-only declared human decision dependency check")
     parser.add_argument("packet", type=Path)
+    parser.add_argument("--new-project-h6", action="store_true",
+                        help="Require new-project H6 bundle, independent of caller packet flag")
     args = parser.parse_args()
-    result = review(json.loads(args.packet.read_text(encoding="utf-8")))
+    packet = json.loads(args.packet.read_text(encoding="utf-8"))
+    result = (review_new_project_h6(packet) if args.new_project_h6 else review(packet))
     print(json.dumps(result, ensure_ascii=False, indent=2))
 
 
