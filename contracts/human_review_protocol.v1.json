@@ -285,6 +285,14 @@
       "H5",
       "H6"
     ],
-    "generic_continue_is_choice": false
+    "generic_continue_is_choice": false,
+    "advisory_entry": "core.human_decision_review.review_new_project_h6",
+    "activity_03_handoff": "core.contracts.review_activity_handoff(new_project=True)",
+    "choice_binding_required": [
+      "original_user_message_ref",
+      "plan_sha256",
+      "chosen_option_or_delegated_scope"
+    ],
+    "trusted_host_authentication_implemented": false
   }
 }

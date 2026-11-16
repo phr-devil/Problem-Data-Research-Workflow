@@ -192,9 +192,11 @@ def _human_packet(*nodes):
         "target": nodes[-1],
         "decisions": {
             step: {
-                "kind": "USER_CONFIRMED",
-                "original_user_message_ref": f"synthetic/original/{step}",
-                "chosen_option": f"synthetic choice {step}",
+                "kind": "AGENT_DECIDED" if step == "H7" else "USER_CONFIRMED",
+                **({"agent_decision_ref": "synthetic/agent/H7",
+                    "h5_scope_ref": "synthetic/original/H5"} if step == "H7" else {
+                    "original_user_message_ref": f"synthetic/original/{step}",
+                    "chosen_option": f"synthetic choice {step}"}),
                 "dimension_decisions": {
                     key: "synthetic scoped decision"
                     for key in H_CONTRACT["steps"][step]["required_dimensions"]
@@ -247,6 +249,25 @@ class ActivityEntryAndHumanReviewTests(unittest.TestCase):
         p["human_review_packet"] = _human_packet("H1", "H2", "H3", "H4", "H5")
         self.assertEqual(review_activity_handoff(p)["human_review_declarations_missing"], ["H6"])
         self.assertFalse(review_activity_handoff(p)["declared_activity_ready_not_authenticated"])
+
+    def test_new_project_activity03_requires_bound_h6_choice(self):
+        p = self._entered("03")
+        human = _human_packet("H1", "H2", "H3", "H4", "H5", "H6")
+        p["human_review_packet"] = human
+        generic = review_activity_handoff(p)
+        self.assertNotIn("H6", generic["human_review_declarations_missing"])
+        checked = review_activity_handoff(p, new_project=True)
+        self.assertTrue(checked["new_project_h6_bundle_checked"])
+        self.assertIn("H6", checked["human_review_declarations_missing"])
+        # The same post-card message, option, and digest is required at H3-H6.
+        for node in ("H3", "H4", "H5", "H6"):
+            human["decisions"][node].update({
+                "original_user_message_ref": "synthetic/post-card-H6",
+                "chosen_option": "A", "plan_sha256": "a" * 64,
+            })
+        bound = review_activity_handoff(p, new_project=True)
+        self.assertNotIn("H6", bound["human_review_declarations_missing"])
+        self.assertFalse(bound["declared_activity_ready_not_authenticated"])
 
     def test_nonmethod_scope_has_disposition_not_fake_experiment_pass(self):
         p = self._entered("04", "NON_DATA")

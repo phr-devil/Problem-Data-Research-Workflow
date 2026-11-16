@@ -25,6 +25,8 @@
 
 **可执行的最小路径核查（已有本地Python且确有文件交付时）**：在现有交付根目录中运行 `python -m core.delivery_check --root OUTPUT_DIR --primary MAIN_RESULT --file OTHER_RESULT`（`--file`按需重复）；工具只核路径存在、是否仍处于交付根目录，**不生成清单、不读取文件内容，也不证明内容正确、权限合规或SEALED隔离**。工具缺失/不可运行时由宿主直接检查文件并报告未验证范围；`PASS_PATHS_ONLY`不得写成科研/隐私/权限验证PASS。普通对话/无文件输出不调用。详情代码见 [core/delivery_check.py](core/delivery_check.py)。
 
+**输出语义不混用**：`NEXT_AGENT_INSTRUCTION` 仅用于已授权且可执行的后续科研任务；`USER_DECISION_REQUIRED` 表示确实需要作者选择的 H6/H8 或独立操作授权；`NO_NEXT_ACTION` 表示没有后续任务。**两种结果不可混淆**：不能把已完成工作表述成待执行命令，也不能在用户尚未决定时提前发送执行命令（禁止预先输出Agent执行指令）。真实原消息与 CPU/GPU、SEALED、写作/绘图许可分别核验，只有被真实授权覆盖的 DEV 技术工作可自主连续执行。
+
 **已执行结果与后续行动分开**：本节规定结果反馈；下文 A/B 继续唯一决定是否给下一步Agent指令。待用户 H 节点选择、改变主Task、增加权限时，只给推荐与必要依据，**不提供依赖待决选择的执行命令**。已有合法任务可继续，则提供精简可复制的下一步Agent指令；全部完结且无需续作时报告 `NO_NEXT_ACTION`。不另建 `COMPLETED/PARTIAL/BLOCKED` 强制状态枚举，文本状态永不等于授权。
 
 **Token 优化是全任务成本目标，而不是单次回复最短**：
@@ -44,11 +46,11 @@
 
 - `AGENT_DECIDABLE`：已在用户真实授权、研究范围及预算内的**技术实现选择**，例如定位并修复普通Bug、复用已有Run、选最有信息量的只读诊断、重跑已授权且协议不变的受影响测试、补写非论文的科学证据摘要。Agent可自行选出**一项最佳后续动作**。
 - `STRONG_RECOMMENDATION`：关键证据充分、下一技术方案明显优于备选且**无需新的用户授权或价值判断**；直接给最优执行方案，不为常规技术分歧反复要求确认。强烈建议**不覆盖权限**。
-- `USER_DECISION_REQUIRED`：H1–H5、**H6初始核心Task与研究策略、H8实质核心Claim/重大升级选择**、适用H9/H10，需要真实作者选择或限定委托；此外超H5科学目标、项目整体STOP/PIVOT、新数据下载、付费/云资源、危险工具、SEALED、外传、实际绘图、正式写作和投稿仍属现有用户门禁。普通H7算法、同H6/H8已选范围内的DEV代码/训练/修复及增量证据归AI自主；不得因每个Run/小模型修改重复要人类确认。AI推荐不是用户决定。
+- `USER_DECISION_REQUIRED`：新项目 H1/H2 复用启动配置、H3–H5 由 Agent 自行准备，**只在 H6 请求一次具体核心Task/科研方案选择；H8仅重大核心Claim/升级选择**、适用H9/H10，需要真实作者选择或限定委托；此外超H5科学目标、项目整体STOP/PIVOT、新数据下载、付费/云资源、危险工具、SEALED、外传、实际绘图、正式写作和投稿仍属现有用户门禁。普通H7算法、同H6/H8已选范围内的DEV代码/训练/修复及增量证据归AI自主；不得因每个Run/小模型修改重复要人类确认。AI推荐不是用户决定。
 
 ### 深度参与模式中的用户科学决策（复用已有 USER_DECISION_REQUIRED）
 
-新 PD-RW 课题默认 `USER_DEEP_PARTICIPATION`：H1–H5完成后，AI在H6提供**推荐的Task+科研组合(C/R/P)及可比较备选**让作者选择或明确委托；关键成果需要冻结主Claim/重大升级时，H8提供**保留、升级、收窄/重构**等可行路线和首选供作者决定；H7保持AI自主。卡片标准与重新触发规则见 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md)。真实原作者选择、选项范围与证据引用缺一不可；旧项目已有真实选择不重问；新证据只重开确有影响的战略节点。技术Bug和普通实验不进入确认循环。
+新 PD-RW 课题默认 `USER_DEEP_PARTICIPATION`：H1/H2从启动配置取得，Agent 先完成 H3–H5 候选，不逐项要求作者回复；只在 H6 提供**推荐的Task+科研组合(C/R/P)及可比较备选**让作者选择或明确委托；关键成果需要冻结主Claim/重大升级时，H8提供**保留、升级、收窄/重构**等可行路线和首选供作者决定；H7保持AI自主。卡片标准与重新触发规则见 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md)。真实原作者选择、选项范围与证据引用缺一不可；旧项目已有真实选择不重问；新证据只重开确有影响的战略节点。技术Bug和普通实验不进入确认循环。
 
 **待用户决策时**输出 `DECISION_ID | RECOMMENDATION+SOURCE | OPTIONS(通常2–3项)+TRADEOFFS | REQUIRED_USER_CHOICE | DEPENDENT_ACTION_HELD`。未确认节点只暂停**依赖该决定**的定稿/资源动作，仍可在既有授权范围内进行独立合法只读核查。明确委托的选题决策不授予`DOWNLOAD/TRAIN/SEALED/WRITING`权限；项目与主张事实不能由用户偏好升级成 VERIFIED。用户决定已在本轮给出时直接引用，不机械增加一次对话。
 

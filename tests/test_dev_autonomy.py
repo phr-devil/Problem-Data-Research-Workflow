@@ -1,4 +1,4 @@
-"""Deterministic H1-H5 user / H6-H8 agent decision regression.
+"""Current v1.3 H6/H8 user strategy and H7 agent DEV autonomy regression.
 
 Declarations are not authentication, real tool permission or Agent behavior.
 """
@@ -33,7 +33,7 @@ def packet(target, included):
         "protocol_version": CONTRACT["protocol_version"],
         "target": target,
         "decisions": {
-            step: choice(step, agent=step in {"H6", "H7", "H8"})
+            step: choice(step, agent=step == "H7")
             for step in included
         },
     }
@@ -41,21 +41,24 @@ def packet(target, included):
 
 class DevAutonomyContractTests(unittest.TestCase):
     def test_owner_partition_and_protocol_version(self):
-        self.assertEqual(CONTRACT["protocol_version"], "pd-rw-human-review-v1.2")
-        for step in ("H1", "H2", "H3", "H4", "H5", "H9", "H10"):
+        self.assertEqual(CONTRACT["protocol_version"], "pd-rw-human-review-v1.3")
+        for step in ("H1", "H2", "H3", "H4", "H5", "H6", "H8", "H9", "H10"):
             self.assertEqual(CONTRACT["steps"][step]["decision_owner"], "USER")
-        for step in ("H6", "H7", "H8"):
-            self.assertEqual(CONTRACT["steps"][step]["decision_owner"], "AGENT")
+        self.assertEqual(CONTRACT["steps"]["H7"]["decision_owner"], "AGENT")
 
-    def test_h6_h7_h8_are_agent_decisions_without_fake_user_grants(self):
+    def test_h6_h8_are_author_decisions_h7_agent_autonomy(self):
         done = ("H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8")
         for step in ("H6", "H7", "H8"):
             with self.subTest(step=step):
                 r = review(packet(step, done))
                 self.assertTrue(r["can_advance_declarations_only"])
-                self.assertEqual(r["target_decision_owner"], "AGENT")
-                self.assertFalse(r["target_requires_user_scientific_choice"])
-                self.assertIn(step, r["agent_decision_declarations"])
+                expected = "AGENT" if step == "H7" else "USER"
+                self.assertEqual(r["target_decision_owner"], expected)
+                self.assertEqual(r["target_requires_user_scientific_choice"], step != "H7")
+                if step == "H7":
+                    self.assertIn(step, r["agent_decision_declarations"])
+                else:
+                    self.assertNotIn(step, r["agent_decision_declarations"])
                 self.assertFalse(r["allows_download_training_sealed_or_writing"])
         # H7 remains optional for scientific discovery/no new algorithm.
         r = review(packet("H8", ("H1", "H2", "H3", "H4", "H5", "H6", "H8")))
@@ -67,12 +70,12 @@ class DevAutonomyContractTests(unittest.TestCase):
         self.assertFalse(r["can_advance_declarations_only"])
         self.assertIn("H5", r["missing_prerequisites"])
         p = packet("H6", ("H1", "H2", "H3", "H4", "H5", "H6"))
-        del p["decisions"]["H6"]["h5_scope_ref"]
+        del p["decisions"]["H6"]["original_user_message_ref"]
         r = review(p)
         self.assertIn("H6", r["malformed_declarations"])
         self.assertFalse(r["can_advance_declarations_only"])
         p = packet("H6", ("H1", "H2", "H3", "H4", "H5", "H6"))
-        del p["decisions"]["H6"]["evidence_refs"]["falsifier_and_comparator"]
+        del p["decisions"]["H6"]["evidence_refs"][CONTRACT["steps"]["H6"]["evidence_minimum"][0]]
         r = review(p)
         self.assertIn("H6", r["missing_evidence_refs"])
         self.assertFalse(r["can_advance_declarations_only"])
@@ -96,10 +99,34 @@ class DevAutonomyContractTests(unittest.TestCase):
 
     def test_legacy_science_decisions_can_be_read_but_not_reclassified(self):
         p = packet("H6", ("H1", "H2", "H3", "H4", "H5", "H6"))
-        p["protocol_version"] = "pd-rw-human-review-v1.1"
-        self.assertFalse(review(p)["can_advance_declarations_only"])
+        p["protocol_version"] = "pd-rw-human-review-v1.2"
+        p["decisions"]["H6"] = {
+            "kind": "AGENT_DECIDED",
+            "agent_decision_ref": "synthetic/legacy-agent",
+            "h5_scope_ref": "synthetic/user-H5",
+            "dimension_decisions": {
+                x: "legacy scoped" for x in
+                ("task_hypothesis", "legal_inputs", "independent_evaluation")
+            },
+            "evidence_refs": {
+                x: "synthetic/legacy-source" for x in
+                ("valid_dev_or_theory_basis", "falsifier_and_comparator")
+            },
+        }
+        legacy = review(p)
+        self.assertTrue(legacy["can_advance_declarations_only"])
+        self.assertEqual(legacy["target_decision_owner_under_source_protocol"], "AGENT_LEGACY")
+        # Identical old agent decision is NOT v1.3 author approval.
+        p["protocol_version"] = CONTRACT["protocol_version"]
+        current = review(p)
+        self.assertFalse(current["can_advance_declarations_only"])
+        self.assertIn("H6", current["malformed_declarations"])
+        # A new explicit author declaration meets the structural requirement,
+        # but still does not authenticate the actual user or authorize execution.
         p["decisions"]["H6"] = choice("H6", agent=False)
-        self.assertTrue(review(p)["can_advance_declarations_only"])
+        updated = review(p)
+        self.assertTrue(updated["can_advance_declarations_only"])
+        self.assertFalse(updated["allows_download_training_sealed_or_writing"])
 
     def test_activity04_accepts_standing_dev_scope_not_human_h7_signoff(self):
         from tests.test_research_activity_handoff import packet as activity_packet

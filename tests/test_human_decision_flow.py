@@ -148,7 +148,7 @@ class HumanDecisionFlowTests(unittest.TestCase):
 
     def test_documents_have_human_choice_at_each_owner(self):
         rules = {
-            "WORKFLOW.md": ("USER_DEEP_PARTICIPATION", "H1", "H10", "HUMAN_REVIEW_PENDING"),
+            "WORKFLOW.md": ("USER_DEEP_PARTICIPATION", "H1", "H10", "AUTHOR_CHOICE_REQUIRED"),
             "START.md": ("USER_DEEP_PARTICIPATION", "H1–H5", "PREFERRED"),
             "SEARCH_DISCOVERY.md": ("H3", "H5", "BREADTH_SCAN"),
             "DATA_DISCOVERY.md": ("H4", "H5", "PRE_DOWNLOAD_SCIENCE_FIT"),
