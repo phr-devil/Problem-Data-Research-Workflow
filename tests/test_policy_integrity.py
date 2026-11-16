@@ -25,6 +25,27 @@ class PolicyIntegrityTests(unittest.TestCase):
         self.assertFalse(review["new_project_interaction"]["generic_continue_is_choice"])
         self.assertIn("单次方案选择", read("WORKFLOW.md"))
 
+    def test_h6_bundled_choice_declares_one_author_message_not_four(self):
+        from core.human_decision_review import review
+
+        def user(ref):
+            return {"kind": "USER_CONFIRMED",
+                    "original_user_message_ref": ref, "chosen_option": "A"}
+
+        entries = {"H1": user("launch"), "H2": user("launch")}
+        entries.update({node: user("h6-reply") for node in
+                        ("H3", "H4", "H5", "H6")})
+        packet = {"format": "pd-rw-human-review-v1",
+                  "target": "H6", "decisions": entries,
+                  "new_project_h6_bundle": True}
+        ok = review(packet)
+        self.assertTrue(ok["can_advance_declarations_only"])
+        self.assertFalse(ok["allows_download_training_sealed_or_writing"])
+        packet["decisions"]["H4"] = user("agent-invented-ref")
+        bad = review(packet)
+        self.assertFalse(bad["can_advance_declarations_only"])
+        self.assertIn("H4", bad["malformed_declarations"])
+
     def test_six_activities_preserved_and_joined_review_declared(self):
         activities = json.loads(read("contracts/research_activity_protocol.v1.json"))
         self.assertEqual(list(activities["activities"]), [f"0{i}" for i in range(1, 7)])
