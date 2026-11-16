@@ -218,7 +218,7 @@ def science_checkpoint(packet: dict) -> dict:
         if not isinstance(packet.get("claim_status"), str) or packet.get("claim_status") not in {"HYPOTHESIZED", "EVIDENCE_CANDIDATE",
                                              "SUPPORTED", "CONFIRMED"}:
             missing.append("claim_status")
-        if packet.get("claim_status") in {"SUPPORTED", "CONFIRMED"}:
+        if isinstance(packet.get("claim_status"), str) and packet["claim_status"] in {"SUPPORTED", "CONFIRMED"}:
             actual_ref = packet.get("actual_evidence_ref_or_not_run")
             if (not _present(actual_ref) or actual_ref.strip().upper() in {
                     "NOT_RUN", "UNKNOWN", "NONE", "N/A", "UNAVAILABLE", "INVALID"}):
@@ -235,7 +235,7 @@ def science_checkpoint(packet: dict) -> dict:
                          or _present(packet.get("legacy_unchanged_claim_ref")))):
                 missing.append("author_selected_main_claim_or_unchanged_legacy")
         independent_ref = packet.get("independent_validation_ref_or_unavailable")
-        if (packet.get("claim_status") == "CONFIRMED"
+        if (isinstance(packet.get("claim_status"), str) and packet["claim_status"] == "CONFIRMED"
                 and isinstance(independent_ref, str)
                 and independent_ref.strip().upper() in {
                     "UNAVAILABLE", "UNKNOWN", "NOT_RUN", "NONE", "N/A", "INVALID"}):
