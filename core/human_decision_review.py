@@ -209,12 +209,12 @@ def review(packet: dict) -> dict:
     if is_new_h6 and target in {"H6", "H7", "H8", "H9", "H10"}:
         # Scientific H1-H5 dependencies stay intact. User-facing next action
         # is a single H6 choice, not five separate author questionnaires.
-        if "H6" not in effective_present:
+        if not can_advance:
             next_review = "H6"
     return {
         "next_user_interaction": (
             "H6" if is_new_h6 and target in {"H6", "H7", "H8", "H9", "H10"}
-            and "H6" not in effective_present else None
+            and not can_advance else None
         ),
         "new_project_h6_bundle_checked": is_new_h6,
         "target": target,
