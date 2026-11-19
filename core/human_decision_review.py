@@ -143,7 +143,8 @@ def review(packet: dict) -> dict:
     # but after the single concrete H6 reply their *author* decision records
     # must cite the SAME original user message. Never infer approval from the
     # flag or a string pointer; only a trusted host can authenticate messages.
-    is_new_h6 = packet.get("new_project_h6_bundle") is True
+    is_new_h6 = (packet.get("new_project_h6_bundle") is True
+                 and protocol_version == "pd-rw-human-review-v1.3")
     if is_new_h6 and target in {"H6", "H7", "H8", "H9", "H10"}:
         h6 = rows.get("H6")
         h6 = h6 if isinstance(h6, dict) else {}
@@ -270,7 +271,11 @@ def review(packet: dict) -> dict:
                 CONTRACT["new_project_sequence"].index(target) + 1
             ]
     if is_new_three:
-        if "H3" not in effective_present:
+        if "H1" not in effective_present:
+            next_review = "H1"
+        elif "H2" not in effective_present:
+            next_review = "H2"
+        elif "H3" not in effective_present:
             next_review = "H3"
         elif "H4" not in effective_present:
             next_review = "H4"
@@ -285,7 +290,7 @@ def review(packet: dict) -> dict:
             next_review = "H6"
     return {
         "next_user_interaction": (
-            next_review if is_new_three and next_review in {"H3", "H4", "H6"}
+            next_review if is_new_three and next_review in {"H1", "H2", "H3", "H4", "H6"}
             else "H6" if is_new_h6 and target in {"H6", "H7", "H8", "H9", "H10"}
             and not can_advance else None
         ),
