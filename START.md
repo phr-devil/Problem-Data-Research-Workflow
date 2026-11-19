@@ -5,17 +5,17 @@
 仅在用户明确选择PD-RW时启用。**默认科研目标是形成可信、可发表的科学证据，而不是直接撰写论文。** **禁止自动绘图：只有用户明确要求实际绘制或修改图片才可出图**；否则仅可文字建议，见[FIGURE_POLICY.md](FIGURE_POLICY.md)。本轮研究范围以当前用户指令为准；[WORKFLOW.md](WORKFLOW.md) 是科研决策与权限的唯一总控，**无需预读所有专题**。
 
 1. **已有项目**：先通过项目内已有 STATE/索引确定 RESEARCH_RECORD.md 和 PAPER_BLUEPRINT.md 的实际路径，读当前快照与相关章节，再核真实 STATE/Run、manifest 和用户授权；若两文件不存在，按旧项目继续使用真实工件，不假定有记录。若使用 `STATE.json/EVENTS.jsonl`，先查事件一致性；缺工件不冒充有效结果。仅按当前阻碍读对应专题。
-2. **新课题**：在`USER_SCOPE`内按[SEARCH_DISCOVERY.md](SEARCH_DISCOVERY.md)进行**BREADTH_SCAN（广度覆盖）→DEEP_FALSIFICATION（最强近邻/反证）→COMPETING_CHOICE（不同失败前提的竞争机会）**三项可连续完成的科学证据审查（H3–H5 先为 Agent 候选分析，再由 H6 单次作者回复一并选择；不逐节点询问）；按公开官方元信息先查`PRE_DOWNLOAD_SCIENCE_FIT`，不因第一个可行方向就停搜。在 H3 候选决定后按官方来源比较 D1/必要外部库，新项目 H4 方案的作者选择与 H6 当前方案回复同次完成，再在 H5 确定最终问题→核官方版本/必要文件/许可/容量→**仅在 H4/H5 满足且另有明确数据获取授权后才下载并核验数据**。已有完整副本直接复用；有覆盖当前D1的下载授权的Agent连续完成获取，不再为选库/下载反复请示；无下载授权仅提供已核实的官方来源、文件清单、容量与推荐/授权选项，**不提供下载Agent执行指令或PowerShell命令**，标 `WAITING_FOR_DOWNLOAD_AUTH`，不进入数据实证。详见 [DATA_DISCOVERY.md](DATA_DISCOVERY.md)。
-3. **证据就绪后（活动02→03）**：复用完整DEV资产及PROOF_PATH，核真值/合法输入/独立单位。H1/H2直接复用启动配置、H3–H5候选在H6回复一并确认；到H6，AI提交科研路线、核心Task、具名近邻及验证成本的首选与备选，**由作者选择或有限委托**后才冻结主任务；H7模型/实验归AI自主。重要可信结果在活动05由AI先回收正负证据，H8核心科学Claim及重大升级由作者选定，普通DEV不反复确认。详情见 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md)。实证缺完整数据只能假说，不伪造Task/Run。
+2. **新课题：三次作者选择**：复用启动H1/H2；Agent先开展有界广度机会搜索、具名近邻反证及不同失败前提比较，形成具有论文价值的H3候选并向作者第一次征询；H3选后深审2–3种数据/PROOF_PATH真值、独立组、许可和确认路径，再H4第二次作者选择；获得独立下载授权并验收必要资源后，Agent拟H5最终问题草案，H6提交最有论文价值的具体任务/算法或传统方法改进/机制/测量/评价方案供第三次选择。H4选库不等于下载许可，未经H6不能擅自冻结新主线。
+3. **证据就绪后（活动02→03）**：H3/H4两次选择各有真实不同原消息和对应卡片摘要，H5由Agent草拟并随第三次H6回复确认，H6方案卡必须绑定H3/H4。随后H7已许可DEV技术工作由AI连续实施，初始算法/贡献可依真实证据合法调整；核心Claim或实质新路线经H8作者决定。正式写作与SEALED等独立授权不变。
 4. **已有任务/运行**：按 [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md) 获取有效Run、诊断负Pilot；**需要设计新算法或连续编码/GPU实验**时，按需读 [ALGORITHM_ENGINEERING.md](ALGORITHM_ENGINEERING.md) 的误差→杠杆→廉价正控→有界执行闭环，实际接口和保护规则读 [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)。机制失败先分辨可用信息/公平基线/欠训练，再决定转向或补论文。论文贡献读 [PAPER_FIRST.md](PAPER_FIRST.md)，正式独立确认读 [CONFIRMATION.md](CONFIRMATION.md)。
 
 **选择不等于证据认证**：H4若是理论/形式证明或无需静态数据库的仿真，确认可审计的 `PROOF_PATH`，不虚构D1；必须记录 H3/H4/H5 对同一科研问题的科学适配，不允许因数据方便替换用户选题。记录人工节点用 `REVIEW:H#`，论文蓝图Markdown标题的 H1/H2/H3 用 `HEADING:H#` 区分；上游决定或真值被新证据推翻时，依赖下游须重新核有效性。
 
 **六活动机器合同**：科研阶段交接以 [research_activity_protocol.v1.json](contracts/research_activity_protocol.v1.json) 为准；新项目进入活动03时以 H6 一次具体作者选择为前置，合法只读探索不依赖该选择。
 
-**新项目统一交互路线（执行镜像 [`contracts/human_review_protocol.v1.json`](contracts/human_review_protocol.v1.json)）**：使用 `protocol_version=pd-rw-human-review-v1.3`；H1–H5仍为原有科研决策维度，但新项目无需逐项询问，**H6初始核心Task/科研组合、H8核心Claim/重大升级由AI先推荐选项后由作者选择或有限委托，H7及普通DEV工作由AI自主**。仅旧项目按原记录兼容读取v1.2，不得把旧AGENT_DECIDED冒充新版作者选择；`H1→H2→H3→H4→H5` 的**节点名称、必审维度和顺序固定**，而论文/实验内容与搜索深度可自适应。开始先从用户原指令逐项映射已明确的决定，不能因为只知道研究领域就假定用户选择了六类课题来源或五类贡献路线；对待定 H3–H5 先给候选证据，最终只在 H6 具体方案卡中让用户一次选择；未收到该选择前不得登记为已获作者确认。已有项目旧记录不得仅按同名H编号无证据地自动转新版。每轮展示简洁的 H1–H5 进度和**当前节点**，不是让AI自行选取当前要问的科学问题。
+**新项目统一交互路线**：协议为`pd-rw-human-review-v1.4`，H3/H4/H6各须在证据对照后获得不同的明确作者回复；H1/H2已填不重复问，H5草案不单独问。`review_new_project_choices`检选择链，不能认证消息；历史v1.3一张H6卡的真实旧项目范围保持有效。
 
-**新项目默认 `USER_DEEP_PARTICIPATION`**：按 [WORKFLOW.md](WORKFLOW.md) 复用用户启动配置的 H1/H2，在 Agent 自主准备 H3–H5 研究问题、D1 数据资源与下一步计划后，于 H6 一次完成方案的**真实用户选择或明确委托**。AI 在每轮先做足合法只读核查与备选比较；用户可一条消息决定多个已披露事项，已有项目复用旧选择而不强制重审。`PREFERRED`、下载计划或 AI 自选库均不能冒充用户批准；选库、下载、拟合、SEALED 和写稿权限严格分开。待决期间可继续不依赖该节点的合法只读研究，不中断普通技术任务。
+**新项目默认 `USER_DEEP_PARTICIPATION`**：三次实质性互动分别选H3论文问题、H4证据资源、H6论文贡献与Task/合法转向包络。选题检索深度按关键不确定性而非规定的等待时长决定。用户回复、模型推荐、下载、训练、SEALED、图件、正式写稿和投稿权限分别处理，不能用一条“继续”代替多个未选节点。
 
 **高价值科学设计**：选题、选库、冻结Task或增加复杂机制前按需核[HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md)：重要知识差额、数据能否区分竞争解释、决定性科学实验及Q2潜力。已有Run直接续做，不增加强制阶段。
 
