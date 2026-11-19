@@ -11,16 +11,16 @@
 3. 决策冲突：用户原始授权优先；科研流程由 WORKFLOW 主控；科研事实以实际合法原始工件为准；专业细则仅由对应权威专题负责。既有项目直接续做，不重开选题/数据/训练。
 4. **适用规则重核（不是全库重读）**：新会话/Agent接手或上下文压缩后，先核 `RULE_REPO | RULE_COMMIT | LOADED_FILES` 与当前任务的可恢复证据；切换项目、Task/活动、版本或受影响协议时，只重核新增适用的权威专题；新数据下载、收费/危险安装、超范围CPU/GPU、SEALED、绘图、写稿、费用、投稿等受限操作**执行前**再核对应规则和原始许可；H5/H6已选定或原旧项目范围有效时的安全非付费本地DEV安装和CPU/GPU拟合按 [WORKFLOW.md](WORKFLOW.md) 的 `AI_DEV_AUTONOMY` 自主执行，无须逐次确认。已知版本、任务、权限与证据未变时复用；不能确认受限操作的许可时停止该操作并定位原指示，允许无依赖只读工作。Markdown被阅读过不等于工具实际具备权限拦截或Agent会永久记忆。
 
-**H6 可信入口提示**：新项目 H3–H6 一次用户选择的声明检查调用 `review_new_project_h6`，活动03交接使用 `review_activity_handoff(..., new_project=True)`；这两个接口本身并不认证原始聊天消息，未连接宿主可信身份时不能声称不可绕过。Agent 看到真实当前对话的具体 H6 回复后不重复询问，继续已获合法 DEV 范围内的工作。
+**三阶段选择可信入口**：新v1.4项目由可信项目路由器调用`review_new_project_choices`，H3/H4/H6三张独立方案卡各需不同原始作者回复和摘要，H5随H6确认；活动03交接调用`review_activity_handoff(...,new_project=True)`。历史v1.3一张H6卡使用旧检查器，不迁移。所有检查器仅校验声明，未连接可信宿主仍不能把字段/哈希当操作许可。
 
-**新项目决策模式**：H1–H10 保留科研语义，`USER_DEEP_PARTICIPATION` 的实际人工交互是启动配置（已提供的不重复问）与 H6 一次方案选择，不等于 H3/H4/H5 分别触发三次审批。
+**新项目决策模式**：H1/H2原启动配置不重问；新v1.4要在深入搜寻并反证论文机会后H3作者选问题，再在证据/真值路径审查后H4作者选数据/PROOF_PATH，最后H5由AI拟草案、H6作者选论文贡献与Task及可转向范围。三次选择不能由一条继续消息包办；旧项目有效决定保持。
 
-**人工科学决策冷启动**：新项目 H1/H2 直接复用已有启动配置、H3–H5 由 Agent 先作未批准的候选分析，只在 H6 提交一张具体科研方案卡供作者一次选择（同时确定 H3–H6）；**H6核心Task/研究组合与H8核心Claim/重大升级需先由AI给带依据的首选和可行备选，再由作者选择或明确范围委托**。H7技术方案、既定策略内DEV算法/训练/修复仍由AI自主，不逐次询问。旧项目H6/H8原记录保留但旧AGENT_DECIDED不能伪装为新作者确认，只有实质战略变动时按新版审核。详见 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md)、[WORKFLOW.md](WORKFLOW.md)；原H9/H10、SEALED与写稿门禁不变。
+**人工科学决策冷启动**：优先最短路径形成可投高水平且有引用/复用潜力的真实论文成果，研究方向、算法和主贡献是可调整手段。H3先广搜/深反证并推荐科研问题，H4对不同证据路线做真值/独立性/混杂比较，H6比较新算法、传统算法改进、机制/测量/评价等具体论文方案；AI均给证据首选与不同前提备选，等待各自作者明确回复。H7同范围内合法DEV自主连续；重大主Claim变动H8再由作者选择，旧项目不倒推重选。
 
 **论文蓝图检查闭环**：科研方向或Task明确即自主创建 `PAPER_BLUEPRINT.md`（默认六章、H1/H2、逐节拟写内容和Claim–Evidence）；重要Run、关键负结果、核心Claim/路线变化、阶段交接时，Agent在已有 `RESEARCH_RECORD.md` 第5节事件填写 `EVENT_KIND`、`BLUEPRINT_CHECK: UPDATED/NO_CHANGE_NEEDED`、`BLUEPRINT_SECTIONS`、`BLUEPRINT_EVIDENCE` 和 `BLUEPRINT_REASON`，按原证据核受影响SEC_ID。普通调参、重复测试、无实质Debug不触发。不新增用户确认；已批准重大结构变动仍须真实作者确认；`WRITING_LOCKED`/绘图门禁不受影响。细节见 [DUAL_DOCUMENT_WORKFLOW.md](DUAL_DOCUMENT_WORKFLOW.md)，`core.doc_integrity` 的静态通过不代表科学正确。
 **最小防漏检查**：核当前活动、适用 H 节点、原证据和实际操作许可；按 [research_activity_protocol.v1.json](contracts/research_activity_protocol.v1.json) 将进入条件、H 决定、交接声明分别审查，禁止用 `declared_activity_ready_not_authenticated` 自授行动。H7/H9 可据证据说明不适用；`REVIEW:H1` ≠ `HEADING:H1`。
 
-**统一人工审核启动合同**：使用 [human_review_protocol.v1.json](contracts/human_review_protocol.v1.json) v1.3。H1/H2 已明确的启动配置不重问，H3–H5 先作 Agent 候选草案，最终与 H6 的同一条原始用户回复捆绑确定；到H6/H8重大科研节点，AI读 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md) 生成 `首选+证据/关键未知+1–2个不同失败前提的备选+作者可选择/委托/暂缓`，核真实原作者消息后才记录已选战略。H7单独由Agent自主决定，普通DEV无需新审批；`can_advance_declarations_only`只是结构检查，不认证作者授权。
+**统一人工审核启动合同**：使用[human_review_protocol.v1.json](contracts/human_review_protocol.v1.json) v1.4；三个作者交互H3/H4/H6，每个有独立真实回复/卡片摘要，H4绑定H3且H6绑定H3/H4，H5由AI准备并随H6确认。H7 AI自主；任何声明检查都不认证用户消息、不能授下载/训练/SEALED/写稿/投稿权限。
 
 **执行前最小规则路由**：H6/H8作者战略选择使用 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md) 和 [EXECUTION_ASSURANCE.md](EXECUTION_ASSURANCE.md) 的选项/选择声明检查；重要Run与负结果仍只做技术/科研证据回收，不把每次实验提升为H8作者审核。没有作者选择时不得宣称新核心Task/Claim已冻结；本地安全非付费已选范围DEV开发由AI继续，权限按原有效消息独立校验。
 
