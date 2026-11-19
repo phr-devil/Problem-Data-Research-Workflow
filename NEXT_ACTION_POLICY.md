@@ -46,11 +46,11 @@
 
 - `AGENT_DECIDABLE`：已在用户真实授权、研究范围及预算内的**技术实现选择**，例如定位并修复普通Bug、复用已有Run、选最有信息量的只读诊断、重跑已授权且协议不变的受影响测试、补写非论文的科学证据摘要。Agent可自行选出**一项最佳后续动作**。
 - `STRONG_RECOMMENDATION`：关键证据充分、下一技术方案明显优于备选且**无需新的用户授权或价值判断**；直接给最优执行方案，不为常规技术分歧反复要求确认。强烈建议**不覆盖权限**。
-- `USER_DECISION_REQUIRED`：新项目 H1/H2 复用启动配置、H3–H5 由 Agent 自行准备，**只在 H6 请求一次具体核心Task/科研方案选择；H8仅重大核心Claim/升级选择**、适用H9/H10，需要真实作者选择或限定委托；此外超H5科学目标、项目整体STOP/PIVOT、新数据下载、付费/云资源、危险工具、SEALED、外传、实际绘图、正式写作和投稿仍属现有用户门禁。普通H7算法、同H6/H8已选范围内的DEV代码/训练/修复及增量证据归AI自主；不得因每个Run/小模型修改重复要人类确认。AI推荐不是用户决定。
+- `USER_DECISION_REQUIRED`：新v1.4项目H1/H2复用启动配置，H3/H4/H6在各自深度分析和推荐卡之后分别要求一次真实作者选择（H5草案随H6确认）；H8仅冻结/重大调整主Claim。新数据下载、付费、SEALED、图件、写稿、投稿及超范围研究仍有独立用户门禁。其余已授权H7/普通DEV由Agent自主，不因算法变化重复申请。
 
 ### 深度参与模式中的用户科学决策（复用已有 USER_DECISION_REQUIRED）
 
-新 PD-RW 课题默认 `USER_DEEP_PARTICIPATION`：H1/H2从启动配置取得，Agent 先完成 H3–H5 候选，不逐项要求作者回复；只在 H6 提供**推荐的Task+科研组合(C/R/P)及可比较备选**让作者选择或明确委托；关键成果需要冻结主Claim/重大升级时，H8提供**保留、升级、收窄/重构**等可行路线和首选供作者决定；H7保持AI自主。卡片标准与重新触发规则见 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md)。真实原作者选择、选项范围与证据引用缺一不可；旧项目已有真实选择不重问；新证据只重开确有影响的战略节点。技术Bug和普通实验不进入确认循环。
+新PD-RW课题默认`USER_DEEP_PARTICIPATION`：启动已有的H1/H2不重问；H3在竞争课题深入检索后由作者选择论文问题；H4核不同真值、数据和独立确认路径后由作者选择；H5由Agent拟草案，H6作者选择具体论文贡献/Task及有限转向范围。三张卡分别提交、三条原消息分别记录，缺其中之一不能当作已批准。重大核心Claim变化再H8；常规DEV由AI自主管理。
 
 **待用户决策时**输出 `DECISION_ID | RECOMMENDATION+SOURCE | OPTIONS(通常2–3项)+TRADEOFFS | REQUIRED_USER_CHOICE | DEPENDENT_ACTION_HELD`。未确认节点只暂停**依赖该决定**的定稿/资源动作，仍可在既有授权范围内进行独立合法只读核查。明确委托的选题决策不授予`DOWNLOAD/TRAIN/SEALED/WRITING`权限；项目与主张事实不能由用户偏好升级成 VERIFIED。用户决定已在本轮给出时直接引用，不机械增加一次对话。
 
@@ -62,7 +62,7 @@
 
 ### 新项目及H6/H8作者战略卡片：明确推荐、作者选择
 
-H6与H8须使用 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md) 的精简推荐卡：`H_ID | BEST_RECOMMENDATION + SCIENCE_REASON | OPTIONS(通常2–3) | C/R/P | NEAREST_PRIOR_GAP | DECISIVE_EVIDENCE | COST/SPEED | MAIN_RISK/UNKNOWN | USER_CHOICE_OR_DELEGATION`。缺推荐/比较/作者回应时不能宣称节点完成；允许一个确有理由的单一选项，不凑假选项。作者选择范围内自动执行H7/普通DEV，重大科学战略改变才重新审H6/H8。
+H3/H4/H6/H8须使用[AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md)的精简卡：`H_ID | BEST_RECOMMENDATION+PAPER_VALUE_REASON | OPTIONS(通常2–3) | NAMED_NEAREST | TRUTH/GROUP/CONFOUND | DECISIVE_EVIDENCE | TIME/COST | MAIN_RISK | USER_CHOICE/DELEGATION`；H6另有贡献C/R/P与合法可转向范围。作者每轮只回答当前真正未选事项；不能用旧H6同条回复代替H3/H4。
 
 ### 新项目统一审核卡片
 
@@ -76,7 +76,7 @@ H6与H8须使用 [AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md) 的精�
 
 **仅当确有下一项已许可的Agent执行任务时**，先给一句`DECISION+EVIDENCE`，再给一个短的、可交给Codex/WorkBuddy/研究Agent执行的**Agent指令**，包含：当前已证据锚点、目标、允许动的文件/数据/协议范围、关键保护（如sealed/预算/写作锁）、完成判据和最少结果反馈。自主处理关联小修与最小必要测试，不规定无意义的固定批次，不要求重复读取所有文件、不生成装饰图与冗长日志。如果用户只要求解释、只读审查、评价或信息性结果，直接完整回答，不为凑A型格式生成执行提示词；任务已完结且无下一动作也使用现有`NO_NEXT_ACTION`语义，不编造指令。
 
-**新项目前期人工交互去重**：启动配置已提供的 H1/H2 不重问；H3–H5 由 Agent 先完成候选调查，仅在一次 H6 具体方案卡中请求作者选择。未经该选择不得执行依赖新主线的研发，但不阻断其他已许可的只读工作；普通 H7 不因每个 Run 重问。原 H8/H9/SEALED/外部效应的独立决策保持有效。
+**新项目前期三轮人工交互**：H1/H2已有配置不重问；H3有界广搜和深反证后等待科研问题选择；H4核论文证据、数据真值和验证路径后等待独立选择；H5草拟、H6方案比较后等待第三次选择。三轮不是固定延迟，也不因多问破坏Token效率，所有已确认且未受影响的选择都复用；历史v1.3有效单轮H6不追溯重选。
 
 ### B. 必须用户决策 → **先明确推荐及依据，再给可选方案；禁止预先输出Agent执行指令**
 
