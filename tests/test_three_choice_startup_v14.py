@@ -15,6 +15,10 @@ def row(step, choice="option", ref=None, digest=None):
         "dimension_decisions": {k: "declared-value" for k in spec["required_dimensions"]},
         "evidence_refs": {k: "synthetic-source-ref" for k in spec["evidence_minimum"]},
     }
+    if step in ("H3","H4","H6"):
+        item.update({"research_line_ref":"research-line-1",
+                     "scope_ref":"original-startup-message",
+                     "hard_constraints_sha256":"d"*64})
     if digest:
         item["plan_sha256"] = digest
     return item
@@ -64,6 +68,16 @@ class ThreeChoiceTests(unittest.TestCase):
         p["decisions"]["H4"]["upstream_h3"]["plan_sha256"] = "f"*64
         result = review_new_project_choices(p)
         self.assertIn("H4", result["malformed_declarations"])
+
+    def test_hard_constraints_or_research_identity_drift_blocks_choice(self):
+        for field, altered in (("hard_constraints_sha256","e"*64),
+                               ("research_line_ref","wrong-research-line"),
+                               ("scope_ref","changed-startup-scope")):
+            p = packet()
+            p["decisions"]["H4"][field] = altered
+            result = review_new_project_choices(p)
+            self.assertFalse(result["can_advance_declarations_only"])
+            self.assertIn("H4", result["malformed_declarations"])
 
     def test_reusing_one_reply_for_h3_h4_is_not_three_choices(self):
         p = packet()
