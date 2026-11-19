@@ -51,6 +51,8 @@ def action_preflight(packet: dict, *, independently_authorized: bool = False,
     if action in DEV:
         # New-project identity must be supplied by a trusted host/router, never
         # inferred from an Agent-controlled JSON flag or a legacy scope claim.
+        if new_project and packet.get("new_project_three_choices_confirmed") is not True:
+            return {"decision": "BLOCK", "reason": "NEW_PROJECT_THREE_CHOICES_REQUIRED"}
         if new_project and packet.get("h6_author_strategy_confirmed") is not True:
             return {"decision": "BLOCK", "reason": "NEW_PROJECT_H6_CHOICE_REQUIRED"}
         conditions = ("h5_scope_confirmed", "dev_inputs_verified", "within_h5_scope",
