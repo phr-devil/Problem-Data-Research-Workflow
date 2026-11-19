@@ -310,6 +310,18 @@
     "generic_continue_is_choice": false,
     "advisory_entry": "core.human_decision_review.review_new_project_choices",
     "activity_03_handoff": "core.contracts.review_activity_handoff(new_project=True)",
-    "trusted_host_authentication_implemented": false
+    "trusted_host_authentication_implemented": false,
+    "required_shared_hard_linkage": [
+      "research_line_ref",
+      "scope_ref",
+      "hard_constraints_sha256"
+    ],
+    "declared_stage_linkage": [
+      "plan_sha256",
+      "original_user_message_ref",
+      "chosen_option_or_delegated_scope"
+    ],
+    "h6_checkpoint_matches_selected_card": true,
+    "linkage_authentication_note": "Declared hashes and refs never authenticate original user messages; trusted host must independently enforce"
   }
 }
