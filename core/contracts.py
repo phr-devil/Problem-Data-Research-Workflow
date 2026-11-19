@@ -386,6 +386,20 @@ def review_activity_handoff(packet: dict, *, new_project: bool = False) -> dict:
                                  and chosen.get("route") == strategy.get("route"))
                     elif row.get("kind") == "USER_DELEGATED":
                         match = match and row.get("delegated_scope") == selection.get("delegated_scope")
+                    # The stage chain in the human packet must match the
+                    # exact H6 card supplied to the science checkpoint.
+                    # Source SHA, message refs and scope remain declarations;
+                    # the trusted host still authenticates the real choices.
+                    if (new_project and activity_id == "03"
+                            and human_packet.get("protocol_version")
+                            == "pd-rw-human-review-v1.4"):
+                        match = (match
+                                 and strategy.get("h6_card_sha256_declared")
+                                 == row.get("plan_sha256")
+                                 and strategy.get("h6_upstream_choices_declared")
+                                 == row.get("upstream_choices")
+                                 and strategy.get("h6_hard_constraints_sha256_declared")
+                                 == row.get("hard_constraints_sha256"))
                     if not match:
                         strategy_review_missing.append("author_strategy_selection_mismatch")
                 strategy_review_ready = not strategy_review_missing
