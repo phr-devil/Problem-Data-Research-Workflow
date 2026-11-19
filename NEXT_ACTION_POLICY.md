@@ -25,7 +25,7 @@
 
 **可执行的最小路径核查（已有本地Python且确有文件交付时）**：在现有交付根目录中运行 `python -m core.delivery_check --root OUTPUT_DIR --primary MAIN_RESULT --file OTHER_RESULT`（`--file`按需重复）；工具只核路径存在、是否仍处于交付根目录，**不生成清单、不读取文件内容，也不证明内容正确、权限合规或SEALED隔离**。工具缺失/不可运行时由宿主直接检查文件并报告未验证范围；`PASS_PATHS_ONLY`不得写成科研/隐私/权限验证PASS。普通对话/无文件输出不调用。详情代码见 [core/delivery_check.py](core/delivery_check.py)。
 
-**输出语义不混用**：`NEXT_AGENT_INSTRUCTION` 仅用于已授权且可执行的后续科研任务；`USER_DECISION_REQUIRED` 表示确实需要作者选择的 H6/H8 或独立操作授权；`NO_NEXT_ACTION` 表示没有后续任务。**两种结果不可混淆**：不能把已完成工作表述成待执行命令，也不能在用户尚未决定时提前发送执行命令（禁止预先输出Agent执行指令）。真实原消息与 CPU/GPU、SEALED、写作/绘图许可分别核验，只有被真实授权覆盖的 DEV 技术工作可自主连续执行。
+**输出语义不混用**：`NEXT_AGENT_INSTRUCTION`仅用于已获实际许可的下一技术工作；`USER_DECISION_REQUIRED`包含新v1.4的H3/H4/H6和重要H8及独立操作授权，`NO_NEXT_ACTION`用于完结。不在尚未选择时提供依赖待选方案的执行命令；合法独立只读可继续。用户选择不自动授下载/训练/SEALED/写稿/投稿权限。
 
 **已执行结果与后续行动分开**：本节规定结果反馈；下文 A/B 继续唯一决定是否给下一步Agent指令。待用户 H 节点选择、改变主Task、增加权限时，只给推荐与必要依据，**不提供依赖待决选择的执行命令**。已有合法任务可继续，则提供精简可复制的下一步Agent指令；全部完结且无需续作时报告 `NO_NEXT_ACTION`。不另建 `COMPLETED/PARTIAL/BLOCKED` 强制状态枚举，文本状态永不等于授权。
 
@@ -60,13 +60,13 @@
 
 **可辨别实验的结果分支（仅在涉及实际 Probe 时）**：保留 `IF_POS/NEG/INVALID` 对应的下一决定与 `AUTH/COST`，具体定义及 `INCONCLUSIVE` 归因只由 [EXPERIMENT_LOOP.md](EXPERIMENT_LOOP.md) 主责；本文件负责将该结果反馈给用户/Agent，不复制算法决策逻辑。无试验、无算法或纯理论任务使用适合其证据类型的条件，不虚构 Run 或实验三分支。
 
-### 新项目及H6/H8作者战略卡片：明确推荐、作者选择
+### 新项目H3/H4/H6和H8作者卡：明确论文价值、证据与真实选择
 
 H3/H4/H6/H8须使用[AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md)的精简卡：`H_ID | BEST_RECOMMENDATION+PAPER_VALUE_REASON | OPTIONS(通常2–3) | NAMED_NEAREST | TRUTH/GROUP/CONFOUND | DECISIVE_EVIDENCE | TIME/COST | MAIN_RISK | USER_CHOICE/DELEGATION`；H6另有贡献C/R/P与合法可转向范围。作者每轮只回答当前真正未选事项；不能用旧H6同条回复代替H3/H4。
 
 ### 新项目统一审核卡片
 
-在 `USER_DEEP_PARTICIPATION` 下，人工节点定义来自 [`contracts/human_review_protocol.v1.json`](contracts/human_review_protocol.v1.json) 的 `required_dimensions`，科研语义仍归 [WORKFLOW.md](WORKFLOW.md)。每轮只有**当前需要用户决定**的H节点成为主卡片，按 `PROTOCOL_VERSION | H1–H5_PROGRESS | CURRENT_REVIEW(ID+固定名称) | AI_RECOMMENDATION+SOURCE | RISKS/UNKNOWN | OPTIONS+TRADEOFFS | REQUIRED_DIMENSIONS/CHOICE_OR_DELEGATION | NEXT_DEPENDENT_ACTION` 给出内容。选项因领域不同而不同，但H1研究目标、H2来源+贡献路线、H3问题、H4证据资源、H5最终题目永不互换定义。允许用户一条消息明确完成多个节点、逐项委托或暂缓；已决定且未变化的内容不再询问。当前节点只涉及一个合理候选也可如实说明，不凑假选项。
+在`USER_DEEP_PARTICIPATION`下，H1/H2来自启动配置，H3、H4、H6分别给出当前卡片的有依据首选及不同失败前提备选；H5在H6一并确认。按`PROTOCOL_VERSION | CURRENT_REVIEW | PREVIOUS_CHOICE_REFS | AI_RECOMMENDATION+NAMED_PRIOR | PAPER_VALUE/AUDIENCE | TRUTH/INDEPENDENCE/UNKNOWN | OPTIONS/COST | REQUIRED_USER_REPLY | NEXT_LEGAL_ACTION`精简展示；本轮只问当前未决定节点，不重复限制、不用摘要代替原用户回复。
 
 **两种结果不可混淆**：`can_present_review_declarations_only` 表示所声明的前置审核齐备，**可以提出当前节点问题**；`can_advance_declarations_only` 才表示所声明的当前节点决策及维度齐备，可以考虑依赖工作；两者都必须先核原用户消息及真实证据，**都不是下载/拟合/SEALED/绘图/正式写作权限**。重要维度只选择部分时维持待决并仅补缺项，不能重新索要已答项。旧项目无 `protocol_version` 允许兼容读取，但不能以同名节点自动假定满足新版本。
 
