@@ -80,7 +80,7 @@ def review(packet: dict) -> dict:
             # The source/ref are untrusted declarations: inspect original
             # records and verify strategy continuity outside this function.
             legacy_continuation = (
-                protocol_version == CONTRACT["protocol_version"]
+                protocol_version in {CONTRACT["protocol_version"], "pd-rw-human-review-v1.3"}
                 and name in AUTHOR_STRATEGY_NODES
                 and entry.get("legacy_source_protocol") == "pd-rw-human-review-v1.2"
                 and isinstance(entry.get("legacy_unchanged_scope_ref"), str)
@@ -97,7 +97,7 @@ def review(packet: dict) -> dict:
                 malformed.append(name)
                 continue
         else:
-            if (name in AGENT_OWNED and protocol_version == CONTRACT["protocol_version"]):
+            if (name in AGENT_OWNED and protocol_version in {CONTRACT["protocol_version"], "pd-rw-human-review-v1.3"}):
                 malformed.append(name)
                 continue
             if (not isinstance(entry.get("original_user_message_ref"), str)
@@ -167,6 +167,69 @@ def review(packet: dict) -> dict:
                 malformed.append(step)
         present.difference_update(malformed)
 
+    # v1.4 new-project choices: three independent author interactions.
+    # H3 chooses a paper-worthy question; H4 selects evidence, bound to H3;
+    # H5 is drafted by the Agent and confirmed with the H6 plan; H6 binds
+    # both upstream selections. These are only structural declarations.
+    is_new_three = protocol_version == "pd-rw-human-review-v1.4"
+    if is_new_three:
+        for stage in ("H3", "H4", "H6"):
+            row = rows.get(stage)
+            if row is None:
+                continue
+            if (not isinstance(row, dict)
+                    or row.get("kind") not in {"USER_CONFIRMED", "USER_DELEGATED"}
+                    or not isinstance(row.get("plan_sha256"), str)
+                    or re.fullmatch(r"[0-9a-f]{64}", row["plan_sha256"]) is None):
+                malformed.append(stage)
+        h3 = rows.get("H3") if isinstance(rows.get("H3"), dict) else {}
+        h4 = rows.get("H4") if isinstance(rows.get("H4"), dict) else {}
+        h6 = rows.get("H6") if isinstance(rows.get("H6"), dict) else {}
+        if h4:
+            upstream = h4.get("upstream_h3")
+            if (not isinstance(upstream, dict)
+                    or upstream.get("plan_sha256") != h3.get("plan_sha256")
+                    or upstream.get("original_user_message_ref")
+                    != h3.get("original_user_message_ref")
+                    or upstream.get("choice") !=
+                    (h3.get("chosen_option") if h3.get("kind") == "USER_CONFIRMED"
+                     else h3.get("delegated_scope"))):
+                malformed.append("H4")
+        if h6:
+            chain = h6.get("upstream_choices")
+            if not isinstance(chain, dict) or set(chain) != {"H3", "H4"}:
+                malformed.append("H6")
+            else:
+                for stage, row in (("H3", h3), ("H4", h4)):
+                    link = chain.get(stage)
+                    if (not isinstance(link, dict)
+                            or link.get("plan_sha256") != row.get("plan_sha256")
+                            or link.get("original_user_message_ref")
+                            != row.get("original_user_message_ref")
+                            or link.get("choice") !=
+                            (row.get("chosen_option") if row.get("kind") == "USER_CONFIRMED"
+                             else row.get("delegated_scope"))):
+                        malformed.append("H6")
+            h5 = rows.get("H5") if isinstance(rows.get("H5"), dict) else {}
+            if (h5.get("original_user_message_ref") != h6.get("original_user_message_ref")
+                    or h5.get("plan_sha256") != h6.get("plan_sha256")
+                    or h5.get("kind") != h6.get("kind")
+                    or (h6.get("kind") == "USER_CONFIRMED"
+                        and h5.get("chosen_option") != h6.get("chosen_option"))
+                    or (h6.get("kind") == "USER_DELEGATED"
+                        and h5.get("delegated_scope") != h6.get("delegated_scope"))):
+                malformed.append("H5")
+        # Same-message 'bundling' across H3/H4/H6 would skip two author
+        # decisions; an original message cannot count as three card replies.
+        available = [(stage, rows.get(stage, {}).get("original_user_message_ref"))
+                     for stage in ("H3", "H4", "H6")
+                     if isinstance(rows.get(stage), dict)
+                     and rows[stage].get("kind") in {"USER_CONFIRMED", "USER_DELEGATED"}]
+        for index, (stage, ref) in enumerate(available):
+            if any(ref == prior_ref for _, prior_ref in available[:index]):
+                malformed.append(stage)
+        present.difference_update(malformed)
+
     # A previously declared choice may be obsolete after a change in upstream
     # truth, resource, task, or protocol. Only the supplied *declarations* are
     # checked here; an Agent must inspect real evidence to identify reopenings.
@@ -206,6 +269,15 @@ def review(packet: dict) -> dict:
             next_review = CONTRACT["new_project_sequence"][
                 CONTRACT["new_project_sequence"].index(target) + 1
             ]
+    if is_new_three:
+        if "H3" not in effective_present:
+            next_review = "H3"
+        elif "H4" not in effective_present:
+            next_review = "H4"
+        elif "H6" not in effective_present:
+            next_review = "H6"
+        else:
+            next_review = target if not can_advance else None
     if is_new_h6 and target in {"H6", "H7", "H8", "H9", "H10"}:
         # Scientific H1-H5 dependencies stay intact. User-facing next action
         # is a single H6 choice, not five separate author questionnaires.
@@ -213,9 +285,11 @@ def review(packet: dict) -> dict:
             next_review = "H6"
     return {
         "next_user_interaction": (
-            "H6" if is_new_h6 and target in {"H6", "H7", "H8", "H9", "H10"}
+            next_review if is_new_three and next_review in {"H3", "H4", "H6"}
+            else "H6" if is_new_h6 and target in {"H6", "H7", "H8", "H9", "H10"}
             and not can_advance else None
         ),
+        "new_project_three_choices_checked": is_new_three,
         "new_project_h6_bundle_checked": is_new_h6,
         "target": target,
         "target_decision_owner": CONTRACT["steps"][target]["decision_owner"],
@@ -245,7 +319,7 @@ def review(packet: dict) -> dict:
         "missing_evidence_refs": missing_evidence,
         "result": result,
         "missing_prerequisites": missing,
-        "malformed_declarations": sorted(malformed, key=STEPS.index),
+        "malformed_declarations": sorted(set(malformed), key=STEPS.index),
         "pending_steps": sorted(pending, key=STEPS.index),
         "declared_completed": sorted(present, key=STEPS.index),
         "effective_declarations_after_reopening": sorted(effective_present, key=STEPS.index),
@@ -274,26 +348,44 @@ def review_new_project_h6(packet: dict) -> dict:
     Caller MUST be a trusted project-router/host for new-line applicability.
     Returned review remains advisory and NEVER authenticates the source message.
     """
-    if not isinstance(packet, dict) or packet.get("protocol_version") != CONTRACT["protocol_version"]:
-        raise ValueError("New-project H6 requires current PD-RW protocol")
+    if not isinstance(packet, dict) or packet.get("protocol_version") != "pd-rw-human-review-v1.3":
+        raise ValueError("Historical one-H6 bundle requires v1.3; use review_new_project_choices for v1.4")
     if packet.get("target") not in {"H6", "H7", "H8", "H9", "H10"}:
         raise ValueError("New-project H6 entry requires H6 or a dependent target")
     scoped = {**packet, "new_project_h6_bundle": True}
     return review(scoped)
 
 
+def review_new_project_choices(packet: dict) -> dict:
+    """v1.4 new-project three-choice declaration check, NOT authentication.
+
+    The trusted project router must identify new-project applicability;
+    caller-controlled JSON cannot be treated as a real author permission.
+    """
+    if not isinstance(packet, dict) or packet.get("protocol_version") != "pd-rw-human-review-v1.4":
+        raise ValueError("New-project three-choice review requires v1.4")
+    if packet.get("target") not in STEPS:
+        raise ValueError("Unrecognized target")
+    return review(packet)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Read-only declared human decision dependency check")
     parser.add_argument("packet", type=Path)
     parser.add_argument("--new-project-h6", action="store_true",
-                        help="Require new-project H6 bundle, independent of caller packet flag")
+                        help="Historical v1.3 new-project single H6 bundle")
+    parser.add_argument("--new-project-choices", action="store_true",
+                        help="Require new-project v1.4 H3/H4/H6 independent choices")
     args = parser.parse_args()
     packet = json.loads(args.packet.read_text(encoding="utf-8"))
-    result = (review_new_project_h6(packet) if args.new_project_h6 else review(packet))
+    if args.new_project_h6 and args.new_project_choices:
+        raise ValueError("Choose only one new-project review mode")
+    result = (review_new_project_choices(packet) if args.new_project_choices else
+              review_new_project_h6(packet) if args.new_project_h6 else review(packet))
     print(json.dumps(result, ensure_ascii=False, indent=2))
     # A new-project H6 declaration alone is never a trusted execution grant.
     # Fail closed for automation that only inspects the process exit code.
-    return 3 if args.new_project_h6 else 0
+    return 3 if args.new_project_h6 or args.new_project_choices else 0
 
 
 if __name__ == "__main__":
