@@ -183,6 +183,24 @@ def review(packet: dict) -> dict:
                     or not isinstance(row.get("plan_sha256"), str)
                     or re.fullmatch(r"[0-9a-f]{64}", row["plan_sha256"]) is None):
                 malformed.append(stage)
+        # Recovered startup HARD constraints, root identity and selected scope
+        # must be identical across all three cards. A digest is only a
+        # structural linkage: no source-message authentication is claimed.
+        anchor = rows.get("H3") if isinstance(rows.get("H3"), dict) else {}
+        for stage in ("H3", "H4", "H6"):
+            entry = rows.get(stage)
+            if not isinstance(entry, dict):
+                continue
+            if (not isinstance(entry.get("research_line_ref"), str)
+                    or not entry["research_line_ref"].strip()
+                    or not isinstance(entry.get("scope_ref"), str)
+                    or not entry["scope_ref"].strip()
+                    or not isinstance(entry.get("hard_constraints_sha256"), str)
+                    or re.fullmatch(r"[0-9a-f]{64}", entry["hard_constraints_sha256"]) is None
+                    or any(entry.get(field) != anchor.get(field)
+                           for field in ("research_line_ref", "scope_ref",
+                                         "hard_constraints_sha256"))):
+                malformed.append(stage)
         h3 = rows.get("H3") if isinstance(rows.get("H3"), dict) else {}
         h4 = rows.get("H4") if isinstance(rows.get("H4"), dict) else {}
         h6 = rows.get("H6") if isinstance(rows.get("H6"), dict) else {}
