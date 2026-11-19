@@ -1,4 +1,4 @@
-# Problem–Data Research Workflow | PD-RW v1.13
+# Problem–Data Research Workflow | PD-RW v1.14
 
 > **独立科研工作流仓库**。不依赖原提示词库或其他章的文件。目标是从“有价值的大问题＋可信数据（或理论证据路径）”开始，在真实观察和有限实验中逐渐发现具体科研任务、算法与论文主张。更自由的探索**不等于放宽最终论文证据**，也不承诺发表或算法增益。
 
@@ -30,7 +30,7 @@
 
 **完成算法后的科学增值（可选）**：[POST_ALGORITHM_SCIENCE_AUDIT.md](POST_ALGORITHM_SCIENCE_AUDIT.md)。复用原始Run、错误结构及具名近邻，按新证据及现有授权做一项或一组有界且有价值的证伪；无新意则保留成果并总结，写作锁继续生效。
 
-**H6/H8 作者科研策略选择（重点升级）**：[AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md) 规定H6在AI给出首选科研组合及备选后由作者选择核心Task/研究路线，H8在重大成果或路线升级时由AI比较KEEP/UPGRADE/REFRAME等方案并由作者选择核心Claim；H7和已选范围DEV算法/训练/修复仍由AI自主，不逐次请示。新协议v1.3保留旧项目记录，实际作者消息与操作授权各自独立。
+**作者三次论文选题与动态贡献转向**：[AUTHOR_STRATEGY_REVIEW.md](AUTHOR_STRATEGY_REVIEW.md) 在v1.4新项目中按H3选择论文问题→H4选择真实数据/证据路径→H6选择具体贡献/Task及有限技术转向范围，三轮各有独立作者回复；H5是Agent草案随H6确认。有效Run可能支持比初始新算法更有价值的旧算法改进、测量规律或机制发现，Agent在合法范围内优先形成可信高水平论文证据，重大核心Claim变化H8作者选择。H7技术与原已授权DEV继续自主，旧v1.3项目无需重选。
 
 **规则执行保障（离线检查与权限边界）**：[EXECUTION_ASSURANCE.md](EXECUTION_ASSURANCE.md) 与 `core.execution_preflight` 检查H6/H8作者战略选项与选择声明、重要Run/负结果证据及DEV范围。未经真实作者选择或有效旧项目范围，不得声称新的核心Task/Claim已获批准；已选范围内H7算法及安全DEV自主执行。**仓库仍未部署可信工具拦截器、SEALED操作系统隔离或真实Agent盲回放**，静态CI不证明实际授权/科学正确性。
 
@@ -38,11 +38,11 @@
 
 **高价值科学问题设计（按需）**：[HIGH_VALUE_RESEARCH_DESIGN.md](HIGH_VALUE_RESEARCH_DESIGN.md) 支持多视角问题搜索、数据库科学辨识力、竞争假设与有界机制探索，保留阶段/授权/写作锁。
 
-**活动01防跳步与防过早选题**：新项目默认 `USER_DEEP_PARTICIPATION`，H1范围→H2六类来源/五类贡献偏好→AI做`BREADTH_SCAN→DEEP_FALSIFICATION→COMPETING_CHOICE`→H3暂定问题→官方数据元信息核验→H4选择D1/理论证明路径→H5最终问题。AI可连续进行不依赖待决决定的合法只读研究，但不能一次性代替用户的选择；允许一条用户消息明确批准多项或按范围委托。数据反证时只重开受影响节点。可选`core.human_decision_review`与`core.search_choice_review`均仅做声明结构检查，不认证用户授权、科学新颖性或Q2潜力。
+**活动01防跳步与防过早选题**：新项目H1/H2复用启动配置；H3先有界广搜、深入原始近邻与竞争假设、分析论文重要性及引用/复用潜力，再作者选问题；H4比较数据/PROOF_PATH科学可辨识性、许可和确认成本，再作者选路径；Agent草拟H5，H6比较具体论文贡献及算法/方法可调整范围供作者第三次选择。检索深度按新信息而非固定计时，旧已选项目不追溯重问，任何选择不替代受限操作授权。
 
 **同名标识防混淆**：`H1–H10` / `H_ID` 是**人工科学决策节点**；`PAPER_BLUEPRINT.md` 中 Markdown `H1/H2/H3` 则是**论文章节标题层级**，不是批准记录。交接时分别写 `REVIEW:H4` 与 `HEADING:H2`，不能依据章节存在推定用户已经审核。
 
-**新项目决策统一协议**：[`contracts/human_review_protocol.v1.json`](contracts/human_review_protocol.v1.json) 是 [WORKFLOW.md](WORKFLOW.md) H1–H10 的机器可读镜像（科研语义只由WORKFLOW定义）。新项目所有方向固定 `H1研究目标 → H2六类问题来源与五类贡献路线 → H3候选科学问题 → H4数据库或PROOF_PATH → H5最终问题`；每轮展示统一进度和用户选择，研究候选/检索深度/实证方法则按领域调整。选择不等于下载、模型拟合、SEALED或写稿许可。结构检查可复用 `core.human_decision_review`；真实 Agent 效果未通过静态CI证明。
+**新项目决策统一协议**：机器镜像[contracts/human_review_protocol.v1.json](contracts/human_review_protocol.v1.json)为`pd-rw-human-review-v1.4`。H3/H4/H6独立原消息/卡片摘要、H4绑定H3、H6绑定H3/H4、H5随H6确认；结构检查用`review_new_project_choices`。用户硬约束、可调整科学策略和真实证据状态分别记录；旧v1.3单H6包作为历史读取。
 
 **固定研发组织、开放科学探索**：六项活动 01科研机会→02数据/理论证据观察→03 Task→04方法/实验↔05科研贡献→06独立确认与总结；每项活动的最低进入/证据/交付由 [research_activity_protocol.v1.json](contracts/research_activity_protocol.v1.json) 统一说明，具体科学问题、技术路线、实验数量按证据决定。H1–H10仍由 [human_review_protocol.v1.json](contracts/human_review_protocol.v1.json) 管重大选择；操作授权分别核用户原消息。合成检查不代表真实Agent已履约。
 
