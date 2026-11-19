@@ -127,8 +127,8 @@ def validate_state(value: Any) -> dict:
 def review_activity_handoff(packet: dict, *, new_project: bool = False) -> dict:
     """Review handoff declarations. Trusted caller supplies new-project identity.
 
-    Pass new_project=True for a newly initiated line; this requires the H6
-    bundled source/choice check at the activity-03 boundary. The boolean is
+    Pass new_project=True for a newly initiated line; v1.4 checks independent
+    H3/H4/H6 choices while historical v1.3 uses its single H6 bundle. The boolean is
     not authenticated here; WorkBuddy host identity enforcement remains external.
     """
     import json
@@ -288,7 +288,7 @@ def review_activity_handoff(packet: dict, *, new_project: bool = False) -> dict:
             raise ContractError("human_review_packet must be an object")
         from core.human_decision_review import (
             CONTRACT as HUMAN_CONTRACT, review as review_human,
-            review_new_project_h6,
+            review_new_project_h6, review_new_project_choices,
         )
         if human_packet.get("protocol_version") not in (
                 HUMAN_CONTRACT["protocol_version"],
@@ -301,7 +301,10 @@ def review_activity_handoff(packet: dict, *, new_project: bool = False) -> dict:
                 candidate = dict(human_packet)
                 candidate["target"] = name
                 try:
-                    decision = (review_new_project_h6(candidate)
+                    decision = (review_new_project_choices(candidate)
+                                if new_project and human_packet.get("protocol_version")
+                                == "pd-rw-human-review-v1.4"
+                                else review_new_project_h6(candidate)
                                 if new_project and activity_id == "03" and name == "H6"
                                 else review_human(candidate))
                 except ValueError as exc:
@@ -332,7 +335,7 @@ def review_activity_handoff(packet: dict, *, new_project: bool = False) -> dict:
     strategy_review_missing = []
     strategy_review_ready = True
     if activity_id in {"03", "05"} and isinstance(human_packet, dict) and (
-            human_packet.get("protocol_version") == "pd-rw-human-review-v1.3"):
+            human_packet.get("protocol_version") in {"pd-rw-human-review-v1.3", "pd-rw-human-review-v1.4"}):
         strategy_review_ready = False
         strategy = packet.get("strategy_checkpoint_packet")
         expected = "H6_TASK" if activity_id == "03" else "H8_CLAIM"
@@ -415,7 +418,13 @@ def review_activity_handoff(packet: dict, *, new_project: bool = False) -> dict:
     )
     return {
         "activity_id": activity_id,
-        "new_project_h6_bundle_checked": bool(new_project and activity_id == "03"),
+        "new_project_h6_bundle_checked": bool(
+            new_project and activity_id == "03"
+            and isinstance(human_packet, dict)
+            and human_packet.get("protocol_version") == "pd-rw-human-review-v1.3"),
+        "new_project_three_choices_checked": bool(
+            new_project and isinstance(human_packet, dict)
+            and human_packet.get("protocol_version") == "pd-rw-human-review-v1.4"),
         "contract_version": contract["contract_version"],
         "evidence_path": evidence_path,
         "missing_evidence_declarations": missing,
